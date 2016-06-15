@@ -1,3 +1,4 @@
+@import 'fonts.css';
 body{
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e3e3e3+0,ffffff+52,d6d6d6+100 */
 	background: #e3e3e3; /* Old browsers */
@@ -43,10 +44,12 @@ header img{
 }
 .greeting p{
 	position: absolute;
-	bottom: 20px;
+	bottom: 50px;
 	color: #004860;
 	font-size:2.5em;
 	line-height: .8;
+	font-family: arial;
+	font-weight: bold;
 }
 .erashymow{
 	color: #37B4AA;
@@ -89,6 +92,11 @@ header img{
 	font-size: 1.5em;
 	width: 80%;
 	margin-top: 30px;
+	font-family: gotham;
+}
+.welcome-two p b{
+	font-family: gothamTwo;
+
 }
 .container-registry{
 	position: absolute;
@@ -102,9 +110,15 @@ header img{
 }
 .navbar-default .navbar-nav > li > a {
 	color: #ACACAC;
+	font-family: gotham;
 }
 .contentSearch{
 	background: #00CCCC;
+	font-family: arial;
+}
+.contentSearch label{
+	font-family: arial;
+	font-weight: bold;
 }
 .contentSearch > .header > img{
 	position: absolute;
@@ -161,19 +175,34 @@ hr {
 	margin:10px;
 	padding-left: 10px;
 }
+.notice-text p{
+	color: #999999;
+}
+.notice-text h2{
+	color: #66C1BF;
+	font-family: gothamTwo;
+}
 .notice-text a{	
 	background: #37B4AA;
 	color: #fff;
 	border: none;
 	padding: 5px;
+	float: right;
+	font-weight: bold;
 }
 .decorator{
 	margin-top: 3%;
 	display: block;
 	text-align: center;
 }
-
-
+.articles .header{
+	font-family: gotham;
+	font-weight: bold;
+}
+.articles .header span{
+	font-family: gothamTwo;
+	color:#808080;
+}
 /*SLIDER USER*/
 
 
@@ -249,6 +278,10 @@ p{
 	overflow: hidden;
 	position: relative;
 }
+.paralax h2{
+	font-family: gothamTwo;
+	font-size: 4.5em;
+}
 .paralax img{
 	width: 100%;
 	z-index: -999;
@@ -256,7 +289,7 @@ p{
 .paralax .paralax-text{
 	z-index: 900;
 	position: absolute;
-	top: 300px;
+	top: 250px;
 	color: #fff;
 }
 .paralax .paralax-text a{
@@ -265,7 +298,9 @@ p{
 	padding: 10px 15px;
 	color: #fff;
 	margin:0px 0px 0px 50px;
+	font-weight: bold;
 }
+/*FOOTER */
 footer{
 	background: #004860;
 	color: #fff;
@@ -273,6 +308,7 @@ footer{
 }
 footer a,p{
 	color: #fff;
+	font-family: gotham;
 }
 .link{
 	padding-top: 10px;

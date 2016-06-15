@@ -1,0 +1,12 @@
+@font-face {
+    font-family: gotham;
+    src: url(../fonts/MuseoSans-100.otf);
+}
+@font-face {
+    font-family: gothamTwo;
+    src: url(../fonts/Gotham-Bold_2.otf);
+}
+@font-face {
+    font-family: gothamTree;
+    src: url(../fonts/MuseoSans_900.otf);
+}
