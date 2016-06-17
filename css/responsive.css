@@ -1,0 +1,108 @@
+@media (max-width: 995px) {
+ 	.butto-formns{
+		margin-top: 10px;
+	}
+	.erashymow {
+		font-size: 2em;
+	}
+	.welcome-two{
+		height: 250px;
+	}
+	.welcome-two p{
+		margin-top: 20px;
+	}
+	.notice-text {
+	    border-left:none;
+	    border-top: 3px solid #CCCCCC;
+	    margin: 10px;
+	    padding-left: 10px;
+	}
+	.imgArticle .articleImg {
+	    margin-bottom: 10px;
+	}
+	.contentSearch > .header > img{
+		position: absolute;
+		left: -30px;
+	}
+	.contentSearch .content-for{
+		margin-top: 40px;
+	}
+	.decorator {
+	    margin: auto;
+	}
+}
+
+@media (max-width: 769px){
+	.container-registry {
+    	position: static;
+    	margin:auto;
+	}
+	.erashymow {
+		font-size: 2.5em;
+	}
+	.welcome-two p {
+	    margin-top: 0px;
+	    padding-top: 20px;
+	}
+	.greeting{
+		height: 200px;
+	}
+	.greeting p{
+		top: 90px;
+		position: relative;
+	}
+	.welcome-two b{
+		bottom: 10px;
+		position: relative;
+	}
+	.welcome-two {
+	    height: auto;
+	}
+
+	.contentSearch .content-for{
+		padding-top: 60px;
+	}
+	.contentSearch {
+  		margin-bottom: 20px;
+	}
+	.paralax .paralax-text{
+		top: 50px;
+	}
+	.paralax h2{
+		font-size: 3em;
+	}
+}
+
+@media (max-width: 500px){
+	.img-hand{
+		display: none;
+	}
+	.greeting {
+	    height: 100px;
+	}
+	.greeting p{
+		top: 20px;
+		text-align: center;
+	}
+	.erashymow {
+		font-size: 1em;
+	}
+	.paralax h2{
+		font-size: 2em;
+	}
+	.paralax .paralax-text a{
+		padding: 5px 10px;
+		margin:0px 0px 0px 5px;
+	}
+}
+
+@media (max-width: 350px){
+	.paralax .paralax-text{
+		top: 5px;
+	}
+	.paralax .paralax-text a{
+		position: relative;
+		left: -50px;
+		padding: 5px 5px;
+	}
+}

@@ -9,35 +9,37 @@ body{
 }
 header{
 	width:100%;
-	height:150px !important;
     overflow: hidden;
     -webkit-box-shadow: 0px 7px 10px -3px rgba(0,0,0,0.61);
 	-moz-box-shadow: 0px 7px 10px -3px rgba(0,0,0,0.61);
 	box-shadow: 0px 7px 10px -3px rgba(0,0,0,0.61);
-	}
+	z-index: 1000;
+	position: relative;
+}
 header img{
-	z-index: -999;
     height: auto;
     position: relative;
-    top: -80px;
     left: 0;
+    width: 100%;
 }
 .welcome{
-	z-index: -999;
-    background: -moz-radial-gradient(center, ellipse cover, rgba(227,227,227,1) 0%, rgba(250,250,250,1) 44%, rgba(227,227,227,1) 100%); /* ff3.6+ */
-    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(227,227,227,1)), color-stop(44%, rgba(250,250,250,1)), color-stop(100%, rgba(227,227,227,1))); /* safari4+,chrome */
-    background:-webkit-radial-gradient(center, ellipse cover, rgba(227,227,227,1) 0%, rgba(250,250,250,1) 44%, rgba(227,227,227,1) 100%); /* safari5.1+,chrome10+ */
-    background: -o-radial-gradient(center, ellipse cover, rgba(227,227,227,1) 0%, rgba(250,250,250,1) 44%, rgba(227,227,227,1) 100%); /* opera 11.10+ */
-    background: -ms-radial-gradient(center, ellipse cover, rgba(227,227,227,1) 0%, rgba(250,250,250,1) 44%, rgba(227,227,227,1) 100%); /* ie10+ */
-    background:radial-gradient(ellipse at center, rgba(227,227,227,1) 0%, rgba(250,250,250,1) 44%, rgba(227,227,227,1) 100%); /* w3c */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#E3E3E3', endColorstr='#E3E3E3',GradientType=1 ); /* ie6-9 */
-	
+    
+	background: rgba(227,227,227,1);
+	background: -moz-linear-gradient(left, rgba(227,227,227,1) 0%, rgba(243,243,243,1) 50%, rgba(227,227,227,1) 100%);
+	background: -webkit-gradient(left top, right top, color-stop(0%, rgba(227,227,227,1)), color-stop(50%, rgba(243,243,243,1)), color-stop(100%, rgba(227,227,227,1)));
+	background: -webkit-linear-gradient(left, rgba(227,227,227,1) 0%, rgba(243,243,243,1) 50%, rgba(227,227,227,1) 100%);
+	background: -o-linear-gradient(left, rgba(227,227,227,1) 0%, rgba(243,243,243,1) 50%, rgba(227,227,227,1) 100%);
+	background: -ms-linear-gradient(left, rgba(227,227,227,1) 0%, rgba(243,243,243,1) 50%, rgba(227,227,227,1) 100%);
+	background: linear-gradient(to right, rgba(227,227,227,1) 0%, rgba(243,243,243,1) 50%, rgba(227,227,227,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e3e3e3', endColorstr='#e3e3e3', GradientType=1 );
+
 }
 .welcome .img-hand{
 	position: absolute;
 	top: 0;
 	right: 35%;
-	width: 20%;
+	width: 25%;
+	max-width: 400px;
 }
 .greeting{
 	height: 400px;
@@ -49,6 +51,7 @@ header img{
 	font-size:2.5em;
 	line-height: .8;
 	font-family: arial;
+	word-break: break-all;
 	font-weight: bold;
 }
 .erashymow{
@@ -56,34 +59,40 @@ header img{
 	font-size: 3em;
 }
 .registry{
+	position: relative;
+	z-index: 1000;
 	margin-top: 30px;
 	padding: 10px;
 	border-radius: 10px;
 	
-    background: -moz-linear-gradient(45deg, rgba(232,232,232,1) 0%, rgba(244,244,244,1) 44%, rgba(252,253,253,1) 100%); /* ff3.6+ */
-    background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(232,232,232,1)), color-stop(44%, rgba(244,244,244,1)), color-stop(100%, rgba(252,253,253,1))); /* safari4+,chrome */
-    background: -webkit-linear-gradient(45deg, rgba(232,232,232,1) 0%, rgba(244,244,244,1) 44%, rgba(252,253,253,1) 100%); /* safari5.1+,chrome10+ */
-    background: -o-linear-gradient(45deg, rgba(232,232,232,1) 0%, rgba(244,244,244,1) 44%, rgba(252,253,253,1) 100%); /* opera 11.10+ */
-    background: -ms-linear-gradient(45deg, rgba(232,232,232,1) 0%, rgba(244,244,244,1) 44%, rgba(252,253,253,1) 100%); /* ie10+ */
-    background: linear-gradient(45deg, rgba(232,232,232,1) 0%, rgba(244,244,244,1) 44%, rgba(252,253,253,1) 100%); /* w3c */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FCFDFD', endColorstr='#E8E8E8',GradientType=1 ); /* ie6-9 */
+	background: rgba(232,232,232,1);
+	background: -moz-linear-gradient(left, rgba(232,232,232,1) 0%, rgba(243,243,243,1) 50%, rgba(253,253,253,1) 100%);
+	background: -webkit-gradient(left top, right top, color-stop(0%, rgba(232,232,232,1)), color-stop(50%, rgba(243,243,243,1)), color-stop(100%, rgba(253,253,253,1)));
+	background: -webkit-linear-gradient(left, rgba(232,232,232,1) 0%, rgba(243,243,243,1) 50%, rgba(253,253,253,1) 100%);
+	background: -o-linear-gradient(left, rgba(232,232,232,1) 0%, rgba(243,243,243,1) 50%, rgba(253,253,253,1) 100%);
+	background: -ms-linear-gradient(left, rgba(232,232,232,1) 0%, rgba(243,243,243,1) 50%, rgba(253,253,253,1) 100%);
+	background: linear-gradient(to right, rgba(232,232,232,1) 0%, rgba(243,243,243,1) 50%, rgba(253,253,253,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e8e8e8', endColorstr='#fdfdfd', GradientType=1 );
 
-	font-size: 15px;
-	color: #37B4AA;
-	z-index: 1000;
 }
 .registry img{
+	max-width: 370px;
 	width: 100%;
+	display: block;
+	text-align: center;
+}
+.registry a{
+	max-width: 370px;
 }
 .butto-formns{
 	background: #37B4AA;
 	color: #fff;
 	border: none;
 	border-radius: 5px;
-	padding: 3px 20px;
+	padding: 5px 10px;
 }
 .welcome-two{
-	z-index: -1000;
+	z-index: 999;
 	height: 225px;
 	background: #004860;
 }
@@ -94,12 +103,16 @@ header img{
 	margin-top: 30px;
 	font-family: gotham;
 }
-.welcome-two p b{
+.welcome-two p span{
 	font-family: gothamTwo;
-
+	font-weight: bold;
+}
+.welcome-two b{
+	font-family: gothamTwo;
 }
 .container-registry{
 	position: absolute;
+	max-width: 320px;
 }
 .navbar-default{
 	background:#61605f !important;
@@ -124,9 +137,11 @@ header img{
 	position: absolute;
 	left: -50px;
 	top: -20px;
+	max-width: 358px;
+	width: 100%;
 }
 .contentSearch .content-for{
-	margin-top: 110px;
+	margin-top: 65px;
 }
 .formulario{
 	background: #F1F1F1;
@@ -181,6 +196,7 @@ hr {
 .notice-text h2{
 	color: #66C1BF;
 	font-family: gothamTwo;
+	word-break: break-all;
 }
 .notice-text a{	
 	background: #37B4AA;
@@ -191,9 +207,12 @@ hr {
 	font-weight: bold;
 }
 .decorator{
-	margin-top: 3%;
+	margin-top: 20px;
 	display: block;
 	text-align: center;
+	max-width: 70px;
+	max-height: 80px;
+	width: 100%;
 }
 .articles .header{
 	font-family: gotham;
@@ -289,7 +308,7 @@ p{
 .paralax .paralax-text{
 	z-index: 900;
 	position: absolute;
-	top: 250px;
+	top: 150px;
 	color: #fff;
 }
 .paralax .paralax-text a{
@@ -301,12 +320,12 @@ p{
 	font-weight: bold;
 }
 /*FOOTER */
-footer{
+.footer{
 	background: #004860;
 	color: #fff;
 	height: 100px;
 }
-footer a,p{
+.footer a, p{
 	color: #fff;
 	font-family: gotham;
 }

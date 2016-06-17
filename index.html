@@ -10,6 +10,7 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -21,12 +22,14 @@
   <body>
     <header><img src="img/header.png" alt="Header"></header>
 
+    <div class="clearfix"></div>
+
     <section class="welcome col-lg-12">
       <img src="img/welcome-hands.png" alt="Hands" class="img-hand">
 
       <div class="row">
 
-        <div class="col-md-7">
+        <div class="col-sm-7 col-md-7">
             <div class="greeting">
               <div class="container">
                 <p>Bienvenido a la <br>
@@ -36,11 +39,11 @@
             </div>
         </div>
 <!-- Registro -->
-        <div class="col-md-5">
+        <div class="col-sm-5 col-md-5">
           <div class="row">
             <div class="col-md-9 container-registry">
               <section class="registry">
-                <p><b>Regístrate y ¡sé parte de Shimow!</b></p>
+                <p><b style="font-size: 15px;color: #37B4AA !important;font-family:gothamTwo;">Regístrate y ¡sé parte de Shimow!</b></p>
                 <form action="" class="welcome-registry">
                   <div class="form-group">
                     <input type="text" class="form-control" placeholder="Nombre y Apellido">
@@ -57,11 +60,11 @@
                     </div>
                 </form>
               </section>
-
+        <div class="clearfix"></div>
 <!-- Inicio Session -->
 
               <section class="registry">
-                <p><b>Regístrate y ¡sé parte de Shimow!</b></p>
+                <p><b style="font-size: 15px;color: #37B4AA !important;font-family:gothamTwo;">Regístrate y ¡sé parte de Shimow!</b></p>
                 <form action="" class="welcome-registry">
                   <div class="form-group">
                     <input type="text" class="form-control" placeholder="Correo Electrónico">
@@ -82,10 +85,11 @@
             </div>
           </div>
         </div>
+        <div class="clearfix"></div>
 
         <div class="col-md-12 welcome-two">
-            <div class="col-md-7">
-              <p>Con <b>Shymow</b> tienes a un sólo click perfiles de todo tipo. de tus intereses, personas, cpmercios, ofertas, personajes y celebridades</p><br>
+            <div class="col-sm-7 col-md-7">
+              <p>Con <span>Shymow</span> tienes a un sólo click perfiles de todo tipo. de tus intereses, personas, cpmercios, ofertas, personajes y celebridades</p><br>
               <p><b>¿A qué esperas para ser parte de Shymow?</b></p>
             </div>
         </div>
@@ -147,32 +151,36 @@
     </section>
     <div class="content">
       <div class="row">
-        <div class="col-md-4 contentSearch">
+        <div class="col-sm-4 col-md-4 contentSearch">
           <section class="header">
-            <img src="img/finder.png" alt="Finder" class="img-responsive">
+            <img src="img/finder.png" alt="Finder">
           </section>
           <section class="content-for">
             <div class="row">
               <br>
-              <form action="">
-                <div class="input-group col-md-10" style="margin-left:20px;">
-                  <input type="text" class="form-control" placeholder="Search for..." aria-describedby="basic-addon2">
-                  <span class="input-group-addon" id="basic-addon2" style="padding:0;"><button style="border:none;padding:0px;"><img src="img/search.png" alt="search" width="32" height="32"></button></span>
-                </div>
-              </form>
+              <div class="col-md-12">
+                <form action="">
+                  <div class="input-group col-md-10">
+                    <input type="text" class="form-control" placeholder="Search for..." aria-describedby="basic-addon2">
+                    <span class="input-group-addon" id="basic-addon2" style="padding:0;"><button style="border:none;padding:0px;"><img src="img/search.png" alt="search" width="32" height="32"></button></span>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="row">
               <div class="formulario">
                 <form action="#">
 
                   <div class="form-group">
                   <br>
-                    <div class="col-md-6">
-                      <label>Actividad Comercial</label>
+                    <div class="col-sm-12 col-md-6">
+                      <label>Comercio</label>
                       <select name="" id="" class="form-control">
                         <option value="">Todo</option>
                       </select>
                       <hr>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-sm-12 col-md-6">
                       <label>Categoría</label>
                       <select name="" id="" class="form-control">
                         <option value="">Todo</option>
@@ -182,15 +190,15 @@
                   </div>
 
                   <div class="form-group">
-                    <div class="col-md-6">
+                    <div class="col-sm-12 col-md-6">
                       <label>Género</label>
                       <select name="" id="" class="form-control">
                         <option value="">Todo</option>
                       </select>
                       <hr>
                     </div>
-                    <div class="col-md-6">
-                      <label>Rango de edad</label>
+                    <div class="col-sm-12 col-md-6">
+                      <label>Edad</label>
                       <select name="" id="" class="form-control">
                         <option value="">Todo</option>
                       </select>
@@ -198,14 +206,14 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <div class="col-md-6">
+                    <div class="col-sm-12 col-md-6">
                       <label>Intereses</label>
                       <select name="" id="" class="form-control">
                         <option value="">Todo</option>
                       </select>
                       <hr>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-sm-12 col-md-6">
                       <label>País</label>
                       <select name="" id="" class="form-control">
                         <option value="">Todo</option>
@@ -214,7 +222,7 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <div class="col-md-6">
+                    <div class="col-sm-12 col-md-6">
                       <label>Provincia</label>
                       <select name="" id="" class="form-control">
                         <option value="">Todo</option>
@@ -227,7 +235,7 @@
                       </select>
                     </div>
                   </div>
-                  <div class="col-md-12">
+                  <div class="col-sm-12 col-md-12">
                     <hr>
                   </div>
 
@@ -236,87 +244,87 @@
                       <label>Lo más buscado</label>
                     </div>
                     <div class="center-block col-md-12">  
-                      <div class="muchtSearch col-md-3">
+                      <div class="muchtSearch col-xs-4 col-sm-6 col-md-3">
                         <img src="img/deportes.png" alt="deportes" class="img-responsive">
                       </div>
-                      <div class="muchtSearch col-md-3">
+                      <div class="muchtSearch col-xs-4 col-sm-6 col-md-3">
                         <img src="img/restaurantes.png" alt="deportes" class="img-responsive">
                       </div>
-                      <div class="muchtSearch col-md-3">
+                      <div class="muchtSearch col-xs-4 col-sm-6 col-md-3">
                         <img src="img/entretenimiento.png" alt="deportes" class="img-responsive">
                       </div>
-                      <div class="muchtSearch col-md-3">
+                      <div class="muchtSearch col-xs-4 col-sm-6 col-md-3">
                         <img src="img/compras.png" alt="deportes" class="img-responsive">
                       </div>
-                      <div class="muchtSearch col-md-3">
+                      <div class="muchtSearch col-xs-4 col-sm-6 col-md-3">
                         <img src="img/amistad.png" alt="deportes" class="img-responsive">
                       </div>
-                      <div class="muchtSearch col-md-3">
+                      <div class="muchtSearch col-xs-4 col-sm-6 col-md-3">
                         <img src="img/musica.png" alt="deportes" class="img-responsive">
                       </div>
-                      <div class="muchtSearch col-md-3">
+                      <div class="muchtSearch col-xs-4 col-sm-6 col-md-3">
                         <img src="img/celebridades.png" alt="deportes" class="img-responsive">
                       </div>
                     </div>
                   </div>
-
+                  <div class="clearfix"></div>
                   <div class="form-group center-block">
                     <div class="col-md-12">
                     <hr>
                       <label>Filtrar por red social</label>
                     </div>
                     <div class="center-block col-md-12">  
-                      <div class="muchtSearch col-md-3">
+                      <div class="muchtSearch col-xs-4 col-sm-6 col-md-3">
                         <img src="img/twitt.png" alt="deportes" class="img-responsive">
                       </div>
-                      <div class="muchtSearch col-md-3">
+                      <div class="muchtSearch col-xs-4 col-sm-6 col-md-3">
                         <img src="img/face.png" alt="deportes" class="img-responsive">
                       </div>
-                      <div class="muchtSearch col-md-3">
+                      <div class="muchtSearch col-xs-4 col-sm-6 col-md-3">
                         <img src="img/youtube.png" alt="deportes" class="img-responsive">
                       </div>
-                      <div class="muchtSearch col-md-3">
+                      <div class="muchtSearch col-xs-4 col-sm-6 col-md-3">
                         <img src="img/instagram.png" alt="deportes" class="img-responsive">
                       </div>
-                      <div class="muchtSearch col-md-3">
+                      <div class="muchtSearch col-xs-4 col-sm-6 col-md-3">
                         <img src="img/pinteres.png" alt="deportes" class="img-responsive">
                       </div>
-                      <div class="muchtSearch col-md-3">
+                      <div class="muchtSearch col-xs-4 col-sm-6 col-md-3">
                         <img src="img/vine.png" alt="deportes" class="img-responsive">
                       </div>
-                      <div class="muchtSearch col-md-3">
+                      <div class="muchtSearch col-xs-4 col-sm-6 col-md-3">
                         <img src="img/tumbrl.png" alt="deportes" class="img-responsive">
                       </div>
-                      <div class="muchtSearch col-md-3">
+                      <div class="muchtSearch col-xs-4 col-sm-6 col-md-3">
                         <img src="img/g+.png" alt="deportes" class="img-responsive">
                       </div>
-                      <div class="muchtSearch col-md-3">
+                      <div class="muchtSearch col-xs-4 col-sm-6 col-md-3">
                         <img src="img/linkedin.png" alt="deportes" class="img-responsive">
                       </div>
-                      <div class="muchtSearch col-md-3">
+                      <div class="muchtSearch col-xs-4 col-sm-6 col-md-3">
                         <img src="img/snap.png" alt="deportes" class="img-responsive">
                       </div>
                     </div>
                   </div>
-
+                  <div class="clearfix"></div>
                   <div class="form-group center-block">
                     <div class="col-md-12">
                     <hr>
                       <label>Filtrar por plataforma de streaming</label>
                     </div>
                     <div class="center-block col-md-12">  
-                      <div class="muchtSearch col-md-3">
+                      <div class="muchtSearch col-xs-4 col-sm-6 col-md-3">
                         <img src="img/twich.png" alt="deportes" class="img-responsive">
                       </div>
-                      <div class="muchtSearch col-md-3">
+                      <div class="muchtSearch col-xs-4 col-sm-6 col-md-3">
                         <img src="img/bambuser.png" alt="deportes" class="img-responsive">
                       </div>
-                      <div class="muchtSearch col-md-3">
+                      <div class="muchtSearch col-xs-4 col-sm-6 col-md-3">
                         <img src="img/lives.png" alt="deportes" class="img-responsive">
                       </div>
                     </div>
                   </div>
-                  
+                  <div class="clearfix"></div>
                   <div class="form-group">
                     <div class="col-md-12">
                     <hr>
@@ -333,61 +341,69 @@
             </div>
           </section>
         </div>
-        <div class="col-md-8">
+        <div class="col-sm-8 col-md-8">
           <section class="video">
             <video src="demo.mp4" controls autoplay loop muted preload="auto" poster="img/video.jpg" >
               HTML5 Video is required for this example
             </video> 
           </section>
-          <section class="articles">
+          <section class="col-sm-12 col-md-12 articles">
             <div class="row">
               <div class="col-md-12 text-center">
                 <div class="header"><h2>En <span>Shymow</span> Encontrarás:</h2></div>
                 <hr>
               </div>
 
-              <section class="notice">
-                <div class="col-md-3 imgArticle">
-                  <img src="img/familia.jpg" alt="Article" class="articleImg">
-                  <div class="binieta">
-                    <img src="img/binieta.png" alt="Binieta" class="img-responsive">
+              <section class="col-sm-12 col-md-12">
+                <div class="notice">
+                  <div class="col-md-3 imgArticle">
+                    <img src="img/familia.jpg" alt="Article" class="articleImg">
+                    <div class="binieta">
+                      <img src="img/binieta.png" alt="Binieta" class="img-responsive">
+                    </div>
                   </div>
-                </div>
-                <div class="col-md-2 decorator"><img src="img/numeral.jpg" alt="numeral" width="70" height="80"></div>
-                <div class="col-md-7">
-                  <div class="notice-text">
-                    <h2>TENDENCIAS</h2>
-                    <p>Enterate de las ultimas <br> tendencias en redes sociales</p><br>
-                    <a href="#">Ver +</a>
-                  </div>
-                </div>
-              </section>
-              <br>
-              <section class="notice">
-                <div class="col-md-3 imgArticle">
-                  <img src="img/familia.jpg" alt="Article" class="articleImg">
-                  <div class="binieta">
-                    <img src="img/binieta.png" alt="Binieta" class="img-responsive">
-                  </div>
-                </div>
-                <div class="col-md-2 decorator"><img src="img/corazon.jpg" alt="corazon" width="80" height="80"></div>
-                <div class="col-md-7">
-                  <div class="notice-text">
-                    <h2>INTERESES</h2>
-                    <p>Encuentra perfiles de redes <br>sociales en tu ciudad</p>
-                    <a href="#">Ver +</a>
+                  <div class="col-md-2"><img src="img/numeral.jpg" alt="numeral" class="decorator"></div>
+                  <div class="col-md-7">
+                    <div class="notice-text">
+                      <h2>TENDENCIAS</h2>
+                      <p>Enterate de las ultimas <br> tendencias en redes sociales</p><br>
+                      <a href="#">Ver +</a>
+                    </div>
                   </div>
                 </div>
               </section>
+              <div class="clearfix"></div>
               <br>
-              <section class="notice">
+              <section class="col-sm-12 col-md-12">
+                <div class="notice">
+                  <div class="col-md-3 imgArticle">
+                    <img src="img/familia.jpg" alt="Article" class="articleImg">
+                    <div class="binieta">
+                      <img src="img/binieta.png" alt="Binieta" class="img-responsive">
+                    </div>
+                  </div>
+                  <div class="col-md-2"><img src="img/corazon.jpg" alt="corazon" class="decorator"></div>
+                  <div class="col-md-7">
+                    <div class="notice-text">
+                      <h2>INTERESES</h2>
+                      <p>Encuentra perfiles de redes <br>sociales en tu ciudad</p>
+                      <a href="#">Ver +</a>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <div class="clearfix"></div>
+              <br>
+
+              <section class="col-sm-12 col-md-12 notice">
                 <div class="col-md-3 imgArticle">
                   <img src="img/familia.jpg" alt="Article" class="articleImg">
                   <div class="binieta">
                     <img src="img/binieta.png" alt="Binieta" class="img-responsive">
                   </div>
                 </div>
-                <div class="col-md-2 decorator"><img src="img/hands.jpg" alt="hands" width="70" height="80"></div>
+                <div class="col-md-2"><img src="img/hands.jpg" alt="hands" class="decorator"></div>
                 <div class="col-md-7">
                   <div class="notice-text">
                     <h2>DESTACADOS</h2>
@@ -396,15 +412,19 @@
                   </div>
                 </div>
               </section>
+
+              <div class="clearfix"></div>
+
               <br>
-              <section class="notice">
+
+              <section class="col-sm-12 col-md-12 notice">
                 <div class="col-md-3 imgArticle">
                   <img src="img/familia.jpg" alt="Article" class="articleImg">
                   <div class="binieta">
                     <img src="img/binieta.png" alt="Binieta" class="img-responsive">
                   </div>
                 </div>
-                <div class="col-md-2 decorator"><img src="img/estrella.jpg" alt="estrella" width="70" height="80"></div>
+                <div class="col-md-2"><img src="img/estrella.jpg" alt="estrella" class="decorator"></div>
                 <div class="col-md-7">
                   <div class="notice-text">
                     <h2>CELEBRIDADES</h2>
@@ -413,6 +433,7 @@
                   </div>
                 </div>
               </section>
+              <div class="clearfix"></div>
               <br>
             </div>
           </section>    
@@ -459,14 +480,14 @@
   <div class="clearfix"></div>
 
     <section class="paralax">
-      <div class="col-md-5 col-md-offset-5 paralax-text">
+      <div class="col-xs-10 col-xs-offset-2 col-sm-10 col-sm-offset-2 col-md-5 col-md-offset-5 paralax-text">
         <h2>¿Estás list@ <br> para empezar?</h2><br>
         <a href="#">REGÍSTRATE</a>
         <a href="#">INICIA SESIÓN</a>
       </div>
       <img src="img/paralax.jpg" alt="img">
     </section>
-    <footer>
+    <div class="footer">
       <div class="text-center">
         <div class="link">
           <a href="#">INICIO</a> |
@@ -480,7 +501,7 @@
         </div>
         <p>2016 Shymow - Todos los derechos reservados</p>
       </div>
-    </footer>  
+    </div>  
 
 
       <!-- js files -->
