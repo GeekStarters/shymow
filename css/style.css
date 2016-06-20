@@ -1,5 +1,5 @@
 @import 'fonts.css';
-body{
+.all{
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e3e3e3+0,ffffff+52,d6d6d6+100 */
 	background: #e3e3e3; /* Old browsers */
 	background: -moz-linear-gradient(left, #e3e3e3 0%, #ffffff 52%, #d6d6d6 100%); /* FF3.6-15 */
@@ -331,4 +331,48 @@ p{
 }
 .link{
 	padding-top: 10px;
+}
+
+/*Que es shymow*/
+
+.nav-shymow{
+	background: #37B5AA;
+	overflow: hidden;
+}
+
+.shymow .whatis p,h2{
+	color: #4C4C4C;
+}
+.shymow .whatis h2{
+	font-size: 3em;
+	font-family: gothamTwo;
+	text-align: center;
+	margin-bottom: 70px;
+}
+.shymow .whatis p{
+	font-size: 1.2em;
+	font-family: arial
+}
+.shymow .whatis{
+	margin-top: 50px;
+}
+.shymow .whatis .shymowWhat img{
+	max-width: 250px;
+	width: 100%;
+	margin-top: 30px;
+	display: block;
+	text-align: center;
+}
+
+.shymow .whatis .shymowWhat p{
+	font-family: gotham;
+	font-size: 2em;
+	color:#37B4AA;
+	text-align: center;
+	line-height: 1;
+}
+.whatis .neWas p,h2{
+	color:#37B5AA !important;
+	text-align: center;
+	word-break: break-all;
 }
