@@ -371,8 +371,40 @@ p{
 	text-align: center;
 	line-height: 1;
 }
-.whatis .neWas p,h2{
+.whatis .neWas p, h2{
 	color:#37B5AA !important;
 	text-align: center;
 	word-break: break-all;
+}
+
+/*FAQ*/
+
+.faq h2{
+	color:#4D4D4D !important;
+	font-family: gothamTwo;
+	font-size: 3.4em;
+
+}
+
+.faq .question{
+	color: #37B5AA;
+	font-family: gothamTwo;
+	font-size: 1.5em;
+}
+.faq .answer{
+	color: #4D4D4D;
+	font-family: arial;
+	font-size: 1.3em;
+}
+/*Contacto*/
+.img-contacto{
+	margin-top: 50px;
+	position: absolute;
+	width: 100%;
+	height: auto;
+
+background:#00C1BE;
+}
+.img-contacto img{
+	width: 100%;
 }
