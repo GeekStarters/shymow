@@ -51,7 +51,6 @@ header img{
 	font-size:2.5em;
 	line-height: .8;
 	font-family: arial;
-	word-break: break-all;
 	font-weight: bold;
 }
 .erashymow{
@@ -89,7 +88,7 @@ header img{
 	color: #fff;
 	border: none;
 	border-radius: 5px;
-	padding: 5px 10px;
+	padding: 10px 10px;
 }
 .welcome-two{
 	z-index: 999;
@@ -196,7 +195,6 @@ hr {
 .notice-text h2{
 	color: #66C1BF;
 	font-family: gothamTwo;
-	word-break: break-all;
 }
 .notice-text a{	
 	background: #37B4AA;
@@ -340,7 +338,7 @@ p{
 	overflow: hidden;
 }
 
-.shymow .whatis p,h2{
+.shymow .whatis p, .shymow .whatis h2{
 	color: #4C4C4C;
 }
 .shymow .whatis h2{
@@ -371,10 +369,9 @@ p{
 	text-align: center;
 	line-height: 1;
 }
-.whatis .neWas p, h2{
+.whatis .neWas p, .whatis .neWas h2{
 	color:#37B5AA !important;
 	text-align: center;
-	word-break: break-all;
 }
 
 /*FAQ*/
@@ -407,4 +404,136 @@ background:#00C1BE;
 }
 .img-contacto img{
 	width: 100%;
+}
+
+/*Registro GENERAL*/
+.reg_general{
+	background: #DEDEDE;
+}
+.reg_general .container{
+	background: #fff;
+	border-radius: 10px;
+	min-height: 500px;
+}
+.reg_general .header_reg h2{
+	color:#4D4D4D !important;
+	font-family: gothamTwo;
+	font-size: 2.5em;
+	text-align: initial !important;
+	padding-bottom: 5px;
+}
+.reg_header p{
+	color:#4D4D4D !important;
+	font-family: arial;
+	font-size: 1.3em;
+	text-align: initial !important;
+}
+
+.reg_general .header_reg{
+	border-bottom:4px solid #37B5AA;
+	padding-top: 15px;
+}
+.reg_general .genera_content{
+	margin:20px auto;
+	width:80%;
+}
+.reg_general .genera_content p{
+	color: #4D4D4D;
+	margin:20px 0px;
+	font-size: 1.5em;
+	font-family: arial;
+	line-height: 1;
+}
+.reg_general .genera_content img{
+	margin:auto;
+	width: 130px;
+	height: 130px;
+}
+
+/*Registro PERSONAL*/
+.reg_personal{
+	background: #DEDEDE;
+}
+.reg_personal h2{
+	color:#4D4D4D !important;
+	font-family: gothamTwo;
+	font-size: 2.5em;
+	text-align: initial !important;
+	padding-bottom: 5px;
+}
+.reg_personal .content_personal{
+	margin-top: 80px;
+}
+
+.reg_personal p{
+	color:#4D4D4D !important;
+	font-family: arial;
+	font-size: 1.5em;
+}
+.reg_personal img{
+	max-width: 500px;
+	width: 100%;
+}
+
+/* Registro personal parte 2*/
+.reg_personal .about-you{
+	width: 70%;
+}
+.reg_personal .about-you .date{
+	width: 80px !important;
+	max-width: 80px;
+	display: inline;
+}
+
+.reg_personal .about-you label{
+	color: #37B4AA;
+}
+.reg_personal .hobbies h3,.reg_personal .about-you h3{
+	color:#C0BFBF;
+	font-family: gothamTwo;
+	margin-bottom: 20px;
+}
+.reg_personal .hobbies{
+	border-left: 2px solid #CCCCCC;
+	padding-left:10px;
+}
+.reg_personal .hobbies p{
+	font-size: 1em;
+}
+.reg_personal .hobbies .like-me{
+ 	padding:5px 9px;
+ 	border: 2px solid #37B5AA;
+ 	display: inline-block;
+ 	border-radius: 5px;
+ 	margin:5px;
+ 	cursor: pointer;
+ 	color:#37B5AA;
+}
+.reg_personal .hobbies .like-me:hover{
+	border: 2px solid #A841FF;
+	color:#A841FF;
+}
+
+
+
+/*Registro Personal FINAL*/
+
+.reg_personal .finish p{
+	font-size:1em;
+	position: absolute;
+	top: -150px;
+}
+.reg_personal .reg_redes{
+	margin-bottom: 50px;
+}
+.reg_personal .reg_redes button{
+	border-radius:5px;padding:6px 12px; background:#37B4AA;border:0px;color:#fff;
+}
+.reg_personal .reg_redes input{
+	width:80%;display:inline; margin-right: 5px ;
+}
+.reg_personal .reg_redes h3{
+	color:#C0BFBF;
+	font-family: gothamTwo;
+	margin-bottom: 20px;
 }

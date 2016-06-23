@@ -30,6 +30,13 @@
 	.decorator {
 	    margin: auto;
 	}
+	.reg_personal .content_personal{
+		margin-top: 0px;
+	}
+	.reg_personal .finish p{
+		top: -200px;
+	}
+
 }
 
 @media (max-width: 769px){
@@ -74,15 +81,29 @@
 	
 	.img-contacto{
 		
-background: rgba(0,170,159,1);
-background: -moz-linear-gradient(left, rgba(0,170,159,1) 0%, rgba(1,182,176,1) 51%, rgba(1,191,188,1) 100%);
-background: -webkit-gradient(left top, right top, color-stop(0%, rgba(0,170,159,1)), color-stop(51%, rgba(1,182,176,1)), color-stop(100%, rgba(1,191,188,1)));
-background: -webkit-linear-gradient(left, rgba(0,170,159,1) 0%, rgba(1,182,176,1) 51%, rgba(1,191,188,1) 100%);
-background: -o-linear-gradient(left, rgba(0,170,159,1) 0%, rgba(1,182,176,1) 51%, rgba(1,191,188,1) 100%);
-background: -ms-linear-gradient(left, rgba(0,170,159,1) 0%, rgba(1,182,176,1) 51%, rgba(1,191,188,1) 100%);
-background: linear-gradient(to right, rgba(0,170,159,1) 0%, rgba(1,182,176,1) 51%, rgba(1,191,188,1) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00aa9f', endColorstr='#01bfbc', GradientType=1 );
+	background: rgba(0,170,159,1);
+	background: -moz-linear-gradient(left, rgba(0,170,159,1) 0%, rgba(1,182,176,1) 51%, rgba(1,191,188,1) 100%);
+	background: -webkit-gradient(left top, right top, color-stop(0%, rgba(0,170,159,1)), color-stop(51%, rgba(1,182,176,1)), color-stop(100%, rgba(1,191,188,1)));
+	background: -webkit-linear-gradient(left, rgba(0,170,159,1) 0%, rgba(1,182,176,1) 51%, rgba(1,191,188,1) 100%);
+	background: -o-linear-gradient(left, rgba(0,170,159,1) 0%, rgba(1,182,176,1) 51%, rgba(1,191,188,1) 100%);
+	background: -ms-linear-gradient(left, rgba(0,170,159,1) 0%, rgba(1,182,176,1) 51%, rgba(1,191,188,1) 100%);
+	background: linear-gradient(to right, rgba(0,170,159,1) 0%, rgba(1,182,176,1) 51%, rgba(1,191,188,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00aa9f', endColorstr='#01bfbc', GradientType=1 );
 
+	}
+
+	.reg_personal .hobbies{
+		border-top:2px solid #CCCCCC;
+		border-left: none;
+		margin-top:20px;
+	}
+	.reg_personal .hobbies a{
+		margin-top: 20px;
+		position: relative;
+	}
+	.reg_personal .finish p{
+		position: static;
+		top:0px;
 	}
 }
 
