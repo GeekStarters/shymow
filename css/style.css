@@ -48,14 +48,18 @@ header img{
 	position: absolute;
 	bottom: 50px;
 	color: #004860;
-	font-size:2.5em;
+	font-size: 4em;
 	line-height: .8;
-	font-family: arial;
+	font-family: gothamTwo;
 	font-weight: bold;
 }
 .erashymow{
 	color: #37B4AA;
-	font-size: 3em;
+	font-size: 1.7em;
+	font-family: gothamTwo;
+}
+.welcome-registry .form-group{
+	margin-bottom: 5px;
 }
 .registry{
 	position: relative;
@@ -79,6 +83,7 @@ header img{
 	width: 100%;
 	display: block;
 	text-align: center;
+	margin-bottom: 5px;
 }
 .registry a{
 	max-width: 370px;
@@ -111,7 +116,7 @@ header img{
 }
 .container-registry{
 	position: absolute;
-	max-width: 320px;
+	max-width: 350px;
 }
 .navbar-default{
 	background:#61605f !important;
@@ -123,10 +128,19 @@ header img{
 .navbar-default .navbar-nav > li > a {
 	color: #ACACAC;
 	font-family: gotham;
+	font-size: 1.2em;
+	border-left: 1px solid #ACACAC;
+	margin:2px 0px;
+}
+.contentSearch button{
+	display: block;
+	margin:auto;
+	text-align: center;
 }
 .contentSearch{
 	background: #00CCCC;
 	font-family: arial;
+	border-radius: 0px 0px 10px 10px;
 }
 .contentSearch label{
 	font-family: arial;
@@ -135,12 +149,18 @@ header img{
 .contentSearch > .header > img{
 	position: absolute;
 	left: -50px;
-	top: -20px;
-	max-width: 358px;
-	width: 100%;
+	top: -15px;
+	max-width: 355px;
+	width: 118%;
 }
 .contentSearch .content-for{
 	margin-top: 65px;
+}
+.padd-left{
+	padding-left: 5px !important;
+}
+.padd-right{
+	padding-right: 5px !important;
 }
 .formulario{
 	background: #F1F1F1;
@@ -150,8 +170,30 @@ header img{
 	box-sizing: border-box;
 	border-radius: 0px 0px 10px 10px; 
 }
+.img-formulario{
+	text-align: center;
+}
+.img-formulario img {
+	display: block;
+	margin:auto;
+	text-align: center;
+	min-width: 50px;
+	width: 21.1821%;
+	display: inline;
+	cursor: pointer;
+}
+.img-formulario-redes img {
+	display: block;
+	margin:auto;
+	text-align: center;
+	min-width:48px;
+	width: 16.4948%;
+	display: inline;
+	cursor: pointer;
+}
 .formulario label{
 	color: #00A99D;
+	font-size: .8em;
 }
 hr {
     border-top: 1px solid #c5c5c5;
@@ -312,10 +354,13 @@ p{
 .paralax .paralax-text a{
 	border: 2px solid #fff;
 	border-radius: 5px;
-	padding: 10px 15px;
+	padding: 15px 20px;
 	color: #fff;
-	margin:0px 0px 0px 50px;
+	margin:20px 0px 0px 50px;
 	font-weight: bold;
+}
+.align-paralax-a{
+	margin-left:20%
 }
 /*FOOTER */
 .footer{
@@ -323,12 +368,20 @@ p{
 	color: #fff;
 	height: 100px;
 }
-.footer a, p{
+.footer a, .footer p{
 	color: #fff;
 	font-family: gotham;
+	font-size: 1.2em
+	font-weight:bold;
 }
 .link{
-	padding-top: 10px;
+	padding-top: 15px;
+}
+.footer-img img{
+	display: inline;
+	max-width: 20px;
+	margin-top: 10px;
+	cursor: pointer;
 }
 
 /*Que es shymow*/
@@ -404,6 +457,18 @@ background:#00C1BE;
 }
 .img-contacto img{
 	width: 100%;
+}
+.img-contacto h2{
+	color:#fff !important; font-family:gothamTwo; font-size:3.5em;
+}
+.img-contacto .row{
+	margin-right: 0px !important;
+}
+.img-contacto p b{
+	margin-left:20px;
+}
+.img-contacto p{
+	font-size:1.5em; text-align:justify; margin-left:20px;margin-right:20px; font-family:arial;line-height:1.5; color:#fff;
 }
 
 /*Registro GENERAL*/

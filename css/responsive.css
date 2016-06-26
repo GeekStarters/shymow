@@ -1,9 +1,29 @@
+@media (min-width: 970px) and (max-width: 1197px) {
+	.align-paralax-a{
+		margin-left:0%
+	}
+}
+
+@media (max-width: 1111px) {
+	.greeting p {
+	    position: absolute;
+	    bottom: 50px;
+	    color: #004860;
+	    font-size: 3.5em;
+	    line-height: .8;
+	    font-family: gothamTwo;
+	    font-weight: bold;
+	}
+	.erashymow {
+	    color: #37B4AA;
+	    font-size: 1.6em;
+	    font-family: gothamTwo;
+	}
+}
+
 @media (max-width: 995px) {
  	.butto-formns{
 		margin-top: 10px;
-	}
-	.erashymow {
-		font-size: 2em;
 	}
 	.welcome-two{
 		height: 250px;
@@ -23,6 +43,7 @@
 	.contentSearch > .header > img{
 		position: absolute;
 		left: -30px;
+		width: 112%;
 	}
 	.contentSearch .content-for{
 		margin-top: 40px;
@@ -38,14 +59,26 @@
 	}
 
 }
-
+@media (max-width: 917px){
+	.greeting p {
+	    position: absolute;
+	    bottom: 50px;
+	    color: #004860;
+	    font-size: 3em;
+	    line-height: .8;
+	    font-family: gothamTwo;
+	    font-weight: bold;
+	}
+	.erashymow {
+	    color: #37B4AA;
+	    font-size: 1.7em;
+	    font-family: gothamTwo;
+	}
+}
 @media (max-width: 769px){
 	.container-registry {
     	position: static;
     	margin:auto;
-	}
-	.erashymow {
-		font-size: 2.5em;
 	}
 	.welcome-two p {
 	    margin-top: 0px;
@@ -106,7 +139,11 @@
 		top:0px;
 	}
 }
-
+@media (max-width: 602px) {
+	.align-paralax-a{
+		margin-left:0%
+	}
+}
 @media (max-width: 500px){
 	.img-hand{
 		display: none;
@@ -130,6 +167,14 @@
 	}
 }
 
+@media (max-width: 383px){
+	.align-paralax-a {
+	    margin-left: 0%;
+	    position: relative;
+	    top: -20px;
+	    text-align: center;
+	}
+}
 @media (max-width: 350px){
 	.paralax .paralax-text{
 		top: 5px;
