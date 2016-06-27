@@ -4,6 +4,11 @@
 	}
 }
 
+@media (max-width: 1045px) {
+	.service .calendar {
+	    font-size: 3.8em;
+	}
+}
 @media (max-width: 1111px) {
 	.greeting p {
 	    position: absolute;
@@ -137,6 +142,24 @@
 	.reg_personal .finish p{
 		position: static;
 		top:0px;
+	}
+	.reg_personal .hobbies-empresa{
+		margin-top:10px;
+	}
+	.reg_personal .about-you-empresa {
+	    padding: 10px 0px !important;
+	    border-bottom: 2px solid #CCCCCC;
+	    border-right: 0px solid #CCCCCC;
+	}
+	.borders-service {
+	    border-left: 0px;
+	    border-right: 0px;
+
+	}
+	.borders-service-responsive{
+	    padding: 20px 0px;
+	    border-top: 2px solid #CCCCCC;; 
+	    border-bottom: 2px solid #CCCCCC;
 	}
 }
 @media (max-width: 602px) {

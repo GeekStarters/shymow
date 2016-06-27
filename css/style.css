@@ -516,6 +516,9 @@ background:#00C1BE;
 }
 
 /*Registro PERSONAL*/
+.reg_personal .container{
+	width: 90% !important;
+}
 .reg_personal{
 	background: #DEDEDE;
 }
@@ -531,16 +534,26 @@ background:#00C1BE;
 }
 
 .reg_personal p{
-	color:#4D4D4D !important;
+	color:#61605F !important;
 	font-family: arial;
-	font-size: 1.5em;
+	font-size: 1.3em;
+	width: 80%;
+	line-height: 1.2;
+	text-align: justify;
 }
-.reg_personal img{
+.reg_personal .container .img-reg img{
 	max-width: 500px;
 	width: 100%;
+	-webkit-box-shadow: 0px 0px 11px -1px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 0px 11px -1px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 11px -1px rgba(0,0,0,0.75);
 }
 
 /* Registro personal parte 2*/
+.out-padding{
+	padding-right: 0px !important;
+	padding-left: 0px !important;
+}
 .reg_personal .about-you{
 	width: 70%;
 }
@@ -564,6 +577,7 @@ background:#00C1BE;
 }
 .reg_personal .hobbies p{
 	font-size: 1em;
+	margin-top: 15px;
 }
 .reg_personal .hobbies .like-me{
  	padding:5px 9px;
@@ -579,7 +593,113 @@ background:#00C1BE;
 	color:#A841FF;
 }
 
+/* Registro empresa parte 2*/
+.reg_personal .about-you-empresa{
+	width: 100%;
+	padding: 0px 10px !important;
+	border-right: 2px solid #CCCCCC;
+}
+.reg_personal .about-you-empresa .date{
+	width: 80px !important;
+	max-width: 80px;
+	display: inline;
+}
 
+.reg_personal .about-you-empresa label{
+	color: #37B4AA;
+	margin-top: 5px;
+}
+.reg_personal .hobbies-empresa h3,.reg_personal .about-you-empresa h3{
+	color:#C0BFBF;
+	font-family: gothamTwo;
+	margin-bottom: 20px;
+}
+.reg_personal .hobbies-empresa{	
+	padding-left:10px !important;
+}
+.reg_personal .hobbies-empresa p{
+	font-size: 1em;
+	margin-top: 15px;
+}
+.reg_personal .hobbies-empresa .like-me{
+ 	padding:5px 9px;
+ 	border: 2px solid #37B5AA;
+ 	display: inline-block;
+ 	font-size: 1em;
+ 	border-radius: 5px;
+ 	margin:4px 5px;
+ 	cursor: pointer;
+ 	color:#37B5AA;
+}
+.reg_personal .hobbies-empresa .like-me:hover{
+	border: 2px solid #A841FF;
+	color:#A841FF;
+}
+/*Reg EMPRESARIAL SERIVECE*/
+	.reg_personal .service img{
+		display: block;
+		text-align: center;
+		margin: auto;
+		max-width: 250px;
+		width: 100%;
+	}
+	.service .date-anio{
+		position: relative;
+		left: 80px;
+	}
+	.service .service-date{
+		font-family: arial;
+		font-size: 1.5em;
+		text-align: center;
+		display: block;
+		position: relative;
+		left: -50px;
+		top: -15px;
+	}
+	.service span{
+		color: #CCCCCC !important;
+	}
+	.service h2{
+		text-align: center !important;
+		margin:auto;
+		color: #CCCCCC !important;
+	}
+	.service{
+		height: 350px;
+	}
+	.service .calendar{
+	    font-family: arial;
+	    font-weight: bold;
+	    font-size: 5em;
+	    margin-top: 20px;
+	}
+	.service .happy{		
+		font-size: 5em !important;
+		font-family: gothamTwo;
+		line-height: .8;
+	}
+	.service .voice{
+		font-family: gothamTwo;
+		font-size: 3em;
+	}
+	.service .voice .sub-teme-voice{
+		font-size: 0.8em;
+		position: relative;
+		top: -15px;
+	}
+	.service .voice-second-teme{
+		text-align: center;
+		display: block;
+		position: relative;
+		top: -25px;
+		font-family: arial;
+		font-size: 1.5em;
+	}
+	.borders-service{
+		padding:0px 10px;
+		border-left: 2px solid #CCCCCC;
+		border-right: 2px solid #CCCCCC;
+	}
 
 /*Registro Personal FINAL*/
 
