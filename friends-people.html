@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Perfil Personas</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+	<div class="profiles">
+		<nav class="nav-shymow">
+			<ul class="nav navbar-nav navbar-right">
+				<img src="img/logo.png" alt="shymow" style="max-width:200px; margin-right:20px; margin-left:20px;">
+			  <li class="dropdown">
+  					<a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="img/profile/people/one.jpg" alt=""> Belén <b class="caret"></b></a>
+  					<ul class="dropdown-menu">
+  						<li class="dropdown-submenu">
+					        <a class="test" tabindex="-1" href="#">Configuración <span class="caret"></span></a>
+					        <ul class="dropdown-menu">
+					          <li><a tabindex="-1" href="#">2nd level dropdown</a></li>
+					          <li><a tabindex="-1" href="#">2nd level dropdown</a></li>
+					        </ul>
+					      </li>
+  						<li><a href="#">Cerrar sesión</a></li>
+  					</ul>
+  				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-left" style="margin-right:20px !important; margin-left:20px !important;">
+
+				<form class="navbar-form navbar-left" role="search">
+				  <div class="input-group">
+				    <input type="text" class="form-control" placeholder="Search for..." aria-describedby="basic-addon2">
+				    <span class="input-group-addon" id="basic-addon2" style="padding:0;"><button style="border:none;padding:0px;"><img src="img/search.png" alt="search" width="32" height="32"></button></span>
+				  </div>
+				</form>
+			</ul>
+		</nav>
+		<div class="container">
+			<div class="profiles-data-users">
+				<div class="profile-header col-sm-12">
+					<div class="header-port">
+						<img src="img/profile/people/portada.jpg" alt="shymow">
+					</div>
+					<div class="header-nav">
+						<nav class="navbar navbar-default" role="navigation">
+							<div class="container-fluid">
+								<!-- Brand and toggle get grouped for better mobile display -->
+								<div class="navbar-header">
+									<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+										<span class="sr-only">Toggle navigation</span>
+										<span class="icon-bar"></span>
+										<span class="icon-bar"></span>
+										<span class="icon-bar"></span>
+									</button>
+								</div>
+						
+								<!-- Collect the nav links, forms, and other content for toggling -->
+								<div class="collapse navbar-collapse navbar-ex1-collapse">
+									<ul class="nav navbar-nav navbar-right">
+										<li><a href="profile_people.html">SOBRE MI</a></li>
+										<li><a href="people-favoritos.html">FAVORITOS</a></li>
+										<li><a href="friends-people.html">MIS AMIGOS</a></li>
+									</ul>
+								</div><!-- /.navbar-collapse -->
+							</div>
+						</nav>
+					</div>
+				</div>
+				<div class="profile-personal-data">
+					<div class="profile-data-header col-sm-3">
+						<div class="data-img-profile">
+							<div class="img-profile">
+								<img src="img/profile/people/one.jpg">
+							</div>
+							<div class="data-profile">
+								<div class="name-profile text-center">
+									<h2>Bélen Fornes</h2>
+								</div>
+								<div class="profile-message text-center">
+									<p>¡Sonríe día a día!</p>
+								</div>
+								<div class="about-profile text-justify">
+									<p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic pariatur, praesentium atque voluptates expedita excepturi reprehenderit vel ea, exercitationem repellat. </p>
+								</div>
+							</div>
+							<div class="more-data">
+								<ul>
+									<li><span class="glyphicon glyphicon-user"></span> Fotógrafa</li>
+									<li><span class="glyphicon glyphicon-map-marker"></span> Madrid, España</li>
+									<li><span class="glyphicon glyphicon-calendar"></span> 01 agosto de 1986</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-offset-4 col-sm-9">
+						
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/jquery-tweetscroll.js"></script> <!-- jQuery tweetscroll plugin -->
+    <script src="js/caroufredsel-carousel.js"></script><!-- CarouFredSel carousel plugin -->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-submenu.js" defer></script>
+    <script>
+	$(document).ready(function(){
+	  $('.dropdown-submenu a.test').on("click", function(e){
+	    $(this).next('ul').toggle();
+	    e.stopPropagation();
+	    e.preventDefault();
+	  });
+	});
+</script> 	
+
+
+
+</body>
+</html>

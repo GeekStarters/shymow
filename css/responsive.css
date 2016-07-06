@@ -9,6 +9,12 @@
 	    font-size: 3.8em;
 	}
 }
+@media (max-width: 1193px) {
+	.profiles .my-social .social-redes{
+		max-width: 300px;
+		margin: 3px;
+	}
+}
 @media (max-width: 1111px) {
 	.greeting p {
 	    position: absolute;
@@ -27,6 +33,17 @@
 }
 
 @media (max-width: 995px) {
+	.profiles .search-more .left hr, .profiles .search-more .right hr{
+		width: 20% !important;
+	}
+	.profiles .search-more .center {
+	    float: left;
+	    width: 50%;
+	}
+	.profiles .my-social .social-redes{
+		max-width: 300px;
+		margin: 3px;
+	}
  	.butto-formns{
 		margin-top: 10px;
 	}
@@ -81,6 +98,23 @@
 	}
 }
 @media (max-width: 769px){
+	.profiles .container .profile-data-header {
+	    margin-left: 0px;
+	    background: rgba(239,239,239,1);
+	    background: -moz-linear-gradient(top, rgba(239,239,239,1) 0%, rgba(239,239,239,1) 21%, rgba(250,250,250,1) 54%, rgba(237,237,237,1) 100%);
+	    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(239,239,239,1)), color-stop(21%, rgba(239,239,239,1)), color-stop(54%, rgba(250,250,250,1)), color-stop(100%, rgba(237,237,237,1)));
+	    background: -webkit-linear-gradient(top, rgba(239,239,239,1) 0%, rgba(239,239,239,1) 21%, rgba(250,250,250,1) 54%, rgba(237,237,237,1) 100%);
+	    background: -o-linear-gradient(top, rgba(239,239,239,1) 0%, rgba(239,239,239,1) 21%, rgba(250,250,250,1) 54%, rgba(237,237,237,1) 100%);
+	    background: -ms-linear-gradient(top, rgba(239,239,239,1) 0%, rgba(239,239,239,1) 21%, rgba(250,250,250,1) 54%, rgba(237,237,237,1) 100%);
+	    background: linear-gradient(to bottom, rgba(239,239,239,1) 0%, rgba(239,239,239,1) 21%, rgba(250,250,250,1) 54%, rgba(237,237,237,1) 100%);
+	    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#efefef', endColorstr='#ededed', GradientType=0 );
+	    position: relative;
+	    top: 0px;
+	    border-radius: 5px;
+	}
+	.profiles .container .profile-data-header img{
+		padding-top: 10px;
+	}
 	.container-registry {
     	position: static;
     	margin:auto;
@@ -161,13 +195,31 @@
 	    border-top: 2px solid #CCCCCC;; 
 	    border-bottom: 2px solid #CCCCCC;
 	}
+	.navbar-nav {
+	    margin: 0px !important;
+	}
 }
 @media (max-width: 602px) {
 	.align-paralax-a{
 		margin-left:0%
 	}
+	.profiles .my-social .social-redes .img-social img{
+		max-width: 100%;
+	}
+	.profiles .my-social .social-redes{
+		max-width: 100%;
+	}
+
 }
 @media (max-width: 500px){
+	.profiles .search-more .left hr, .profiles .search-more .right hr{
+		width: 100%;
+		display: none;
+	}
+	.profiles .search-more .center {
+	    width: 100%;
+	    top: 0px;
+	}
 	.img-hand{
 		display: none;
 	}
