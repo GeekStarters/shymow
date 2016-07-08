@@ -1199,3 +1199,57 @@ top: 35px;
 .profiles .search-more-favorit .right hr{
 	float: right;
 }
+
+
+/*Friends Profile*/
+.profiles .friends .content-friends{
+	
+	background: rgba(254,254,254,1);
+	background: -moz-linear-gradient(left, rgba(254,254,254,1) 0%, rgba(240,240,240,1) 54%, rgba(240,240,240,1) 100%);
+	background: -webkit-gradient(left top, right top, color-stop(0%, rgba(254,254,254,1)), color-stop(54%, rgba(240,240,240,1)), color-stop(100%, rgba(240,240,240,1)));
+	background: -webkit-linear-gradient(left, rgba(254,254,254,1) 0%, rgba(240,240,240,1) 54%, rgba(240,240,240,1) 100%);
+	background: -o-linear-gradient(left, rgba(254,254,254,1) 0%, rgba(240,240,240,1) 54%, rgba(240,240,240,1) 100%);
+	background: -ms-linear-gradient(left, rgba(254,254,254,1) 0%, rgba(240,240,240,1) 54%, rgba(240,240,240,1) 100%);
+	background: linear-gradient(to right, rgba(254,254,254,1) 0%, rgba(240,240,240,1) 54%, rgba(240,240,240,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', endColorstr='#f0f0f0', GradientType=1 );
+
+
+	-webkit-box-shadow: -1px 0px 13px -3px rgba(0,0,0,0.75);
+	-moz-box-shadow: -1px 0px 13px -3px rgba(0,0,0,0.75);
+	box-shadow: -1px 0px 13px -3px rgba(0,0,0,0.75);
+
+	border-radius: 15px;
+	margin-bottom: 20px !important;
+}
+.profiles .friends .content-friends .sub-content-friends{
+	padding: 10px;
+}
+.profiles .friends .content-friends .sub-content-friends .img-friend img{
+	max-width: 200px;
+	width: 100%;
+	margin: auto;
+    display: block;
+}
+
+.profiles .friends .content-friends .sub-content-friends .friend-social img{
+	max-width: 25px;
+}
+.profiles .friends .content-friends .sub-content-friends .friend-social{
+	text-align: center;
+	top:-10px;
+	position: relative;
+}
+.profiles .friends .content-friends .sub-content-friends .friend-social a{
+	text-decoration: none;
+}
+.profiles .friends .content-friends .sub-content-friends .friend-name{
+	text-align: center;
+}
+.profiles .friends .content-friends .sub-content-friends .friend-name h2{
+	font-family: gothamTwo;
+	font-size: 1.5em;
+	color: #B7B7B7;
+}
+.profiles .friends .content-friends .sub-content-friends .friend-name a{
+	text-decoration: none;
+}
