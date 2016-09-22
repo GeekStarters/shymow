@@ -92,9 +92,7 @@ Route::group(['middleware' => 'auth'], function()
         }
     });
     Route::get('tendencia/{name}','InsideController@tendencia');
-    Route::get('shymow-shop',function(){
-        return view('logueado.shymow-shop');
-    });
+    Route::get('shymow-shop','ShymowShop@shymowView');
     Route::get('amigos','InsideController@amigos');
     Route::get('perfil','InsideController@perfil');
 
@@ -116,6 +114,8 @@ Route::group(['middleware' => 'auth'], function()
     Route::post('envio-producto','ShymowShop@envioProducto');
     Route::post('crear-producto','ShymowShop@create');
 
+    Route::get('buy-product/{id}','ShymowShop@buyView');
+
 
 
     //CONFIGURAR SHYMOW SHOP
@@ -126,5 +126,12 @@ Route::group(['middleware' => 'auth'], function()
     Route::get('out-config-shymow-shop','ShymowShop@outShymowShop');
     Route::post('validacion','ShymowShop@validacion');
     Route::post('processor_general_config','ShymowShop@processorGeneralConfig');
+    Route::post('processor_notification_config','ShymowShop@processorNotificationConfig');
+    Route::post('create_store','ShymowShop@createNewStore');
     Route::get('configurar-shymow-shop','ShymowShop@generalConfigure');
+    Route::get('notification_shop','ShymowShop@notificationShop');
+    Route::get('close_shop','ShymowShop@closeShop');
+    Route::get('buy_cancel','ShymowShop@buyCancel');
+    Route::get('buy_success','ShymowShop@buySuccess');
+    Route::get('success_buy','ShymowShop@successBuy');
 });

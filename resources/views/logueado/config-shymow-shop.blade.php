@@ -6,7 +6,7 @@
 	<br>
 	<div class="col-md-10 col-md-offset-1 out-padding create-product-container">
 		<div class="create-product-header">
-			<div class="col-md-4 border-right">
+			<div class="col-md-4 active-background-product-agregate border-right-active">
 				<h2 class="text-center">
 					General
 				</h2>
@@ -28,12 +28,12 @@
 				<br><br>
 					
 				<div class="col-sm-10 col-sm-offset-1 shymow-shop-general">
-				<div class="row">
-				<p class="text-danger" id="errors-validate" style="color: #a94442 !important;font-size:1em;font-weight:bold;display:none;"></p>
-				@foreach($errors->all(('<p class="text-danger" style="color: #a94442 !important;font-size:1em;font-weight:bold;">:message</p>') )as $message)
-					{!!$message!!}
-				@endforeach
-				</div>
+					<div class="row">
+					<p class="text-danger" id="errors-validate" style="color: #a94442 !important;font-size:1em;font-weight:bold;display:none;"></p>
+					@foreach($errors->all(('<p class="text-danger" style="color: #a94442 !important;font-size:1em;font-weight:bold;">:message</p>') )as $message)
+						{!!$message!!}
+					@endforeach
+					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label class="color-label">Nombre <i class="glyphicon glyphicon-pencil color-edit"></i></label>
@@ -53,7 +53,7 @@
 							<label class="color-label" style="display:block;">Teléfono celular <i class="glyphicon glyphicon-pencil color-edit"></i></label>
 							<select name="code" class="form-control" style="display:inline;width:30%;">
 								@foreach($codes as $code)
-									<option value="{{$code->id}}">{{$code->iso}}(+{{$code->phonecode}})</option>
+									<option value="{{$code->phonecode}}">{{$code->iso}}(+{{$code->phonecode}})</option>
 								@endforeach
 							</select>
 							{!! Form::text('celular','',['class'=>'form-control', 'style'=>'width:65%;display:inline;']) !!}
@@ -89,6 +89,7 @@
 					<button type="submit" class="butto-formns navbar-right botton-margin">CONTINUAR</button>
 					<a href="{{url('out-config-shymow-shop')}}"  class="butto-blank navbar-right botton-margin">CANCELAR</a>
 				</div>	
+			</div>
 		{!! Form::close() !!}
 	</div>
 </div>
@@ -118,7 +119,7 @@
 		    display: 'Código postal',
 		    rules: 'required'
 		},{
-		    name: 'codigo',
+		    name: 'code',
 		    display: 'Código de area',
 		    rules: 'required'
 		},{

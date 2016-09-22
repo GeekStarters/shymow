@@ -6,7 +6,10 @@ use App\Product;
 use App\Images_product;
 use App\Http\Controllers\Controller;
 use DB;
+use App\Notification_settings_store;
 use App\Type_send_product;
+use App\Store;
+use App\Order;
 use Validator;
 use Input;
 use Illuminate\Http\Request;
@@ -26,7 +29,12 @@ class ShymowShop extends Controller {
 		$categorys = Category_product::all();
 		return view('logueado.agregar-producto',compact('categorys'));
 	}
-
+	public function shymowView(){
+		$products = DB::select('SELECT * FROM `products` LEFT JOIN images_products on images_products.product_id = products.id  WHERE products.active = true GROUP BY products.id ORDER BY products.id DESC LIMIT 5');
+		// dd($products);
+		$count_data = count($products);
+		return view('logueado.shymow-shop',compact('products','count_data'));
+	}
 	/**
 	 * Show the form for creating a new resource.
 	 *
@@ -62,50 +70,57 @@ class ShymowShop extends Controller {
 	    					$garantia = true;
 	    					break;
 	    			}
-	    			$product = new Product();
-		    			$product->title = session('producto')['title'];
-		    			$product->category_product_id = session('producto')['category'];
-		    			$product->type_product_id = session('producto')['type'];
-		    			$product->first_spesification_id = session('producto')['first-spesification'];
-		    			$product->last_spesification_id = session('producto')['last-spesification'];
-		    			$product->description = session('informacion-producto')['description'];
-		    			$product->price = session('informacion-producto')['precio'];
-		    			$product->stock = session('informacion-producto')['stock'];
-		    			$product->garantia = $garantia;
-		    			$product->send_type = $request->input('send-product');
-		    		$product->save();
+	    			$store_id = Store::userStore(Auth::user()->id)->first();
+	    			$count_data = $store_id->count();
+	    			if($count_data > 0){
+		    			$product = new Product();
+			    			$product->title = session('producto')['title'];
+			    			$product->store_id = $store_id->id;
+			    			$product->category_product_id = session('producto')['category'];
+			    			$product->type_product_id = session('producto')['type'];
+			    			$product->first_spesification_id = session('producto')['first-spesification'];
+			    			$product->last_spesification_id = session('producto')['last-spesification'];
+			    			$product->description = session('informacion-producto')['description'];
+			    			$product->price = session('informacion-producto')['precio'];
+			    			$product->stock = session('informacion-producto')['stock'];
+			    			$product->garantia = $garantia;
+			    			$product->send_type = $request->input('send-product');
+			    		$product->save();
 
-		    		if (session::has('informacion-producto.dataOneImage')) {
-		    			$imageRoot = session('informacion-producto')['dataOneImage'][0];
+			    		if (session::has('informacion-producto.dataOneImage')) {
+			    			$imageRoot = session('informacion-producto')['dataOneImage'][0];
 
-		    			$newImage = new Images_product();
-		    				$newImage->name = $imageRoot[0];
-		    				$newImage->path = $imageRoot[1];
-		    				$newImage->product_id = $product->id;
-		    			$newImage->save();
+			    			$newImage = new Images_product();
+			    				$newImage->name = $imageRoot[0];
+			    				$newImage->path = $imageRoot[1];
+			    				$newImage->product_id = $product->id;
+			    			$newImage->save();
 
-		    		}
-		    		if (session::has('informacion-producto.dataTwoImage')) {
-		    			$imageRoot = session('informacion-producto')['dataTwoImage'][0];
+			    		}
+			    		if (session::has('informacion-producto.dataTwoImage')) {
+			    			$imageRoot = session('informacion-producto')['dataTwoImage'][0];
 
-		    			$newImage = new Images_product();
-		    				$newImage->name = $imageRoot[0];
-		    				$newImage->path = $imageRoot[1];
-		    				$newImage->product_id = $product->id;
-		    			$newImage->save();
-		    		}
-		    		if (session::has('informacion-producto.dataThreeImage')) {
-		    			$imageRoot = session('informacion-producto')['dataThreeImage'][0];
+			    			$newImage = new Images_product();
+			    				$newImage->name = $imageRoot[0];
+			    				$newImage->path = $imageRoot[1];
+			    				$newImage->product_id = $product->id;
+			    			$newImage->save();
+			    		}
+			    		if (session::has('informacion-producto.dataThreeImage')) {
+			    			$imageRoot = session('informacion-producto')['dataThreeImage'][0];
 
-		    			$newImage = new Images_product();
-		    				$newImage->name = $imageRoot[0];
-		    				$newImage->path = $imageRoot[1];
-		    				$newImage->product_id = $product->id;
-		    			$newImage->save();
-		    		}
-		    		Session::forget('producto');								
-	    			Session::forget('informacion-producto');
-		    		return redirect('shymow-shop');
+			    			$newImage = new Images_product();
+			    				$newImage->name = $imageRoot[0];
+			    				$newImage->path = $imageRoot[1];
+			    				$newImage->product_id = $product->id;
+			    			$newImage->save();
+			    		}
+			    		Session::forget('producto');								
+		    			Session::forget('informacion-producto');
+			    		return redirect('shymow-shop');
+	    			}else{
+	    				return redirect('perfil');
+	    			}
 
 	    		} catch (Exception $e) {
 	    			Session::forget('producto');								
@@ -120,7 +135,13 @@ class ShymowShop extends Controller {
 	    }
 
 	}
-
+	public function buyView($id){
+		$products = Product::find($id)->productImage($id)->take(1)->get();
+		$count = $products->count();
+		$store = Store::userStore(Auth::user()->id)->first();
+		// dd($store['original']['email_store']);
+		return view('logueado.buy_product',compact('products','count','store'));
+	}
 	/**
 	 * Store a newly created resource in storage.
 	 *
@@ -129,6 +150,124 @@ class ShymowShop extends Controller {
 	public function store()
 	{
 		
+	}
+
+	public function buySuccess(){
+		if ($_GET['tx']) {
+            $tx = $_GET['tx'];
+            // Init cURL
+            $request = curl_init();
+
+            // Set request options
+            curl_setopt_array($request, array
+            (
+              CURLOPT_URL => 'https://www.sandbox.paypal.com/cgi-bin/webscr',
+              CURLOPT_POST => TRUE,
+              CURLOPT_POSTFIELDS => http_build_query(array
+                (
+                  'cmd' => '_notify-synch',
+                  'tx' => $tx,
+                  'at' => '8sZ-2VXDwHC1Q1tHVpt8zOGS3LU-eqiO-IOjbADksh8XTFwvG-4gvuwW3R8',
+                )),
+              CURLOPT_RETURNTRANSFER => TRUE,
+              CURLOPT_HEADER => FALSE,
+              // CURLOPT_SSL_VERIFYPEER => TRUE,
+              // CURLOPT_CAINFO => 'cacert.pem',
+            ));
+
+            // Execute request and get response and status code
+            $response = curl_exec($request);
+            $status   = curl_getinfo($request, CURLINFO_HTTP_CODE);
+
+            if($status == 200 AND strpos($response, 'SUCCESS') === 0)
+            {
+                // Remove SUCCESS part (7 characters long)
+                $response = substr($response, 7);
+
+                // URL decode
+                $response = urldecode($response);
+
+                // Turn into associative array
+                preg_match_all('/^([^=\s]++)=(.*+)/m', $response, $m, PREG_PATTERN_ORDER);
+                $response = array_combine($m[1], $m[2]);
+
+                // Fix character encoding if different from UTF-8 (in my case)
+                if(isset($response['charset']) AND strtoupper($response['charset']) !== 'UTF-8')
+                {
+                  foreach($response as $key => &$value)
+                  {
+                    $value = mb_convert_encoding($value, 'UTF-8', $response['charset']);
+                  }
+                  $response['charset_original'] = $response['charset'];
+                  $response['charset'] = 'UTF-8';
+                }
+
+                // Sort on keys for readability (handy when debugging)
+                ksort($response);
+
+                if (isset($response['handling_amount'])) {
+                	$response['handling_amount'] = floatval($response['handling_amount']);
+                }
+                if (isset($response['mc_gross'])) {
+                	$response['mc_gross'] = floatval($response['mc_gross']);
+                }
+                if (isset($response['shipping'])) {
+                	$response['shipping'] = floatval($response['shipping']);
+                }
+                if (isset($response['mc_fee'])) {
+                	$response['mc_fee'] = floatval($response['mc_fee']);
+                }
+                if (isset($response['payment_fee'])) {
+                	$response['payment_fee'] = floatval($response['payment_fee']);
+                }
+                if (isset($response['payment_gross'])) {
+                	$response['payment_gross'] = floatval($response['payment_gross']);
+                }
+
+                if (isset($response['quantity'])) {
+                	$response['quantity'] = (int) $response['quantity'];
+                }
+                $newOrder = new Order($response);
+                	$newOrder->product_id = (int)$response['item_number'];
+                	$newOrder->perfil_id = (int)Auth::user()->id;
+                	$newOrder->quantity = (int)$response['quantity'];
+                $newOrder->save();
+
+                $product_id = (int)$response['item_number'];
+                $data = [
+                	"product_id" => $product_id,
+                	"order_id" => $newOrder->id
+                ];
+                Session::put('success_buy', $data);
+                return redirect('success_buy');
+                
+            }else{
+            	return redirect('shymow-shop');
+            }
+        }else{
+            return redirect('shymow-shop');
+        }
+	}
+
+	public function successBuy(){
+		if (!Session::has('success_buy'))
+		{
+		    return redirect('shymow-shop');
+		}
+		$information = Session::get('success_buy');
+		$id = $information['product_id'];
+		$order_id = $information['order_id'];
+		$products = Product::find($id)->productImage($id)->take(1)->get();
+		$count = $products->count();
+
+		$monto = Order::monto($order_id)->first();
+		$monto = $monto['original']['mc_gross'];
+		// dd($store['original']['email_store']);
+		return view('logueado.success_buy',compact('products','count','monto'));
+
+	}
+	public function buyCancel(){
+		return redirect('shymow-shop');
 	}
 
 	/**
@@ -358,14 +497,53 @@ class ShymowShop extends Controller {
             return redirect('identificate');
         }
 	}
+	public function processorNotificationConfig(Request $request){
+		if (!session::has('configuracion_shymow_shop')) {
+			if (!session::has('configuracion_shymow_shop.general')) {
+				dd(session::get('configuracion_shymow_shop.general'));
+				return redirect('identificate');
+			}
+		}
+		$data = $request->all();
+		$messages = [
+			'sale.required' => 'Notificación de venta efectuada requerdida',
+			'label.required' => 'Notificación sobre etiquetas requerida',
+			'share.required' => 'Notifiación sobre compartir requerida',
+			'like.required' => 'Notificación de like en productos requerida',
+			'message.required' => 'Notificación de mensajes requerida',
+			'comment.required' => 'Notificación de comentarios requerida',
+			'qualification.required' => 'Notifiación de calificación requerida',
+			'notificacion_email.required' => 'Notificaciones a email requerida',
+			'notificacion_email.integer' => 'Seleccione debidamente las opciones',
+		];
+		$v = Validator::make($data, [
+			'sale' => 'required',
+			'label' => 'required',
+			'share' => 'required',
+			'like' => 'required',
+			'message' => 'required',
+			'comment' => 'required',
+			'qualification' => 'required',
+			'notificacion_email' => 'required|integer',
+	    ],$messages);
 
+	    if ($v->fails())
+	    {
+		    return redirect('notification_shop')->withErrors($v)->withInput($request->all());
+	    }
+	    Session::push('configuracion_shymow_shop.noification', $data);
+	    return redirect('close_shop');
+	}
 	public function processorGeneralConfig(Request $request){
+		if (!session::has('configuracion_shymow_shop')) {
+			return redirect('identificate');
+		}
 		$data = $request->all();
 		$messages = [
 			'nombre.required' => 'Su nombre es requerido',
 			'apellido.required' => 'Su apellido es requerido',
 			'apellido.email' => 'Su email es requerido',
-			'faddres.required' => 'Su direccion es requerida',
+			'faddress.required' => 'Su direccion es requerida',
 			'code.required' => 'Su código de area es requerida',
 			'cp.required' => 'Su código postal es requerido',
 			'celular.integer' => 'Introdusca un número valido',
@@ -375,8 +553,7 @@ class ShymowShop extends Controller {
 			'apellido' => 'required|min:8',
 			'email' => 'required|email',
 			'celular' => 'required|min:7|integer',
-			'faddres' => 'required|min:10',
-			'laddres' => 'min:10',
+			'faddress' => 'required|min:10',
 			'cp' => 'required',
 			'code' => 'required',
 			'ciudad' => 'required',
@@ -386,6 +563,9 @@ class ShymowShop extends Controller {
 	    {
 		    return redirect('configurar-shymow-shop')->withErrors($v)->withInput($request->all());
 	    }
+	    Session::push('configuracion_shymow_shop.general', $data);
+
+	    return redirect('notification_shop');
 	}
 
 	public function outShymowShop(){
@@ -397,4 +577,130 @@ class ShymowShop extends Controller {
 		return redirect('perfil');
 	}
 
+	public function notificationShop(){
+		if (!session::has('configuracion_shymow_shop')) {
+			return redirect('identificate');
+		}
+		if (!session::has('configuracion_shymow_shop.general')) {
+			return redirect('identificate');
+		}
+		return view('.logueado.config-notification-shymow-shop');
+	}
+	public function closeShop(){
+		if (!session::has('configuracion_shymow_shop')) {
+			return redirect('identificate');
+		}
+		if (!session::has('configuracion_shymow_shop.noification')) {
+			return redirect('notification_shop');
+		}
+		return view('.logueado.config-close-shop');
+	}
+
+	public function createNewStore(){
+		if (!session::has('configuracion_shymow_shop')) {
+			return redirect('identificate');
+		}
+		if (!session::has('configuracion_shymow_shop.noification')) {
+			return redirect('notification_shop');
+		}
+		if (!session::has('configuracion_shymow_shop.general')) {
+			return redirect('identificate');
+		}	
+		$search = Store::userStore(Auth::user()->id)->count();
+
+		$general = session::get('configuracion_shymow_shop.general')[0];
+		$notification = session::get('configuracion_shymow_shop.noification')[0];
+
+		$viewCp = false;
+		if (isset($general['viewcp'])) {
+			if ($general['viewcp'] == "true") {
+				$viewCp = true;
+			}else{
+				$viewCp = false;
+			}
+		}
+		$viewCiudad = false;
+		if (isset($general['viewciudad'])) {
+			if ($general['viewciudad'] == "true") {
+				$viewCiudad = true;
+			}else{
+				$viewCiudad = false;
+			}
+		}
+
+		$sound_notification = false;
+		$sound_message = false;
+		$sound_sale = false;
+
+		if (isset($notification['sound_new_notification'])) {
+			if ($notification['sound_new_notification'] == "true") {
+				$sound_notification = true;
+			}else{
+				$sound_notification = false;
+			}
+		}
+		if (isset($notification['sound_new_message'])) {
+			if ($notification['sound_new_message'] == "true") {
+				$sound_message = true;
+			}else{
+				$sound_message = false;
+			}
+		}
+		if (isset($notification['sound_new_sale'])) {
+			if ($notification['sound_new_sale'] == "true") {
+				$sound_sale = true;
+			}else{
+				$sound_sale = false;
+			}
+		}
+
+		// $sound_notification = validateBool($notification['sound_new_notification']);
+		$phone = '+'.$general['code'].$general['celular'];
+		// dd($notification);
+
+		function validateBool($data){
+			if($data == "true"){
+				return true;
+			}else{
+				return false;
+			}
+		}
+
+		$sale =validateBool($notification['sale']);
+		$label =validateBool($notification['label']);
+		$share =validateBool($notification['share']);
+		$like =validateBool($notification['like']);
+		$message =validateBool($notification['message']);
+		$comment =validateBool($notification['comment']);
+		$qualification =validateBool($notification['qualification']);
+		$notification_email = (int) $notification['notificacion_email'];
+		if($search < 1){
+			$store = new Store();
+				$store->profile_id = Auth::user()->id;
+				$store->first_name = $general['nombre'];
+				$store->last_name = $general['apellido'];
+				$store->email_store = $general['email'];
+				$store->phone = $phone;
+				$store->address = $general['faddress'];
+				$store->further_office = $general['laddress'];
+			$store->save();
+
+			$notification_store = new Notification_settings_store();
+				$notification_store->store_id = $store->id;
+				$notification_store->sound_notification = $sound_notification;
+				$notification_store->sound_new_message = $sound_message;
+				$notification_store->sound_sale = $sound_sale;
+				$notification_store->buy_notification = $sale;
+				$notification_store->label_notification = $label;
+				$notification_store->share_notification = $share;
+				$notification_store->like_notification = $like;
+				$notification_store->message_notification = $message;
+				$notification_store->comments_notification = $comment;
+				$notification_store->qualification_notification = $qualification;
+				$notification_store->email_notification = $notification_email;
+			$notification_store->save();
+
+			return redirect('shymow-shop');
+		}
+	}
 }

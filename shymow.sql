@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-09-2016 a las 03:36:08
+-- Tiempo de generación: 22-09-2016 a las 14:11:58
 -- Versión del servidor: 5.7.9
 -- Versión de PHP: 5.6.16
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `shymow`
 --
-CREATE DATABASE IF NOT EXISTS `shymow` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-USE `shymow`;
 
 -- --------------------------------------------------------
 
@@ -43,13 +41,13 @@ CREATE TABLE IF NOT EXISTS `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `active`, `created_at`, `updated_at`) VALUES
-(1, 'Deportes', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(2, 'Restaurantes', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(3, 'Entretenimiento', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(4, 'Compras', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(5, 'Amistad', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(6, 'Música', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(7, 'Celebridad', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01');
+(1, 'Deportes', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(2, 'Restaurantes', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(3, 'Entretenimiento', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(4, 'Compras', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(5, 'Amistad', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(6, 'Música', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(7, 'Celebridad', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40');
 
 -- --------------------------------------------------------
 
@@ -72,13 +70,13 @@ CREATE TABLE IF NOT EXISTS `category_posts` (
 --
 
 INSERT INTO `category_posts` (`id`, `name`, `active`, `created_at`, `updated_at`) VALUES
-(1, 'Bisutería', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(2, 'Casas de playa', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(3, 'Series de Tv y cine', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(4, 'Música', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(5, 'Videojuegos', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(6, 'Empresas', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(7, 'Movilidad y transporte', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01');
+(1, 'Bisutería', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(2, 'Casas de playa', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(3, 'Series de Tv y cine', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(4, 'Música', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(5, 'Videojuegos', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(6, 'Empresas', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(7, 'Movilidad y transporte', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40');
 
 -- --------------------------------------------------------
 
@@ -102,11 +100,11 @@ CREATE TABLE IF NOT EXISTS `category_products` (
 --
 
 INSERT INTO `category_products` (`id`, `name`, `path`, `active`, `created_at`, `updated_at`) VALUES
-(1, 'Productos', 'img/create_product/productos.png', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(2, 'Servicios', 'img/create_product/servicios.png', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(3, 'Inmuebles', 'img/create_product/inmuebles.png', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(4, 'Techno', 'img/create_product/techno.png', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(5, 'Otros', 'img/create_product/otros.png', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01');
+(1, 'Productos', 'img/create_product/productos.png', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(2, 'Servicios', 'img/create_product/servicios.png', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(3, 'Inmuebles', 'img/create_product/inmuebles.png', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(4, 'Techno', 'img/create_product/techno.png', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(5, 'Otros', 'img/create_product/otros.png', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40');
 
 -- --------------------------------------------------------
 
@@ -49212,21 +49210,21 @@ CREATE TABLE IF NOT EXISTS `first_spesifications` (
 --
 
 INSERT INTO `first_spesifications` (`id`, `type_product_id`, `name`, `active`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Pantalla plana', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(2, 2, 'HD', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(3, 3, 'LCD HD', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(4, 6, 'Laptops', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(5, 7, 'Patios', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(6, 8, 'Arreglos florales', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(7, 11, 'Vidrio', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(8, 12, 'Metal', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(9, 13, 'Madera', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(10, 16, 'Rock', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(11, 16, 'Rap', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(12, 16, 'Electronica', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(13, 19, 'Ajenjo', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(14, 20, 'Pizarra electronica', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(15, 21, 'Frijoles', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01');
+(1, 1, 'Pantalla plana', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(2, 2, 'HD', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(3, 3, 'LCD HD', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(4, 6, 'Laptops', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(5, 7, 'Patios', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(6, 8, 'Arreglos florales', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(7, 11, 'Vidrio', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(8, 12, 'Metal', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(9, 13, 'Madera', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(10, 16, 'Rock', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(11, 16, 'Rap', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(12, 16, 'Electronica', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(13, 19, 'Ajenjo', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(14, 20, 'Pizarra electronica', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(15, 21, 'Frijoles', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40');
 
 -- --------------------------------------------------------
 
@@ -49270,12 +49268,12 @@ CREATE TABLE IF NOT EXISTS `friends` (
 --
 
 INSERT INTO `friends` (`id`, `user1`, `user2`, `active`, `friend`, `created_at`, `updated_at`) VALUES
-(1, 1, 2, 1, 0, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(2, 1, 3, 1, 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(3, 1, 4, 1, 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(4, 2, 3, 1, 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(5, 2, 4, 1, 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(6, 3, 4, 1, 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01');
+(1, 1, 2, 1, 0, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(2, 1, 3, 1, 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(3, 1, 4, 1, 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(4, 2, 3, 1, 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(5, 2, 4, 1, 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(6, 3, 4, 1, 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40');
 
 -- --------------------------------------------------------
 
@@ -49313,16 +49311,14 @@ CREATE TABLE IF NOT EXISTS `images_products` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   KEY `images_products_product_id_foreign` (`product_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `images_products`
 --
 
 INSERT INTO `images_products` (`id`, `path`, `name`, `product_id`, `active`, `created_at`, `updated_at`) VALUES
-(1, 'img/productos/1473828525-arrgelo-de-pc.png', '1473828525-arrgelo-de-pc.png', 1, 1, '2016-09-14 10:48:52', '2016-09-14 10:48:52'),
-(2, 'img/productos/1473828525-ganar-dinero-reparando-pc.jpg', '1473828525-ganar-dinero-reparando-pc.jpg', 1, 1, '2016-09-14 10:48:52', '2016-09-14 10:48:52'),
-(3, 'img/productos/1473828525-UwiIoMnkOlnm.jpg', '1473828525-UwiIoMnkOlnm.jpg', 1, 1, '2016-09-14 10:48:52', '2016-09-14 10:48:52');
+(1, 'img/productos/1474403234-ganar-dinero-reparando-pc.jpg', '1474403234-ganar-dinero-reparando-pc.jpg', 1, 1, '2016-09-21 02:27:18', '2016-09-21 02:27:18');
 
 -- --------------------------------------------------------
 
@@ -49347,51 +49343,51 @@ CREATE TABLE IF NOT EXISTS `interests` (
 --
 
 INSERT INTO `interests` (`id`, `categories_id`, `name`, `active`, `created_at`, `updated_at`) VALUES
-(1, 5, 'Acampar', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(2, 5, 'Compartir coche', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(3, 5, 'Objetos perdidos', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(4, 5, 'Party', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(5, 5, 'Idiomas', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(6, 5, 'Trueque de habilidades', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(7, 5, 'Infantil', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(8, 5, 'Pesca', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(9, 5, 'Cultura', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(10, 5, 'Ecologismo', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(11, 5, 'Intercambio de idioma', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(12, 5, 'Excursionismo', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(13, 5, 'Viajar', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(14, 5, 'Animales', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(15, 5, 'Aventura', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(16, 5, 'Voluntariado', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(17, 5, 'Jardinería', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(18, 5, 'Escribir', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(19, 3, 'Coleccionismo', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(20, 3, 'Moda', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(21, 3, 'Filosofía', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(22, 3, 'Lectura', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(23, 3, 'Anime', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(24, 3, 'Fotografía', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(25, 3, 'Pintar', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(26, 3, 'Teatro', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(27, 3, 'Videojuegos', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(28, 3, 'Informática', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(29, 3, 'Arte', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(30, 3, 'Bailar', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(31, 3, 'Ciencia', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(32, 3, 'Política', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(33, 3, 'Exposiciones', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(34, 6, 'Música', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(35, 6, 'Conciertos', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(36, 2, 'Cocina', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(37, 7, 'Serie', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(38, 7, 'Cine', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(39, 7, 'Belleza', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(40, 1, 'Salud', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(41, 1, 'Motor', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(42, 1, 'Juegos de mesa', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(43, 1, 'Deportes', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(44, 4, 'Compras', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(45, 4, 'Tecnología', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01');
+(1, 5, 'Acampar', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(2, 5, 'Compartir coche', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(3, 5, 'Objetos perdidos', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(4, 5, 'Party', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(5, 5, 'Idiomas', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(6, 5, 'Trueque de habilidades', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(7, 5, 'Infantil', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(8, 5, 'Pesca', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(9, 5, 'Cultura', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(10, 5, 'Ecologismo', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(11, 5, 'Intercambio de idioma', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(12, 5, 'Excursionismo', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(13, 5, 'Viajar', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(14, 5, 'Animales', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(15, 5, 'Aventura', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(16, 5, 'Voluntariado', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(17, 5, 'Jardinería', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(18, 5, 'Escribir', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(19, 3, 'Coleccionismo', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(20, 3, 'Moda', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(21, 3, 'Filosofía', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(22, 3, 'Lectura', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(23, 3, 'Anime', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(24, 3, 'Fotografía', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(25, 3, 'Pintar', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(26, 3, 'Teatro', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(27, 3, 'Videojuegos', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(28, 3, 'Informática', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(29, 3, 'Arte', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(30, 3, 'Bailar', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(31, 3, 'Ciencia', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(32, 3, 'Política', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(33, 3, 'Exposiciones', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(34, 6, 'Música', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(35, 6, 'Conciertos', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(36, 2, 'Cocina', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(37, 7, 'Serie', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(38, 7, 'Cine', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(39, 7, 'Belleza', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(40, 1, 'Salud', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(41, 1, 'Motor', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(42, 1, 'Juegos de mesa', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(43, 1, 'Deportes', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(44, 4, 'Compras', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(45, 4, 'Tecnología', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40');
 
 -- --------------------------------------------------------
 
@@ -49416,26 +49412,26 @@ CREATE TABLE IF NOT EXISTS `last_spesifications` (
 --
 
 INSERT INTO `last_spesifications` (`id`, `first_spesification_id`, `name`, `active`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Grande', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(2, 2, 'Pequeño', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(3, 4, 'Core i5', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(4, 4, 'Core i7', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(5, 4, 'Core i9', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(6, 5, 'Orden y restauracion', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(7, 6, 'Reestauración', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(8, 7, 'Tamaño familiar', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(9, 7, 'Mediano', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(10, 8, 'Tamaño familiar', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(11, 8, 'Mediano', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(12, 9, 'Tamaño familiar', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(13, 9, 'Mediano', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(14, 10, 'Exitos', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(15, 10, 'Populares', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(16, 11, 'Exitos', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(17, 11, 'Populares', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(18, 12, 'Exitos', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(19, 12, 'Populares', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(20, 14, 'Grande', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01');
+(1, 1, 'Grande', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(2, 2, 'Pequeño', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(3, 4, 'Core i5', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(4, 4, 'Core i7', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(5, 4, 'Core i9', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(6, 5, 'Orden y restauracion', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(7, 6, 'Reestauración', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(8, 7, 'Tamaño familiar', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(9, 7, 'Mediano', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(10, 8, 'Tamaño familiar', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(11, 8, 'Mediano', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(12, 9, 'Tamaño familiar', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(13, 9, 'Mediano', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(14, 10, 'Exitos', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(15, 10, 'Populares', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(16, 11, 'Exitos', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(17, 11, 'Populares', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(18, 12, 'Exitos', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(19, 12, 'Populares', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(20, 14, 'Grande', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40');
 
 -- --------------------------------------------------------
 
@@ -49509,7 +49505,8 @@ INSERT INTO `migrations` (`migration`, `batch`) VALUES
 ('2016_09_08_194123_create_comment_shares_table', 1),
 ('2016_09_09_235857_create_post_trends_table', 1),
 ('2016_09_14_023351_create_type_send_products_table', 1),
-('2016_09_14_040518_create_images_products_table', 1);
+('2016_09_14_040518_create_images_products_table', 1),
+('2016_09_20_184524_create_orders_table', 1);
 
 -- --------------------------------------------------------
 
@@ -49548,18 +49545,83 @@ DROP TABLE IF EXISTS `notification_settings_stores`;
 CREATE TABLE IF NOT EXISTS `notification_settings_stores` (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `store_id` int(10) UNSIGNED NOT NULL,
+  `sound_notification` tinyint(1) NOT NULL,
+  `sound_new_message` tinyint(1) NOT NULL,
+  `sound_sale` tinyint(1) NOT NULL,
   `buy_notification` tinyint(1) NOT NULL,
   `label_notification` tinyint(1) NOT NULL,
   `like_notification` tinyint(1) NOT NULL,
+  `share_notification` tinyint(1) NOT NULL,
   `message_notification` tinyint(1) NOT NULL,
   `qualification_notification` tinyint(1) NOT NULL,
-  `comments_notification` tinyint(1) NOT NULL,
+  `comments_notification` int(11) NOT NULL,
+  `email_notification` tinyint(1) NOT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '1',
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   KEY `notification_settings_stores_store_id_foreign` (`store_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `notification_settings_stores`
+--
+
+INSERT INTO `notification_settings_stores` (`id`, `store_id`, `sound_notification`, `sound_new_message`, `sound_sale`, `buy_notification`, `label_notification`, `like_notification`, `share_notification`, `message_notification`, `qualification_notification`, `comments_notification`, `email_notification`, `active`, `created_at`, `updated_at`) VALUES
+(1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, '2016-09-21 02:26:40', '2016-09-21 02:26:40');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `orders`
+--
+
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE IF NOT EXISTS `orders` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `perfil_id` int(10) UNSIGNED NOT NULL,
+  `address_city` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `address_country` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `address_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `address_status` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `address_street` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `address_zip` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `business` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `first_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `last_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `handling_amount` decimal(5,2) NOT NULL,
+  `item_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `mc_currency` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `payer_email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `payer_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `payer_status` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `payment_date` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `payment_status` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `receiver_email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `receiver_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `shipping` decimal(8,2) NOT NULL,
+  `payment_fee` decimal(8,2) NOT NULL,
+  `payment_gross` decimal(8,2) NOT NULL,
+  `mc_fee` decimal(8,2) NOT NULL,
+  `mc_gross` decimal(8,2) NOT NULL,
+  `txn_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `orders_product_id_foreign` (`product_id`),
+  KEY `orders_perfil_id_foreign` (`perfil_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `orders`
+--
+
+INSERT INTO `orders` (`id`, `product_id`, `perfil_id`, `address_city`, `address_country`, `address_name`, `address_status`, `address_street`, `address_zip`, `business`, `first_name`, `last_name`, `handling_amount`, `item_name`, `mc_currency`, `payer_email`, `payer_id`, `payer_status`, `payment_date`, `payment_status`, `receiver_email`, `receiver_id`, `quantity`, `shipping`, `payment_fee`, `payment_gross`, `mc_fee`, `mc_gross`, `txn_id`, `active`, `created_at`, `updated_at`) VALUES
+(2, 1, 4, 'San Jose', 'United States', 'test buyer', 'confirmed', '1 Main St', '95131', 'melvingilberto-facilitator@gmail.com', 'test', 'buyer', '0.00', 'Reparo pc', 'EUR', 'melvingilberto-buyer@gmail.com', '6K9HTY7P7A23U', 'verified', '13:28:04 Sep 20, 2016 PDT', 'Pending', 'melvingilberto-facilitator@gmail.com', '6MAGNDGG3SS9J', 0, '0.00', '0.00', '0.00', '0.00', '2000.00', '8G950541MX562300A', 1, '2016-09-21 02:28:10', '2016-09-21 02:28:10'),
+(3, 1, 4, 'San Jose', 'United States', 'test buyer', 'confirmed', '1 Main St', '95131', 'melvingilberto-facilitator@gmail.com', 'test', 'buyer', '0.00', 'Reparo+pc', 'EUR', 'melvingilberto-buyer@gmail.com', '6K9HTY7P7A23U', 'verified', '13:30:25 Sep 20, 2016 PDT', 'Pending', 'melvingilberto-facilitator@gmail.com', '6MAGNDGG3SS9J', 90, '0.00', '0.00', '0.00', '0.00', '4500.00', '5MT03894BG7247142', 1, '2016-09-21 02:32:00', '2016-09-21 02:32:00');
 
 -- --------------------------------------------------------
 
@@ -49619,10 +49681,10 @@ CREATE TABLE IF NOT EXISTS `perfils` (
 --
 
 INSERT INTO `perfils` (`id`, `name`, `email`, `password`, `birthdate`, `genero`, `pais`, `provincia`, `municipio`, `work`, `phone`, `role`, `edad`, `img_profile`, `img_portada`, `hobbies`, `redes`, `streamings`, `webs`, `blogs`, `mi_frase`, `descripcion`, `active`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Wilmer gilberto', 'wilmer@gmail.com', '$2y$10$pA7.TqATEpJhW97JDH7LTuS8uqJI.xbMkcz.5GqIzVjWBgsirEr4O', '1995-03-29', 'M', 'El Salvador', 'El refugio', 'La paz', '', '', 0, 22, 'img/profile/default.png', 'img/profile/portada.jpg', 'Musica, juegos, Economia', NULL, NULL, NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 1, NULL, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(2, 'delmi solano', 'demi@gmail.com', '$2y$10$2kat.04Qn4lcyijJ.Bz9sO3s.JWM6zMN.yTIqVDR6L7Yj2NLgKCpO', '1995-03-29', 'F', 'El Salvador', 'El refugio', 'La paz', '', '', 0, 29, 'img/profile/default.png', 'img/profile/portada.jpg', 'Musica, juegos, Economia', NULL, NULL, NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 1, NULL, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(3, 'Gisela lara', 'Gisela@gmail.com', '$2y$10$OYPNZEcw/c49g37unzPsGO6jG6/GUJLHrbJ/PCr4yc71oaaXI1AMy', '1995-03-29', 'F', 'El Salvador', 'El refugio', 'La paz', '', '', 0, 21, 'img/profile/default.png', 'img/profile/portada.jpg', 'Musica, juegos, Economia', NULL, NULL, NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 1, NULL, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(4, 'Developer prueba', 'developer@gmail.com', '$2y$10$jR0Qscpor84Nc/Icq1ykfObki/9A8l3eHMxYCuhMzI6ATBm6ZIYES', '1995-03-29', 'M', 'El Salvador', 'El refugio', 'La paz', '', '', 0, 21, 'img/profile/default.png', 'img/profile/portada.jpg', 'Musica, juegos, Economia', NULL, NULL, NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 1, 'LJWDN7RZ6iS04dyFO7Deho6fB0d1qDhS8cUnMhNtDt6CHwJlP254Mjdmlkfi', '2016-09-14 10:46:01', '2016-09-15 04:05:40');
+(1, 'Wilmer gilberto', 'wilmer@gmail.com', '$2y$10$r6xKpFoMQmZVikcRrpnRBOPLMmOmLRt.i4czapx3R10EKqZ66aQ8i', '1995-03-29', 'M', 'El Salvador', 'El refugio', 'La paz', '', '', 0, 22, 'img/profile/default.png', 'img/profile/portada.jpg', 'Musica, juegos, Economia', NULL, NULL, NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 1, NULL, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(2, 'delmi solano', 'demi@gmail.com', '$2y$10$vkaue4ILcJdSsU.EpXUs7.w6UMWFbOFPC4CRFplXK0hYRfA/P0lt6', '1995-03-29', 'F', 'El Salvador', 'El refugio', 'La paz', '', '', 0, 29, 'img/profile/default.png', 'img/profile/portada.jpg', 'Musica, juegos, Economia', NULL, NULL, NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 1, NULL, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(3, 'Gisela lara', 'Gisela@gmail.com', '$2y$10$hGKWhlpimqQdCXBiy3SjCuVXw5YjT/SODHQfAOn0MVQxCyL93R57S', '1995-03-29', 'F', 'El Salvador', 'El refugio', 'La paz', '', '', 0, 21, 'img/profile/default.png', 'img/profile/portada.jpg', 'Musica, juegos, Economia', NULL, NULL, NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 1, NULL, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(4, 'Developer prueba', 'developer@gmail.com', '$2y$10$SQfFh4inTPepnTxsRd1mJe7Kt/a8ZE/FnW91XQLcKP3xSrvfN5I6q', '1995-03-29', 'M', 'El Salvador', 'El refugio', 'La paz', '', '', 0, 21, 'img/profile/default.png', 'img/profile/portada.jpg', 'Musica, juegos, Economia', NULL, NULL, NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 1, 'WCTsg2fvpQax7EpKtQPpRnLrOwjSL5UvChl86YXmx075emFrfogEHGiSWBph', '2016-09-21 02:23:40', '2016-09-21 02:32:45');
 
 -- --------------------------------------------------------
 
@@ -49663,14 +49725,7 @@ CREATE TABLE IF NOT EXISTS `posts` (
   PRIMARY KEY (`id`),
   KEY `posts_category_post_id_foreign` (`category_post_id`),
   KEY `posts_profil_id_foreign` (`profil_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Volcado de datos para la tabla `posts`
---
-
-INSERT INTO `posts` (`id`, `description`, `category_post_id`, `profil_id`, `qualification`, `like`, `share`, `active`, `created_at`, `updated_at`) VALUES
-(1, 'Welcome', 2, 4, 0, 0, 0, 1, '2016-09-15 01:01:21', '2016-09-15 01:01:21');
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -49730,7 +49785,7 @@ CREATE TABLE IF NOT EXISTS `products` (
 --
 
 INSERT INTO `products` (`id`, `store_id`, `title`, `description`, `price`, `stock`, `send_type`, `active`, `garantia`, `category_product_id`, `type_product_id`, `first_spesification_id`, `last_spesification_id`, `qualification`, `like`, `share`, `created_at`, `updated_at`) VALUES
-(1, 0, 'Reparo pc', 'Reparamos todo tipo de laptos, vendemos accesorios de todo tipo', '45.00', 1000, 3, 1, 1, 2, 6, 4, 5, 0, 0, 0, '2016-09-14 10:48:52', '2016-09-14 10:48:52');
+(1, 1, 'Reparo pc', 'Reparamos todo tipo de computadoras las 24 horas del dia', '50.00', 230, 2, 1, 1, 2, 6, 4, 5, 0, 0, 0, '2016-09-21 02:27:18', '2016-09-21 02:27:18');
 
 -- --------------------------------------------------------
 
@@ -53977,7 +54032,14 @@ CREATE TABLE IF NOT EXISTS `stores` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   KEY `stores_profile_id_foreign` (`profile_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `stores`
+--
+
+INSERT INTO `stores` (`id`, `profile_id`, `first_name`, `last_name`, `email_store`, `phone`, `address`, `further_office`, `store_close`, `active`, `created_at`, `updated_at`) VALUES
+(1, 4, 'Melvin Gilberto', 'Solano Mendoza', 'melvingilberto@gmail.com', '+50373038724', 'San Martin, San salvador, El salvador', '', 0, 1, '2016-09-21 02:26:40', '2016-09-21 02:26:40');
 
 -- --------------------------------------------------------
 
@@ -54018,27 +54080,27 @@ CREATE TABLE IF NOT EXISTS `type_products` (
 --
 
 INSERT INTO `type_products` (`id`, `category_product_id`, `name`, `active`, `created_at`, `updated_at`) VALUES
-(1, 1, 'TV', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(2, 1, 'Radio', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(3, 1, 'PC', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(4, 1, 'Camaras', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(5, 1, 'Impresoras', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(6, 2, 'Reparación de PC', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(7, 2, 'Limpieza', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(8, 2, 'Decoraciones', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(9, 2, 'Labanderia', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(10, 2, 'Pasear perros', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(11, 3, 'Mesas', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(12, 3, 'Sillas', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(13, 3, 'Vitrinas', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(14, 3, 'Closet', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(15, 3, 'Gradas', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(16, 4, 'Música', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(17, 4, 'Accesorios', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(18, 4, 'Heramientas', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(19, 5, 'Hierbas', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(20, 5, 'Pizarra', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(21, 5, 'Semillas', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01');
+(1, 1, 'TV', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(2, 1, 'Radio', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(3, 1, 'PC', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(4, 1, 'Camaras', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(5, 1, 'Impresoras', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(6, 2, 'Reparación de PC', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(7, 2, 'Limpieza', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(8, 2, 'Decoraciones', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(9, 2, 'Labanderia', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(10, 2, 'Pasear perros', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(11, 3, 'Mesas', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(12, 3, 'Sillas', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(13, 3, 'Vitrinas', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(14, 3, 'Closet', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(15, 3, 'Gradas', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(16, 4, 'Música', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(17, 4, 'Accesorios', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(18, 4, 'Heramientas', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(19, 5, 'Hierbas', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(20, 5, 'Pizarra', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(21, 5, 'Semillas', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40');
 
 -- --------------------------------------------------------
 
@@ -54061,9 +54123,9 @@ CREATE TABLE IF NOT EXISTS `type_send_products` (
 --
 
 INSERT INTO `type_send_products` (`id`, `name`, `active`, `created_at`, `updated_at`) VALUES
-(1, 'No hago envíos', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(2, 'Si hago envíos', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01'),
-(3, 'Acordar con el comprador', 1, '2016-09-14 10:46:01', '2016-09-14 10:46:01');
+(1, 'No hago envíos', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(2, 'Si hago envíos', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40'),
+(3, 'Acordar con el comprador', 1, '2016-09-21 02:23:40', '2016-09-21 02:23:40');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

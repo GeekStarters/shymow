@@ -103,6 +103,14 @@ header img{
 	margin-right: 10px !important;
 	padding: 10px 10px !important;
 }
+.butto-danger{
+	background: #fff !important;
+	color: #C9302C !important;
+	border: 2px solid #C9302C;
+	border-radius: 5px;
+	margin-right: 10px !important;
+	padding: 10px 10px !important;
+}
 .welcome-two{
 	z-index: 999;
 	height: 225px;
@@ -1618,7 +1626,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fdfdfd', end
 }
 .price{
 	color: #999999;
-	font-size: 3.5em !important;
+	font-size: 2.5em !important;
 	font-family: gothamTwo;
 }
 
@@ -1982,4 +1990,41 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4f6f5', end
 .shymow-shop-general span{
 	font-size: .9em;
 	color: #6E6E6E;
+}
+
+/*HEADER SHYMOW SHOP CONFIG*/
+
+.h2-header{
+	z-index: 3;
+	color: #999999;
+	font-family: gothamTwo;
+	font-size: 1.5em;
+	padding: 1px 0px;
+}
+
+.header-config-shymow-notification p{
+ 	margin-left: 16px;
+ 	color: #999999;
+ 	font-size: 1.1em;
+
+}
+
+.notification-config-shop img{
+	display: inline;
+}
+.notification-config-shop p{
+	display: inline;
+ 	color: #999999;
+ 	font-size: 1.1em;
+
+}
+
+/*Style general*/
+
+
+.color-shymow{
+	color: #37B4AA;
+	font-family: gothamTwo;
+	font-size: 1.2em;
+	margin:10px 0px;
 }
