@@ -17,12 +17,17 @@ class CreateNotificationSettingsStoresTable extends Migration {
 			$table->increments('id');
 			$table->integer('store_id')->unsigned();
 			$table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
+			$table->boolean('sound_notification');
+			$table->boolean('sound_new_message');
+			$table->boolean('sound_sale');
 			$table->boolean('buy_notification');
 			$table->boolean('label_notification');
 			$table->boolean('like_notification');
+			$table->boolean('share_notification');
 			$table->boolean('message_notification');
 			$table->boolean('qualification_notification');
-			$table->boolean('comments_notification');
+			$table->integer('comments_notification');
+			$table->boolean('email_notification');
 			$table->boolean('active')->default(true);
 			$table->timestamps();
 		});

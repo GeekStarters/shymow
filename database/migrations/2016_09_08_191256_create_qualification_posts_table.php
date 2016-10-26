@@ -20,6 +20,7 @@ class CreateQualificationPostsTable extends Migration {
 			$table->integer('profil_id')->unsigned();
 			$table->foreign('profil_id')->references('id')->on('profils')->onDelete('cascade');
 			$table->integer('qualification');
+			$table->boolean('active')->default(true);
 			$table->timestamps();
 		});
 	}

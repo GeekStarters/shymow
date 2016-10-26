@@ -20,9 +20,10 @@ class CreatePostsTable extends Migration {
 			$table->foreign('category_post_id')->references('id')->on('category_posts')->onDelete('cascade');
 			$table->integer('profil_id')->unsigned();
 			$table->foreign('profil_id')->references('id')->on('profils')->onDelete('cascade');
-			$table->integer('qualification');
-			$table->integer('like');
-			$table->integer('share');
+			$table->integer('like')->default(0);
+			$table->integer('qualification')->default(0);
+			$table->integer('posts')->default(0);
+			$table->integer('share')->default(0);
 			$table->boolean('active')->default(true);
 			$table->timestamps();
 		});

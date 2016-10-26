@@ -1087,7 +1087,7 @@ border-radius: 0px 0px 15px 15px;
 }
 .profiles .content-post .post-body{
 	background: #FFFFFF;
-	margin:10px;
+	/*margin:10px 10px 0px 10px;*/
 	position: relative;
 	border: 2px solid #DCDCDC;
 	border-radius: 10px 10px 0px;
@@ -1134,6 +1134,14 @@ border-radius: 0px 0px 15px 15px;
 	color: #B8B8BA;
 	padding: 3px 5px;
 	border-radius: 2px;
+}
+.follow-post-active{
+	background: #37B4AA !important;
+	color: #FFF !important;
+}
+.follow-post-desactive{
+	background: #707173 !important;
+	color: #B8B8BA !important;
 }
 .profiles .content-post .post-body .post-header .post-follow a{
 	text-decoration: none;
@@ -1188,6 +1196,7 @@ border-radius: 0px 0px 15px 15px;
 }
 .profiles .content-post .post-footer .post-share {
 	font-size: 1.5em;
+	cursor: pointer;
 }
 .profiles .content-post .post-footer .post-comment {
 	font-size: 1.5em;
@@ -1195,10 +1204,17 @@ border-radius: 0px 0px 15px 15px;
 }
 .profiles .content-post .post-footer .post-like-me {
 	font-size: 1.5em;
+	color: #707173;
+	cursor: pointer;
+}
+.profiles .content-post .post-footer .post-like-me-active {
+	font-size: 1.5em;
 	color: #EF4D0D;
+	cursor: pointer;
 }
 .profiles .content-post .post-footer .qualification-header {
 	color: #BBBBBB;
+	display: block;
 }
 .profiles .content-post .post-footer .qualification {
 	color: #FFCD00;
@@ -1220,10 +1236,6 @@ border-radius: 0px 0px 15px 15px;
 .number-post{
 	color: #999999;
 }
-.qualification-popular{
-	color: #FFD400;
-	font-size: 1.5em;
-}
 .profiles .content-post .post-footer li{
 	display: inline;
 	float: left;
@@ -1231,8 +1243,30 @@ border-radius: 0px 0px 15px 15px;
 	padding-right: 10px;
 	border-right: 1px solid #CCCCCC;
 	height: 50px;
-	list-style: none;
 }
+.post-qualification a {
+	text-decoration: none;
+	display: inline-block;
+	/* Volver a dar tamaño al texto */
+	font-size: 32px;
+	font-size: 2rem;	
+	cursor: pointer;
+	color: #888;
+}
+
+.post-qualification:hover a {
+	color: #FFD400;
+}
+/*
+ * El selector de hijo, es necesario para aumentar la especifidad
+ */
+.post-qualification > a:hover ~ a {
+	color: #888;
+}
+.qualification-popular{
+	color: #FFD400 !important;
+}
+
 .profiles .content-post .post-body .post-data .post-data-footer-face a{
 	text-decoration: none;
 	color: #ACB9C1;
@@ -2027,4 +2061,52 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4f6f5', end
 	font-family: gothamTwo;
 	font-size: 1.2em;
 	margin:10px 0px;
+}
+
+.box-comment{
+	cursor: pointer;
+}
+.box-comment-content{
+	margin-top: 0px;
+	border-left: 1px solid #DCDCDC;
+	border-right: 1px solid #DCDCDC;
+	border-bottom: 1px solid #DCDCDC;
+	border-radius: 0px 0px 10px 10px;
+	position: relative;
+	top: -10px;
+	display: none;
+}
+.box-comment-content .form-group{
+	margin-top: 10px;
+}
+.box-comment-body{
+	width: 100%;
+}
+.box-coment-data-header, .box-coment-data-description{
+	margin: 10px;
+}
+
+.box-comment-data-content{
+	border-bottom: 1px solid #DCDCDC;
+}
+
+/*TYPEAHEAD*/
+#custom-templates .empty-message {
+  padding: 5px 10px;
+ text-align: center;
+}
+#custom-templates .tt-menu, #custom-templates .tt-open{
+	width: 100%;
+	width: 100% !important;
+	background: #fff;
+}
+.tt-dataset a img{
+	max-width: 30px;
+	max-height: 30px;
+	margin:5px;
+	display: inline;
+}
+
+.tt-dataset tt-suggestion:hover{
+	background: #037FAC !important;
 }

@@ -24,13 +24,14 @@
   				</li>
 			</ul>
 			<ul class="nav navbar-nav navbar-left" style="margin-right:20px !important; margin-left:20px !important;">
-
+				 <!-- Buscador superior -->
 				<form class="navbar-form navbar-left" role="search">
-				  <div class="input-group">
-				    <input class="js-typeahead-car_v1 form-control" name="car_v1[query]" placeholder="Search" autocomplete="off" type="search">
+				  <div class="input-group" id="custom-templates">
+				    <input class="typeahead form-control" name="top_search" data-provide="typeahead" placeholder="Search" autocomplete="off" type="text">
 				    <span class="input-group-addon" id="basic-addon2" style="padding:0;"><button style="border:none;padding:0px;"><img src="img/search.png" alt="search" width="32" height="32"></button></span>
 				  </div>
 				</form>
+
 			</ul>
 		</nav>
 		<div class="container">
@@ -98,14 +99,16 @@
 						?>
 
 						@if($archivo_actual == 'tendencias')
-							<div class="col-ms-3 popular">
-								<h2>MÁS POPULAR</h2>
-								<ul>
-									@foreach($topTrends as $topTrend)
-										<li class="hashtag-top">#{{$topTrend->name}}</li>
-									@endforeach
-								</ul>
-							</div>
+							@if(count($trends)>0)
+								<div class="col-ms-3 popular">
+									<h2>MÁS POPULAR</h2>
+									<ul>
+										@foreach($topTrends as $topTrend)
+											<li class="hashtag-top">#{{$topTrend->name}}</li>
+										@endforeach
+									</ul>
+								</div>
+							@endif
 						@endif
 					</div>
 					@if($archivo_actual == "perfil")

@@ -19,7 +19,9 @@ class CreateLikePostsTable extends Migration {
 			$table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
 			$table->integer('profil_id')->unsigned();
 			$table->foreign('profil_id')->references('id')->on('profils')->onDelete('cascade');
-			$table->integer('like');
+			$table->boolean('like');
+			$table->boolean('active')->default(true);
+
 			$table->timestamps();
 		});
 	}

@@ -58,7 +58,6 @@ Route::get('empresa_social','HomeController@empresaSocial');
 
 Route::post('headsearch','SearchController@getAjaxUser');
 
-
 // Login
 Route::post('login','AuthenticationController@index');
 
@@ -91,7 +90,7 @@ Route::group(['middleware' => 'auth'], function()
             return redirect('agregar-producto');
         }
     });
-    Route::get('tendencia/{name}','InsideController@tendencia');
+    Route::get('/tendencia/{name}','InsideController@tendencia');
     Route::get('shymow-shop','ShymowShop@shymowView');
     Route::get('amigos','InsideController@amigos');
     Route::get('perfil','InsideController@perfil');
@@ -134,4 +133,30 @@ Route::group(['middleware' => 'auth'], function()
     Route::get('buy_cancel','ShymowShop@buyCancel');
     Route::get('buy_success','ShymowShop@buySuccess');
     Route::get('success_buy','ShymowShop@successBuy');
+
+    //Traer comentarios
+    Route::get('/get_comment/{id}','PostController@getComment');
+
+    //Crear comentario.
+    Route::post('/create_comment/{id}','PostController@createComment');
+
+    //Crear like.
+    Route::post('/create_like/{post}','PostController@createLike');
+
+    //Crear calificacion.
+    Route::post('/create_qualification/{post_id}/{quaification}','PostController@createQualification');
+
+
+    //Compartir view post.
+    Route::get('/share_post/{post_id}/{id_user}','PostController@sharePost');
+
+    //crear post compartido.
+    Route::post('/create_share_post/','PostController@createSharePost');
+    //Seguir post.
+    Route::post('/follow_post','PostController@followPost');
+
+
+
+    Route::get('/search_typeahead','InsideController@typeaSearch');
+
 });

@@ -5,7 +5,8 @@ use App\Http\Controllers\Controller;
 use App\Countrie;
 use App\State;
 use App\Citie;
-
+use App\Perfil;
+use DB;
 use Illuminate\Http\Request;
 use Validator;
 use Session;
@@ -97,5 +98,7 @@ class HomeController extends Controller {
 			return redirect('/');
 		}
 	}
+	
+
 	
 }

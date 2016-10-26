@@ -21,6 +21,7 @@
     @endif
   </ul>
   <ul class="nav navbar-nav navbar-left" style="margin-right:20px !important; margin-left:20px !important;">
+    <!-- Buscador superior -->
     <form class="navbar-form navbar-left" role="search">
       <div class="input-group">
         <input type="text" class="form-control" placeholder="Search for..." aria-describedby="basic-addon2">
@@ -28,5 +29,6 @@
       </div>
       <a href="{{url('/')}}" class="btn btn-default"><span class="glyphicon glyphicon-home"></span></a href="index.html" class="btn btn-default">
     </form>
+
   </ul>
 </nav>

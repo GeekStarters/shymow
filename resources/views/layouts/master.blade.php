@@ -30,11 +30,12 @@
        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src=" {{ asset('js/jquery-tweetscroll.js') }}"></script> <!-- jQuery tweetscroll plugin -->
-    <script src="js/caroufredsel-carousel.js"></script><!-- CarouFredSel carousel plugin -->
+    <script src="{{ asset('js/caroufredsel-carousel.js')}}"></script><!-- CarouFredSel carousel plugin -->
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src=" {{ asset('js/bootstrap.min.js') }} "></script>
     <script src=" {{ asset('js/validate.min.js') }} "></script>
     <script src=" {{ asset('js/hashtag.js') }} "></script>
+    <script src=" {{ asset('js/handlebars.js') }} "></script>
     <script src=" {{ asset('js/typeahead.js') }} "></script>
     <script src=" {{ asset('js/scripts.js') }} "></script>
     <script src=" {{ asset('js/validate.js') }} "></script>
