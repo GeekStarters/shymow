@@ -12,6 +12,7 @@
     <link href="{{ asset('/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/responsive.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/font-awesome.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/css/sweetalert.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -37,8 +38,10 @@
     <script src=" {{ asset('js/hashtag.js') }} "></script>
     <script src=" {{ asset('js/handlebars.js') }} "></script>
     <script src=" {{ asset('js/typeahead.js') }} "></script>
+    <script src=" {{ asset('js/sweetalert.js') }}"></script>
     <script src=" {{ asset('js/scripts.js') }} "></script>
     <script src=" {{ asset('js/validate.js') }} "></script>
+    <script src=" {{ asset('js/messages.js') }} "></script>
     
     @yield('scripts')
     @yield('scriptsTwo')

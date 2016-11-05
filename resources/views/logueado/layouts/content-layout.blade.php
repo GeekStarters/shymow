@@ -67,6 +67,9 @@
 						</nav>
 					</div>
 				</div>
+				<!-- Content chat flotante -->
+				
+				<!-- End chat flotante -->
 				<div class="profile-personal-data">
 					<div class="profile-data-header col-sm-3">
 						<div class="data-img-profile">
@@ -166,6 +169,8 @@
 		<div class="container">
 			@yield('content-logueo')
 		</div>
+
+		
 	</div>
 @endsection
 

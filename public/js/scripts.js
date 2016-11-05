@@ -6,7 +6,7 @@ $( document ).ready(function() {
         }
     });
 
-    $.get('search_typeahead', function(data){
+    $.get('/search_typeahead', function(data){
         var users = data.data;
 
         var user = new Bloodhound({
@@ -16,8 +16,7 @@ $( document ).ready(function() {
         });
         user.initialize();
         $('#custom-templates .typeahead').typeahead(null, {
-          name: 'best-pictures',
-          display: 'value',
+          name: 'search',
           source: user.ttAdapter(),
           templates: {
             empty: [
@@ -25,7 +24,7 @@ $( document ).ready(function() {
                 'unable to find any Best Picture winners that match the current query',
               '</div>'
             ].join('\n'),
-            suggestion: Handlebars.compile('<a href="/user/{{id}}"><div><img class="img-responsive" src="{{img}}"><strong>{{name}}</strong></div></a>')
+            suggestion: Handlebars.compile('<a href="/user/{{id}}"><div><img class="img-responsive" src="/{{img}}"><strong>{{name}}</strong></div></a>')
           }
         });
     },'json');
@@ -298,4 +297,556 @@ $( document ).ready(function() {
         });
         
     });
+
+
+    //AGREGAR STREAM
+    $('.add-social').on('click', '.add-stream', function(event) {
+        event.preventDefault();
+        /* Act on the event */
+        var object = $(this);
+        var $container = $('.stream-container');
+        var count = $container.children().length +1;
+        var text = $(this).parent('.form-group').find('input[type="text"]').val();
+        if (isValidUrl(text,true)) {
+            var streamNet = ['twitch','bambuser','livestream'];
+            var result = text.replace("www", ""); 
+            result = result.split(".");
+            resultOut = result[0].split('//');
+            var page;
+            if (resultOut[1] == "") {
+                page = result[1];
+            }else{
+                page = resultOut[1];
+            }
+
+            // console.log(page);
+            var controlador = 0;
+            for (var i =0; i<streamNet.length; i++) {
+                if (streamNet[i] == page) {
+                    controlador ++;
+                    $(this).attr('data-stream', streamNet[i]);
+
+                    $.post('/add_networks', {networks:streamNet[i],data:text }, function(data, textStatus, xhr) {
+                        /*optional stuff to do after success */
+                        object.parents('.add-social').find('.error-danger').fadeOut('slow');
+
+                        var html = "";
+                            html += '<div class="col-sm-6 add-body out-padding">';
+                            html +=    '<div class="form-group">';
+                            html +=        '<input type="text" class="form-control" placeholder="Streaming"><button class="add-stream button-add" data-stream=""><span class="glyphicon glyphicon-plus"></span></button>';
+                            html +=    '</div>';
+                            html +='</div>';
+
+                        if (object.hasClass('add-stream')) {
+                            object.removeClass('add-stream');
+                            object.addClass('button-delete');
+
+                            if (object.children('span').hasClass('glyphicon-plus')) {
+                                object.children('span').removeClass('glyphicon-plus');
+                                object.children('span').addClass('glyphicon-minus');
+                            }
+                        }
+
+                        $container.append(html);    
+                    });
+                }
+            }
+
+            if (controlador < 1) {
+                $(this).parents('.add-social').find('.error-danger').fadeIn('slow');
+            }
+        }else{
+            $(this).parents('.add-social').find('.error-danger').fadeIn('slow');
+        }
+    });
+    //Eliminar stream
+    $('.add-social').on('click', '.button-delete', function(event) {
+        event.preventDefault();
+        var objects = $(this);
+        var stream = $(this).siblings('input[type="text"]').val();
+        var network = $(this).data('stream');
+        // console.log(network);
+        swal({
+          title: "Are you sure?",
+          text: "Your will not be able to recover this data!",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-danger",
+          confirmButtonText: "Yes, delete it!",
+          closeOnConfirm: false
+        },
+        function(){
+            $.post('/delete_networks', {networks: network,streamings: stream}, function(data, textStatus) {
+                if (textStatus == "success") {
+                    if (!data.error) {
+                        objects.parents('.add-body').fadeOut('slow');
+                        swal("Deleted!", data.message, "success");
+                    }
+                }
+            });
+        });
+    });
+    function isValidUrl(url,obligatory,ftp)
+    {
+        // Si no se especifica el paramatro "obligatory", interpretamos
+        // que no es obligatorio
+        if(obligatory==undefined)
+            obligatory=0;
+        // Si no se especifica el parametro "ftp", interpretamos que la
+        // direccion no puede ser una direccion a un servidor ftp
+        if(ftp==undefined)
+            ftp=0;
+     
+        if(url=="" && obligatory==0)
+            return true;
+
+        if(ftp)
+            var pattern = /^(http|https|ftp)\:\/\/[a-z0-9\.-]+\.[a-z]{2,4}/gi;
+        else
+            var pattern = /^(http|https)\:\/\/[a-z0-9\.-]+\.[a-z]{2,4}/gi;
+
+        if(url.match(pattern))
+            return true;
+        else
+            return false;
+    }
+
+    //Agregar spacio para crear red
+    $('.container_social').on('click', '.new_social', function(event) {
+        event.preventDefault();
+        /* Act on the event */
+        var insert = $('.insert-social .social-container-insert');
+        var name = $(this).data('name');
+        if (insert.length < 1) {
+            var html =      '<div class="social-container-insert">'
+                html +=        '<br>'
+                html +=        '<div class="col-sm-6 add-body out-padding">'
+                html +=            '<div class="form-group">'
+                html +=                '<input type="text" class="form-control" placeholder="Red social"><button data-name="'+name+'" class="add-redes button-add"><span class="glyphicon glyphicon-plus"></span></button>'
+                html +=            '</div>'
+                html +=        '</div>'
+                html +=    '</div>'
+            $('.insert-social').append(html);
+        }
+    });
+
+    $('.insert-social').on('click', '.add-redes', function(event) {
+        event.preventDefault();
+        /* Act on the event */
+        var text = $(this).parent('.form-group').find('input[type="text"]').val();
+        var name = $(this).data('name');
+
+        if (isValidUrl(text,true)) {
+            var socialNet = ['facebook','twitter','linkedin','youtube','pinterest','instagram','snapchat','plus','vine','tumblr'];
+            var result = text.replace("www", ""); 
+            result = result.split(".");
+            resultOut = result[0].split('//');
+            var page;
+            if (resultOut[1] == "" || resultOut[1].length < 4) {
+                page = result[1];
+                if (page == "es") {
+                    page = result[2];
+                }
+            }else{
+                page = resultOut[1];
+            }
+            // console.log(page);
+            var controlador = 0;
+            for (var i =0; i<socialNet.length; i++) {
+                
+                if (socialNet[i] == page) {
+                    controlador ++;
+
+                    $.post('/add_networks', {networks:socialNet[i],data:text }, function(data, textStatus, xhr) {
+                        /*optional stuff to do after success */
+                        $('.social-danger').fadeOut('slow');
+
+                        var insert = $('.insert-social .social-container-insert');
+                        if (insert.length > 0) {
+                            insert.remove();
+                        };
+
+                        if (data.error) {
+                            swal("Error!", data.message, "success");
+                        }else{
+
+                            var html = '<div class="social-redes">';
+                            html +=        '<a href="{{url($red)}}" target="_blank">';
+                                html +=        '<div class="img-social">';
+                                html +=            '<div class="sub-img-social">';
+                                html +=                '<img src="img/profile/'+page+'.png" alt="shymow">';
+                                html +=            '</div>';
+                                html +=           ' <img src="img/profile/redes_add/'+page+'.jpg" alt="shymow">';
+                                html +=       ' </div>';
+                            html +=       ' </a>';
+                            html +=       ' <div class="social-body">';
+                            html +=            '<h2>'+name+'</h2>';
+                            html +=            '<p>'+page+'</p>';
+                            html +=        '</div>';
+                            html +=    '</div>';
+                            $('.container_social').prepend(html);
+                        }
+                    });
+                }
+            }
+
+            if (controlador < 1) {
+                $('.social-danger').fadeIn('slow');
+            }
+        }else{
+            $('.social-danger').fadeIn('slow');
+        }
+    });
+    //Eliminar redes
+    $('.container_social').on('click', '.delete_red', function(event) {
+        event.preventDefault();
+        /* Act on the event */
+        var network = $(this).data('network');
+        var red = $(this).data('red');
+        var object = $(this);
+         swal({
+          title: "Are you sure?",
+          text: "Your will not be able to recover this data!",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-danger",
+          confirmButtonText: "Yes, delete it!",
+          closeOnConfirm: false
+        },
+        function(){
+            $.post('/delete_networks', {networks: network,data: red}, function(data, textStatus) {
+                if (textStatus == "success") {
+                    if (!data.error) {
+                        
+                        object.parents('.social-redes').fadeOut('slow');
+                        swal("Deleted!", data.message, "success");
+                    }
+                }
+            });
+        });
+    });
+
+
+    // Agregar y eliminar blogs y web
+    $('.add-social').on('click', '.web-blogs-add', function(event) {
+        var object = $(this);
+        var type = object.data('type');
+        var val = object.siblings('input[type="text"]').val();
+        var container = $('.'+type+'-container');
+        if (isValidUrl(val,true)) {
+            $.post('/add_networks', {networks: type,data:val}, function(data, textStatus, xhr) {
+                $('.alert-'+type).fadeOut('slow');
+
+                var html = "";
+                    html += '<div class="col-sm-6 add-body out-padding">';
+                    html +=    '<div class="form-group">';
+                    html +=        '<input type="text" class="form-control" placeholder="http://"><button class="button-add web-blogs-add" data-type="'+type+'"><span class="glyphicon glyphicon-plus"></span></button>';
+                    html +=    '</div>';
+                    html +='</div>';
+
+                if (object.hasClass('web-blogs-add')) {
+                    object.removeClass('web-blogs-add');
+                    object.addClass('web-blogs-delete');
+
+                    if (object.children('span').hasClass('glyphicon-plus')) {
+                        object.children('span').removeClass('glyphicon-plus');
+                        object.children('span').addClass('glyphicon-minus');
+                    }
+                }
+
+                container.append(html);    
+            });
+        }else{
+            $('.alert-'+type).fadeIn('slow');
+        }
+    });
+
+
+    $('.add-social').on('click', '.web-blogs-delete', function(event) {
+        event.preventDefault();
+        /* Act on the event */
+
+        var object = $(this);
+        var type = object.data('type');
+        var val = object.siblings('input[type="text"]').val();
+        var container = $('.'+type+'-container');
+
+         swal({
+          title: "Are you sure?",
+          text: "Your will not be able to recover this data!",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-danger",
+          confirmButtonText: "Yes, delete it!",
+          closeOnConfirm: false
+        },
+        function(){
+            $.post('/delete_networks', {networks: type,data: val}, function(data, textStatus) {
+                if (textStatus == "success") {
+                    if (!data.error) {
+                        
+                        object.parents('.col-sm-6').fadeOut('slow');
+                        swal("Deleted!", data.message, "success");
+                    }
+                }
+            });
+        });
+    });
+
+
+    $('#chat-proper-options').popover();
+    $('#chat-proper').popover({
+        content:function(){
+            var html ="";
+            html +=            '<div class="row chat-content-view">'
+                html +=            '<div style="color:#000;cursor:pointer;">'
+                html +=                '<div class="clearfix"></div>';
+                html +=                '<div class="col-sm-3">';
+                html +=                    '<img style="width:100%;" src="img/profile/star/7.jpg" alt="shymow">';
+                html +=                '</div>';
+                html +=                '<div class="col-sm-9">';
+                html +=                    '<div style="font-weight: bold;">';
+                html +=                        '<div style="float:left;">';
+                html +=                            'Nombre';
+                html +=                        '</div>';
+                html +=                        '<div style="float:right;"">';
+                html +=                            '23min';
+                html +=                        '</div>';
+                html +=                    '</div>';
+                html +=                    '<div class="clearfix"></div>';
+                html +=                    '<div style="font-size:.9em;">';
+                html +=                        'Lorem ipsum dolor sit amet, consectetur.';
+                html +=                    '</div>';
+                html +=                '</div>';
+                html +=            '</div>';
+            html +=            '</div>';
+            html +=            '<div class="clearfix"></div>';
+            html +=            '<hr>';
+
+
+            html +=            '<div class="row chat-content-view">'
+                html +=            '<div style="color:#000;cursor:pointer;">'
+                html +=                '<div class="clearfix"></div>';
+                html +=                '<div class="col-sm-3">';
+                html +=                    '<img style="width:100%;" src="img/profile/star/7.jpg" alt="shymow">';
+                html +=                '</div>';
+                html +=                '<div class="col-sm-9">';
+                html +=                    '<div style="font-weight: bold;">';
+                html +=                        '<div style="float:left;">';
+                html +=                            'Nombre';
+                html +=                        '</div>';
+                html +=                        '<div style="float:right;"">';
+                html +=                            '23min';
+                html +=                        '</div>';
+                html +=                    '</div>';
+                html +=                    '<div class="clearfix"></div>';
+                html +=                    '<div style="font-size:.9em;">';
+                html +=                        'Lorem ipsum dolor sit amet, consectetur.';
+                html +=                    '</div>';
+                html +=                '</div>';
+                html +=            '</div>';
+            html +=            '</div>';
+            html +=            '<div class="clearfix"></div>';
+            html +=            '<hr>';
+
+
+            html +=            '<div class="row chat-content-view">'
+                html +=            '<div style="color:#000;cursor:pointer;">'
+                html +=                '<div class="clearfix"></div>';
+                html +=                '<div class="col-sm-3">';
+                html +=                    '<img style="width:100%;" src="img/profile/star/7.jpg" alt="shymow">';
+                html +=                '</div>';
+                html +=                '<div class="col-sm-9">';
+                html +=                    '<div style="font-weight: bold;">';
+                html +=                        '<div style="float:left;">';
+                html +=                            'Nombre';
+                html +=                        '</div>';
+                html +=                        '<div style="float:right;"">';
+                html +=                            '23min';
+                html +=                        '</div>';
+                html +=                    '</div>';
+                html +=                    '<div class="clearfix"></div>';
+                html +=                    '<div style="font-size:.9em;">';
+                html +=                        'Lorem ipsum dolor sit amet, consectetur.';
+                html +=                    '</div>';
+                html +=                '</div>';
+                html +=            '</div>';
+            html +=            '</div>';
+            html +=            '<div class="clearfix"></div>';
+            html +=            '<hr>';
+
+            html +=            '<div class="row chat-content-view">'
+                html +=            '<div style="color:#000;cursor:pointer;">'
+                html +=                '<div class="clearfix"></div>';
+                html +=                '<div class="col-sm-3">';
+                html +=                    '<img style="width:100%;" src="img/profile/star/7.jpg" alt="shymow">';
+                html +=                '</div>';
+                html +=                '<div class="col-sm-9">';
+                html +=                    '<div style="font-weight: bold;">';
+                html +=                        '<div style="float:left;">';
+                html +=                            'Nombre';
+                html +=                        '</div>';
+                html +=                        '<div style="float:right;"">';
+                html +=                            '23min';
+                html +=                        '</div>';
+                html +=                    '</div>';
+                html +=                    '<div class="clearfix"></div>';
+                html +=                    '<div style="font-size:.9em;">';
+                html +=                        'Lorem ipsum dolor sit amet, consectetur.';
+                html +=                    '</div>';
+                html +=                '</div>';
+                html +=            '</div>';
+            html +=            '</div>';
+            html +=            '<div class="clearfix"></div>';
+            html +=            '<hr>';
+            return html;
+        },
+        html: true,
+        placement:"top",
+        });
+    $('body').on('click', '#chat-proper', function(event) {
+        $('.float-chat').find('.popover-content').addClass('chat-float-view');
+    });
+
+    $('body').on('mouseover', '.chat-content-view', function(event) {
+        event.preventDefault();
+        /* Act on the event */
+        $(this).css('background', '#B3DBCD');
+    });
+    $('body').on('mouseout', '.chat-content-view', function(event) {
+        event.preventDefault();
+        /* Act on the event */
+        $(this).css('background', '#EEEFEE');
+    });
+
+
+    $('#btn_create_message').click(function(event) {
+            /* Act on the event */
+            $('#container-message').find('.content-chat-message-description').fadeOut('fast');
+            $('#container-message').find('.content-new-chat-message-description').fadeIn('fast');
+        $.ajax({
+            url: '/create_new_message',
+            type: 'GET',
+            dataType: 'html',
+            beforeSend: function(){
+                var html ="";
+                html +='<div class="text-center"><i class="fa fa-refresh fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span></div>';
+                $('#container-message').find('.content-new-chat-message-description').html(html);
+            },
+            success:function(data){
+                $('#container-message').find('.content-new-chat-message-description').html(data);
+            }
+        })
+        .fail(function() {
+            console.log("error");
+        });
+    });
+
+
+    $('body').on('click', '.chatSelect', function(event) {
+        event.preventDefault();
+        /* Act on the event */
+        $('#container-message').find('.content-new-chat-message-description').fadeOut('fast');
+        $('#container-message').find('.content-chat-message-description').fadeIn('fast');
+        var object = $(this);
+        var name = $(this).find('.notify-message-header').children('.name').text();
+
+        //Channel
+        var key = $(this).data('key');
+        var receptor = $(this).data('receptor');
+        var emisor = $(this).data('transmitter');
+        $('#room').attr('value', key);
+        $('#from_chat').attr('value', receptor);
+
+                    
+        var html = "";
+        html += '<h3>';
+        html+=  '<i class="fa fa-comments" style="color: #37B4AA"></i>';
+        html+=  '<span data-transmitter="'+emisor+'">'+name+'</span>';
+        html+=  '<span id="openChannel" data-channelopen="'+key+'"></span>';
+        html += '</h3>';
+        $('#container-message').find('.user').html(html);
+
+        if ($('.message-description-information').hasClass('height-chat') == false) {
+            $('.message-description-information').addClass('height-chat');
+        }
+
+        $.ajax({
+            url: '/all_messages',
+            type: 'GET',
+            dataType: 'json',
+            data: {channel: key},
+            beforeSend: function(){
+                $('body').find('.content-chat-messages').html('<div class="text-center"><i class="fa fa-refresh fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span></div>');
+            },
+            success:function(data){
+                if (!data.error) {
+
+                    var values = JSON.parse(data.data)  
+                    var message = "";
+                    $('.message-description-information')
+                    for($i=0;$i<values.length;$i++){
+                        var data = values[$i];
+                        message += '<div class="row">';
+                        message +=  '<div class="chat-message">';
+                        message +=      '<div class="clearfix"></div>';
+                        message +=      '<div class="col-sm-2">';
+                        message +=          '<img src="/'+data.emisorImg+'" alt="shymow">';
+                        message +=      '</div>';
+                        message +=      '<div class="col-sm-10">';
+                        message +=          '<div class="notify-message-header">';
+                        message +=                 '<div class="name">';
+                        message +=                     '<span>';
+                        message +=                      data.emisorName;
+                        message +=                     '</span>';
+                        message +=                 '</div>';
+                        message +=                 '<div class="time">';
+                        message +=                     '<span></span>';
+                        message +=                 '</div>';
+                        message +=             '</div>';
+                        message +=         '<div class="clearfix"></div>';
+                        message +=         '<div class="content-information">';
+                        message +=             data.message;
+                        message +=         '</div>';
+                        message +=     '</div>';
+                        message +=  '</div>';
+                        message += '</div>';
+                        message += '<div class="clearfix"></div>';
+
+                        $('body').find('.content-chat-messages').empty();
+                        $('body').find('.content-chat-messages').append(message);
+
+                        $('#sendMessageChat').slideDown('slow');
+                        var WH = object.height();
+                        var SH =object.height();
+                        object.scrollTop = object.scrollHeight;
+                    }
+
+
+                    $.post('/change_read', {channel: key}, function(data, textStatus, xhr) {
+                        if (object.hasClass('notReaderMessage')) {;
+                            object.removeClass('notReaderMessage')
+                        }
+                    });
+                }else{
+                    $('body').find('.content-chat-messages').html('<div class="alert lert-danger alert-dismissible" role="alert">  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>  <strong>Warning!</strong>'+data.message+' </div>');
+                }
+            }
+        })
+        .fail(function() {
+            console.log("error");
+        });
+    });
+
+
+
+    // $('#container-message').on('submit', '#new_message_form', function(event) {
+    //     event.preventDefault();
+    //     /* Act on the event */
+
+    //     var from = $('#new_message_messages').val();
+    //     var id = $('#from_id').val();
+    //     var new_message = $('#new_message').val();
+    //     console.log(new_message,id,from);
+    // });
 });

@@ -13,6 +13,8 @@ Laravel Socialite provides an expressive, fluent interface to OAuth authenticati
 
 **We are not accepting new adapters.**
 
+Adapters for other platforms are listed at the community driven [Socialite Providers](https://socialiteproviders.github.io/) website.
+
 ## License
 
 Laravel Socialite is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
@@ -110,6 +112,15 @@ return Socialite::driver('google')
 ```
 
 When using the `with` method, be careful not to pass any reserved keywords such as `state` or `response_type`.
+
+#### Stateless Authentication
+
+The `stateless` method may be used to disable session state verification. This is useful when adding social authentication to an API:
+
+```php
+return Socialite::driver('google')->stateless()->user();
+```
+
 
 #### Retrieving User Details
 

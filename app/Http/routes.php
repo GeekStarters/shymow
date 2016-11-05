@@ -158,5 +158,29 @@ Route::group(['middleware' => 'auth'], function()
 
 
     Route::get('/search_typeahead','InsideController@typeaSearch');
+    Route::post('/delete_networks','PerfilController@destroyNetwork');
 
+    Route::post('/add_networks','PerfilController@createNetwork');
+
+    // CHAT
+    Route::get('/messages','MessagesController@index');
+    // Ajax new messaje
+    Route::get('/create_new_message','MessagesController@store');
+    // New Message Form
+    Route::post('/new_message_form','MessagesController@create');
+
+    //Cambiar el estado de vistos
+    Route::post('/change_read','MessagesController@changeRead');
+
+    //Get all messages chat
+    Route::get('/all_messages','MessagesController@allMesagess');
+
+    //Get All Chat Channel
+    Route::get('/channels','MessagesController@channels');
+
+    Route::post('set_message','MessagesController@setMessage');
+
+    //Get All Chat Channel
+    Route::get('/data_user','MessagesController@getUser');
+    
 });

@@ -111,7 +111,7 @@ class RegistroController extends Controller {
 	    			// dd(Session::get('social_json'));
 	    			$getSocial = Session::pull('social_json');
 	    			$count = count($getSocial[$domainValor]) +1;
-	    			$nameArraySocial = (string) $domainValor.$count;
+	    			$nameArraySocial = (string)$count;
 
 	    			// dd($count,$nameArraySocial);
 	    			$getSocial[$domainValor][$nameArraySocial] = $url;
@@ -123,10 +123,10 @@ class RegistroController extends Controller {
 	    			$count = Session::get('social_json');
 	    			if ($count > 1) {
 	    				$array = Session::pull('social_json');
-	    				$array[$domainValor] =[$domainValor."1"=>$url];
+	    				$array[$domainValor] =["1"=>$url];
 
 	    			}else{
-	    				$array = [$domainValor => [$domainValor."1"=>$url]];
+	    				$array = [$domainValor => ["1"=>$url]];
 	    			}
 	    			
 	    			// dd($array);
@@ -162,7 +162,7 @@ class RegistroController extends Controller {
 	    	}
 
 	    	
-	    	$streamNet = ['twitch','bambuser','lives'];
+	    	$streamNet = ['twitch','bambuser','livestream'];
 
 	    	if(in_array($domainValor, $streamNet)){
 
@@ -170,7 +170,7 @@ class RegistroController extends Controller {
 	    			// dd(Session::get('stream_json'));
 	    			$getSocial = Session::pull('stream_json');
 	    			$count = count($getSocial[$domainValor]) +1;
-	    			$nameArraySocial = (string) $domainValor.$count;
+	    			$nameArraySocial = (string) $count;
 
 	    			// dd($count,$nameArraySocial);
 	    			$getSocial[$domainValor][$nameArraySocial] = $url;
@@ -182,15 +182,15 @@ class RegistroController extends Controller {
 	    			$count = Session::get('stream_json');
 	    			if ($count > 1) {
 	    				$array = Session::pull('stream_json');
-	    				$array[$domainValor] =[$domainValor."1"=>$url];
+	    				$array[$domainValor] =["1"=>$url];
 
 	    			}else{
-	    				$array = [$domainValor => [$domainValor."1"=>$url]];
+	    				$array = [$domainValor => ["1"=>$url]];
 	    			}
 	    			
-	    			// dd($array);
+	    			dd($array);
 	    			Session::put('stream_json',$array);
-	    			// dd(Session::get('stream_json'));
+	    			dd(Session::get('stream_json'));
 	    		}
 	    	}
 	    }
@@ -222,8 +222,8 @@ class RegistroController extends Controller {
 	    	$user = new Perfil($data_user);
 			    $user->redes = $jsonRedes;
 			    $user->streamings = $jsonStream;
-			    $user->blogs = $request->input('blog1');
-			    $user->webs = $request->input('web1');
+			    $user->blogs = json_encode($request->input('blog1'));
+			    $user->webs = json_encode($request->input('web1'));
 			    $user->birthdate = $date;
 			    $user->role = $role;
 			    $user->pais = $pais;

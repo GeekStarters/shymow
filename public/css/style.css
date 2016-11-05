@@ -1024,13 +1024,19 @@ color:#fff;
 
 }
 .profiles .my-social .social-redes .img-social {
-	width: 50%;
+	width: 100%;
 	float:left;
 	position: relative; 
 }
 .profiles .my-social .social-redes .social-body{
-	color: rgb(157, 157, 157);
+	color: rgb(157, 157, 157) !important;
 	margin: 20px 10px 0px 15px;
+}
+.color_reds{
+	color: rgb(157, 157, 157) !important;
+}
+.web-blogs-delete{
+	background: #C35353 !important;
 }
 .profiles .my-social .social-redes .social-body h2{
 	font-family: gothamTwo;
@@ -1049,17 +1055,21 @@ color:#fff;
 .profiles .my-social .social-redes .img-social .sub-img-social{
 	max-width: 20px !important;
 	position: absolute;
-	right: 5px;
+	right: 15px;
 	bottom:5px;
 }
 .profiles .my-social .social-redes .social-body{
 	float: right;
 }
-.profiles .add-social .add-body{
-	margin-bottom: 50px;
-}
-.profiles .add-social .add-body button{
+.profiles .add-social .add-body .button-add{
 	border-radius:5px;padding:6px 12px; background:#37B4AA;border:0px;color:#fff;
+}
+.profiles .add-social .add-body .button-delete{
+	border-radius: 5px;
+	padding: 6px 12px;
+	background: #c35353;
+	border: 0px;
+	color: #fff;
 }
 .profiles .add-social .add-body input{
 	width:80%;display:inline; margin-right: 5px ;
@@ -2109,4 +2119,179 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4f6f5', end
 
 .tt-dataset tt-suggestion:hover{
 	background: #037FAC !important;
+}
+
+.error-danger{
+	display: none;
+}
+
+.new_social{
+	cursor: pointer;
+}
+
+
+
+/*CHAT*/
+.float-chat{
+	max-width: 350px;
+	position: fixed;	
+	bottom: 0px;
+	right: 0px;
+	color: #fff;
+	z-index: 10000;
+
+}
+.float-chat .chat-over:hover{
+	background: #37B4AA;
+}
+.float-chat .chat-over{
+	display: inline;
+	border-right: 2px solid #fff;
+	cursor: pointer;
+	padding: 15px;
+	background: #61605F;
+}
+
+.float-chat .chat-over i{
+	font-size: 2em;
+}
+.chat-float-message{
+	position: relative;
+}
+.count-notification{
+	background: #E1010E;
+	position: absolute;
+	border-radius: 2px;
+	right: 0px;
+	bottom: 15px;
+	display: none;
+}
+.number-notify{
+	font-size: .8em;
+	font-family: gothamTwo;
+	padding: 5px;
+}
+
+.chat-float-view{
+	background: #EEEFEE !important;
+}
+
+
+/* ESTILOS DE CHAT MESSAGES*/
+.chat-messages-container{
+	height: 100% !important;
+}
+.chat-border{
+	border:2px solid #EEEEEE;
+	border-radius: 10px;
+	padding: 15px;
+}
+.chat-border .header-chat{
+	color:#949494;
+	font-family: gothamTwo;
+	margin:10px 0px;
+}
+
+.paddgin-chat{
+	padding: 10px;
+}
+.notify-message{
+	color:#000;cursor:pointer;
+	overflow: auto;
+	padding: 10px;
+}
+.notify-message:hover{
+	background: #E1F0EC;
+}
+.notify-message .notify-message-header .time span{
+	color: #565454;
+	float:right;
+}
+.notify-message .notify-message-header .name span{
+	float:left;
+}
+.notify-message .notify-message-header .time{
+	font-weight: bold;
+}
+.notify-message .notify-message-header .name{
+	font-weight: bold;
+}
+.notify-message img{
+	width:100%;
+}
+.notify-message .content-information{
+	font-size:.9em;
+}
+.message-description-header .user{
+	float: left;
+}
+.message-description-header .more-options{
+	float:right;
+	overflow: hidden;
+	display: inline-block;
+}
+.chat-messages-container .content-messages{
+	height: 350px;
+	max-height: 350px !important;
+	overflow-x:hidden; overflow-y:scroll;
+}
+.message-description-information .content-chat-messages{
+	height: 350px;
+	max-height: 350px !important;
+	overflow-x:hidden; overflow-y:scroll;
+}
+.message-description-new-information{
+	min-height: 400px;
+	position: relative;
+}
+.message-description-new-information .tt-menu, .message-description-new-information .tt-open{
+	background: #fff !important;
+}
+#new_message_messages{
+	width: 100% !important;
+	border-radius: 5px;
+	border: 1px solid #ddd;
+}
+.chatSelect:hover{
+	background: #B3DBCD !important;
+}
+.chatSelected{
+	background: #B3DBCD;
+}
+.chatSelect{
+	border-bottom: 1px solid #fff;
+}
+.notReaderMessage{
+	background: #E1F0EC !important;
+}
+.send-new-message input[type="text"]{
+	/*border: 0px solid;*/
+}
+
+.chat-message {
+    color: #000;
+    overflow: auto;
+    padding: 10px;
+}
+.chat-message .notify-message-header .time span{
+	float:right;
+}
+.chat-message .notify-message-header .name span{
+	float:left;
+}
+.chat-message .notify-message-header .time{
+	font-weight: bold;
+}
+.chat-message .notify-message-header .name{
+	font-weight: bold;
+}
+.chat-message img{
+	width:100%;
+}
+.chat-message .content-information{
+	font-size:.9em;
+}
+
+#sendMessageChat{
+	display: none;
 }

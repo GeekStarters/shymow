@@ -29,11 +29,11 @@ class CreatePerfilsTable extends Migration {
 			$table->integer('edad');
 			$table->string('img_profile')->default('img/profile/default.png');
 			$table->string('img_portada')->default('img/profile/portada.jpg');
-			$table->string('hobbies')->nullable();
-			$table->string('redes')->nullable();
-			$table->string('streamings')->nullable();
-			$table->string('webs')->nullable();
-			$table->string('blogs')->nullable();
+			$table->string('hobbies',1000)->nullable();
+			$table->string('redes',2000)->nullable();
+			$table->string('streamings',2000)->nullable();
+			$table->string('webs',2000)->nullable();
+			$table->string('blogs',2000)->nullable();
 			$table->string('mi_frase')->default('¡Bienvenid@ a Shymow!');
 			$table->string('descripcion')->default('Edita tu descripción');
 			$table->boolean('active')->default(true);

@@ -604,112 +604,48 @@
 			<div class="my-social">
 				<div class="interesting-header">
 					<h2>Mis redes sociales</h2>
-				</div>
-				<div class="social-redes">
-					<div class="img-social">
-						<div class="sub-img-social">
-							<img src="img/profile/twitter.png" alt="shymow">
-						</div>
-						<img src="img/profile/star/my-social1.jpg" alt="shymow">
-					</div>
-					<div class="social-body">
-						<h2>@BeluFornes</h2>
-						<p>Twitter</p>
-					</div>
-				</div>
-				<div class="social-redes">
-					<div class="img-social">
-						<div class="sub-img-social">
-							<img src="img/profile/facebook.png" alt="shymow">
-						</div>
-						<img src="img/profile/star/my-social1.jpg" alt="shymow">
-					</div>
-					<div class="social-body">
-						<h2>BeluFornes</h2>
-						<p>Facebook</p>
-					</div>
-				</div>
-				<div class="social-redes">
-					<div class="img-social">
-						<div class="sub-img-social">
-							<img src="img/profile/youtube.png" alt="shymow">
-						</div>
-						<img src="img/profile/star/my-social1.jpg" alt="shymow">
-					</div>
-					<div class="social-body">
-						<h2>BeluFornes</h2>
-						<p>Youtube</p>
-					</div>
-				</div>
-				<div class="social-redes">
-					<div class="img-social">
-						<div class="sub-img-social">
-							<img src="img/profile/instagram.jpg" alt="shymow">
-						</div>
-						<img src="img/profile/star/my-social1.jpg" alt="shymow">
-					</div>
-					<div class="social-body">
-						<h2>BeluFornes</h2>
-						<p>Instagram</p>
-					</div>
-				</div>
-				<div class="social-redes">
-					<div class="img-social">
-						<div class="sub-img-social">
-							<img src="img/profile/vine.png" alt="shymow">
-						</div>
-						<img src="img/profile/star/my-social1.jpg" alt="shymow">
-					</div>
-					<div class="social-body">
-						<h2>BeluFornes</h2>
-						<p>Vine</p>
-					</div>
-				</div>
-				<div class="social-redes">
-					<div class="img-social">
-						<div class="sub-img-social">
-							<img src="img/profile/tumblr.png" alt="shymow">
-						</div>
-						<img src="img/profile/star/my-social1.jpg" alt="shymow">
-					</div>
-					<div class="social-body">
-						<h2>BeluFornes</h2>
-						<p>Tumblr</p>
-					</div>
-				</div>
-				<div class="social-redes">
-					<div class="img-social">
-						<div class="sub-img-social">
-							<img src="img/profile/g+.png" alt="shymow">
-						</div>
-						<img src="img/profile/star/my-social1.jpg" alt="shymow">
-					</div>
-					<div class="social-body">
-						<h2>BeluFornes</h2>
-						<p>Google Plus</p>
-					</div>
-				</div>
-				<div class="social-redes">
-					<div class="img-social">
-						<div class="sub-img-social">
-							<img src="img/profile/linkedin.png" alt="shymow">
-						</div>
-						<img src="img/profile/star/my-social1.jpg" alt="shymow">
-					</div>
-					<div class="social-body">
-						<h2>BeluFornes</h2>
-						<p>Linkedin</p>
-					</div>
-				</div>
-				<div class="social-redes">
-					<div class="img-social">
-						<img src="img/profile/more.jpg" alt="shymow">
-					</div>
-					<div class="social-body">
-						<h2 style="color:#60BBB2;">Agregar <br>Red social</h2>
-					</div>
+					<p class="alert alert-danger text-danger social-danger error-danger alert-dismissible" role="alert">
+  						No es una URL valida <br>Ejemplo: http://página.dominio <br> Páginas validas facebook, twitter, linkedin, youtube, pinterest, instagram, snapchat, plus, vine, tumblr</p>
 				</div>
 
+				<div class="container_social">
+					@if(isset(Auth::user()->redes))
+						@for($i=0; $i<count($socialNet);$i++)
+							@if(isset($socials[$socialNet[$i]]))
+								@foreach( $socials[$socialNet[$i] ] as $red)
+									<div class="social-redes">
+										<a href="{{url($red)}}" target="_blank">
+											<div class="img-social">
+												<div class="sub-img-social">
+													<img src="{{url('img/profile/'.$socialNet[$i].'.png')}}" alt="shymow">
+												</div>
+												<img src="{{url('img/profile/redes_add/'.$socialNet[$i].'.jpg')}}" alt="shymow">
+											</div>
+										</a>
+										<div class="social-body">
+											<a href="{{url($red)}}" class="color_reds" target="_blank">
+												<h2>{{explode(" ",Auth::user()->name)[0]}}</h2>
+											</a>
+											<p>{{$socialNet[$i]}}</p>
+											<h6 class="text-danger delete_red" data-network="{{$socialNet[$i]}}" data-red="{{$red}}" style="cursor:pointer;">Eliminar</h6>
+										</div>
+									</div>
+								@endforeach
+							@endif
+						@endfor
+					@endif
+
+					<div class="social-redes new_social"  data-name='{{explode(" ",Auth::user()->name)[0]}}'>
+						<div class="img-social">
+							<img src="img/profile/more.jpg" alt="shymow">
+						</div>
+						<div class="social-body">
+							<h2 style="color:#60BBB2;">Agregar <br>Red social</h2>
+						</div>
+					</div>
+				</div>
+				<div class="add-social insert-social">
+				</div>
 			</div>
 		</div>
 		<hr>
@@ -717,20 +653,28 @@
 			<div class="add-social">
 				<div class="interesting-header">
 					<h2>Mis canales de streaming</h2>
+					<p class="alert alert-danger text-danger error-danger alert-dismissible" role="alert">
+  						No es una URL valida <br>Ejemplo: http://página.dominio <br> Páginas validas Bambuser, Livestream</p>
 				</div>
-				<div class="col-sm-6 add-body out-padding">
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Streaming"><button><span class="glyphicon glyphicon-plus"></span></button>
-					</div>
-				</div>
-				<div class="col-sm-6 add-body out-padding">
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Streaming"><button><span class="glyphicon glyphicon-plus"></span></button>
-					</div>
-				</div>
-				<div class="col-sm-6 add-body out-padding">
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Streaming"><button><span class="glyphicon glyphicon-plus"></span></button>
+				
+					@if(isset(Auth::user()->streamings))
+						@for($i=0; $i<count($streamNet);$i++)
+							@if(isset($streams[$streamNet[$i]]))
+								@foreach( $streams[$streamNet[$i] ] as $streamings)
+									<div class="col-sm-6 add-body out-padding">
+										<div class="form-group">
+											<input type="text" class="form-control" value="{{$streamings}}" placeholder="Streaming"><button data-stream="{{$streamNet[$i]}}" class="button-delete"><span class="glyphicon glyphicon-minus"></span></button>
+										</div>
+									</div>
+								@endforeach
+							@endif
+						@endfor
+					@endif
+				<div class="stream-container">
+					<div class="col-sm-6 add-body out-padding">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Streaming"><button class="add-stream button-add" data-stream=""><span class="glyphicon glyphicon-plus"></span></button>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -741,28 +685,24 @@
 			<div class="add-social">
 				<div class="interesting-header">
 					<h2>Mis páginas web</h2>
+					<p class="alert alert-danger text-danger error-danger alert-web" role="alert">
+  						No es una URL valida <br>Ejemplo: http://página.dominio</p>
 				</div>
-				<div class="col-sm-6 add-body out-padding">
-					<form action="">
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="http://"><button><span class="glyphicon glyphicon-plus"></span></button>
+				@if(isset(Auth::user()->webs))
+					@foreach(json_decode(Auth::user()->webs,true) as $web)
+						<div class="col-sm-6 add-body out-padding">
+							<div class="form-group">
+								<input type="text" class="form-control" value="{{$web}}" placeholder="http://"><button class="button-add web-blogs-delete" data-type="web"><span class="glyphicon glyphicon-minus"></span></button>
+							</div>
 						</div>
+					@endforeach
+				@endif
+				<div class="web-container">
+					<div class="col-sm-6 add-body out-padding">
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="http://"><button><span class="glyphicon glyphicon-plus"></span></button>
+							<input type="text" class="form-control" placeholder="http://"><button data-type="web" class="button-add web-blogs-add"><span class="glyphicon glyphicon-plus"></span></button>
 						</div>
-
-					</form>
-				</div>
-				<div class="col-sm-6 add-body out-padding">
-					<form action="">
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="http://"><button><span class="glyphicon glyphicon-plus"></span></button>
-						</div>
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="http://"><button><span class="glyphicon glyphicon-plus"></span></button>
-						</div>
-
-					</form>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -772,30 +712,31 @@
 			<div class="add-social">
 				<div class="interesting-header">
 					<h2>Mis blogs</h2>
+					<p class="alert alert-danger text-danger error-danger alert-blog" role="alert">
+  						No es una URL valida <br>Ejemplo: http://página.dominio</p>
 				</div>
-				<div class="col-sm-6 add-body out-padding">
-					<form action="">
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="http://"><button><span class="glyphicon glyphicon-plus"></span></button>
+				@if(isset(Auth::user()->blogs))
+					@foreach(json_decode(Auth::user()->blogs,true) as $blog)
+						<div class="col-sm-6 add-body out-padding">
+							<div class="form-group">
+								<input type="text" class="form-control" value="{{$blog}}" placeholder="http://"><button class="button-add web-blogs-delete" data-type="blog"><span class="glyphicon glyphicon-minus"></span></button>
+							</div>
 						</div>
+					@endforeach
+				@endif
+				<div class="blog-container">
+					<div class="col-sm-6 add-body out-padding">
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="http://"><button><span class="glyphicon glyphicon-plus"></span></button>
+							<input type="text" class="form-control" placeholder="http://"><button class="button-add web-blogs-add" data-type="blog"><span class="glyphicon glyphicon-plus"></span></button>
 						</div>
-
-					</form>
-				</div>
-				<div class="col-sm-6 add-body out-padding">
-					<form action="">
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="http://"><button><span class="glyphicon glyphicon-plus"></span></button>
-						</div>
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="http://"><button><span class="glyphicon glyphicon-plus"></span></button>
-						</div>
-
-					</form>
+					</div>
 				</div>
 			</div>
+			<br>
+			<br>
+			<br>
+			<br>
+			<div class="clearfix"></div>
 		</div>
 		<!-- Modal -->
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -818,8 +759,9 @@
 		  </div>
 		</div>
 	</div>
+		
 @stop
-
+@extends('logueado.layouts.content-float-chat')
 @section('scripts')
 <script>
 	jQuery(document).ready(function($) {

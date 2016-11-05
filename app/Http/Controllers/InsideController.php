@@ -40,8 +40,20 @@ class InsideController extends Controller {
 		$posts = DB::select('
 			SELECT posts.posts, posts.id as id_post, images_posts.post_id as image_post_id,images_posts.path, images_posts.active as image_active, posts.description, posts.qualification, posts.like, posts.share, posts.active as post_active, posts.profil_id, like_posts.post_id, like_posts.profil_id, like_posts.like as likeLike, like_posts.active as likeActive, posts.profil_id as id_user,share_posts.description_old_post,share_posts.post_id as old_post_id, share_posts.profil_id as creator_perfil, perfils.name, perfils.id as user_id_creator, perfils.img_profile as imagen_perfil_creator,share_posts.active as share_active, follow_posts.active as follow FROM posts LEFT JOIN images_posts on images_posts.post_id = posts.id LEFT JOIN like_posts ON posts.id = like_posts.post_id and like_posts.profil_id = '.$id.' and (like_posts.active = true and like_posts.like = true) LEFT JOIN share_posts ON share_posts.new_post_id = posts.id LEFT JOIN perfils ON share_posts.profil_id = perfils.id LEFT JOIN follow_posts ON follow_posts.post_id = posts.id WHERE posts.profil_id = '.$id.' and posts.active = true ORDER BY posts.id DESC LIMIT 3 ');
 
-		// dd($posts);
-		return view('logueado.perfil',compact('category','posts'));
+		$socialNet = ['facebook','twitter','linkedin','youtube','pinterest','instagram','snapchat','plus','vine','tumblr'];
+
+		$streamNet = ['twitch','bambuser','livestream'];
+
+		$streams = "";
+		if (isset(Auth::user()->streamings)) {
+			$streams = json_decode(Auth::user()->streamings,true);
+		}
+
+		$socials = "";
+		if (isset(Auth::user()->redes)) {
+			$socials = json_decode(Auth::user()->redes,true);
+		}
+		return view('logueado.perfil',compact('category','posts','socialNet','streamNet','streams','socials'));
 	}
 
 	public function tendencias(){

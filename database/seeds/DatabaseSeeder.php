@@ -9,6 +9,9 @@ use App\First_spesification;
 use App\Last_spesification;
 use App\Category;
 use App\Interest;
+use App\Chat;
+use App\User_chat;
+use App\Message;
 use App\Type_send_product;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
@@ -27,6 +30,8 @@ class DatabaseSeeder extends Seeder {
         $this->call('FirstSpesificationTableSeeder');
         $this->call('LastSpesificationTableSeeder');
         $this->call('TypeSendTableSeeder');
+        $this->call('ChatTableSeeder');
+        $this->call('MessageTableSeeder');
     }
 
 }
@@ -603,6 +608,96 @@ class CategoryPostTableSeeder extends seeder{
         ));
         Category_post::create(array(
 	        'name' => 'Movilidad y transporte',
+        ));
+	}
+}
+
+
+class ChatTableSeeder extends seeder{
+	public function run(){
+		DB::table('chats')->delete();
+        Chat::create(array(
+	        'userOne' => 4,
+	        'userTwo' => 3,
+	        'channel' => Hash::make('1'),
+        ));
+         Chat::create(array(
+	        'userOne' => 2,
+	        'userTwo' => 1,
+	        'channel' => Hash::make('2'),
+        ));
+          Chat::create(array(
+	        'userOne' => 3,
+	        'userTwo' => 2,
+	        'channel' => Hash::make('3'),
+        ));
+          Chat::create(array(
+	        'userOne' => 1,
+	        'userTwo' => 4,
+	        'channel' => Hash::make('4'),
+        ));
+	}
+}
+class MessageTableSeeder extends seeder{
+	public function run(){
+		DB::table('messages')->delete();
+        Message::create(array(
+	        'chat_id' => 1,
+	        'emisor' => 4,
+	        'receptor' => 3,
+	        'message' => "Hola como estas",
+        ));
+        Message::create(array(
+	        'chat_id' => 1,
+	        'emisor' => 4,
+	        'receptor' => 3,
+	        'message' => "Espero que bien",
+        ));
+        Message::create(array(
+	        'chat_id' => 1,
+	        'emisor' => 3,
+	        'receptor' => 4,
+	        'message' => "Si porque",
+        ));
+        Message::create(array(
+	        'chat_id' => 1,
+	        'emisor' => 4,
+	        'receptor' => 3,
+	        'message' => "Solo queria saber",
+        ));
+        Message::create(array(
+	        'chat_id' => 1,
+	        'emisor' => 3,
+	        'receptor' => 4,
+	        'message' => "Gracias",
+        ));
+
+
+        Message::create(array(
+	        'chat_id' => 2,
+	        'emisor' => 2,
+	        'receptor' => 1,
+	        'message' => "Que haces",
+        ));
+        Message::create(array(
+	        'chat_id' => 2,
+	        'emisor' => 2,
+	        'receptor' => 1,
+	        'message' => "Nada por qué?",
+        ));
+
+
+        Message::create(array(
+	        'chat_id' => 4,
+	        'emisor' => 1,
+	        'receptor' => 4,
+	        'message' => "Estoy aburrido",
+        ));
+        Message::create(array(
+	        'chat_id' => 4,
+	        'emisor' => 4,
+	        'receptor' => 1,
+	        'message' => "Por que? jaja",
         ));
 	}
 }

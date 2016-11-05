@@ -9,6 +9,7 @@ use App\Perfil;
 use Auth;
 use Authenticatable;
 use Hash;
+use Session;
 
 class AuthenticationController extends Controller {
 
@@ -46,7 +47,7 @@ class AuthenticationController extends Controller {
     	}
 
 	    if (Auth::attempt($user,$remember))
-		{
+		{	
 	        return redirect()->intended('favoritos');
 		}else
 		{
