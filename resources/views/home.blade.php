@@ -1,7 +1,12 @@
 @extends('layouts.master')
 
 @section('content')
+<div class="alert alert-warning alert-dismissible cookies" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>Advertencia!</strong> Utilizamos cookies propias y de terceros para mejorar nuestros servicios y mostrarle publicidad relacionada con sus preferencias mediante el análisis de sus hábitos de navegación. Si continua navegando, consideramos que acepta su uso. Puede cambiar la configuración u obtener más información <a href="{{url('politicas_cookie')}}">aquí</a>..
+</div>
 @if(Auth::check())
+
 <nav class="nav-shymow">
   <ul class="nav navbar-nav navbar-right">
     <a href="{{url('/')}}">
@@ -94,6 +99,12 @@
                     {!! Form::password('password',['class'=>'form-control', 'placeholder'=>'Contraseña','required' => 'required']) !!}
                   </div>
                   {!! Form::submit('Regístrate',['class'=>'butto-formns']) !!}
+
+                  <div class="col-md-12">
+                    {!! Form::checkbox('condiciones','true',['required'=>'required']) !!}
+                    <span style="color:#37B4AA">Acepto términos y condiciones </span><br>
+                    <a href="{{url('condiciones')}}">Condiciones de uso</a>
+                  </div>
                 </div>
                 {!! Form::close() !!}
               </section>
@@ -121,7 +132,7 @@
                 </div>
                 <div class="row">
                   <div class="col-md-12" style="color:#C5C5C5;">
-                    {!! Form::checkbox('remember','true') !!}
+                    {!! Form::checkbox('remember','true',['required'=>'required']) !!}
                     <span style="color:#37B4AA">Recordar mis datos</span>
                     | <a href="#" style="color:#37B4AA;">Olvidé mi contraseña</a>
                   </div>
@@ -399,7 +410,7 @@
         </div>
         <div class="col-sm-9 col-md-9" id="contentArt">
           <section class="video">
-            <video src="demo.mp4" controls autoplay loop muted preload="auto" poster="img/video.jpg" >
+            <video src="video/shymow.mp4" controls loop muted preload="auto" poster="img/video.jpg" >
               HTML5 Video is required for this example
             </video> 
           </section>
@@ -549,12 +560,11 @@
 <div class="footer">
   <div class="text-center">
     <div class="link">
-      <a href="#">INICIO</a> |
-      <a href="#">QUÉ ES SHYMOW</a> |
-      <a href="#">F.A.Q</a> |
+      <a href={{url('/')}}>INICIO</a> |
+      <a href={{url('/nosotros')}}>QUÉ ES SHYMOW</a> |
       <a href="#">CONTACTO</a> |
-      <a href="#">TÉRMINOS Y CONDICIONES</a> |
-      <a href="#">PÓLITICA DE PRIVACIDAD</a> |
+      <a href={{url('condiciones')}}>TÉRMINOS Y CONDICIONES</a> |
+      <a href="{{url('politicas_privacidad')}}">PÓLITICA DE PRIVACIDAD</a> |
       <a href="#">LOGIN</a> |
       <br>
     </div>

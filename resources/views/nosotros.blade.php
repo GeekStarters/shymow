@@ -36,7 +36,7 @@
         <h2 style="font-size:4em !important;line-height:1.2;font-family:gothamTwo;">#EraShymow</h2>
       </div>
       <section class="video" style="max-width:600px; margin:auto;">
-              <video src="demo.mp4" controls autoplay loop muted preload="auto" poster="img/video.jpg" >
+              <video src="video/shymow.mp4" controls loop muted preload="auto" poster="img/video.jpg" >
                 HTML5 Video is required for this example
               </video> 
             </section>

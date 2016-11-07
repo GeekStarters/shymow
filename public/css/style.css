@@ -22,6 +22,12 @@ header img{
     left: 0;
     width: 100%;
 }
+.cookies{
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	z-index: 1000000;
+}
 .welcome{
     
 	background: rgba(227,227,227,1);
@@ -492,6 +498,7 @@ p{
 	color: #4D4D4D;
 	font-family: arial;
 	font-size: 1.3em;
+	text-align: justify;
 }
 /*Contacto*/
 .img-contacto{
@@ -1246,14 +1253,7 @@ border-radius: 0px 0px 15px 15px;
 .number-post{
 	color: #999999;
 }
-.profiles .content-post .post-footer li{
-	display: inline;
-	float: left;
-	margin-right: 10px;
-	padding-right: 10px;
-	border-right: 1px solid #CCCCCC;
-	height: 50px;
-}
+
 .post-qualification a {
 	text-decoration: none;
 	display: inline-block;

@@ -623,82 +623,8 @@ $( document ).ready(function() {
             html +=            '<div class="clearfix"></div>';
             html +=            '<hr>';
 
-
-            html +=            '<div class="row chat-content-view">'
-                html +=            '<div style="color:#000;cursor:pointer;">'
-                html +=                '<div class="clearfix"></div>';
-                html +=                '<div class="col-sm-3">';
-                html +=                    '<img style="width:100%;" src="img/profile/star/7.jpg" alt="shymow">';
-                html +=                '</div>';
-                html +=                '<div class="col-sm-9">';
-                html +=                    '<div style="font-weight: bold;">';
-                html +=                        '<div style="float:left;">';
-                html +=                            'Nombre';
-                html +=                        '</div>';
-                html +=                        '<div style="float:right;"">';
-                html +=                            '23min';
-                html +=                        '</div>';
-                html +=                    '</div>';
-                html +=                    '<div class="clearfix"></div>';
-                html +=                    '<div style="font-size:.9em;">';
-                html +=                        'Lorem ipsum dolor sit amet, consectetur.';
-                html +=                    '</div>';
-                html +=                '</div>';
-                html +=            '</div>';
-            html +=            '</div>';
-            html +=            '<div class="clearfix"></div>';
-            html +=            '<hr>';
-
-
-            html +=            '<div class="row chat-content-view">'
-                html +=            '<div style="color:#000;cursor:pointer;">'
-                html +=                '<div class="clearfix"></div>';
-                html +=                '<div class="col-sm-3">';
-                html +=                    '<img style="width:100%;" src="img/profile/star/7.jpg" alt="shymow">';
-                html +=                '</div>';
-                html +=                '<div class="col-sm-9">';
-                html +=                    '<div style="font-weight: bold;">';
-                html +=                        '<div style="float:left;">';
-                html +=                            'Nombre';
-                html +=                        '</div>';
-                html +=                        '<div style="float:right;"">';
-                html +=                            '23min';
-                html +=                        '</div>';
-                html +=                    '</div>';
-                html +=                    '<div class="clearfix"></div>';
-                html +=                    '<div style="font-size:.9em;">';
-                html +=                        'Lorem ipsum dolor sit amet, consectetur.';
-                html +=                    '</div>';
-                html +=                '</div>';
-                html +=            '</div>';
-            html +=            '</div>';
-            html +=            '<div class="clearfix"></div>';
-            html +=            '<hr>';
-
-            html +=            '<div class="row chat-content-view">'
-                html +=            '<div style="color:#000;cursor:pointer;">'
-                html +=                '<div class="clearfix"></div>';
-                html +=                '<div class="col-sm-3">';
-                html +=                    '<img style="width:100%;" src="img/profile/star/7.jpg" alt="shymow">';
-                html +=                '</div>';
-                html +=                '<div class="col-sm-9">';
-                html +=                    '<div style="font-weight: bold;">';
-                html +=                        '<div style="float:left;">';
-                html +=                            'Nombre';
-                html +=                        '</div>';
-                html +=                        '<div style="float:right;"">';
-                html +=                            '23min';
-                html +=                        '</div>';
-                html +=                    '</div>';
-                html +=                    '<div class="clearfix"></div>';
-                html +=                    '<div style="font-size:.9em;">';
-                html +=                        'Lorem ipsum dolor sit amet, consectetur.';
-                html +=                    '</div>';
-                html +=                '</div>';
-                html +=            '</div>';
-            html +=            '</div>';
-            html +=            '<div class="clearfix"></div>';
-            html +=            '<hr>';
+            html += '<a href="/messages" class="text-center">Ver todos</>';
+            
             return html;
         },
         html: true,

@@ -296,8 +296,8 @@
 			@endforeach
 			
 		</div>
-		<div class="clearfix"></div>
-		<div class="row col-md-12">
+		<!-- <div class="clearfix"></div> -->
+		<!-- <div class="row col-md-12">
 			<div class="my-post">
 				<div class="interesting-header">
 					<h2>Mis últimos post</h2>
@@ -431,7 +431,7 @@
 									<img src="img/logo.png" alt="shymow" style="margin-right:5px;">
 								  <li class="dropdown">
 					  					<a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="img/profile/people/one.jpg" alt=""> <b class="caret"></b></a>
-					  					<ul class="dropdown-menu">
+					  					<ul class="dropdown-menu"> -->
 					  						<!-- <li class="dropdown-submenu">
 										        <a class="test" tabindex="-1" href="#">Configuración <span class="caret"></span></a>
 										        <ul class="dropdown-menu">
@@ -439,7 +439,7 @@
 										          <li><a tabindex="-1" href="#">2nd level dropdown</a></li>
 										        </ul>
 										      </li> -->
-					  						<li><a href="#">Perfil</a></li>
+				<!-- 	  						<li><a href="#">Perfil</a></li>
 					  					</ul>
 					  				</li>
 								</ul>
@@ -518,7 +518,7 @@
 									<img src="img/logo.png" alt="shymow" style="margin-right:5px;">
 								  <li class="dropdown">
 					  					<a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="img/profile/people/one.jpg" alt=""> <b class="caret"></b></a>
-					  					<ul class="dropdown-menu">
+					  					<ul class="dropdown-menu"> -->
 					  						<!-- <li class="dropdown-submenu">
 										        <a class="test" tabindex="-1" href="#">Configuración <span class="caret"></span></a>
 										        <ul class="dropdown-menu">
@@ -526,7 +526,7 @@
 										          <li><a tabindex="-1" href="#">2nd level dropdown</a></li>
 										        </ul>
 										      </li> -->
-					  						<li><a href="#">Perfil</a></li>
+				<!-- 	  						<li><a href="#">Perfil</a></li>
 					  					</ul>
 					  				</li>
 								</ul>
@@ -580,8 +580,8 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="clearfix"></div>
+		</div> -->
+		<!-- <div class="clearfix"></div>
 		<br>
 		<br>
 		<br>
@@ -597,7 +597,7 @@
 			<div class="right">
 				<hr>
 			</div>
-		</div>
+		</div> -->
 
 		<div class="clearfix"></div>
 		<div class="row" style="margin-left:0px;">

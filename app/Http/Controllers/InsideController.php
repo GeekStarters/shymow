@@ -53,6 +53,7 @@ class InsideController extends Controller {
 		if (isset(Auth::user()->redes)) {
 			$socials = json_decode(Auth::user()->redes,true);
 		}
+		// dd($socials);
 		return view('logueado.perfil',compact('category','posts','socialNet','streamNet','streams','socials'));
 	}
 

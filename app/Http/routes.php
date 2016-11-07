@@ -24,9 +24,13 @@ Route::get('/',function(){
     $interest = Interest::lists('name','id');
     return view('home',compact('countries','interest'));
 });
+Route::get('condiciones','NavigationController@condiciones');
 Route::get('nosotros','NavigationController@nosotros');
 Route::get('faq','NavigationController@faq');
 Route::get('contacto','NavigationController@contacto');
+Route::get('politicas_privacidad','NavigationController@politicasPrivacidad');
+Route::get('politicas_cookie','NavigationController@politicasCookie');
+Route::get('contratacion_premium','NavigationController@contratacionPremium');
 
 //Ruta para retorno de ciudad y estado por medio de ajax
 Route::get('state/{id}','NavigationController@state');
@@ -38,7 +42,7 @@ Route::get('registro','HomeController@registro');
 
 // Registro Usuarios
 Route::get('users','HomeController@users');
-Route::get('data_user','HomeController@dataUser');
+Route::get('data_users','HomeController@dataUser');
 Route::post('final_steps','RegistroController@final_steps');
 Route::get('final_steps','HomeController@final_steps');
 Route::post('create_user','RegistroController@create');

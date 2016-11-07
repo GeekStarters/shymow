@@ -129,7 +129,6 @@ class RegistroController extends Controller {
 	    				$array = [$domainValor => ["1"=>$url]];
 	    			}
 	    			
-	    			// dd($array);
 	    			Session::put('social_json',$array);
 	    			// dd(Session::get('social_json'));
 	    		}
@@ -188,9 +187,9 @@ class RegistroController extends Controller {
 	    				$array = [$domainValor => ["1"=>$url]];
 	    			}
 	    			
-	    			dd($array);
+	    			// dd($array);
 	    			Session::put('stream_json',$array);
-	    			dd(Session::get('stream_json'));
+	    			// dd(Session::get('stream_json'));
 	    		}
 	    	}
 	    }
@@ -218,12 +217,26 @@ class RegistroController extends Controller {
 	    $pais = $pais[0]['name'];
 	    $provincia = $provincia[0]['name'];
 	    $municipio = $municipio[0]['name'];
+
+	    $webs_get = $request->input('web1');
+	    $blogs_get = $request->input('blog1');
+
+	    if ($webs_get == "") {
+	    	$webs_get = NULL;
+	    }else{
+	    	$webs_get = json_encode([$request->input('web1')]);
+	    }
+	    if($blogs_get == ""){
+	    	$blogs_get = NULL;
+	    }else{
+	    	$blogs_get = json_encode([$request->input('blog1')]);
+	    }
 	    try {
 	    	$user = new Perfil($data_user);
 			    $user->redes = $jsonRedes;
 			    $user->streamings = $jsonStream;
-			    $user->blogs = json_encode($request->input('blog1'));
-			    $user->webs = json_encode($request->input('web1'));
+			    $user->blogs = $webs_get;
+			    $user->webs = $blogs_get;
 			    $user->birthdate = $date;
 			    $user->role = $role;
 			    $user->pais = $pais;
@@ -284,6 +297,7 @@ class RegistroController extends Controller {
 	        'name' => 'required|min:10',
 	        'email' => 'required|min:10|email|unique:perfils',
 	        'password' => 'required|min:8',
+	        'condiciones' => 'required',
 	    ]);
 
 	    if ($v->fails())
@@ -294,7 +308,6 @@ class RegistroController extends Controller {
 		$name = $request->input('name');
 		$email = $request->input('email');
 		$password = $request->input('password');
-
 		$password = Hash::make($password);
 		$data_user = ['name' => $name,'email'=>$email,'password'=>$password];
 

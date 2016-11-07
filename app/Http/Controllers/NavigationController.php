@@ -19,6 +19,18 @@ class NavigationController extends Controller {
 	public function nosotros(){
 		return view('nosotros');
 	}
+	public function politicasCookie(){
+		return view('cookies');
+	}
+	public function contratacionPremium(){
+		return view('contratacion_premium');
+	}
+	public function politicasPrivacidad(){
+		return view('privacidad');
+	}
+	public function condiciones(){
+		return view('condiciones');
+	}
 	public function faq(){
 		return view('faq');
 	}

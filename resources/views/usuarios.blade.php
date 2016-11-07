@@ -22,7 +22,7 @@
 						<p>Nos alegra que te hayas unido a nosotros <br><br>En Shymow lograrás conectarte de verdad con aquello que te importa o te interesa. <br><br> Podrás colgar los perfiles de tus redes sociales, guarda en favorito aquellas cuentas de otros usuarios que te interesan y compartirlos con el resto de la comunidad</p>
 					</div>
 					<br><br>
-					<a href="{{ url('data_user') }}" class="butto-formns navbar-right">¡EMPECEMOS!</a>
+					<a href="{{ url('data_users') }}" class="butto-formns navbar-right">¡EMPECEMOS!</a>
 				</div>
 			</div>
 		</div>
