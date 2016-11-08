@@ -1442,7 +1442,20 @@ top: 35px;
 	margin: auto;
     display: block;
 }
-
+.social-icon img{
+	max-width: 25px !important;
+}
+.social-icon{
+	text-align: center;
+	top:-10px;
+	position: relative;
+	margin-bottom: 10px;
+}
+.social-icon a{
+	text-align: center
+	text-decoration: none;
+	display: inline-block;
+}
 .profiles .friends .content-friends .sub-content-friends .friend-social img{
 	max-width: 25px;
 }

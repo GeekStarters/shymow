@@ -1,10 +1,13 @@
 @extends('layouts.master')
 
 @section('content')
+@if(!Auth::check())
 <div class="alert alert-warning alert-dismissible cookies" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
   <strong>Advertencia!</strong> Utilizamos cookies propias y de terceros para mejorar nuestros servicios y mostrarle publicidad relacionada con sus preferencias mediante el análisis de sus hábitos de navegación. Si continua navegando, consideramos que acepta su uso. Puede cambiar la configuración u obtener más información <a href="{{url('politicas_cookie')}}">aquí</a>..
 </div>
+@endif()
+
 @if(Auth::check())
 
 <nav class="nav-shymow">
@@ -510,40 +513,54 @@
  </div>
 
 
- <div class="container-fluid users">
+<div class="container-fluid users">
   <section>
     <div class="row">
       <div class="col-md-12">
-        <article class="grid_3 carousel-article text-center">
-         <h4>Últimos usuarios registrados:</h4>
-         <div style="position: relative;width: 220px; height: 90px;" class="caroufredsel_wrapper">
-          <div class="center-block" style="width:230px !important;">
-            <ul id="foo3" class="carousel-li">
-              <li>
-               <p>
-                 Slider1, welcome to freshdesignweb blog, here is useful slider text example tutorial with demo and download link, hope you can learn more about web design. Regard, Graham Bill
-               </p>
-             </li><li>
-             <p>
-              Slider2, welcome to freshdesignweb blog, here is useful slider text example tutorial with demo and download link, hope you can learn more about web design. Regard, Graham Bill
-            </p>
-          </li><li>
-          <p>
-            Slider3, welcome to freshdesignweb blog, here is useful slider text example tutorial with demo and download link, hope you can learn more about web design.Regard, Graham Bill
-          </p>
-        </li>
-      </ul>
-      <div class="clearfix"></div>
+        <article class="grid_3 carousel-article text-center"><br>
+          <h4 style="color: #61605F !important;font-family: gothamTwo;font-size: 2.5em;">Últimos usuarios registrados:</h4>
 
-      <div style="display: block;" class="carousel-pagination" id="foo3_pag">
-        <a class="selected" href="#"><span>1</span></a><a class="" href="#"><span>2</span></a><a class="" href="#"><span>3</span></a>
+          <div class="container-slider">
+            <a href="#"  id="nextview" class="control-slider"><i class="glyphicon glyphicon-chevron-left" style="left: -40px;"></i></a>
+            <div id="w">
+              <nav class="slidernav" style="display: none">
+                <div id="navbtns" class="clearfix">
+                  <a href="#" class="previous">prev</a>
+                  <a href="#" class="next">next</a>
+                </div>
+              </nav>
+                <div class="crsl-items" data-navigation="navbtns">
+                  <div class="crsl-wrap">
+                    @foreach($users as $user)
+                      <div class="crsl-item">
+                        <div class="thumbnail">
+                          <img src="{{ url($user->img_profile) }}" alt="nyc subway">
+                          <div class="social-icon">
+                            @if(isset($user->redes))
+                              @for($i=0; $i<count($socialNet);$i++)
+                                @if(isset(json_decode($user->redes,true)[$socialNet[$i]]))
+                                  @foreach( json_decode($user->redes,true)[$socialNet[$i] ] as $red)
+
+                                  <a href="{{url($red)}}" target="_blank"><img src="{{url('img/profile/'.$socialNet[$i].'-post.png')}}" alt="shymow"></a>
+                                  @endforeach
+                                @endif
+                              @endfor
+                            @endif
+                          </div>
+                        </div>
+                        
+                        <h3><a href="#">{{$user->name}}</a></h3>
+                      </div>
+                    @endforeach
+                  </div><!-- @end .crsl-wrap -->
+                </div><!-- @end .crsl-items -->
+            </div><!-- @end #w -->
+            <a href="#" id="preview" class="control-slider"><i class="glyphicon glyphicon-chevron-right"></i></a>
+          </div>
+        </article><!-- slider text article end -->
       </div>
     </div>
-  </div>
-</article><!-- slider text article end -->
-</div>
-</div>
-</section>
+  </section>
 </div>
 <div class="clearfix"></div>
 
@@ -587,13 +604,23 @@
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
   });
-  $("#foo3").carouFredSel({
-    items: 1,
-    auto: true,
-    scroll: 1,
-    pagination  : "#foo3_pag"
+ $('.crsl-items').carousel({
+    visible: 3,
+    itemMinWidth: 180,
+    itemEqualHeight: 370,
+    itemMargin: 9,
   });
-
+  $('#preview').click(function(event) {
+    /* Act on the event */
+    $('#navbtns').find('.next').click();
+  });
+  $('#nextview').click(function(event) {
+    /* Act on the event */
+    $('#navbtns').find('.previous').click();
+  });
+  $("a[href=#]").on('click', function(e) {
+    e.preventDefault();
+  });
   $('#pais').change(function(event) {
     /* Act on the event */
     $('#state').html('<option>Cargando..</option>');

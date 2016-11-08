@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-11-2016 a las 06:02:53
+-- Tiempo de generación: 08-11-2016 a las 01:55:18
 -- Versión del servidor: 5.7.9
 -- Versión de PHP: 5.6.16
 
@@ -49266,11 +49266,11 @@ CREATE TABLE IF NOT EXISTS `messages` (
 --
 
 INSERT INTO `messages` (`id`, `chat_id`, `emisor`, `receptor`, `read`, `active`, `message`, `created_at`, `updated_at`) VALUES
-(1, 1, 4, 3, 0, 1, 'Hola como estas', '2016-11-07 10:52:45', '2016-11-07 10:52:45'),
-(2, 1, 4, 3, 0, 1, 'Espero que bien', '2016-11-07 10:52:45', '2016-11-07 10:52:45'),
-(3, 1, 3, 4, 0, 1, 'Si porque', '2016-11-07 10:52:45', '2016-11-07 10:52:45'),
-(4, 1, 4, 3, 0, 1, 'Solo queria saber', '2016-11-07 10:52:45', '2016-11-07 10:52:45'),
-(5, 1, 3, 4, 0, 1, 'Gracias', '2016-11-07 10:52:45', '2016-11-07 10:52:45'),
+(1, 1, 4, 3, 1, 1, 'Hola como estas', '2016-11-07 10:52:45', '2016-11-08 04:59:57'),
+(2, 1, 4, 3, 1, 1, 'Espero que bien', '2016-11-07 10:52:45', '2016-11-08 04:59:57'),
+(3, 1, 3, 4, 1, 1, 'Si porque', '2016-11-07 10:52:45', '2016-11-08 04:59:57'),
+(4, 1, 4, 3, 1, 1, 'Solo queria saber', '2016-11-07 10:52:45', '2016-11-08 04:59:57'),
+(5, 1, 3, 4, 1, 1, 'Gracias', '2016-11-07 10:52:45', '2016-11-08 04:59:57'),
 (6, 2, 2, 1, 0, 1, 'Que haces', '2016-11-07 10:52:45', '2016-11-07 10:52:45'),
 (7, 2, 2, 1, 0, 1, 'Nada por qué?', '2016-11-07 10:52:45', '2016-11-07 10:52:45'),
 (8, 4, 1, 4, 0, 1, 'Estoy aburrido', '2016-11-07 10:52:45', '2016-11-07 10:52:45'),
@@ -49495,9 +49495,9 @@ CREATE TABLE IF NOT EXISTS `perfils` (
 INSERT INTO `perfils` (`id`, `name`, `email`, `password`, `birthdate`, `genero`, `pais`, `provincia`, `municipio`, `work`, `phone`, `role`, `edad`, `img_profile`, `img_portada`, `hobbies`, `redes`, `streamings`, `webs`, `blogs`, `mi_frase`, `descripcion`, `active`, `policies_and_conditions`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Wilmer gilberto', 'wilmer@gmail.com', '$2y$10$Alk/cuOBjf5FGSjN963bL.mIj8T6TvX2UL/M43/76cACsB82iC/ni', '1995-03-29', 'M', 'El Salvador', 'El refugio', 'La paz', '', '', 0, 22, 'img/profile/default.png', 'img/profile/portada.jpg', 'Musica, juegos, Economia', NULL, NULL, NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 1, 1, NULL, '2016-11-07 10:52:44', '2016-11-07 10:52:44'),
 (2, 'delmi solano', 'demi@gmail.com', '$2y$10$/TsV6FNknqJUBNTqNPw3KuEssF0dCLnycJXpsHz6sX6IMchFty4wG', '1995-03-29', 'F', 'El Salvador', 'El refugio', 'La paz', '', '', 0, 29, 'img/profile/default.png', 'img/profile/portada.jpg', 'Musica, juegos, Economia', NULL, NULL, NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 1, 1, NULL, '2016-11-07 10:52:44', '2016-11-07 10:52:44'),
-(3, 'Gisela lara', 'Gisela@gmail.com', '$2y$10$4ZyyZDUPKyp8JxKp9PlID.C/5OuC1Svs1d/arAv8SUAG1c64TXop2', '1995-03-29', 'F', 'El Salvador', 'El refugio', 'La paz', '', '', 0, 21, 'img/profile/default.png', 'img/profile/portada.jpg', 'Musica, juegos, Economia', NULL, NULL, NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 1, 1, NULL, '2016-11-07 10:52:44', '2016-11-07 10:52:44'),
-(4, 'Developer prueba', 'developer@gmail.com', '$2y$10$F01oqr8XCIc3CUvGkkeOw.1Bgpgd9cPbsPT2Q1CZqwiyP/QXi5Xdi', '1995-03-29', 'M', 'El Salvador', 'El refugio', 'La paz', '', '', 0, 21, 'img/profile/default.png', 'img/profile/portada.jpg', 'Musica, juegos, Economia', '{"facebook":["https:\\/\\/www.facebook.com\\/"],"youtube":["https:\\/\\/www.youtube.com\\/watch?v=HpdrsJpRUd8"]}', '{"twitch":["https:\\/\\/www.twitch.tv\\/","https:\\/\\/www.twitch.tv\\/"]}', NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 1, 1, 'HqQqHd15XMLI9GUx2byBnfVJaTs7h25MHgEhBkfwVGflDQad97POukMfWFYe', '2016-11-07 10:52:44', '2016-11-07 11:37:08'),
-(10, 'Everth Omar', 'omar@gmail.com', '$2y$10$vmoEURqOThcbXb8EgSXKreJlfPnb9IHB5U/tkdhz9UD4B13SBzC3i', '1995-08-25', 'm', 'Bangladesh', 'Feni', 'Feni', '', '', 2, 21, 'img/profile/default.png', 'img/profile/portada.jpg', '', '{"facebook":{"1":"https:\\/\\/www.facebook.com\\/","2":"https:\\/\\/www.facebook.com\\/nelson.gochez.9"}}', '{"twitch":{"1":"https:\\/\\/www.twitch.tv\\/","2":"https:\\/\\/www.twitch.tv\\/directory\\/game\\/Overwatch"}}', '["http:\\/\\/fusiontutoriales.com\\/"]', '["http:\\/\\/desarrollocodigo.com"]', '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 1, 1, '3rm13wVSCVsxtVebgHPgLJui6X0GVvfqPWoOIPKAqvRDcM9SbCrfEzuSqUPx', '2016-11-07 11:57:52', '2016-11-07 11:58:41');
+(3, 'Gisela lara', 'Gisela@gmail.com', '$2y$10$4ZyyZDUPKyp8JxKp9PlID.C/5OuC1Svs1d/arAv8SUAG1c64TXop2', '1995-03-29', 'F', 'El Salvador', 'El refugio', 'La paz', '', '', 0, 21, 'img/profile/default.png', 'img/profile/portada.jpg', 'Musica, juegos, Economia', '{"youtube":["https:\\/\\/www.youtube.com\\/watch?v=AtaE1BpbZKc"]}', NULL, NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 1, 1, '6fUQp7RaqR0qIRJuxeyTkwGKir0BDcPitk4YKtwGqhtJiCv1r4u9E03QBEXA', '2016-11-07 10:52:44', '2016-11-08 07:52:05'),
+(4, 'Developer prueba', 'developer@gmail.com', '$2y$10$F01oqr8XCIc3CUvGkkeOw.1Bgpgd9cPbsPT2Q1CZqwiyP/QXi5Xdi', '1995-03-29', 'M', 'El Salvador', 'El refugio', 'La paz', '', '', 0, 21, 'img/profile/default.png', 'img/profile/portada.jpg', 'Musica, juegos, Economia', '{"facebook":["https:\\/\\/www.facebook.com\\/","https:\\/\\/www.facebook.com\\/"],"youtube":["https:\\/\\/www.youtube.com\\/watch?v=HpdrsJpRUd8"]}', '{"twitch":["https:\\/\\/www.twitch.tv\\/","https:\\/\\/www.twitch.tv\\/"]}', NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 1, 1, 'TSAMylJ4CC54HScV3E5POVdTa0xztRxvXN3JgiSkIHn5C0zWXVCn1pwxBWZp', '2016-11-07 10:52:44', '2016-11-08 07:35:08'),
+(10, 'Everth Omar', 'omar@gmail.com', '$2y$10$vmoEURqOThcbXb8EgSXKreJlfPnb9IHB5U/tkdhz9UD4B13SBzC3i', '1995-08-25', 'm', 'Bangladesh', 'Feni', 'Feni', '', '', 2, 21, 'img/profile/default.png', 'img/profile/portada.jpg', '', '{"facebook":{"1":"https:\\/\\/www.facebook.com\\/","2":"https:\\/\\/www.facebook.com\\/nelson.gochez.9"},"youtube":["https:\\/\\/www.youtube.com\\/watch?v=AtaE1BpbZKc"]}', '{"twitch":{"1":"https:\\/\\/www.twitch.tv\\/","2":"https:\\/\\/www.twitch.tv\\/directory\\/game\\/Overwatch"}}', '["http:\\/\\/fusiontutoriales.com\\/"]', '["http:\\/\\/desarrollocodigo.com"]', '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 1, 1, '9eoWx4XC9QpIpE6tEcGfl28mgUbvQ2g6Q54XYXEOr0SY4yisglUDJYhEOctY', '2016-11-07 11:57:52', '2016-11-08 07:51:44');
 
 -- --------------------------------------------------------
 

@@ -16,7 +16,7 @@
 							<a href="#"><img src="img/profile/face-post.png" alt="shymow"></a>
 							<a href="#"><img src="img/profile/twitter-post.png" alt="shymow"></a>
 							<a href="#"><img src="img/profile/linkedin-post.png" alt="shymow"></a>
-							<a href="#"><img src="img/profile/pinterest-post.png" alt="shymow"></a>
+							<a href="#"><img src="img/profile/pinterest.png" alt="shymow"></a>
 							<a href="#"><img src="img/profile/instagram-post.png" alt="shymow"></a>
 							<a href="#"><img src="img/profile/youtube-post.png" alt="shymow"></a>
 						</div>

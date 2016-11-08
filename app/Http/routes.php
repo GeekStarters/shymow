@@ -2,6 +2,7 @@
 use App\Countrie;
 use App\Interest;
 use App\Type_send_product;
+use App\Perfil;
 use Session as session;
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,10 @@ Route::get('social/login/{provider}', 'Auth\AuthController@handleProviderCallbac
 Route::get('/',function(){
     $countries = Countrie::lists('name','id');
     $interest = Interest::lists('name','id');
-    return view('home',compact('countries','interest'));
+    $users = Perfil::where('active',true)
+                    ->orderBy('id','DESC')->take(10)->get();
+    $socialNet = ['facebook','twitter','linkedin','youtube','pinterest','instagram'];
+    return view('home',compact('countries','interest','users','socialNet'));
 });
 Route::get('condiciones','NavigationController@condiciones');
 Route::get('nosotros','NavigationController@nosotros');
