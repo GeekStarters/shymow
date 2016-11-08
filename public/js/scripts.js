@@ -17,14 +17,15 @@ $( document ).ready(function() {
         user.initialize();
         $('#custom-templates .typeahead').typeahead(null, {
           name: 'search',
+          display: 'name',
           source: user.ttAdapter(),
           templates: {
             empty: [
               '<div class="empty-message">',
-                'unable to find any Best Picture winners that match the current query',
+                'No se encontraron usuarios',
               '</div>'
             ].join('\n'),
-            suggestion: Handlebars.compile('<a href="/user/{{id}}"><div><img class="img-responsive" src="/{{img}}"><strong>{{name}}</strong></div></a>')
+            suggestion: Handlebars.compile('<a href="/view_user/{{name}}"><div><img class="img-responsive" src="/{{img}}"><strong>{{name}}</strong></div></a>')
           }
         });
     },'json');
@@ -224,7 +225,7 @@ $( document ).ready(function() {
                 html += '<div class="post-body tendencias-post">';
                 html += '<div class="post-header">';
                 html += '<div class="post-user">';
-                html += '<div class="post-icono"><img src="'+data.img_profile+'" alt="shymow"></div>';
+                html += '<div class="post-icono"><img src="/'+data.img_profile+'" alt="shymow"></div>';
                 html += '<div class="post-user"><strong>'+data.user_name+'</strong></div>';
                 html += '</div>';
                 html += '</div>';
@@ -602,7 +603,7 @@ $( document ).ready(function() {
                 html +=            '<div style="color:#000;cursor:pointer;">'
                 html +=                '<div class="clearfix"></div>';
                 html +=                '<div class="col-sm-3">';
-                html +=                    '<img style="width:100%;" src="img/profile/star/7.jpg" alt="shymow">';
+                html +=                    '<img style="width:100%;" src="/img/profile/star/7.jpg" alt="shymow">';
                 html +=                '</div>';
                 html +=                '<div class="col-sm-9">';
                 html +=                    '<div style="font-weight: bold;">';
