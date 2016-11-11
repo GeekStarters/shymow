@@ -13,6 +13,9 @@
     <link href="{{ asset('/css/responsive.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/font-awesome.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/css/sweetalert.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/imgareaselect-animated') }}">
+    <link rel="stylesheet" href="{{ asset('/css/imgareaselect-default.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/imgareaselect-deprecated.css') }}">
     <link rel="stylesheet" type="text/css" media="all" href="{{ asset('css/slider-horizontal.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
@@ -44,6 +47,7 @@
     <script src=" {{ asset('js/validate.js') }} "></script>
     <script src=" {{ asset('js/messages.js') }} "></script>
     <script type="text/javascript" src="{{ asset('js/responsiveCarousel.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery.imgareaselect.min.js') }}"></script>
     
     @yield('scripts')
     @yield('scriptsTwo')

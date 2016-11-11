@@ -18,7 +18,7 @@ use App\Qualification_post;
 use App\Perfil;
 use App\Share_post;
 use App\Follow_post;
-
+use Input;
 class PostController extends Controller {
 
 	/**
@@ -52,7 +52,7 @@ class PostController extends Controller {
 
 	    if ($v->fails())
 	    {	
-	        return redirect('perfil')->withErrors($v, 'post')->withInput(Input::all());
+	        return redirect('perfil')->withErrors($v, 'post')->withInput($request->all());
 	    }
 
 	    $searchTrends = explode(' ', $request->input('description'));

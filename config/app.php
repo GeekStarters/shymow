@@ -147,6 +147,7 @@ return [
 		'Collective\Html\HtmlServiceProvider',
 
 		Laravel\Socialite\SocialiteServiceProvider::class,
+		Intervention\Image\ImageServiceProvider::class
 
 	],
 
@@ -198,6 +199,7 @@ return [
 		'Form' => 'Collective\Html\FormFacade',
       	'Html' => 'Collective\Html\HtmlFacade',
       	'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+      	'Image' => Intervention\Image\Facades\Image::class,
 
 	],
 

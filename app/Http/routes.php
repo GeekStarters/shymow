@@ -35,7 +35,7 @@ Route::get('contacto','NavigationController@contacto');
 Route::get('politicas_privacidad','NavigationController@politicasPrivacidad');
 Route::get('politicas_cookie','NavigationController@politicasCookie');
 Route::get('contratacion_premium','NavigationController@contratacionPremium');
-
+Route::get('view_user/{name?}','NavigationController@viewUser');
 //Ruta para retorno de ciudad y estado por medio de ajax
 Route::get('state/{id}','NavigationController@state');
 Route::get('city/{id}','NavigationController@city');
@@ -190,5 +190,10 @@ Route::group(['middleware' => 'auth'], function()
 
     //Get All Chat Channel
     Route::get('/data_user','MessagesController@getUser');
+
+    //Edit profile img
+    Route::get('/edit_img_user','PerfilController@editImg');
+    Route::post('/uploadProfileImg','PerfilController@uploadProfileImg');
+    Route::post('/edit_data_profile','PerfilController@editDataProfile');
     
 });

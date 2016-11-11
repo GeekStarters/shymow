@@ -549,11 +549,11 @@ class ShymowShop extends Controller {
 			'celular.integer' => 'Introdusca un número valido',
 		];
 		$v = Validator::make($data, [
-			'nombre' => 'required|min:8',
-			'apellido' => 'required|min:8',
+			'nombre' => 'required|min:1',
+			'apellido' => 'required|min:1',
 			'email' => 'required|email',
 			'celular' => 'required|min:7|integer',
-			'faddress' => 'required|min:10',
+			'faddress' => 'required|min:5',
 			'cp' => 'required',
 			'code' => 'required',
 			'ciudad' => 'required',

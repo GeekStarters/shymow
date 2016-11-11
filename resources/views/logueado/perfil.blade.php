@@ -770,17 +770,16 @@
 		});
 
 		$("#uploadImg").change(function(){
-		    readURL(this);
+		    readURL(this,'#blah');
 		    $('#blah').fadeIn('slow');
 		});
-
-		function readURL(input) {
+		function readURL(input,id) {
 
 		    if (input.files && input.files[0]) {
 		        var reader = new FileReader();
 
 		        reader.onload = function (e) {
-		            $('#blah').attr('src', e.target.result);
+		            $(id).attr('src', e.target.result);
 		        }
 
 		        reader.readAsDataURL(input.files[0]);
@@ -792,6 +791,8 @@
 		    }
 		});
 		Hashtag.replaceTags('.hashtag-post','fb');
+
+	
 	});
 </script>
 @stop

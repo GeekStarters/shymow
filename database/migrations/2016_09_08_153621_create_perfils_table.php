@@ -37,6 +37,7 @@ class CreatePerfilsTable extends Migration {
 			$table->string('mi_frase')->default('¡Bienvenid@ a Shymow!');
 			$table->string('descripcion')->default('Edita tu descripción');
 			$table->boolean('active')->default(true);
+			$table->boolean('policies_and_conditions')->default(true);
 			$table->rememberToken();
 			$table->timestamps();
 		});

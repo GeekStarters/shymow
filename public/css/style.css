@@ -938,6 +938,18 @@ color:#fff;
 	font-size: 1.2em;
 	font-family: arial;
 }
+.editar-foto{
+	margin-top: 5px;
+	color: #A6A6A6;
+	padding: 3px 0px;
+	font-size: 1.2em;
+	border-bottom: 1px dashed #ddd;
+}
+.editar-foto:hover{
+	cursor: pointer;
+	background: #9A9A9A;
+	color: #FFFFFF;
+}
 .data-img-profile{
 	background: rgba(239,239,239,1);
 	background: -moz-linear-gradient(top, rgba(239,239,239,1) 0%, rgba(239,239,239,1) 21%, rgba(250,250,250,1) 54%, rgba(237,237,237,1) 100%);
@@ -1946,7 +1958,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4f6f5', end
 	margin-bottom: 0px;
 }
 
-
+.upload-image-postProfile{
+	display: none;
+	min-width:250px;
+}
 .upload-image-post{
 	display: none;
 	width: 90px;
@@ -2307,4 +2322,37 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4f6f5', end
 
 #sendMessageChat{
 	display: none;
+}
+
+
+
+/*EDITAR IMAGEN PERFIL*/
+.edit_img button, .edit_img a{
+	margin:20px;
+	display: none;
+}
+.edit_img img{
+	display: none;
+	width: 400px;
+	margin:20px;
+	border:2px solid #696666;
+}
+.edit_img h2{
+	border-bottom: 2px dashed #807F7F;
+	font-family: gothamTwo;
+}
+
+.edit_img span{
+	margin-top: 20px;
+	font-size: 6em;
+	cursor: pointer;
+}
+
+.color-edit:hover{
+	color: #D50000;
+}
+.color-edit{
+	color: #37B5AA;
+	cursor: pointer;
+	font-size: 18px !important;
 }

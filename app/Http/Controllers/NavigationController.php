@@ -4,7 +4,8 @@ use App\Http\Controllers\Controller;
 use App\Countrie;
 use App\State;
 use App\Citie;
-
+use App\Perfil;
+use App\Post;
 use Illuminate\Http\Request;
 use Validator;
 use Session;
@@ -37,7 +38,25 @@ class NavigationController extends Controller {
 	public function contacto(){
 		return view('nosotros');
 	}
+	public function viewUser($name = null){
+		if ($name != null) {
+			$users = Perfil::where('id',$name)
+								->where('active',true)->first();
+			if (count($users) > 0 && count($users) < 2) {
+				$posts = Post::where('profil_id',$users->id)
+								->where('active',true)->get();
 
+			// dd($posts);
+			$socialNet = ['facebook','twitter','linkedin','youtube','pinterest','instagram','snapchat','plus','vine','tumblr'];
+			$streamNet = ['twitch','bambuser','livestream'];
+			return view('logueado.ver_perfil',compact('users','posts','socialNet','streamNet'));
+			}else{
+
+			}
+		}else{
+			return view('logueado.agregar');
+		}
+	}
 	// Funciones con Query Scope laravel return data ajax
 	public function state($id){
 		$state = State::stateOfCountry($id)->get();

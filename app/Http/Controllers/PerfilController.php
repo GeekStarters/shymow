@@ -6,7 +6,8 @@ use Validator;
 use Illuminate\Http\Request;
 use Auth;
 use App\Perfil;
-
+use Image;
+use Input;
 class PerfilController extends Controller {
 
 	/**
@@ -56,11 +57,86 @@ class PerfilController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function editDataProfile(Request $request)
 	{
-		//
+		$v = Validator::make($request->all(), [
+	        'data' => 'required',
+	        'type' => 'required',
+	    ]);
+	    if ($v->fails())
+	    {
+	        return response()->json(['error' => true]);
+	    }
+
+	    $data = $request->input('data');
+	    $type = $request->input('type');
+	    
+	    try {
+	    	switch ($type) {
+	    		case 'frase':
+	    			Perfil::where('id',Auth::id())->update(['mi_frase'=>$data]);
+	    			return response()->json(['error' => false]);
+	    			break;
+	    		case 'descripcion':
+	    			Perfil::where('id',Auth::id())->update(['descripcion'=>$data]);
+	    			return response()->json(['error' => false]);
+	    			break;
+	    		case 'work':
+	    			Perfil::where('id',Auth::id())->update(['work'=>$data]);
+	    			return response()->json(['error' => false]);
+	    			break;
+	    		case 'phone':
+	    			Perfil::where('id',Auth::id())->update(['phone'=>$data]);
+	    			return response()->json(['error' => false]);
+	    			break;
+	    		default:
+	    			return response()->json(['error' => true]);
+	    			break;
+	    	}
+	    } catch (Exception $e) {
+	    	return response()->json(['error' => true]);
+	    }
 	}
 
+	public function editImg(){
+		return view('logueado.editar_img_perfil');
+	}
+	public function uploadProfileImg(Request $request){
+		$messages = [
+			"required" => "Seleccione una imagen y el campo que desea",
+			"image" => "Seleccione una imagen valida"
+		];
+		$v = Validator::make($request->all(), [
+	        'img' => 'required|image:jpeg,png',
+	        'x1' => 'required',
+	        'x2' => 'required',
+	        'y1' => 'required',
+	        'y2' => 'required',
+	        'width' => 'required',
+	        'height' => 'required',
+	    ],$messages);
+
+	    if ($v->fails())
+	    {
+	        return redirect()->back()->withErrors($v->errors());
+	    }
+
+	    $img = Input::file('img');
+	    $width = $request->input('width');
+	    $height = $request->input('height');
+	    $x1 = $request->input('x1');
+	    $y1 = $request->input('y1');
+	    $filename  = time() . '.' . $img->getClientOriginalExtension();
+	    $path = public_path('img/profile/' . $filename);
+
+		try {
+			Image::make( $img->getRealPath() )->resize(400,400)->crop($width, $height, $x1, $y1)->save($path);
+			Perfil::where('id',Auth::id())->update(['img_profile'=>'img/profile/' . $filename]);
+			return redirect('perfil');
+		} catch (Exception $e) {
+			
+		}
+	}
 	/**
 	 * Update the specified resource in storage.
 	 *

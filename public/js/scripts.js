@@ -5,7 +5,17 @@ $( document ).ready(function() {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-
+    function preview(img, selection) {
+        var scaleX = 100 / (selection.width || 1);
+        var scaleY = 100 / (selection.height || 1);
+      
+        $('#ferret + div > img').css({
+            width: Math.round(scaleX * 400) + 'px',
+            height: Math.round(scaleY * 300) + 'px',
+            marginLeft: '-' + Math.round(scaleX * selection.x1) + 'px',
+            marginTop: '-' + Math.round(scaleY * selection.y1) + 'px'
+        });
+    }
     $.get('/search_typeahead', function(data){
         var users = data.data;
 
@@ -25,7 +35,7 @@ $( document ).ready(function() {
                 'No se encontraron usuarios',
               '</div>'
             ].join('\n'),
-            suggestion: Handlebars.compile('<a href="/view_user/{{name}}"><div><img class="img-responsive" src="/{{img}}"><strong>{{name}}</strong></div></a>')
+            suggestion: Handlebars.compile('<a href="/view_user/{{id}}"><div><img class="img-responsive" src="/{{img}}"><strong>{{name}}</strong></div></a>')
           }
         });
     },'json');
@@ -767,13 +777,133 @@ $( document ).ready(function() {
 
 
 
-    // $('#container-message').on('submit', '#new_message_form', function(event) {
-    //     event.preventDefault();
-    //     /* Act on the event */
+    // EDITAR MI FRASE
+    $('#frase').click(function(event) {
+        /* Act on the event */
+        var text = $(this).parent('p').text();
+        var object = $(this).parent('p');
+        swal({
+          title: "Mi frase",
+          text: "Escribe una frase nueva:",
+          type: "input",
+          showCancelButton: true,
+          closeOnConfirm: false,
+          animation: "slide-from-top",
+          inputPlaceholder: text
+        },
+        function(inputValue){
+          if (inputValue === false) return false;
+          
+          if (inputValue === "") {
+            swal.showInputError("Necesitas escribir tu frase!");
+            return false
+          }
+          
+          $.ajax({
+              url: '/edit_data_profile',
+              type: 'POST',
+              dataType: 'JSON',
+              data: {type: 'frase',data:inputValue},
+              success:function(data){
+                if (!data.error) {
+                    swal("Bien!", "Tu nueva frace: " + inputValue);
+                    object.text(inputValue);
+                }else{
+                    swal("Error!", "Vuelve a intentarlo");
+                }
+              }
+          })
+          .fail(function() {
+              console.log("error");
+          });
+          
+        });
+    });
 
-    //     var from = $('#new_message_messages').val();
-    //     var id = $('#from_id').val();
-    //     var new_message = $('#new_message').val();
-    //     console.log(new_message,id,from);
-    // });
+    //Editar descripcion
+    $('#descripcion_profile').click(function(event) {
+        /* Act on the event */
+        var text = $(this).parent('p').text();
+        var object = $(this).parent('p');
+        swal({
+          title: "Mi breve descripción",
+          text: "Escribe una descripción nueva:",
+          type: "input",
+          showCancelButton: true,
+          closeOnConfirm: false,
+          animation: "slide-from-top",
+          inputPlaceholder: text,
+        },
+        function(inputValue){
+          if (inputValue === false) return false;
+          
+          if (inputValue === "") {
+            swal.showInputError("Necesitas una descripción!");
+            return false
+          }
+          
+          $.ajax({
+              url: '/edit_data_profile',
+              type: 'POST',
+              dataType: 'JSON',
+              data: {type: 'descripcion',data:inputValue},
+              success:function(data){
+                if (!data.error) {
+                    swal("Bien!", "Tu nueva frace: " + inputValue);
+                    object.text(inputValue);
+                }else{
+                    swal("Error!", "Vuelve a intentarlo");
+                }
+              }
+          })
+          .fail(function() {
+              console.log("error");
+          });
+          
+        });
+    });
+
+    // Editar trabajo
+    $('#work').click(function(event) {
+        /* Act on the event */
+        var text = $(this).parent('p').text();
+        var object = $(this).siblings('.val');
+        swal({
+          title: "Mi profesión",
+          text: "Escribe una profesión:",
+          type: "input",
+          showCancelButton: true,
+          closeOnConfirm: false,
+          animation: "slide-from-top",
+          inputPlaceholder: text
+        },
+        function(inputValue){
+          if (inputValue === false) return false;
+          
+          if (inputValue === "") {
+            swal.showInputError("Necesitas escribir una profesión!");
+            return false
+          }
+          
+          $.ajax({
+              url: '/edit_data_profile',
+              type: 'POST',
+              dataType: 'JSON',
+              data: {type: 'work',data:inputValue},
+              success:function(data){
+                if (!data.error) {
+                    swal("Bien!", "Tu nueva frace: " + inputValue);
+                    object.text(inputValue);
+                }else{
+                    swal("Error!", "Vuelve a intentarlo");
+                }
+              }
+          })
+          .fail(function() {
+              console.log("error");
+          });
+          
+        });
+    });
+
 });
