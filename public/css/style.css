@@ -2356,3 +2356,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4f6f5', end
 	cursor: pointer;
 	font-size: 18px !important;
 }
+
+/*Categoria favoritos title*/
+.text-favorite{
+	font-family: gothamTwo;
+	color: #999999 !important;
+	font-size: 1.3em;
+	width: 100%;
+}
+.text-favorite span{
+	float: right;
+}

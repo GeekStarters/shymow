@@ -3,9 +3,9 @@
 
 @section('content-logueo')
 <div class="col-sm-offset-4 col-sm-8 friends">
-	@if(count($friends) > 0)
+	@if(count($user_contents) > 0)
 
-		@foreach ($friends as $friend)
+		@foreach ($user_contents as $friend)
 			<div class="col-sm-4">
 				<div class="content-friends">
 					<div class="sub-content-friends">
@@ -13,7 +13,7 @@
 							<img src="{{ $friend->img_profile }}" alt="shymow">
 						</div>
 						<div class="friend-social">
-							<a href="#"><img src="img/profile/face-post.png" alt="shymow"></a>
+							<a href="#"><img src="img/profile/facebook-post.png" alt="shymow"></a>
 							<a href="#"><img src="img/profile/twitter-post.png" alt="shymow"></a>
 							<a href="#"><img src="img/profile/linkedin-post.png" alt="shymow"></a>
 							<a href="#"><img src="img/profile/pinterest.png" alt="shymow"></a>

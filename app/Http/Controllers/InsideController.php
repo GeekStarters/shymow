@@ -8,6 +8,7 @@ use App\Images_post;
 use App\Category_post;
 use App\Trend;
 use App\Like_post;
+use App\Friend;
 use App\Perfil;
 use Auth;
 use Illuminate\Http\Request;
@@ -27,12 +28,94 @@ class InsideController extends Controller {
 
 	public function amigos()
 	{
+		//ID this user
 		$id = Auth::user()->id;
-		$friends = DB::select('SELECT * FROM perfils INNER JOIN friends on friends.user2 = perfils.id where user1 = '.$id.' AND friend = true UNION SELECT * FROM perfils INNER JOIN friends on friends.user1 = perfils.id where user2 = '.$id.' AND friend = true');
-		
-		return view('logueado.amigos')->withFriends($friends);
-	}
+		//Stack users
+		$user_contents = [];
+		//ID all my friends
+		$friends = Friend::where('user1',$id)
+							->orWhere('user2',$id)
+							->where('status',1)
+							->get();
+		//If i had more than one friends
+		if (count($friends) > 0) {
+			// I get each users
+			foreach ($friends as $friend) {
+				//declare a variable ID user
+				$user_id = "";
 
+				//If this user is equal to ID
+				if ($friend->user1 == $id)
+					//Add value to user_id of another user
+					$user_id = $friend->user2;
+				else
+					//If not add value user_id this user
+					$user_id = $friend->user1;
+
+				//let's search a user active
+				$user = Perfil::where('id',$user_id)
+								->where('active',true)
+								->first();
+				//If return user is more than one and less than two
+				if (count($user)>0 && count($user) < 2) {
+					array_push($user_contents, $user);
+				}
+			}
+		}
+		return view('logueado.amigos',compact('user_contents'));
+	}
+	public function favorites(){
+		//ID this user
+		$id = Auth::user()->id;
+		//ID all my friends
+		$post = "";
+		$post_content = [];
+		$friends = Friend::where('user1',$id)
+							->orWhere('user2',$id)
+							->where('status',1)
+							->get();
+		//If i had more than one friends
+		if (count($friends) > 0) {
+			// I get each users
+			foreach ($friends as $friend) {
+				//declare a variable ID user
+				$user_id = "";
+
+				//If this user is equal to ID
+				if ($friend->user1 == $id)
+					//Add value to user_id of another user
+					$user_id = $friend->user2;
+				else
+					//If not add value user_id this user
+					$user_id = $friend->user1;
+
+				//Let's all post of each user
+				$posts = DB::select('SELECT posts.posts,posts.category_post_id, posts.id as id_post, images_posts.post_id as image_post_id,images_posts.path, images_posts.active, posts.description, posts.qualification, posts.like, posts.share, posts.active, posts.profil_id, perfils.name AS user, perfils.img_profile , like_posts.post_id, like_posts.profil_id as userLike, like_posts.like as likeLike, like_posts.active as likeActive FROM posts LEFT JOIN images_posts on images_posts.post_id = posts.id INNER JOIN perfils ON posts.profil_id = perfils.id LEFT JOIN like_posts ON posts.id = like_posts.post_id and like_posts.profil_id = "'.$user_id.'" and (like_posts.active = true and like_posts.like = true) WHERE posts.active = true AND perfils.id = "'.$user_id.'" GROUP BY posts.id ORDER BY posts.created_at ASC LIMIT 10');
+
+				//If return user is more than one and less than two
+				if (count($posts)>0) {
+					foreach ($posts as $post) {
+						array_push($post_content, $post);
+					}
+				}
+			}
+
+
+			//add Post this user
+			$posts = DB::select('SELECT posts.posts,posts.category_post_id, posts.id as id_post, images_posts.post_id as image_post_id,images_posts.path, images_posts.active, posts.description, posts.qualification, posts.like, posts.share, posts.active, posts.profil_id, perfils.name AS user, perfils.img_profile , like_posts.post_id, like_posts.profil_id as userLike, like_posts.like as likeLike, like_posts.active as likeActive FROM posts LEFT JOIN images_posts on images_posts.post_id = posts.id INNER JOIN perfils ON posts.profil_id = perfils.id LEFT JOIN like_posts ON posts.id = like_posts.post_id and like_posts.profil_id = "'.Auth::id().'" and (like_posts.active = true and like_posts.like = true) WHERE posts.active = true AND perfils.id = "'.Auth::id().'" GROUP BY posts.id ORDER BY posts.created_at ASC LIMIT 10');
+
+			//If return user is more than one and less than two
+			if (count($posts)>0) {
+				foreach ($posts as $post) {
+					array_push($post_content, $post);
+				}
+			}
+		}
+		// dd($post_content);
+		//Post category
+		$categories = Category_post::where('active',true)->get();
+		return view('logueado.favoritos',compact('categories','post_content'));
+	}
 	public function perfil(){
 		$category = Category_post::lists('name','id');
 		$id = Auth::user()->id;
@@ -58,7 +141,7 @@ class InsideController extends Controller {
 	}
 
 	public function tendencias(){
-		$trends = DB::select('SELECT post_trends.trend_id,posts.posts, posts.id as id_post, images_posts.post_id,images_posts.path, images_posts.active, posts.description, posts.qualification, posts.like, posts.share, posts.active, posts.profil_id, perfils.name AS user, perfils.img_profile , like_posts.post_id, like_posts.profil_id, like_posts.like as likeLike, like_posts.active as likeActive FROM posts INNER JOIN post_trends on posts.id = post_trends.post_id LEFT JOIN images_posts on images_posts.post_id = posts.id INNER JOIN perfils ON posts.profil_id = perfils.id LEFT JOIN like_posts ON posts.id = like_posts.post_id and like_posts.profil_id = '.Auth::user()->id.' and (like_posts.active = true and like_posts.like = true) WHERE posts.active = true GROUP BY post_trends.post_id ORDER BY posts.id DESC LIMIT 10');
+		$trends = DB::select('SELECT post_trends.trend_id,posts.posts, posts.id as id_post, images_posts.post_id,images_posts.path, images_posts.active, posts.description, posts.qualification, posts.like, posts.share, posts.active, posts.profil_id, perfils.name AS user, perfils.img_profile , like_posts.post_id, like_posts.profil_id as userLike, like_posts.like as likeLike, like_posts.active as likeActive FROM posts INNER JOIN post_trends on posts.id = post_trends.post_id LEFT JOIN images_posts on images_posts.post_id = posts.id INNER JOIN perfils ON posts.profil_id = perfils.id LEFT JOIN like_posts ON posts.id = like_posts.post_id and like_posts.profil_id = '.Auth::user()->id.' and (like_posts.active = true and like_posts.like = true) WHERE posts.active = true GROUP BY post_trends.post_id ORDER BY posts.id DESC LIMIT 10');
 
 		$topTrends = DB::select('SELECT `post_trends`.`trend_id`, count(`post_trends`.`trend_id`) AS `TOTAL`,`trends`.`name` FROM `post_trends` LEFT JOIN `trends` ON `trends`.`id` = `post_trends`.`trend_id` GROUP BY `trend_id` ORDER BY `TOTAL` DESC LIMIT 0 , 10 ');
 		// dd($trends);

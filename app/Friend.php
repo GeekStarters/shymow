@@ -22,7 +22,7 @@ class Friend extends Model implements AuthenticatableContract {
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['user1','user2','active','friend'];
+	protected $fillable = ['user1','user2','active','status'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.

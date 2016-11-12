@@ -71,10 +71,7 @@ Route::post('login','AuthenticationController@index');
 
 Route::group(['middleware' => 'auth'], function()
 {
-    Route::get('favoritos',function()
-    {
-    	return view('logueado.favoritos');
-    });
+    Route::get('favoritos','InsideController@favorites');
     Route::get('tendencias','InsideController@tendencias');
 
     Route::get('envio-producto',function(){

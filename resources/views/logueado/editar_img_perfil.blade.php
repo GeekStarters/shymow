@@ -78,7 +78,7 @@
 		var selection = $('#viewImgProfile').imgAreaSelect({
 		    handles: true,
 		    instance: true,
-		    aspectRatio: '4:3',
+		    aspectRatio: '4:4',
 		    onSelectEnd: function (img, selection) {
 	            $('input[name="x1"]').val(selection.x1);
 	            $('input[name="y1"]').val(selection.y1);

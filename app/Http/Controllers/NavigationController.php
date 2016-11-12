@@ -36,7 +36,7 @@ class NavigationController extends Controller {
 		return view('faq');
 	}
 	public function contacto(){
-		return view('nosotros');
+		return view('contacto');
 	}
 	public function viewUser($name = null){
 		if ($name != null) {

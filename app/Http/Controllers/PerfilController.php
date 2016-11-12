@@ -130,7 +130,7 @@ class PerfilController extends Controller {
 	    $path = public_path('img/profile/' . $filename);
 
 		try {
-			Image::make( $img->getRealPath() )->resize(400,400)->crop($width, $height, $x1, $y1)->save($path);
+			Image::make( $img->getRealPath() )->resize(400,400)->crop($width, $height, $x1, $y1)->resize(400,400)->save($path);
 			Perfil::where('id',Auth::id())->update(['img_profile'=>'img/profile/' . $filename]);
 			return redirect('perfil');
 		} catch (Exception $e) {
