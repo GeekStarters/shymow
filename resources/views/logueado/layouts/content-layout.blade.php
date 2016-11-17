@@ -35,7 +35,7 @@
 
 			</ul>
 		</nav>
-		<div class="container" style="margin-bottom: 60px">
+		<div class="container" style="margin-bottom: 80px">
 			<div class="profiles-data-users">
 				<div class="profile-header col-sm-12">
 					<div class="header-port">

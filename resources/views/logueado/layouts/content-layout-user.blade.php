@@ -8,20 +8,22 @@
 				<a href="{{url('/')}}">
 					<img src="{{url('img/logo.png')}}" alt="shymow" style="max-width:200px; margin-right:20px; margin-left:20px;">
 				</a>
-			  <li class="dropdown">
-  					<a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="{{ url(Auth::user()->img_profile) }}" alt=""> {{Auth::user()->name}} <b class="caret"></b></a>
-  					<ul class="dropdown-menu">
-  						<li class="dropdown-submenu">
-					        <a class="test" tabindex="-1" href="#">Configuración <span class="caret"></span></a>
-					        <ul class="dropdown-menu">
-					          <li><a tabindex="-1" href="#">2nd level dropdown</a></li>
-					          <li><a tabindex="-1" href="{{url('identificate')}}">Shymow Shop</a></li>
-					        </ul>
-					      </li>
-					     <li><a href="{{ url('agregar-producto') }}">Shymow Shop</a></li>
-  						<li><a href="{{ url('logout') }}">Cerrar sesión</a></li>
-  					</ul>
-  				</li>
+				@if(Auth::check())
+				 	<li class="dropdown">
+	  					<a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="{{ url(Auth::user()->img_profile) }}" alt=""> {{Auth::user()->name}} <b class="caret"></b></a>
+	  					<ul class="dropdown-menu">
+	  						<li class="dropdown-submenu">
+						        <a class="test" tabindex="-1" href="#">Configuración <span class="caret"></span></a>
+						        <ul class="dropdown-menu">
+						          <li><a tabindex="-1" href="#">2nd level dropdown</a></li>
+						          <li><a tabindex="-1" href="{{url('identificate')}}">Shymow Shop</a></li>
+						        </ul>
+						      </li>
+						     <li><a href="{{ url('agregar-producto') }}">Shymow Shop</a></li>
+	  						<li><a href="{{ url('logout') }}">Cerrar sesión</a></li>
+	  					</ul>
+	  				</li>
+	  			@endif
 			</ul>
 			<ul class="nav navbar-nav navbar-left" style="margin-right:20px !important; margin-left:20px !important;">
 				 <!-- Buscador superior -->
@@ -34,12 +36,14 @@
 
 			</ul>
 		</nav>
-		<div class="container" style="margin-bottom: 60px">
+		<div class="container" style="margin-bottom: 80px">
 			<div class="profiles-data-users">
 				<div class="profile-header col-sm-12">
 					<div class="header-port">
 						<img src="{{ url($users->img_portada) }}" alt="shymow">
-						<a href="{{url('shymow-shop')}}" class="cart-shop"><i class="glyphicon glyphicon-shopping-cart"></i></a>
+						@if(Auth::check())
+							<a href="{{url('shymow-shop')}}" class="cart-shop"><i class="glyphicon glyphicon-shopping-cart"></i></a>
+						@endif
 					</div>
 					<div class="header-nav">
 						<nav class="navbar navbar-default" role="navigation">
@@ -55,14 +59,16 @@
 								</div>
 						
 								<!-- Collect the nav links, forms, and other content for toggling -->
-								<div class="collapse navbar-collapse navbar-ex1-collapse">
-									<ul class="nav navbar-nav navbar-right">
-										<li><a href="{{ url('perfil') }}">SOBRE MI</a></li>
-										<li><a href="{{ url('favoritos') }}">FAVORITOS</a></li>
-										<li><a href="{{ url('amigos') }}">MIS AMIGOS</a></li>
-										<li><a href="{{ url('tendencias') }}">TENDENCIAS</a></li>
-									</ul>
-								</div><!-- /.navbar-collapse -->
+								@if(Auth::check())
+									<div class="collapse navbar-collapse navbar-ex1-collapse">
+										<ul class="nav navbar-nav navbar-right">
+											<li><a href="{{ url('perfil') }}">SOBRE MI</a></li>
+											<li><a href="{{ url('favoritos') }}">FAVORITOS</a></li>
+											<li><a href="{{ url('amigos') }}">MIS AMIGOS</a></li>
+											<li><a href="{{ url('tendencias') }}">TENDENCIAS</a></li>
+										</ul>
+									</div><!-- /.navbar-collapse -->
+								@endif
 							</div>
 						</nav>
 					</div>

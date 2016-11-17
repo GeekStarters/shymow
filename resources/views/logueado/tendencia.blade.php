@@ -29,15 +29,23 @@
 						<div class="post-header">
 
 							<div class="post-follow">
-								<a href="">
+								<a 
+									@if($trend->follow)
+										class="follow-post-active"
+									@else
+										class="follow-post-desactive"
+									@endif 
+
+
+									data-follow="{{$trend->id_post}}">
 									<i class="glyphicon glyphicon-user"></i>
 									<i class="glyphicon glyphicon-plus"></i>
 								</a>
 							</div>
 
 							<div class="post-user">
-								<div class="post-icono"><a href=""><img src="{{url($trend->img_profile) }}" alt="shymow"></a></div>
-								<div class="post-user"><a href="">{{$trend->user }}</a></div>
+								<div class="post-icono"><a href="{{url('view_user/'.$trend->profil_id)}}"><img src="{{url($trend->img_profile) }}" alt="shymow"></a></div>
+								<div class="post-user"><a href="{{url('view_user/'.$trend->profil_id)}}">{{$trend->user }}</a></div>
 								<div class="post-twitt"><span>@Robe_extremo</span></div>
 							</div>
 						</div>
@@ -55,32 +63,37 @@
 						</div>
 						<div class="post-footer block-center text-center">
 							<div class="post-data-footer-face ">
-								<span class="post-qualification">
-									<div class="qualification-popular border-right-post-tendencias">
-										<span class="glyphicon glyphicon-star"></span>
-										<span class="glyphicon glyphicon-star"></span>
-										<span class="glyphicon glyphicon-star"></span>
-										<span class="glyphicon glyphicon-star"></span>
-										<span class="glyphicon glyphicon-star"></span>
-									</div>
-								</span>
 								<span class="post-qualification  border-right-post-tendencias">
-										@if((int)$trend->qualification < 5)
-												@for ($i = 1; $i <= (int)$trend->qualification; $i++)
-													<a data-star="{{$i}}" class="glyphicon glyphicon-star qualification-popular" data-post="{{$trend->id_post}}"></a>
-												@endfor
-												@for ($i = 1; $i <= 5-(int)$trend->qualification; $i++)
-													<a data-star="{{(int)$trend->qualification+$i}}" class="glyphicon glyphicon-star qualification-no-popular" data-post="{{$trend->id_post}}"></a>
-												@endfor
-										@else
-												@for ($i = 1; $i <= (int)$trend->qualification; $i++)
-													<a data-star="{{$i}}" class="glyphicon glyphicon-star qualification-popular" data-post="{{$trend->id_post}}"></a>
-												@endfor
-										@endif
-										
-										
+									@if((int)$trend->qualification < 5)
+											@for ($i = 1; $i <= (int)$trend->qualification; $i++)
+												<a data-star="{{$i}}" class="glyphicon glyphicon-star qualification-popular" data-post="{{$trend->id_post}}"></a>
+											@endfor
+											@for ($i = 1; $i <= 5-(int)$trend->qualification; $i++)
+												<a data-star="{{(int)$trend->qualification+$i}}" class="glyphicon glyphicon-star qualification-no-popular" data-post="{{$trend->id_post}}"></a>
+											@endfor
+									@else
+											@for ($i = 1; $i <= (int)$trend->qualification; $i++)
+												<a data-star="{{$i}}" class="glyphicon glyphicon-star qualification-popular" data-post="{{$trend->id_post}}"></a>
+											@endfor
+									@endif
+									
+									
+								</span>
+								<div class="dropup">
+									<span class="post-share border-right-post-tendencias">
+										  <span class="dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										    
+											<span class="number-post">{{$trend->share}}</span> <i class="fa fa-share-alt" aria-hidden="true"></i>
+										  </span>
+										  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+										    <li><a href="#">Facebook</a></li>
+										    <li><a href="#">Twitter</a></li>
+										    <li role="separator" class="divider"></li>
+										    <li><a data-post_id="{{$trend->id_post}}" data-user_id="{{$trend->id_user}}" class="share_post_shymow" data-toggle="modal" data-target="#myModal">Compartir</a></li>
+										  </ul>
 									</span>
-								@if($trend->profil_id == Auth::user()->id)
+								</div>
+								@if($trend->userLike == Auth::user()->id)
 									<span class="like-me post-like-me-active border-right-post-tendencias" data-like="{{$trend->id_post}}">
 										<span class="number-post">{{$trend->like}}</span> <span class="glyphicon glyphicon-heart"></span>
 									</span> 
@@ -89,6 +102,7 @@
 										<span class="number-post">{{$trend->like}}</span> <span class="glyphicon glyphicon-heart"></span>
 									</span> 
 								@endif
+
 								<span class="post-comment border-right-post-tendencias box-comment" data-trend="{{$trend->id_post}}">
 									<span class="number-post post_change">{{$trend->posts}}</span> <span class="glyphicon glyphicon-comment"></span>
 								</span>

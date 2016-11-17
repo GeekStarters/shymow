@@ -192,5 +192,10 @@ Route::group(['middleware' => 'auth'], function()
     Route::get('/edit_img_user','PerfilController@editImg');
     Route::post('/uploadProfileImg','PerfilController@uploadProfileImg');
     Route::post('/edit_data_profile','PerfilController@editDataProfile');
-    
+
+
+    //Friends
+    Route::get('/all_users','FriendsController@index');
+    //Add Friends
+    Route::get('/add_friends/{id?}','FriendsController@create');
 });

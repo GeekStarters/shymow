@@ -15,15 +15,23 @@
 						<div class="post-header">
 
 							<div class="post-follow">
-								<a href="">
+								<a 
+									@if($trend->follow)
+										class="follow-post-active"
+									@else
+										class="follow-post-desactive"
+									@endif 
+
+
+									data-follow="{{$trend->id_post}}">
 									<i class="glyphicon glyphicon-user"></i>
 									<i class="glyphicon glyphicon-plus"></i>
 								</a>
 							</div>
 
 							<div class="post-user">
-								<div class="post-icono"><a href=""><img src="{{url($trend->img_profile) }}" alt="shymow"></a></div>
-								<div class="post-user"><a href="">{{$trend->user }}</a></div>
+								<div class="post-icono"><a href="{{url('view_user/'.$trend->profil_id)}}"><img src="{{url($trend->img_profile) }}" alt="shymow"></a></div>
+								<div class="post-user"><a href="{{url('view_user/'.$trend->profil_id)}}">{{$trend->user }}</a></div>
 								<div class="post-twitt"><span>@Robe_extremo</span></div>
 							</div>
 						</div>
@@ -57,9 +65,20 @@
 									
 									
 								</span>
-								<span class="post-share border-right-post-tendencias">
-									<span class="number-post">{{$trend->share}}</span> <i class="fa fa-share-alt" aria-hidden="true"></i>
-								</span>
+								<div class="dropup">
+									<span class="post-share border-right-post-tendencias">
+										  <span class="dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										    
+											<span class="number-post">{{$trend->share}}</span> <i class="fa fa-share-alt" aria-hidden="true"></i>
+										  </span>
+										  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+										    <li><a href="#">Facebook</a></li>
+										    <li><a href="#">Twitter</a></li>
+										    <li role="separator" class="divider"></li>
+										    <li><a data-post_id="{{$trend->id_post}}" data-user_id="{{$trend->id_user}}" class="share_post_shymow" data-toggle="modal" data-target="#myModal">Compartir</a></li>
+										  </ul>
+									</span>
+								</div>
 								@if($trend->userLike == Auth::user()->id)
 									<span class="like-me post-like-me-active border-right-post-tendencias" data-like="{{$trend->id_post}}">
 										<span class="number-post">{{$trend->like}}</span> <span class="glyphicon glyphicon-heart"></span>
@@ -124,6 +143,27 @@
 			<h2 class="text-center">No se encontraron tendencias</h2>
 		</div>
 	@endif
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title" id="myModalLabel">Compartir</h4>
+			      </div>
+			      {!! Form::open(['url' => 'create_share_post','method' => 'post','files' => false]) !!}
+
+			      	<div class="col-md-12" id="modal_container">
+			      		
+			      	</div>
+				    <div class="clearfix"></div>
+
+				    
+				{!! Form::close() !!}
+			    </div>
+			  </div>
+			</div>
+		</div>
 </div>
 @stop
 @extends('logueado.layouts.content-float-chat')

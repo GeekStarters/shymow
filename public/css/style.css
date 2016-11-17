@@ -2367,3 +2367,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4f6f5', end
 .text-favorite span{
 	float: right;
 }
+
+/*BOTONES*/
+.btn-default-s{
+	background: #37B5AA;color: #fff
+}
+.btn-default-s:hover{
+	background: #fff; color:#37B5AA;border:1px solid #37B5AA;
+}

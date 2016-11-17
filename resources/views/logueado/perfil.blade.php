@@ -69,8 +69,8 @@
 									</div>
 
 									<div class="post-user">
-										<div class="post-icono"><a href=""><img src="{{Auth::user()->img_profile }}" alt="shymow"></a></div>
-										<div class="post-user"><a href="">{{Auth::user()->name }}</a></div>
+										<div class="post-icono"><a href="{{url('view_user/'.$post->id_user)}}"><img src="{{Auth::user()->img_profile }}" alt="shymow"></a></div>
+										<div class="post-user"><a href="{{url('view_user/'.$post->id_user)}}">{{Auth::user()->name }}</a></div>
 										<div class="post-twitt"><span>@Robe_extremo</span></div>
 									</div>
 								</div>
@@ -180,8 +180,8 @@
 									</div>
 
 									<div class="post-user">
-										<div class="post-icono"><a href=""><img src="{{url('img/profile/default.png')}}" alt="shymow"></a></div>
-										<div class="post-user"><a href="">{{Auth::user()->name}}</a></div>
+										<div class="post-icono"><a href="{{url('view_user/'.$post->id_user)}}"><img src="{{Auth::user()->img_profile }}" alt="shymow"></a></div>
+										<div class="post-user"><a href="{{url('view_user/'.$post->id_user)}}">{{Auth::user()->name}}</a></div>
 										<div class="post-twitt"><span></span></div>
 									</div>
 								</div>
@@ -196,8 +196,8 @@
 											<div class="post-body tendencias-post">
 												<div class="post-header">
 													<div class="post-user">
-														<div class="post-icono"><a href=""><img src="{{url($post->imagen_perfil_creator)}}" alt="shymow"></a></div>
-														<div class="post-user"><a href="">{{$post->name}}</a></div>
+														<div class="post-icono"><a href="{{url('view_user/'.$post->old_post_id)}}"><img src="{{url($post->imagen_perfil_creator)}}" alt="shymow"></a></div>
+														<div class="post-user"><a href="{{url('view_user/'.$post->old_post_id)}}">{{$post->name}}</a></div>
 														<div class="post-twitt"><span></span></div>
 													</div>
 												</div>
@@ -205,6 +205,9 @@
 												<div class="clearfix"></div>
 												<div class="post-description hashtag-post">
 													{{$post->description_old_post}}
+													@if(isset($post->img_share_active) && $post->img_share_active)
+														<img src="{{url($post->path_share)}}" class="img-responsive" alt="Shymow"></img>
+													@endif
 												</div>
 												<div class="post-media">
 
