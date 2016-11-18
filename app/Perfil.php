@@ -35,4 +35,107 @@ class Perfil extends Model implements AuthenticatableContract {
 	    return 'remember_token';
 	}
 
+	public function social() {
+		return $this->hasOne('App\Social');
+	}
+
+	public function scopeUser($query, $name)
+    {
+    	if (trim($name) != "") {
+    		$query->select('*')->where('name', 'LIKE', '%'.$name.'%');
+    	}
+    }
+
+    public function scopeType($query, $type)
+    {
+    	if (trim($type) != "") {
+    		if ($type != "all") {
+    			$query->select('*')->where('role',$type);
+    		}else{
+    			$query->select('*');
+    		}
+    	}
+    }
+    public function scopeGenero($query, $genero)
+    {
+    	if (trim($genero) != "") {
+    		if ($genero != "all") {
+    			$query->select('*')->where('genero',$genero);
+    		}else{
+    			$query->select('*');
+    		}
+    	}
+    }
+    public function scopeEdad($query, $edad)
+    {
+        if (trim($edad) != "") {
+            if ($edad != "all") {
+                $query->select('*')->where('edad',$edad);
+            }else{
+                $query->select('*');
+            }
+        }
+    }
+    public function scopePais($query, $pais)
+    {
+        if (trim($pais) != "") {
+            if ($pais != "all") {
+                $query->select('*')->where('pais',$pais);
+            }else{
+                $query->select('*');
+            }
+        }
+    }
+    public function scopeProvincia($query, $provincia)
+    {
+        if (trim($provincia) != "") {
+            if ($provincia != "all") {
+                $query->select('*')->where('provincia',$provincia);
+            }else{
+                $query->select('*');
+            }
+        }
+    }
+    public function scopeMunicipio($query, $municipio)
+    {
+        if (trim($municipio) != "") {
+            if ($municipio != "all") {
+                $query->select('*')->where('municipio',$municipio);
+            }else{
+                $query->select('*');
+            }
+        }
+    }
+
+    public function scopeHobbie($query, $hobbie)
+    {
+        if (trim($hobbie) != "") {
+            if ($hobbie != "all") {
+            	$query->select('*')->where('hobbies', 'LIKE', '%'.$hobbie.'%');
+            }else{
+	            $query->select('*');
+	        }
+        }
+    }
+    public function scopeRedes($query, $social)
+    {
+        if (trim($social) != "") {
+            if ($social != "all") {
+            	$query->select('*')->where('redes', 'LIKE', '%'.$social.'%');
+            }else{
+	            $query->select('*');
+	        }
+        }
+    }
+    public function scopeStream($query, $stream)
+    {
+        if (trim($stream) != "") {
+            if ($stream != "all") {
+            	$query->select('*')->where('streamings', 'LIKE', '%'.$stream.'%');
+            }else{
+	            $query->select('*');
+	        }
+        }
+    }
+
 }

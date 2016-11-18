@@ -211,7 +211,7 @@
                           <img src="img/celebridades.png" data-interest="7" alt="celebridades" class="img-responsive">
                         <!-- </div> -->
                       </div>
-                      {!! Form::hidden('interest','',['id' => 'interest']) !!}
+                      {!! Form::hidden('interest','all',['id' => 'interest']) !!}
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group center-block">
@@ -251,7 +251,7 @@
                           <img src="img/snap.png" data-redes="snapchat"   alt="snapchat" class="img-responsive">
                         <!-- </div> -->
 
-                        {!! Form::hidden('redes','',['id' => 'redes']) !!}
+                        {!! Form::hidden('redes','all',['id' => 'redes']) !!}
                       </div>
                     </div>
                     <div class="clearfix"></div>
@@ -265,12 +265,12 @@
                           <img src="img/twich.png" alt="twitch" data-stream="twitch" class="img-responsive">
                         <!-- </div> -->
                         <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
-                          <img src="img/bambuser.png" alt="bambuser" data-stream="bambuser" class="img-responsive">
+                          <img src="img/bambuser.png" alt="bambuser" data-stream="livestream" class="img-responsive">
                         <!-- </div> -->
                         <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
-                          <img src="img/lives.png" alt="lives" data-stream="lives" class="img-responsive">
+                          <img src="img/lives.png" alt="lives" data-stream="bambuser" class="img-responsive">
                         <!-- </div> -->
-                        {!! Form::hidden('stream','',['id' => 'stream']) !!}
+                        {!! Form::hidden('stream','all',['id' => 'stream']) !!}
                       </div>
                       <div class="col-md-12 center-block center-text">
                         <br>
@@ -288,56 +288,66 @@
               <a name="search"></a>
               <h2>Resultados de la búsqueda</h2>
             </div>
-            @foreach($users as $user)
-              <div class="container-busquedas">
-                <div class="sub-content-busqueda">
+            @if(count($users) > 0)
+              @foreach($users as $user)
+                <div class="container-busquedas">
+                  <div class="sub-content-busqueda">
 
-                  <div class="img-busqueda col-sm-3" style="padding:0px !important;"><img src="{{$user->img_profile}}" alt="shymow"></div>
+                    <div class="img-busqueda col-sm-3" style="padding:0px !important;"><img src="{{$user->img_profile}}" alt="shymow"></div>
 
-                  <div class="busquedas-content col-sm-6" style="padding:0px !important;">
-                    <div class="content-busqueda-header">
-                      <span class="first-title">{{$user->username}}</span>
-                       <span class="sub-title">{{$user->mi_frase}}</span>
-                    </div>
-                    <p>{{$user->descripcion}}</p>
-                  </div>
-
-                  <div class="busquedas-settings" style="padding:0px !important;">
-                    <ul>
-                      <li class="busquedas-qualification">
-                        <div class="qualification-header">
-                          Calificación
-                        </div>
-                        <div class="qualification">
-                          <span class="glyphicon glyphicon-star"></span>
-                          <span class="glyphicon glyphicon-star"></span>
-                          <span class="glyphicon glyphicon-star"></span>
-                          <span class="glyphicon glyphicon-star"></span>
-                          <span class="glyphicon glyphicon-star"></span>
-                        </div>
-                      </li>
-                      <div class="busquedas-sub-options">
-                        <li class="busquedas-share">
-                          <i class="fa fa-share-alt" aria-hidden="true"></i>
-                        </li>
-                        <li class="busquedas-like-me">
-                          <span class="glyphicon glyphicon-heart"></span>
-                        </li>
+                    <div class="busquedas-content col-sm-6" style="padding:0px !important;">
+                      <div class="content-busqueda-header">
+                        <span class="first-title">{{$user->name}}</span>
+                         <span class="sub-title">{{$user->pais}}</span>
                       </div>
-                    </ul>
-                    <div class="busquedas-social">
-                      <a href="#"><img src="img/profile/face-post.png" alt="shymow"></a>
-                      <a href="#"><img src="img/profile/twitter-post.png" alt="shymow"></a>
-                      <a href="#"><img src="img/profile/linkedin-post.png" alt="shymow"></a>
-                      <a href="#"><img src="img/profile/pinterest-post.png" alt="shymow"></a>
-                      <a href="" class="show-more">VER +</a>
+                      <p>{{$user->descripcion}}</p>
                     </div>
+
+                    <div class="busquedas-settings" style="padding:0px !important;">
+                      <ul>
+                        <li class="busquedas-qualification">
+                          <div class="qualification-header">
+                            Calificación
+                          </div>
+                          <div class="qualification">
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                          </div>
+                        </li>
+                        <div class="busquedas-sub-options">
+                          <li class="busquedas-share">
+                            <i class="fa fa-share-alt" aria-hidden="true"></i>
+                          </li>
+                          <li class="busquedas-like-me">
+                            <span class="glyphicon glyphicon-heart"></span>
+                          </li>
+                        </div>
+                      </ul>
+                      <div class="busquedas-social">
+                      @if(isset($user->redes))
+                        @for($i=0; $i<count($socialNet);$i++)
+                          @if(isset(json_decode($user->redes,true)[$socialNet[$i]]))
+                            @foreach( json_decode($user->redes,true)[$socialNet[$i] ] as $red)
+
+                            <a href="{{url($red)}}" target="_blank"><img src="{{url('img/profile/'.$socialNet[$i].'-post.png')}}" alt="shymow"></a>
+                            @endforeach
+                          @endif
+                        @endfor
+                      @endif
+                        <a href="{{url('view_user/'.$user->id)}}" class="show-more">VER +</a>
+                      </div>
+                    </div>
+                    
                   </div>
-                  
                 </div>
-              </div>
-              <br>
-            @endforeach
+                <br>
+              @endforeach
+            @else
+              <h3>No se encontraron resultados</h3>
+            @endif
             
             {!! $users->appends(Request::all())->fragment('search')->render() !!}
           </div>
@@ -349,33 +359,47 @@
         <section>
           <div class="row">
             <div class="col-md-12">
-              <article class="grid_3 carousel-article text-center">
-                 <h4>Últimos usuarios registrados:</h4>
-                 <div style="position: relative;width: 220px; height: 90px;" class="caroufredsel_wrapper">
-                    <div class="center-block" style="width:230px !important;">
-                      <ul id="foo3" class="carousel-li">
-                        <li>
-                           <p>
-                               Slider1, welcome to freshdesignweb blog, here is useful slider text example tutorial with demo and download link, hope you can learn more about web design. Regard, Graham Bill
-                           </p>
-                        </li><li>
-                           <p>
-                              Slider2, welcome to freshdesignweb blog, here is useful slider text example tutorial with demo and download link, hope you can learn more about web design. Regard, Graham Bill
-                           </p>
-                        </li><li>
-                           <p>
-                              Slider3, welcome to freshdesignweb blog, here is useful slider text example tutorial with demo and download link, hope you can learn more about web design.Regard, Graham Bill
-                           </p>
-                        </li>
-                      </ul>
-                      <div class="clearfix"></div>
+          <article class="grid_3 carousel-article text-center"><br>
+          <h4 style="color: #61605F !important;font-family: gothamTwo;font-size: 2.5em;">Últimos usuarios registrados:</h4>
 
-                      <div style="display: block;" class="carousel-pagination" id="foo3_pag">
-                        <a class="selected" href="#"><span>1</span></a><a class="" href="#"><span>2</span></a><a class="" href="#"><span>3</span></a>
-                      </div>
-                    </div>
+          <div class="container-slider">
+            <a href="#"  id="nextview" class="control-slider"><i class="glyphicon glyphicon-chevron-left" style="left: -40px;"></i></a>
+            <div id="w">
+              <nav class="slidernav" style="display: none">
+                <div id="navbtns" class="clearfix">
+                  <a href="#" class="previous">prev</a>
+                  <a href="#" class="next">next</a>
                 </div>
-              </article><!-- slider text article end -->
+              </nav>
+                <div class="crsl-items" data-navigation="navbtns">
+                  <div class="crsl-wrap">
+                    @foreach($userslider as $user)
+                      <div class="crsl-item">
+                        <div class="thumbnail">
+                          <img src="{{ url($user->img_profile) }}" alt="nyc subway">
+                          <div class="social-icon">
+                            @if(isset($user->redes))
+                              @for($i=0; $i<count($socialNet);$i++)
+                                @if(isset(json_decode($user->redes,true)[$socialNet[$i]]))
+                                  @foreach( json_decode($user->redes,true)[$socialNet[$i] ] as $red)
+
+                                  <a href="{{url($red)}}" target="_blank"><img src="{{url('img/profile/'.$socialNet[$i].'-post.png')}}" alt="shymow"></a>
+                                  @endforeach
+                                @endif
+                              @endfor
+                            @endif
+                          </div>
+                        </div>
+                        
+                        <h3><a href="#">{{$user->name}}</a></h3>
+                      </div>
+                    @endforeach
+                  </div><!-- @end .crsl-wrap -->
+                </div><!-- @end .crsl-items -->
+            </div><!-- @end #w -->
+            <a href="#" id="preview" class="control-slider"><i class="glyphicon glyphicon-chevron-right"></i></a>
+          </div>
+        </article><!-- slider text article end -->
             </div>
           </div>
         </section>
@@ -423,13 +447,23 @@
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
   });
-  $("#foo3").carouFredSel({
-    items: 1,
-    auto: true,
-    scroll: 1,
-    pagination  : "#foo3_pag"
+  $('.crsl-items').carousel({
+    visible: 3,
+    itemMinWidth: 180,
+    itemEqualHeight: 370,
+    itemMargin: 9,
   });
-
+  $('#preview').click(function(event) {
+    /* Act on the event */
+    $('#navbtns').find('.next').click();
+  });
+  $('#nextview').click(function(event) {
+    /* Act on the event */
+    $('#navbtns').find('.previous').click();
+  });
+  $("a[href=#]").on('click', function(e) {
+    e.preventDefault();
+  });
   $('#pais').change(function(event) {
     /* Act on the event */
     $('#state').html('<option>Cargando..</option>');
@@ -486,7 +520,7 @@
           "border-radius":"5px"
         });
       }else{
-        $('#interest').attr('value',"");
+        $('#interest').attr('value',"all");
         $(this).css({
           "background":"",
           "border-radius":""
@@ -513,7 +547,7 @@
           "border-radius":"5px"
         });
       }else{
-        $('#redes').attr('value',"");
+        $('#redes').attr('value',"all");
         $(this).css({
           "background":"",
           "border-radius":""
@@ -542,7 +576,7 @@
           "border-radius":"5px"
         });
       }else{
-        $('#stream').attr('value',"");
+        $('#stream').attr('value',"all");
         $(this).css({
           "background":"",
           "border-radius":""

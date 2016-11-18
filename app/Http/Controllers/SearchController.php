@@ -6,14 +6,30 @@ use DB;
 use App\Countrie;
 use App\State;
 use App\Citie;
-use App\User;
+use App\Perfil;
 use App\Interest;
-
+use Validator;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller {
 
 	public function show(Request $request){
+		$v = Validator::make($request->all(), [
+	        'like' => 'required',
+	        'genero' => 'required',
+	        'redes' => 'required',
+	        'stream' => 'required',
+	        'edad' => 'required',
+	        'pais' => 'required',
+	        'provincia' => 'required',
+	        'municipio' => 'required',
+	        'interes' => 'required',
+	    ]);
+
+	    if ($v->fails())
+	    {
+	       return redirect('/');
+	    }
 		$name = $request->input('search');
 		$type = $request->input('like');
 		$genero = $request->input('genero');
@@ -50,15 +66,18 @@ class SearchController extends Controller {
 
 		// dd($interests['attributes']['categories_id']);
 
-		$users = User::user($name)->type($type)->genero($genero)->edad($edad)->pais($pais)->provincia($provincia)->municipio($municipio)->hobbie($interests['attributes']['name'])->social($social)->stream($stream)->paginate(4);
+		$users = Perfil::user($name)->type($type)->genero($genero)->edad($edad)->pais($pais)->provincia($provincia)->municipio($municipio)->hobbie($interests['attributes']['name'])->redes($social)->stream($stream)->paginate(4);
 
 		$users->setPath('busqueda_inicio');
 		// dd($results);
-		return \View::make('logueado.home_busqueda',compact('countries','users','interest'));
+		$userslider = Perfil::where('active',true)
+                    ->orderBy('id','DESC')->take(10)->get();
+    	$socialNet = ['facebook','twitter','linkedin','youtube','pinterest','instagram'];
+		return \View::make('logueado.home_busqueda',compact('countries','users','interest','userslider','socialNet'));
 		
 	}
 
 	public function getAjaxUser(Request $request){
-		echo "hola"
+		echo "hola";
 	}
 }

@@ -26,6 +26,7 @@ class FriendsController extends Controller {
 			->groupBy('perfils.id')
 			->orderBy('perfils.id','DESC')
 			->paginate(20);
+
 		return view('logueado.add_users',compact('users'));
 	}
 

@@ -238,185 +238,188 @@
                 @else
                 {!! Form::open(array('url' => '','method'=>'get')) !!}
                 @endif
-                <div class="input-group col-md-12">
-                  {!! Form::text('search','',['placeholder'=>'Search for...','class'=>'form-control','aria-describedby'=>'basic-addon2','style'=>'padding:0']) !!}
-                  <span class="input-group-addon" id="basic-addon2" style="padding:0;"><span style="border:none;padding:0px;"><img src="img/search.png" alt="search" width="38" height="32"></span></span>
+                                    <div class="input-group col-md-12">
+                      {!! Form::text('search','',['placeholder'=>'Search for...','class'=>'form-control','aria-describedby'=>'basic-addon2','style'=>'padding:0']) !!}
+                      <span class="input-group-addon" id="basic-addon2" style="padding:0;"><span style="border:none;padding:0px;"><img src="img/search.png" alt="search" width="38" height="32"></span></span>
+                    </div>
                 </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="formulario">
-                <div class="form-group">
-                  <div class="col-md-12">
-                    {!! Form::label('Quiero encontrar:')!!}
-                    {!! Form::token() !!}
+              <div class="row">
+                <div class="formulario">
                     <div class="form-group">
-                      <div class="col-sm-6">
-                        {!! Form::radio('like', 'value', true);!!} {!! Form::label('Todo')!!} <br>
-                        {!! Form::radio('like', '0')!!} {!! Form::label('Personas')!!} <br>
-                        {!! Form::radio('like', '2') !!} {!! Form::label('Empresas')!!} <br>
-                        {!! Form::radio('like', '1') !!} {!! Form::label('Celebridad')!!}
-                      </div>
-                      <div class="col-sm-6">
-                        {!! Form::radio('like', 'youtubers') !!} {!! Form::label('Youtubers')!!} <br>
+                      <div class="col-md-12">
+                        {!! Form::label('Quiero encontrar:')!!}
+                        <div class="form-group">
+                          <div class="col-sm-6">
+                            {!! Form::radio('like', 'all', true);!!} {!! Form::label('Todo')!!} <br>
+                            {!! Form::radio('like', '0')!!} {!! Form::label('Personas')!!} <br>
+                            {!! Form::radio('like', '2') !!} {!! Form::label('Empresas')!!} <br>
+                            {!! Form::radio('like', '1') !!} {!! Form::label('Celebridad')!!}
+
+                          </div>
+                          <div class="col-sm-6">
+                            {!! Form::radio('like', 'youtubers') !!} {!! Form::label('Youtubers')!!} <br>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <br>
-                  <div class="col-sm-12 col-md-6 padd-right">
-                    {!! Form::label('Act. comercial')!!}
-                    {!! Form::select('comercio',array('all' => 'Todo'),'',['class'=>'form-control','required' => 'required','id'=>'comercio']) !!}
-                    <hr>
-                  </div>
-                  <div class="col-sm-12 col-md-6 padd-left">
-                    {!! Form::label('Categoría')!!}
-                    {!! Form::select('categoria',array('all' => 'Todo'),'',['class'=>'form-control','required' => 'required','id'=>'categoria']) !!}
-                    <hr>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <div class="col-sm-12 col-md-6 padd-right">
-                    {!! Form::label('Genero')!!}
-                    {!! Form::select('genero',array('all' => 'Todo','m' => 'Hombre', 'f' => 'Mujer'),'',['class'=>'form-control','required' => 'required','id'=>'genero']) !!}
-                    <hr>
-                  </div>
-                  <div class="col-sm-12 col-md-6 padd-left">
-                    {!! Form::label('Edad')!!}
-                    <select name="edad" id="" class="form-control">
-                      <option value="all">Todo</option>
-                      @for($i = 1;$i<=99;$i++)
-                      <option value="{{$i}}">{{$i}}</option>
-                      @endfor
-                    </select>
-                    <hr>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-sm-12 col-md-6 padd-right">
-                    <label>Intereses</label>
-                    {!! Form::select('interes',array('all' => 'Todo') + $interest,'',['class'=>'form-control','required' => 'required','id'=>'interes']) !!}
-                    <hr>
-                  </div>
-                  <div class="col-sm-12 col-md-6 padd-left">
-                    <label>País</label>
-                    {!! Form::select('pais',array('all' => 'Todo') + $countries,'',['class'=>'form-control','required' => 'required','id'=>'pais']) !!}
-                    <hr>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-sm-12 col-md-6 padd-right">
-                    <label>Provincia</label>
-                    {!! Form::select('provincia',array('all' => 'Todo'),'',['class'=>'form-control', 'required' => 'required','id'=>'state']); !!}
-                  </div>
-                  <div class="col-md-6 col-sm-12 padd-left">
-                    <label>Municipio</label>
-                    {!! Form::select('municipio',array('all' => 'Todo'),'',['class'=>'form-control', 'required' => 'required','id'=>'city']); !!}
-                  </div>
-                </div>
-                <div class="col-sm-12 col-md-12">
-                  <hr>
-                </div>
-
-                <div class="form-group center-block">
-                  <div class="col-md-12">
-                    <label>Lo más buscado</label>
-                  </div>
-                  <div class="center-block col-md-12 img-formulario">  
-                    <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
-                    <img src="img/deportes.png" alt="deportes" class="img-responsive">
-                    <!-- </div> -->
-                    <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
-                    <img src="img/restaurantes.png" alt="deportes" class="img-responsive">
-                    <!-- </div> -->
-                    <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
-                    <img src="img/entretenimiento.png" alt="deportes" class="img-responsive">
-                    <!-- </div> -->
-                    <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
-                    <img src="img/compras.png" alt="deportes" class="img-responsive">
-                    <!-- </div> -->
-                    <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
-                    <img src="img/amistad.png" alt="deportes" class="img-responsive">
-                    <!-- </div> -->
-                    <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
-                    <img src="img/musica.png" alt="deportes" class="img-responsive">
-                    <!-- </div> -->
-                    <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
-                    <img src="img/celebridades.png" alt="deportes" class="img-responsive">
-                    <!-- </div> -->
-                  </div>
-                </div>
-                <div class="clearfix"></div>
-                <div class="form-group center-block">
-                  <div class="col-md-12">
-                    <hr>
-                    <label>Filtrar por red social</label>
-                  </div>
-                  <div class="text-center col-md-12 img-formulario-redes">  
-                    <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
-                    <img src="img/twitt.png" alt="deportes" class="img-responsive">
-                    <!-- </div> -->
-                    <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
-                    <img src="img/face.png" alt="deportes" class="img-responsive">
-                    <!-- </div> -->
-                    <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
-                    <img src="img/youtube.png" alt="deportes" class="img-responsive">
-                    <!-- </div> -->
-                    <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
-                    <img src="img/instagram.png" alt="deportes" class="img-responsive">
-                    <!-- </div> -->
-                    <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
-                    <img src="img/pinteres.png" alt="deportes" class="img-responsive">
-                    <!-- </div> -->
-                    <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
-                    <img src="img/vine.png" alt="deportes" class="img-responsive">
-                    <!-- </div> -->
-                    <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
-                    <img src="img/tumbrl.png" alt="deportes" class="img-responsive">
-                    <!-- </div> -->
-                    <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
-                    <img src="img/g+.png" alt="deportes" class="img-responsive">
-                    <!-- </div> -->
-                    <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
-                    <img src="img/linkedin.png" alt="deportes" class="img-responsive">
-                    <!-- </div> -->
-                    <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
-                    <img src="img/snap.png" alt="deportes" class="img-responsive">
-                    <!-- </div> -->
-                  </div>
-                </div>
-                <div class="clearfix"></div>
-                <div class="form-group center-block">
-                  <div class="col-md-12">
-                    <hr>
-                    <label>Filtrar por plataforma de streaming</label>
-                  </div>
-                  <div class="center-block col-md-12 img-formulario">  
-                    <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
-                    <img src="img/twich.png" alt="deportes" class="img-responsive">
-                    <!-- </div> -->
-                    <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
-                    <img src="img/bambuser.png" alt="deportes" class="img-responsive">
-                    <!-- </div> -->
-                    <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
-                    <img src="img/lives.png" alt="deportes" class="img-responsive">
-                    <!-- </div> -->
-                  </div>
-                  <div class="col-md-12 center-block center-text">
+                    <div class="form-group">
                     <br>
-                    {!! Form::submit('BUSCAR',['class'=>'butto-formns center-block']) !!}
-                  </div>
-                </div>
-                {!! Form::close() !!}
-              </div>
-            </div>
+                      <div class="col-sm-12 col-md-6 padd-right">
+                        {!! Form::label('Act. comercial')!!}
+                        {!! Form::select('comercio',array('all' => 'Todo'),'',['class'=>'form-control','required' => 'required','id'=>'comercio']) !!}
+                        <hr>
+                      </div>
+                      <div class="col-sm-12 col-md-6 padd-left">
+                        {!! Form::label('Categoría')!!}
+                        {!! Form::select('categoria',array('all' => 'Todo'),'',['class'=>'form-control','required' => 'required','id'=>'categoria']) !!}
+                        <hr>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="col-sm-12 col-md-6 padd-right">
+                        {!! Form::label('Genero')!!}
+                        {!! Form::select('genero',array('all' => 'Todo','m' => 'Hombre', 'f' => 'Mujer'),'',['class'=>'form-control','required' => 'required','id'=>'genero']) !!}
+                        <hr>
+                      </div>
+                      <div class="col-sm-12 col-md-6 padd-left">
+                        {!! Form::label('Edad')!!}
+                        <select name="edad" id="" class="form-control">
+                          <option value="all">Todo</option>
+                          @for($i = 1;$i<=99;$i++)
+                            <option value="{{$i}}">{{$i}}</option>
+                          @endfor
+                        </select>
+                        <hr>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-sm-12 col-md-6 padd-right">
+                        <label>Intereses</label>
+                        {!! Form::select('interes',array('all' => 'Todo') + $interest,'',['class'=>'form-control','required' => 'required','id'=>'interes']) !!}
+                        <hr>
+                      </div>
+                      <div class="col-sm-12 col-md-6 padd-left">
+                        <label>País</label>
+                        {!! Form::select('pais',array('all' => 'Todo') + $countries,'',['class'=>'form-control','required' => 'required','id'=>'pais']) !!}
+                        <hr>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-sm-12 col-md-6 padd-right">
+                        <label>Provincia</label>
+                        {!! Form::select('provincia',array('all' => 'Todo'),'',['class'=>'form-control', 'required' => 'required','id'=>'state']); !!}
+                      </div>
+                      <div class="col-md-6 col-sm-12 padd-left">
+                        <label>Municipio</label>
+                        {!! Form::select('municipio',array('all' => 'Todo'),'',['class'=>'form-control', 'required' => 'required','id'=>'city']); !!}
+                      </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12">
+                      <hr>
+                    </div>
+
+                    <div class="form-group center-block">
+                      <div class="col-md-12">
+                        <label>Lo más buscado</label>
+                      </div>
+                      <div class="center-block col-md-12 img-formulario" id="img-interest">  
+                        <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
+                          <img src="img/deportes.png" alt="deportes" data-interest="1" class="img-responsive">
+                        <!-- </div> -->
+                        <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
+                          <img src="img/restaurantes.png" data-interest="2" alt="restaurantes" class="img-responsive">
+                        <!-- </div> -->
+                        <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
+                          <img src="img/entretenimiento.png" data-interest="3" alt="entretenimiento" class="img-responsive">
+                        <!-- </div> -->
+                        <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
+                          <img src="img/compras.png" data-interest="4" alt="compras" class="img-responsive">
+                        <!-- </div> -->
+                        <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
+                          <img src="img/amistad.png" data-interest="5" alt="amistad" class="img-responsive">
+                        <!-- </div> -->
+                        <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
+                          <img src="img/musica.png" data-interest="6" alt="musica" class="img-responsive">
+                        <!-- </div> -->
+                        <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
+                          <img src="img/celebridades.png" data-interest="7" alt="celebridades" class="img-responsive">
+                        <!-- </div> -->
+                      </div>
+                      {!! Form::hidden('interest','all',['id' => 'interest']) !!}
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group center-block">
+                      <div class="col-md-12">
+                      <hr>
+                        <label>Filtrar por red social</label>
+                      </div>
+                      <div class="text-center col-md-12 img-formulario-redes" id="img-redes">  
+                        <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
+                          <img src="img/twitt.png" alt="twitter" data-redes="twitter" class="img-responsive">
+                        <!-- </div> -->
+                        <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
+                          <img src="img/face.png" data-redes="facebook" alt="facebook" class="img-responsive">
+                        <!-- </div> -->
+                        <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
+                          <img src="img/youtube.png" data-redes="youtube" alt="youtube" class="img-responsive">
+                        <!-- </div> -->
+                        <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
+                          <img src="img/instagram.png" data-redes="instagram" alt="instagram" class="img-responsive">
+                        <!-- </div> -->
+                        <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
+                          <img src="img/pinteres.png" data-redes="pinterest" alt="pinterest" class="img-responsive">
+                        <!-- </div> -->
+                        <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
+                          <img src="img/vine.png" data-redes="vine" alt="vine" class="img-responsive">
+                        <!-- </div> -->
+                        <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
+                          <img src="img/tumbrl.png" data-redes="tumblr" alt="tumblr" class="img-responsive">
+                        <!-- </div> -->
+                        <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
+                          <img src="img/g+.png" alt="google" data-redes="plus" class="img-responsive">
+                        <!-- </div> -->
+                        <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
+                          <img src="img/linkedin.png" data-redes="linkedin" alt="linkedin" class="img-responsive">
+                        <!-- </div> -->
+                        <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
+                          <img src="img/snap.png" data-redes="snapchat"   alt="snapchat" class="img-responsive">
+                        <!-- </div> -->
+
+                        {!! Form::hidden('redes','all',['id' => 'redes']) !!}
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group center-block">
+                      <div class="col-md-12">
+                      <hr>
+                        <label>Filtrar por plataforma de streaming</label>
+                      </div>
+                      <div class="center-block col-md-12 img-formulario" id="img-stream">  
+                        <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
+                          <img src="img/twich.png" alt="twitch" data-stream="twitch" class="img-responsive">
+                        <!-- </div> -->
+                        <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
+                          <img src="img/bambuser.png" alt="bambuser" data-stream="bambuser" class="img-responsive">
+                        <!-- </div> -->
+                        <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
+                          <img src="img/lives.png" alt="lives" data-stream="lives" class="img-responsive">
+                        <!-- </div> -->
+                        {!! Form::hidden('stream','all',['id' => 'stream']) !!}
+                      </div>
+                      <div class="col-md-12 center-block center-text">
+                        <br>
+                        {!! Form::submit('BUSCAR',['class'=>'butto-formns center-block']) !!}
+                      </div>
+                    </div>
+                  {!! Form::close() !!}
           </section>
         </div>
         <div class="col-sm-9 col-md-9" id="contentArt">
           <section class="video">
-            <video src="video/shymow.mp4" controls loop muted preload="auto" poster="img/video.jpg" >
+            <video src="video/shymow.mp4" controls loop muted preload="auto" >
+              <!-- poster="img/video.jpg" --> >
               HTML5 Video is required for this example
             </video> 
           </section>
@@ -660,7 +663,109 @@
       console.log("error");
     })
   });
+    $('#state').change(function(event) {
+    /* Act on the event */
+    $('#city').html('<option>Cargando..</option>');
+    var id = $(this).val();
+    $.ajax({
+      url: 'city/'+id,
+      type: 'GET',
+      dataType: 'html',
+      success: function(data){
+        $('#city').html(data);
+        if (data == "")
+          $('#city').html('<option value="all">Municipios no encontrados</option>');
+      }
+    })
+    .fail(function() {
+      console.log("error");
+    })
+  });
 
+
+
+  $('#img-interest img').on('click',function(event) {
+    event.preventDefault();
+    var interestSelect = $(this).data('interest');
+    var interest = $('#interest').attr('value');
+    $( "#img-interest img" ).each(function() {
+      $( this ).css({
+        "background":"",
+        "border-radius":""
+      });
+    });
+     if(interest != interestSelect){
+        $('#interest').attr('value',interestSelect);
+
+        $(this).css({
+          "background":"#A841FF",
+          "border-radius":"5px"
+        });
+      }else{
+        $('#interest').attr('value',"all");
+        $(this).css({
+          "background":"",
+          "border-radius":""
+        });
+      }
+    /* Act on the event */
+  });
+
+   $('#img-redes img').on('click',function(event) {
+      event.preventDefault();
+      var redesSelect = $(this).data('redes');
+      var redes = $('#redes').attr('value');
+      $( "#img-redes img" ).each(function() {
+        $( this ).css({
+          "background":"",
+          "border-radius":""
+        });
+      });
+       if(redes != redesSelect){
+        $('#redes').attr('value',redesSelect);
+
+        $(this).css({
+          "background":"#A841FF",
+          "border-radius":"5px"
+        });
+      }else{
+        $('#redes').attr('value',"all");
+        $(this).css({
+          "background":"",
+          "border-radius":""
+        });
+      }
+      /* Act on the event */
+  });
+
+
+
+  $('#img-stream img').on('click',function(event) {
+      event.preventDefault();
+      var streamSelect = $(this).data('stream');
+      var stream = $('#stream').attr('value');
+      $( "#img-stream img" ).each(function() {
+        $( this ).css({
+          "background":"",
+          "border-radius":""
+        });
+      });
+      if(stream != streamSelect){
+        $('#stream').attr('value',streamSelect);
+
+        $(this).css({
+          "background":"#A841FF",
+          "border-radius":"5px"
+        });
+      }else{
+        $('#stream').attr('value',"all");
+        $(this).css({
+          "background":"",
+          "border-radius":""
+        });
+      }
+      /* Act on the event */
+  });
     // $('#buscador').submit(function(event) {
     //   /* Act on the event */
     //   event.preventDefault();
