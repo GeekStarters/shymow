@@ -6,6 +6,7 @@ use Validator;
 use Illuminate\Http\Request;
 use Auth;
 use App\Perfil;
+use App\Empresa;
 use Image;
 use Input;
 class PerfilController extends Controller {
@@ -50,7 +51,147 @@ class PerfilController extends Controller {
 	{
 		//
 	}
+	public function delete_local($address = null,$lat = null,$lng = null){
+		if (isset($address)) {
+			if (isset($lat)) {
+				if (isset($lng)) {
 
+				    $validator = false;
+					$keyL = "";
+					$building = Empresa::where('profile_id',Auth::id())->where('active',true)->get();
+					if (count($building) > 0) {
+						$local = $building[0]->local;
+						if (isset($local) && $local != "") {
+							$locals = json_decode($local,true);
+							foreach ($locals as $key => $local) {
+								if ($local['address'] == $address) {
+									if ($local['lat'] == $lat){
+										if ($local['lng'] == $lng){
+											$validator = true;
+											$keyL = $key;
+										}
+									}
+								}
+							}
+
+							if ($validator) {
+								unset($locals[$keyL]);
+								asort($locals, 0);
+								
+								$locals = json_encode($locals);
+								try {
+									Empresa::where('profile_id',Auth::id())->update(['local' => $locals]);
+									return redirect('perfil');
+								} catch (Exception $e) {
+									return redirect('perfil');
+								}
+								return redirect('perfil');
+							}else{
+								return redirect('perfil');
+							}
+						}
+					}
+				}else{
+					return redirect('perfil');
+				}
+			}else{
+				return redirect('perfil');
+			}
+		}else{
+			return redirect('perfil');
+		}
+	}
+	public function viewLocal($address = null,$lat = null,$lng = null){
+		if (isset($address)) {
+			if (isset($lat)) {
+				if (isset($lng)) {
+					$validator = false;
+					$keyL = "";
+					$building = Empresa::where('profile_id',Auth::id())->where('active',true)->get();
+					if (count($building) > 0) {
+						$local = $building[0]->local;
+						if (isset($local) && $local != "") {
+							$locals = json_decode($local,true);
+							foreach ($locals as $key => $local) {
+								if ($local['address'] == $address) {
+									if ($local['lat'] == $lat){
+										if ($local['lng'] == $lng){
+											$validator = true;
+											$keyL = $key;
+										}
+									}
+								}
+							}
+
+							if ($validator) {
+								$local = $locals[$keyL];
+								$add = $local['address'];
+								$latitud = $local['lat'];
+								$longitud = $local['lng'];
+
+								return view('logueado.view_local',compact('add','latitud','longitud'));
+							}else{
+								return redirect('perfil');
+							}
+						}
+					}
+				}else{
+					return redirect('perfil');
+				}
+			}else{
+				return redirect('perfil');
+			}
+		}else{
+			return redirect('perfil');
+		}
+	}
+	public function addLocal(Request $request){
+		$v = Validator::make($request->all(), [
+	        'address' => 'required',
+	        'lat' => 'required',
+	        'lng' => 'required',
+	    ]);
+	    if ($v->fails())
+	    {
+	        return response()->json(['error' => true]);
+	    }
+
+	    $lat = $request->input('lat');
+	    $lng = $request->input('lng');
+	    $address = $request->input('address');
+
+	    $newLocal = [
+	    	"address" => $address,
+	    	"lat" => $lat,
+	    	"lng" => $lng
+	    ];
+	    $building = Empresa::where('profile_id',Auth::id())->where('active',true)->get();
+	    if (count($building) > 0) {
+	    	if (isset($building[0]->local) && $building[0]->local != "") {
+	    		$local = json_decode($building[0]->local,true);
+	    		$countL = count($local); 
+	    		$local[$countL] = $newLocal;
+	    		$local = json_encode($local);
+
+	    		// dd($local);
+	    		try {
+	    			Empresa::where('profile_id',Auth::id())->update(['local' => $local]);
+	    			return response()->json(['error' => false]); 
+	    		} catch (Exception $e) {
+	    			return response()->json(['error' => true]);
+	    		}
+	    	}else{
+	    		$newLocal = json_encode([$newLocal]);
+	    		try {
+	    			Empresa::where('profile_id',Auth::id())->update(['local' => $newLocal]);
+	    		} catch (Exception $e) {
+	    			return response()->json(['error' => true]);
+	    		}
+	    	}
+	    }
+
+	    return response()->json(['error' => false]);
+	}
 	/**
 	 * Show the form for editing the specified resource.
 	 *

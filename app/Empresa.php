@@ -16,6 +16,6 @@ class Empresa extends Model {
 	 */
 	protected $table = 'empresas';
 
-	protected $fillable = ['user','empresa','alias','dni','actividad_comercial','empresa_pais','empresa_provincia','empresa_municipio','responsable','email_responsable'];
+	protected $fillable = ['profile_id','empresa','alias','dni','actividad_comercial','empresa_pais','empresa_provincia','empresa_municipio','responsable','email_responsable','local'];
 
 }

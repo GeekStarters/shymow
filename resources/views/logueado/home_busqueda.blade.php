@@ -304,7 +304,7 @@
                     </div>
 
                     <div class="busquedas-settings" style="padding:0px !important;">
-                      <ul>
+                      <!-- <ul>
                         <li class="busquedas-qualification">
                           <div class="qualification-header">
                             Calificación
@@ -325,7 +325,7 @@
                             <span class="glyphicon glyphicon-heart"></span>
                           </li>
                         </div>
-                      </ul>
+                      </ul> -->
                       <div class="busquedas-social">
                       @if(isset($user->redes))
                         @for($i=0; $i<count($socialNet);$i++)

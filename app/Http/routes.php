@@ -198,4 +198,13 @@ Route::group(['middleware' => 'auth'], function()
     Route::get('/all_users','FriendsController@index');
     //Add Friends
     Route::get('/add_friends/{id?}','FriendsController@create');
+
+    //Add Local
+    Route::post('/add_local','PerfilController@addLocal');
+
+    //View Local
+    Route::get('/view_local/{address?}/{lat?}/{lng?}','PerfilController@viewLocal');
+
+    //Delete local
+    Route::get('/delete_local/{address?}/{lat?}/{lng?}','PerfilController@delete_local');
 });

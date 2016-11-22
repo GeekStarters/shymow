@@ -10,6 +10,7 @@ use App\Trend;
 use App\Like_post;
 use App\Friend;
 use App\Perfil;
+use App\Empresa;
 use Auth;
 use Illuminate\Http\Request;
 use Validator;
@@ -135,6 +136,14 @@ class InsideController extends Controller {
 		$socials = "";
 		if (isset(Auth::user()->redes)) {
 			$socials = json_decode(Auth::user()->redes,true);
+		}
+
+		if (Auth::user()->role == 2) {
+			$buildings = Empresa::where('profile_id',Auth::id())->where('active',true)->get();
+			if(count($buildings) > 0){
+				$builds = json_decode($buildings[0]->local,true);
+				return view('logueado.perfil',compact('category','posts','socialNet','streamNet','streams','socials','builds'));
+			}
 		}
 		// dd($posts);
 		return view('logueado.perfil',compact('category','posts','socialNet','streamNet','streams','socials'));

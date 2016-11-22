@@ -48,7 +48,6 @@
     <script src=" {{ asset('js/messages.js') }} "></script>
     <script type="text/javascript" src="{{ asset('js/responsiveCarousel.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/jquery.imgareaselect.min.js') }}"></script>
-    
     @yield('scripts')
     @yield('scriptsTwo')
 

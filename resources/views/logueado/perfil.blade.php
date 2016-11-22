@@ -603,6 +603,7 @@
 		</div> -->
 
 		<div class="clearfix"></div>
+
 		<div class="row" style="margin-left:0px;">
 			<div class="my-social">
 				<div class="interesting-header">
@@ -652,6 +653,38 @@
 			</div>
 		</div>
 		<hr>
+		@if(Auth::user()->role == 2)
+			<div class="row" style="margin-left:0px;">
+				<div class="add-social">
+					<div class="interesting-header">
+						<h2>Mis sucursales</h2>
+						<h6 style="color:#5A5858">Agregar dirección: ejemplo 1600 Amphitheatre Parkway, Mountain View, CA</h6><br>
+						<p class="alert alert-danger text-danger error-danger alert-dismissible" id="map-danger" role="alert">
+	  						Dirección no encontrada</p>
+					</div>
+					<div class="col-sm-6 add-body out-padding">
+						<div class="form-group">
+							<input type="text" id="address-input" class="form-control" placeholder="Streaming"><button class="add-business button-add bussines-add"><span class="glyphicon glyphicon-plus"></span></button>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<ul id>
+							@if(count($builds)>0)
+								<div class="interesting-header">
+									<h2>Mis sucursales</h2>
+								</div>
+								<ul id="sucursales">
+									@foreach($builds as $builds)
+										<li><a href="{{url('/view_local/'.$builds['address'].'/'.$builds['lat'].'/'.$builds['lng'])}}">{{$builds['address']}}</a></li>
+									@endforeach
+								</ul>
+							@endif
+						</ul>
+					</div>
+				</div>
+			</div>
+			<hr>
+		@endif
 		<div class="row" style="margin-left:0px;">
 			<div class="add-social">
 				<div class="interesting-header">
@@ -766,7 +799,9 @@
 @stop
 @extends('logueado.layouts.content-float-chat')
 @section('scripts')
-<script>
+	<script type="text/javascript" src="{{url('https://maps.googleapis.com/maps/api/js?key=AIzaSyDssPGqiz3lLJ8RoKvlXlUk2OGR97z4zVk')}}"></script>
+	<script type="text/javascript" src="{{ asset('js/map.js') }}"></script>
+	<script>
 	jQuery(document).ready(function($) {
 		$('.camera i').click(function(event) {
 			$('#uploadImg').click();

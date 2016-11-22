@@ -482,7 +482,7 @@ $( document ).ready(function() {
                         }else{
 
                             var html = '<div class="social-redes">';
-                            html +=        '<a href="{{url($red)}}" target="_blank">';
+                            html +=        '<a href="'+text+'" target="_blank">';
                                 html +=        '<div class="img-social">';
                                 html +=            '<div class="sub-img-social">';
                                 html +=                '<img src="img/profile/'+page+'.png" alt="shymow">';
