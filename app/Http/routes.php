@@ -165,6 +165,8 @@ Route::group(['middleware' => 'auth'], function()
     Route::post('/create_share_post/','PostController@createSharePost');
     //Seguir post.
     Route::post('/follow_post','PostController@followPost');
+    //Eliminar post
+    Route::get('/delete_post/{post}','PostController@deletePost')->where('id', '[0-9]+');;
 
 
 
@@ -213,4 +215,7 @@ Route::group(['middleware' => 'auth'], function()
 
     //Delete local
     Route::get('/delete_local/{address?}/{lat?}/{lng?}','PerfilController@delete_local');
+
+
+
 });

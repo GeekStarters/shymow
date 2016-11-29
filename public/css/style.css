@@ -2415,3 +2415,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4f6f5', end
 .modalFooter a:hover{
 	border:2px solid #FFF;
 }
+
+.delete_post{
+	color:#7B7B7B;
+	float: right;
+	background: none !important;
+	margin-bottom: 5px;
+}
+
+.delete_post:hover{
+	color:#B70101 !important;
+}

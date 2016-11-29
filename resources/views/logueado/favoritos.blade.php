@@ -10,6 +10,7 @@
 	<!-- AQUI INICIA LO CORTADO -->
 	<div class="col-md-12">
 		<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+			@include('flash::message')
 			<?php $counts = 0; ?>
 			@if(count($post_content) > 0)
 				@foreach($categories as $category)
@@ -37,9 +38,13 @@
 										<div class="content-post no-background">
 											<div class="post-body tendencias-post">
 												<div class="post-header">
-
 													<div class="post-follow">
-														<a 
+														@if($post->profil_id == Auth::id())
+															<a href="{{url('/delete_post/'.$post->id_post)}}" class="delete_post">
+																<i class="glyphicon glyphicon-remove"></i>
+															</a>
+														@endif
+														<a id="foll"
 															@if($post->follow)
 																class="follow-post-active"
 															@else
@@ -147,9 +152,18 @@
 										<div class="content-post no-background">
 											<div class="post-body tendencias-post">
 												<div class="post-header">
-
+													<div>
+														<a href="#" class="delete_post">
+															<i class="glyphicon glyphicon-remove"></i>
+														</a>
+													</div>
 													<div class="post-follow">
-														<a 
+														@if($post->profil_id == Auth::id())
+															<a href="{{url('/delete_post/'.$post->id_post)}}" class="delete_post">
+																<i class="glyphicon glyphicon-remove"></i>
+															</a>
+														@endif
+														<a id="foll"
 															@if($post->follow)
 																class="follow-post-active"
 															@else

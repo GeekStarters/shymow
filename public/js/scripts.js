@@ -277,7 +277,7 @@ $( document ).ready(function() {
         
     });
 
-    $('body').on('click', '.post-follow a', function(event) {
+    $('body').on('click', '.post-follow #foll', function(event) {
         event.preventDefault();
         /* Act on the event */
         var classCss = $(this).hasClass('follow-post-active');

@@ -5,9 +5,10 @@
 	<div class="clear-fix"></div>
 
 	<div class="profiles">
+		@include('flash::message')
 		<div class="clear-fix"></div>
 		<hr>
-
+		
 		<div class="col-md-offset-2 col-md-8">
 		<br>
 			<div class="post">
@@ -46,6 +47,7 @@
 		</div>
 		<br>
 		<div id="myPost">
+
 			@foreach($posts as $post)
 				@if(!$post->share_active)
 					<div class="col-sm-6 col-md-offset-3 col-sm-offset-3">
@@ -55,7 +57,10 @@
 								<div class="post-header">
 
 									<div class="post-follow">
-										<a 
+										<a href="{{url('/delete_post/'.$post->id_post)}}" class="delete_post">
+											<i class="glyphicon glyphicon-remove"></i>
+										</a>
+										<a id="foll"
 											@if($post->follow)
 												class="follow-post-active"
 											@else
@@ -67,7 +72,8 @@
 											<i class="glyphicon glyphicon-plus"></i>
 										</a>
 									</div>
-
+									
+									
 									<div class="post-user">
 										<div class="post-icono"><a href="{{url('view_user/'.$post->id_user)}}"><img src="{{Auth::user()->img_profile }}" alt="shymow"></a></div>
 										<div class="post-user"><a href="{{url('view_user/'.$post->id_user)}}">{{Auth::user()->name }}</a></div>
@@ -165,7 +171,10 @@
 								<div class="post-header">
 
 									<div class="post-follow">
-										<a 
+										<a href="{{url('/delete_post/'.$post->id_post)}}" class="delete_post">
+											<i class="glyphicon glyphicon-remove"></i>
+										</a>
+										<a id="foll"
 											@if($post->follow)
 												class="follow-post-active"
 											@else
@@ -178,7 +187,6 @@
 											<i class="glyphicon glyphicon-plus"></i>
 										</a>
 									</div>
-
 									<div class="post-user">
 										<div class="post-icono"><a href="{{url('view_user/'.$post->id_user)}}"><img src="{{Auth::user()->img_profile }}" alt="shymow"></a></div>
 										<div class="post-user"><a href="{{url('view_user/'.$post->id_user)}}">{{Auth::user()->name}}</a></div>

@@ -147,7 +147,8 @@ return [
 		'Collective\Html\HtmlServiceProvider',
 
 		Laravel\Socialite\SocialiteServiceProvider::class,
-		Intervention\Image\ImageServiceProvider::class
+		Intervention\Image\ImageServiceProvider::class,
+		Laracasts\Flash\FlashServiceProvider::class,
 
 	],
 

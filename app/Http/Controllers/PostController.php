@@ -31,6 +31,21 @@ class PostController extends Controller {
 		//
 	}
 
+	public function deletePost($post){
+		$getPost = Post::find($post);
+		if (count($getPost) > 0) {
+			if ($getPost->profil_id == Auth::id()) {
+				Post::where('id',$post)->update(['active' => false]);
+				flash('Post eliminado', 'success');
+				return redirect()->back();
+			}else{
+				flash('Error al eliminar Post', 'danger');
+				return redirect()->back();
+			}
+
+		}
+	}
+
 	/**
 	 * Show the form for creating a new resource.
 	 *
