@@ -2375,3 +2375,43 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4f6f5', end
 .btn-default-s:hover{
 	background: #fff; color:#37B5AA;border:1px solid #37B5AA;
 }
+.img_cat_search{
+	position: absolute;
+	left: -60px;
+	top: 0.5px;
+	width: 50px;
+	z-index: 100000;
+}
+.panel-changes{
+	position: relative;
+}
+.panel-changes .container-busquedas{
+	margin-bottom: 10px;
+}
+
+.modalFooter{
+	background: #37B5AA;
+	padding: 5px 10px;
+}
+
+.modalFooter h2{
+	font-family: gothamTwo;
+	font-size: 1.5em;
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+.modalFooter hr{
+	color: #FFF !important;
+	border-top: 1px solid #FFF !important;
+}
+.modalFooter a{
+	background: transparent !important;
+	border:2px solid #FFF;
+	color: #FFF !important;
+	text-decoration: none;
+}
+
+.modalFooter a:hover{
+	border:2px solid #FFF;
+}

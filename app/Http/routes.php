@@ -3,6 +3,8 @@ use App\Countrie;
 use App\Interest;
 use App\Type_send_product;
 use App\Perfil;
+use App\BusinessCategories;
+use App\BusinessSubCategories;
 use Session as session;
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +28,10 @@ Route::get('/',function(){
     $users = Perfil::where('active',true)
                     ->orderBy('id','DESC')->take(10)->get();
     $socialNet = ['facebook','twitter','linkedin','youtube','pinterest','instagram'];
-    return view('home',compact('countries','interest','users','socialNet'));
+
+    $subCategories = BusinessSubCategories::lists('name','id');
+    $categories = BusinessCategories::lists('name','id');
+    return view('home',compact('countries','interest','users','socialNet','subCategories','categories'));
 });
 Route::get('condiciones','NavigationController@condiciones');
 Route::get('nosotros','NavigationController@nosotros');
@@ -65,6 +70,7 @@ Route::post('empresa_social','RegistroController@empresaSocial');
 Route::get('empresa_social','HomeController@empresaSocial');
 
 Route::post('headsearch','SearchController@getAjaxUser');
+Route::get('searchAll','SearchController@getSearchData');
 
 // Login
 Route::post('login','AuthenticationController@index');

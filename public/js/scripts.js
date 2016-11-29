@@ -342,7 +342,7 @@ $( document ).ready(function() {
                         object.parents('.add-social').find('.error-danger').fadeOut('slow');
 
                         var html = "";
-                            html += '<div class="col-sm-6 add-body out-padding">';
+                            html += '<div class="col-sm-6 sody out-padding">';
                             html +=    '<div class="form-group">';
                             html +=        '<input type="text" class="form-control" placeholder="Streaming"><button class="add-stream button-add" data-stream=""><span class="glyphicon glyphicon-plus"></span></button>';
                             html +=    '</div>';

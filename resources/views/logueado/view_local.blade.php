@@ -46,9 +46,6 @@
 	var latitude = $('#position').data('lat');
 	var longitude = $('#position').data('lng');
 	var title = $('.title-trends').text();
-	console.log(latitude);
-	console.log(longitude);
-	console.log(longitude);
 	function initMap() {
 	  var myLatLng = {lat: latitude, lng: longitude};
 

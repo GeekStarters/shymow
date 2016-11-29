@@ -82,7 +82,8 @@
 						</div>
 						<div class="grup-form">
 							{!! Form::label('Actividad comercial')!!}
-							{!! Form::select('empresa_comercio', array('agricultura' => 'Agricultura', 'administracion' => 'Administracion'), 'agricultura',['class'=>'form-control','required' => 'required']); !!}
+
+							{!! Form::select('empresa_comercio',array('' => 'Seleccionar') + $subCategories,'',['class'=>'form-control','required' => 'required']) !!}
 						</div>
 						<div class="grup-form">
 							{!! Form::label('País')!!}

@@ -451,7 +451,7 @@ class RegistroController extends Controller {
 		    $empresa = $request->input('empresa');
 		    $alias = $request->input('alias');
 		    $dni = $request->input('dni');
-		    $empresa_comercio = $request->input('empresa_comercio');
+		    $empresa_comercio = (int)$request->input('empresa_comercio');
 		    $empresa_pais = $request->input('empresa_pais');
 		    $empresa_provincia = $request->input('empresa_provincia');
 		    $empresa_municipio = $request->input('empresa_municipio');

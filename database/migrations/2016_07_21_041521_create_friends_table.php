@@ -16,9 +16,15 @@ class CreateFriendsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('user1');
+			$table->foreign('user1')->references('id')->on('perfils')->onDelete('cascade');
 			$table->integer('user2');
-			$table->boolean('active')->default(true);;
-			$table->boolean('friend')->default(false);;
+			$table->foreign('user2')->references('id')->on('perfils')->onDelete('cascade');
+			$table->boolean('active')->default(true);
+			$table->integer('status')->default(0);
+			// 0 Pendiente
+			// 1 Aceptado
+			// 2 denegado
+			// 3 bloqueado
 			$table->timestamps();
 		});
 	}

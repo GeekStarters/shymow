@@ -6,6 +6,8 @@ use App\Countrie;
 use App\State;
 use App\Citie;
 use App\Perfil;
+use App\BusinessCategories;
+use App\BusinessSubCategories;
 use DB;
 use Illuminate\Http\Request;
 use Validator;
@@ -50,8 +52,8 @@ class HomeController extends Controller {
 	}
 	public function dataEmpresa(){
 		$country = Countrie::lists('name','id');
-
-		return view('datos_empresa')->with('countries',$country);
+		$subCategories = BusinessSubCategories::lists('name','id');
+		return view('datos_empresa')->with('countries',$country)->with('subCategories',$subCategories);
 	}
 	public function empresaSocial(){
 		return view('final_empresa');

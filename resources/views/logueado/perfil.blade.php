@@ -664,21 +664,24 @@
 					</div>
 					<div class="col-sm-6 add-body out-padding">
 						<div class="form-group">
-							<input type="text" id="address-input" class="form-control" placeholder="Streaming"><button class="add-business button-add bussines-add"><span class="glyphicon glyphicon-plus"></span></button>
+							<input type="text" id="address-input" class="form-control" placeholder="Local"><button class="add-business button-add bussines-add"><span class="glyphicon glyphicon-plus"></span></button>
 						</div>
 					</div>
 					<div class="col-md-12">
 						<ul id>
-							@if(count($builds)>0)
+							
 								<div class="interesting-header">
 									<h2>Mis sucursales</h2>
 								</div>
 								<ul id="sucursales">
-									@foreach($builds as $builds)
-										<li><a href="{{url('/view_local/'.$builds['address'].'/'.$builds['lat'].'/'.$builds['lng'])}}">{{$builds['address']}}</a></li>
-									@endforeach
+									@if(count($builds)>0)
+										@foreach($builds as $builds)
+											<li><a href="{{url('/view_local/'.$builds['address'].'/'.$builds['lat'].'/'.$builds['lng'])}}">{{$builds['address']}}</a></li>
+										@endforeach
+									@else
+										<p id="nothingLocal">No hay sucursales</p>
+									@endif
 								</ul>
-							@endif
 						</ul>
 					</div>
 				</div>

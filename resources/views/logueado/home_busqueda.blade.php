@@ -2,95 +2,9 @@
 @section('content')
     @extends('layouts.nav')
     <div class="all">
-      <header><img src="img/header.png" alt="Header"></header>
-
-      <div class="clearfix"></div>
-      <section class="welcome col-lg-12">
-        <img src="img/welcome-hands.png" alt="Hands" class="img-hand">
-
-        <div class="row">
-
-          <div class="col-sm-7 col-md-7">
-              <div class="greeting">
-                <div class="container">
-                    <p>Felicitaciones,<br>ya eres parte de <br>
-                    <span class="erashymow">#EraShymow</span>
-                  </p>
-                </div>
-              </div>
-          </div>
-          <div class="col-sm-5 col-md-5">
-            <div class="row">
-            </div>
-          </div>
-          <div class="clearfix"></div>
-
-          <div class="col-md-12 welcome-two">
-              <div class="col-sm-7 col-md-7">
-                <p>Con <span>Shymow</span> tienes a un sólo click perfiles de todo tipo: de tus intereses, personas, comercios, ofertas, personajes y celebridades</p><br>
-                <p><b>¿A qué esperas para ser parte de Shymow?</b></p>
-              </div>
-          </div>
-        </div>
-      </section>
-      <div class="clearfix"></div>
-      <!-- Fin welcome -->
-      <!-- Slider -->
-      <section>
-        <div id="carousel-id" class="carousel slide" data-ride="carousel">
-          <ol class="carousel-indicators">
-            <li data-target="#carousel-id" data-slide-to="0" class="active"></li>
-            <li data-target="#carousel-id" data-slide-to="1" class=""></li>
-            <li data-target="#carousel-id" data-slide-to="2" class=""></li>
-          </ol>
-          <div class="carousel-inner">
-            <div class="item active">
-              <img alt="First slide" src="img/slider01.jpg">
-            </div>
-            <div class="item">
-              <img alt="Third slide" src="img/slider02.jpg">
-            </div>
-            <div class="item">
-              <img alt="Third slide" src="img/slider03.jpg">
-            </div>
-          </div>
-          <a class="left carousel-control" href="#carousel-id" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-          <a class="right carousel-control" href="#carousel-id" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-        </div>
-      </section>
-      <section class="menu">
-        <nav class="navbar navbar-default" role="navigation">
-          <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-            </div>
-        
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-              <ul class="nav navbar-nav">
-                <li class="active"><a href="{{ url('/') }}">INICIO</a></li>
-                <li><a href="{{ url('nosotros') }}">QUÉ ES SHYMOW</a></li>
-                <li><a href="{{ url('faq') }}">F.A.Q</a></li>
-                <li><a href="{{ url('contacto') }}">CONTACTO</a></li>
-              </ul>
-              <ul class="nav navbar-nav navbar-right">
-                <form class="navbar-form navbar-left" role="search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for..." aria-describedby="basic-addon2">
-                    <span class="input-group-addon" id="basic-addon2" style="padding:0;"><button style="border:none;padding:0px;"><img src="img/search.png" alt="search" width="38" height="32"></button></span>
-                  </div>
-                </form>
-              </ul>
-            </div><!-- /.navbar-collapse -->
-          </div>
-        </nav>
-      </section>
+      <br>
+      <br>
+      <br>
       <div class="content">
         <div class="row">
           <div class="col-sm-3 col-md-3 contentSearch">
@@ -103,7 +17,7 @@
                 <div class="col-md-12">
                   {!! Form::model(Request::all(), array('url' => 'busqueda_inicio','method'=>'get','id'=>'buscador')) !!}
                     <div class="input-group col-md-12">
-                      {!! Form::text('search','',['placeholder'=>'Search for...','class'=>'form-control','aria-describedby'=>'basic-addon2','style'=>'padding:0']) !!}
+                      {!! Form::text('search','',['placeholder'=>'Search for...','class'=>'form-control','aria-describedby'=>'basic-addon2','style'=>'padding:0','id'=>'searching']) !!}
                       <span class="input-group-addon" id="basic-addon2" style="padding:0;"><span style="border:none;padding:0px;"><img src="img/search.png" alt="search" width="38" height="32"></span></span>
                     </div>
                 </div>
@@ -115,39 +29,46 @@
                         {!! Form::label('Quiero encontrar:')!!}
                         <div class="form-group">
                           <div class="col-sm-6">
-                            {!! Form::radio('like', 'all', true);!!} {!! Form::label('Todo')!!} <br>
-                            {!! Form::radio('like', '0')!!} {!! Form::label('Personas')!!} <br>
-                            {!! Form::radio('like', '2') !!} {!! Form::label('Empresas')!!} <br>
-                            {!! Form::radio('like', '1') !!} {!! Form::label('Celebridad')!!}
+                            <input type="radio" value="all" name="like" id="searchAll" sele>
+                            <label for="like">Todo</label><br>
 
-                          </div>
-                          <div class="col-sm-6">
-                            {!! Form::radio('like', 'youtubers') !!} {!! Form::label('Youtubers')!!} <br>
+                            <input type="radio" value="0" name="like" id="SearchPeople">
+                            <label for="like">Personas</label><br>
+
+                            <input type="radio" value="2" name="like" id="SearchBusiness">
+                            <label for="like">Empresas</label><br>
+                            
+                            <input type="radio" value="1" name="like" id="SearchCelebrities">
+                            <label for="like">Celebridad</label>
+                            <br>
+
+                            <input type="radio" value="youtubers" name="like" id="searchYoutubers">
+                            <label for="like">Youtubers</label><br>
                           </div>
                         </div>
                       </div>
                     </div>
                     <div class="form-group">
                     <br>
-                      <div class="col-sm-12 col-md-6 padd-right">
+                      <div class="col-sm-12 col-md-6 padd-right" id="actComercial">
                         {!! Form::label('Act. comercial')!!}
-                        {!! Form::select('comercio',array('all' => 'Todo'),'',['class'=>'form-control','required' => 'required','id'=>'comercio']) !!}
+                        {!! Form::select('comercio',array('all' => 'Todo') + $subCategories,'',['class'=>'form-control','required' => 'required','id'=>'comercio']) !!}
                         <hr>
                       </div>
-                      <div class="col-sm-12 col-md-6 padd-left">
+                      <div class="col-sm-12 col-md-6 padd-left" id="searchcategories">
                         {!! Form::label('Categoría')!!}
-                        {!! Form::select('categoria',array('all' => 'Todo'),'',['class'=>'form-control','required' => 'required','id'=>'categoria']) !!}
+                        {!! Form::select('categoria',array('all' => 'Todo') + $categories,'',['class'=>'form-control','required' => 'required','id'=>'categoria']) !!}
                         <hr>
                       </div>
                     </div>
 
                     <div class="form-group">
-                      <div class="col-sm-12 col-md-6 padd-right">
+                      <div class="col-sm-12 col-md-6 padd-right" id="searchGender">
                         {!! Form::label('Genero')!!}
                         {!! Form::select('genero',array('all' => 'Todo','m' => 'Hombre', 'f' => 'Mujer'),'',['class'=>'form-control','required' => 'required','id'=>'genero']) !!}
                         <hr>
                       </div>
-                      <div class="col-sm-12 col-md-6 padd-left">
+                      <div class="col-sm-12 col-md-6 padd-left" id="searchEdad">
                         {!! Form::label('Edad')!!}
                         <select name="edad" id="" class="form-control">
                           <option value="all">Todo</option>
@@ -159,7 +80,7 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <div class="col-sm-12 col-md-6 padd-right">
+                      <div class="col-sm-12 col-md-6 padd-right" id="interesting">
                         <label>Intereses</label>
                         {!! Form::select('interes',array('all' => 'Todo') + $interest,'',['class'=>'form-control','required' => 'required','id'=>'interes']) !!}
                         <hr>
@@ -170,21 +91,22 @@
                         <hr>
                       </div>
                     </div>
+                    
                     <div class="form-group">
                       <div class="col-sm-12 col-md-6 padd-right">
                         <label>Provincia</label>
-                        {!! Form::select('provincia',array('all' => 'Todo'),'',['class'=>'form-control', 'required' => 'required','id'=>'state']); !!}
+                        {!! Form::select('provincia',array('all' => 'Seleccione pais'),'',['class'=>'form-control', 'required' => 'required','id'=>'state']); !!}
                       </div>
                       <div class="col-md-6 col-sm-12 padd-left">
                         <label>Municipio</label>
-                        {!! Form::select('municipio',array('all' => 'Todo'),'',['class'=>'form-control', 'required' => 'required','id'=>'city']); !!}
+                        {!! Form::select('municipio',array('all' => 'Seleccione Provincia'),'',['class'=>'form-control', 'required' => 'required','id'=>'city']); !!}
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-12">
                       <hr>
                     </div>
 
-                    <div class="form-group center-block">
+                    <div class="form-group center-block" id="buscado">
                       <div class="col-md-12">
                         <label>Lo más buscado</label>
                       </div>
@@ -214,7 +136,7 @@
                       {!! Form::hidden('interest','all',['id' => 'interest']) !!}
                     </div>
                     <div class="clearfix"></div>
-                    <div class="form-group center-block">
+                    <div class="form-group center-block" id="filtroredes">
                       <div class="col-md-12">
                       <hr>
                         <label>Filtrar por red social</label>
@@ -255,7 +177,7 @@
                       </div>
                     </div>
                     <div class="clearfix"></div>
-                    <div class="form-group center-block">
+                    <div class="form-group center-block" id="filtrostream">
                       <div class="col-md-12">
                       <hr>
                         <label>Filtrar por plataforma de streaming</label>
@@ -272,11 +194,13 @@
                         <!-- </div> -->
                         {!! Form::hidden('stream','all',['id' => 'stream']) !!}
                       </div>
+
+                    </div>
+
                       <div class="col-md-12 center-block center-text">
                         <br>
                         {!! Form::submit('BUSCAR',['class'=>'butto-formns center-block']) !!}
                       </div>
-                    </div>
                   {!! Form::close() !!}
                 </div>
               </div>
@@ -286,173 +210,485 @@
           <div class="col-sm-9">
             <div class="text-center busquedas-header">
               <a name="search"></a>
-              <h2>Resultados de la búsqueda</h2>
+              <h2 style="color: #5f5d5d;font-size: 2em;">Resultados de la búsqueda</h2>
             </div>
+            <?php $tuser= count($users) ?>
             @if(count($users) > 0)
-              @foreach($users as $user)
-                <div class="container-busquedas">
-                  <div class="sub-content-busqueda">
-
-                    <div class="img-busqueda col-sm-3" style="padding:0px !important;"><img src="{{$user->img_profile}}" alt="shymow"></div>
-
-                    <div class="busquedas-content col-sm-6" style="padding:0px !important;">
-                      <div class="content-busqueda-header">
-                        <span class="first-title">{{$user->name}}</span>
-                         <span class="sub-title">{{$user->pais}}</span>
-                      </div>
-                      <p>{{$user->descripcion}}</p>
+              <div class="col-sm-11 col-sm-offset-1">
+                @if($_GET['like'] == "2" || $_GET['like'] == "all")
+                  <div id="mapa" style="height: 350px;margin-bottom: 50px"></div>
+                @endif
+                @if($_GET['like'] == "0")
+                  <div class="panel panel-default panel-changes">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                      <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#CAT-NAME" aria-expanded="true" class="text-favorite" aria-controls="CAT-NAME">
+                          <img class="img_cat_search" class="img-responsive" src="img/icon_usuarios.png" alt="">
+                          Personas
+                          <span class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                      </h4>
                     </div>
+                      <div id="CAT-NAME" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                      <div class="panel-body">
 
-                    <div class="busquedas-settings" style="padding:0px !important;">
-                      <!-- <ul>
-                        <li class="busquedas-qualification">
-                          <div class="qualification-header">
-                            Calificación
-                          </div>
-                          <div class="qualification">
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                          </div>
-                        </li>
-                        <div class="busquedas-sub-options">
-                          <li class="busquedas-share">
-                            <i class="fa fa-share-alt" aria-hidden="true"></i>
-                          </li>
-                          <li class="busquedas-like-me">
-                            <span class="glyphicon glyphicon-heart"></span>
-                          </li>
-                        </div>
-                      </ul> -->
-                      <div class="busquedas-social">
-                      @if(isset($user->redes))
-                        @for($i=0; $i<count($socialNet);$i++)
-                          @if(isset(json_decode($user->redes,true)[$socialNet[$i]]))
-                            @foreach( json_decode($user->redes,true)[$socialNet[$i] ] as $red)
+                        @foreach($users as $user)
+                          <div class="container-busquedas">
+                            <div class="sub-content-busqueda">
 
-                            <a href="{{url($red)}}" target="_blank"><img src="{{url('img/profile/'.$socialNet[$i].'-post.png')}}" alt="shymow"></a>
-                            @endforeach
-                          @endif
-                        @endfor
-                      @endif
-                        <a href="{{url('view_user/'.$user->id)}}" class="show-more">VER +</a>
+                              <div class="img-busqueda col-sm-3" style="padding:0px !important;"><img src="{{$user->img_profile}}" alt="shymow"></div>
+
+                              <div class="busquedas-content col-sm-6" style="padding:0px !important;">
+                                <div class="content-busqueda-header">
+                                  <span class="first-title">{{$user->name}}</span>
+                                   <span class="sub-title">{{$user->pais}}</span>
+                                </div>
+                                <p>{{$user->descripcion}}</p>
+                              </div>
+
+                              <div class="busquedas-settings" style="padding:0px !important;">
+                                
+                                <div class="busquedas-social">
+                                @if(isset($user->redes))
+                                  @for($i=0; $i<count($socialNet);$i++)
+                                    @if(isset(json_decode($user->redes,true)[$socialNet[$i]]))
+                                      @foreach( json_decode($user->redes,true)[$socialNet[$i] ] as $red)
+
+                                      <a href="{{url($red)}}" target="_blank"><img src="{{url('img/profile/'.$socialNet[$i].'-post.png')}}" alt="shymow"></a>
+                                      @endforeach
+                                    @endif
+                                  @endfor
+                                @endif
+                                  <a href="{{url('view_user/'.$user->id)}}" class="show-more">VER +</a>
+                                </div>
+                              </div>
+                              
+                            </div>
+                          </div>
+                          <br>
+                        @endforeach
                       </div>
                     </div>
-                    
                   </div>
-                </div>
-                <br>
-              @endforeach
+                @endif
+                @if($_GET['like'] == "1")
+                  <div class="panel panel-default panel-changes">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                      <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#CAT-NAME" aria-expanded="true" class="text-favorite" aria-controls="CAT-NAME">
+                          <img class="img_cat_search" class="img-responsive" src="img/icon_celebrities.png" alt="">
+                          Celebridad
+                          <span class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                      </h4>
+                    </div>
+                      <div id="CAT-NAME" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                      <div class="panel-body">
+
+                        @foreach($users as $user)
+                          <div class="container-busquedas">
+                            <div class="sub-content-busqueda">
+
+                              <div class="img-busqueda col-sm-3" style="padding:0px !important;"><img src="{{$user->img_profile}}" alt="shymow"></div>
+
+                              <div class="busquedas-content col-sm-6" style="padding:0px !important;">
+                                <div class="content-busqueda-header">
+                                  <span class="first-title">{{$user->name}}</span>
+                                   <span class="sub-title">{{$user->pais}}</span>
+                                </div>
+                                <p>{{$user->descripcion}}</p>
+                              </div>
+
+                              <div class="busquedas-settings" style="padding:0px !important;">
+                                
+                                <div class="busquedas-social">
+                                @if(isset($user->redes))
+                                  @for($i=0; $i<count($socialNet);$i++)
+                                    @if(isset(json_decode($user->redes,true)[$socialNet[$i]]))
+                                      @foreach( json_decode($user->redes,true)[$socialNet[$i] ] as $red)
+
+                                      <a href="{{url($red)}}" target="_blank"><img src="{{url('img/profile/'.$socialNet[$i].'-post.png')}}" alt="shymow"></a>
+                                      @endforeach
+                                    @endif
+                                  @endfor
+                                @endif
+                                  <a href="{{url('view_user/'.$user->id)}}" class="show-more">VER +</a>
+                                </div>
+                              </div>
+                              
+                            </div>
+                          </div>
+                          <br>
+                        @endforeach
+                      </div>
+                    </div>
+                  </div>
+                @endif
+                @if($_GET['like'] == "2")
+                  <div class="panel panel-default panel-changes">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                      <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#CAT-NAME" aria-expanded="true" class="text-favorite" aria-controls="CAT-NAME">
+                          <img class="img_cat_search" class="img-responsive" src="img/icon_empresa.png" alt="">
+                          Empresa
+                          <span class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                      </h4>
+                    </div>
+                      <div id="CAT-NAME" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                      <div class="panel-body">
+                        
+                        @foreach($users as $user)
+                          <div class="container-busquedas">
+                            <div class="sub-content-busqueda">
+
+                              <div class="img-busqueda col-sm-3" style="padding:0px !important;"><img src="{{$user->img_profile}}" alt="shymow"></div>
+
+                              <div class="busquedas-content col-sm-6" style="padding:0px !important;">
+                                <div class="content-busqueda-header">
+                                  <span class="first-title">{{$user->name}}</span>
+                                   <span class="sub-title">{{$user->pais}}</span>
+                                </div>
+                                <p>{{$user->descripcion}}</p>
+                              </div>
+
+                              <div class="busquedas-settings" style="padding:0px !important;">
+                                
+                                <div class="busquedas-social">
+                                @if(isset($user->redes))
+                                  @for($i=0; $i<count($socialNet);$i++)
+                                    @if(isset(json_decode($user->redes,true)[$socialNet[$i]]))
+                                      @foreach( json_decode($user->redes,true)[$socialNet[$i] ] as $red)
+
+                                      <a href="{{url($red)}}" target="_blank"><img src="{{url('img/profile/'.$socialNet[$i].'-post.png')}}" alt="shymow"></a>
+                                      @endforeach
+                                    @endif
+                                  @endfor
+                                @endif
+                                  <a href="{{url('view_user/'.$user->id)}}" class="show-more">VER +</a>
+                                </div>
+                              </div>
+                              
+                            </div>
+                          </div>
+                          <br>
+                        @endforeach
+                      </div>
+                    </div>
+                  </div>
+                @endif
+
+                @if($_GET['like'] == "all")
+                  <div class="panel panel-default panel-changes">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                      <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#empresa" aria-expanded="true" class="text-favorite" aria-controls="empresa">
+                          <img class="img_cat_search" class="img-responsive" src="img/icon_empresa.png" alt="">
+                          Empresa
+                          <span class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                      </h4>
+                    </div>
+                      <div id="empresa" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                      <div class="panel-body">
+                        
+                        @foreach($users as $user)
+                          @if(isset($user->empresa))
+                            <div class="container-busquedas">
+                              <div class="sub-content-busqueda">
+                                <div class="img-busqueda col-sm-3" style="padding:0px !important;"><img src="{{$user->img_profile}}" alt="shymow"></div>
+
+                                <div class="busquedas-content col-sm-6" style="padding:0px !important;">
+                                  <div class="content-busqueda-header">
+                                    <span class="first-title">{{$user->name}}</span>
+                                     <span class="sub-title">{{$user->pais}}</span>
+                                  </div>
+                                  <p>{{$user->descripcion}}</p>
+                                </div>
+
+                                <div class="busquedas-settings" style="padding:0px !important;">
+                                  
+                                  <div class="busquedas-social">
+                                  @if(isset($user->redes))
+                                    @for($i=0; $i<count($socialNet);$i++)
+                                      @if(isset(json_decode($user->redes,true)[$socialNet[$i]]))
+                                        @foreach( json_decode($user->redes,true)[$socialNet[$i] ] as $red)
+
+                                        <a href="{{url($red)}}" target="_blank"><img src="{{url('img/profile/'.$socialNet[$i].'-post.png')}}" alt="shymow"></a>
+                                        @endforeach
+                                      @endif
+                                    @endfor
+                                  @endif
+                                    <a href="{{url('view_user/'.$user->id)}}" class="show-more">VER +</a>
+                                  </div>
+                                </div>
+                                
+                              </div>
+                            </div>
+                          @endif
+                          
+                        @endforeach
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="panel panel-default panel-changes">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                      <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#personas" aria-expanded="true" class="text-favorite" aria-controls="personas">
+                          <img class="img_cat_search" class="img-responsive" src="img/icon_usuarios.png" alt="">
+                          Personas
+                          <span class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                      </h4>
+                    </div>
+                      <div id="personas" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                      <div class="panel-body">
+                        
+                        @foreach($users as $user)
+                            <div class="container-busquedas">
+                              <div class="sub-content-busqueda">
+                                <div class="img-busqueda col-sm-3" style="padding:0px !important;"><img src="{{$user->img_profile}}" alt="shymow"></div>
+
+                                <div class="busquedas-content col-sm-6" style="padding:0px !important;">
+                                  <div class="content-busqueda-header">
+                                    <span class="first-title">{{$user->name}}</span>
+                                     <span class="sub-title">{{$user->pais}}</span>
+                                  </div>
+                                  <p>{{$user->descripcion}}</p>
+                                </div>
+
+                                <div class="busquedas-settings" style="padding:0px !important;">
+                                  
+                                  <div class="busquedas-social">
+                                  @if(isset($user->redes))
+                                    @for($i=0; $i<count($socialNet);$i++)
+                                      @if(isset(json_decode($user->redes,true)[$socialNet[$i]]))
+                                        @foreach( json_decode($user->redes,true)[$socialNet[$i] ] as $red)
+
+                                        <a href="{{url($red)}}" target="_blank"><img src="{{url('img/profile/'.$socialNet[$i].'-post.png')}}" alt="shymow"></a>
+                                        @endforeach
+                                      @endif
+                                    @endfor
+                                  @endif
+                                    <a href="{{url('view_user/'.$user->id)}}" class="show-more">VER +</a>
+                                  </div>
+                                </div>
+                                
+                              </div>
+                            </div>
+                          
+                          
+                        @endforeach
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="panel panel-default panel-changes">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                      <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#celebridad" aria-expanded="true" class="text-favorite" aria-controls="celebridad">
+                          <img class="img_cat_search" class="img-responsive" src="img/icon_celebrities.png" alt="">
+                          Celebridad
+                          <span class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                      </h4>
+                    </div>
+                      <div id="celebridad" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                      <div class="panel-body">
+                        
+                        @foreach($users as $user)
+                            @if($user->role == 1)
+                              <div class="container-busquedas">
+                                <div class="sub-content-busqueda">
+                                  <div class="img-busqueda col-sm-3" style="padding:0px !important;"><img src="{{$user->img_profile}}" alt="shymow"></div>
+
+                                  <div class="busquedas-content col-sm-6" style="padding:0px !important;">
+                                    <div class="content-busqueda-header">
+                                      <span class="first-title">{{$user->name}}</span>
+                                       <span class="sub-title">{{$user->pais}}</span>
+                                    </div>
+                                    <p>{{$user->descripcion}}</p>
+                                  </div>
+
+                                  <div class="busquedas-settings" style="padding:0px !important;">
+                                    
+                                    <div class="busquedas-social">
+                                    @if(isset($user->redes))
+                                      @for($i=0; $i<count($socialNet);$i++)
+                                        @if(isset(json_decode($user->redes,true)[$socialNet[$i]]))
+                                          @foreach( json_decode($user->redes,true)[$socialNet[$i] ] as $red)
+
+                                          <a href="{{url($red)}}" target="_blank"><img src="{{url('img/profile/'.$socialNet[$i].'-post.png')}}" alt="shymow"></a>
+                                          @endforeach
+                                        @endif
+                                      @endfor
+                                    @endif
+                                      <a href="{{url('view_user/'.$user->id)}}" class="show-more">VER +</a>
+                                    </div>
+                                  </div>
+                                  
+                                </div>
+                              </div>
+                            @endif
+                          
+                          
+                        @endforeach
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="panel panel-default panel-changes">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                      <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#mayores" aria-expanded="true" class="text-favorite" aria-controls="mayores">
+                          <img class="img_cat_search" class="img-responsive" src="img/icon_tercera_edad.png" alt="">
+                          Tercera edad
+                          <span class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                      </h4>
+                    </div>
+                      <div id="mayores" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                      <div class="panel-body">
+                        
+                        @foreach($users as $user)
+                            @if($user->edad > 63)
+                              <div class="container-busquedas">
+                                <div class="sub-content-busqueda">
+                                  <div class="img-busqueda col-sm-3" style="padding:0px !important;"><img src="{{$user->img_profile}}" alt="shymow"></div>
+
+                                  <div class="busquedas-content col-sm-6" style="padding:0px !important;">
+                                    <div class="content-busqueda-header">
+                                      <span class="first-title">{{$user->name}}</span>
+                                       <span class="sub-title">{{$user->pais}}</span>
+                                    </div>
+                                    <p>{{$user->descripcion}}</p>
+                                  </div>
+
+                                  <div class="busquedas-settings" style="padding:0px !important;">
+                                    
+                                    <div class="busquedas-social">
+                                    @if(isset($user->redes))
+                                      @for($i=0; $i<count($socialNet);$i++)
+                                        @if(isset(json_decode($user->redes,true)[$socialNet[$i]]))
+                                          @foreach( json_decode($user->redes,true)[$socialNet[$i] ] as $red)
+
+                                          <a href="{{url($red)}}" target="_blank"><img src="{{url('img/profile/'.$socialNet[$i].'-post.png')}}" alt="shymow"></a>
+                                          @endforeach
+                                        @endif
+                                      @endfor
+                                    @endif
+                                      <a href="{{url('view_user/'.$user->id)}}" class="show-more">VER +</a>
+                                    </div>
+                                  </div>
+                                  
+                                </div>
+                              </div>
+                            @endif
+                          
+                          
+                        @endforeach
+                      </div>
+                    </div>
+                  </div>
+                @endif
+                
+
+
+
+
+              </div>
+              <div class="clearfix"></div>
             @else
               <h3>No se encontraron resultados</h3>
             @endif
             
+
+
+              
             {!! $users->appends(Request::all())->fragment('search')->render() !!}
           </div>
         </div>
       </div>
 
 
-      <div class="container-fluid users">
-        <section>
-          <div class="row">
-            <div class="col-md-12">
-          <article class="grid_3 carousel-article text-center"><br>
-          <h4 style="color: #61605F !important;font-family: gothamTwo;font-size: 2.5em;">Últimos usuarios registrados:</h4>
 
-          <div class="container-slider">
-            <a href="#"  id="nextview" class="control-slider"><i class="glyphicon glyphicon-chevron-left" style="left: -40px;"></i></a>
-            <div id="w">
-              <nav class="slidernav" style="display: none">
-                <div id="navbtns" class="clearfix">
-                  <a href="#" class="previous">prev</a>
-                  <a href="#" class="next">next</a>
-                </div>
-              </nav>
-                <div class="crsl-items" data-navigation="navbtns">
-                  <div class="crsl-wrap">
-                    @foreach($userslider as $user)
-                      <div class="crsl-item">
-                        <div class="thumbnail">
-                          <img src="{{ url($user->img_profile) }}" alt="nyc subway">
-                          <div class="social-icon">
-                            @if(isset($user->redes))
-                              @for($i=0; $i<count($socialNet);$i++)
-                                @if(isset(json_decode($user->redes,true)[$socialNet[$i]]))
-                                  @foreach( json_decode($user->redes,true)[$socialNet[$i] ] as $red)
-
-                                  <a href="{{url($red)}}" target="_blank"><img src="{{url('img/profile/'.$socialNet[$i].'-post.png')}}" alt="shymow"></a>
-                                  @endforeach
-                                @endif
-                              @endfor
-                            @endif
-                          </div>
-                        </div>
-                        
-                        <h3><a href="#">{{$user->name}}</a></h3>
-                      </div>
-                    @endforeach
-                  </div><!-- @end .crsl-wrap -->
-                </div><!-- @end .crsl-items -->
-            </div><!-- @end #w -->
-            <a href="#" id="preview" class="control-slider"><i class="glyphicon glyphicon-chevron-right"></i></a>
-          </div>
-        </article><!-- slider text article end -->
-            </div>
-          </div>
-        </section>
-      </div>
-      <div class="clearfix"></div>
-
-      <section class="paralax">
-        <div class="col-xs-10 col-xs-offset-2 col-sm-10 col-sm-offset-2 col-md-5 col-md-offset-5 paralax-text">
-          <h2>¿Estás list@ <br> para empezar?</h2><br><br>
-          <div class="align-paralax-a">
-          	<a href="#">REGÍSTRATE</a>
-          	<a href="#">INICIA SESIÓN</a>
-          </div>
-        </div>
-        <img src="img/paralax.jpg" alt="img">
-      </section>
-      <div class="footer">
-        <div class="text-center">
-          <div class="link">
-            <a href="#">INICIO</a> |
-            <a href="#">QUÉ ES SHYMOW</a> |
-            <a href="#">F.A.Q</a> |
-            <a href="#">CONTACTO</a> |
-            <a href="#">TÉRMINOS Y CONDICIONES</a> |
-            <a href="#">PÓLITICA DE PRIVACIDAD</a> |
-            <a href="#">LOGIN</a> |
-            <br>
-          </div>
-          <p>2016 Shymow - Todos los derechos reservados</p>
-          <div class="footer-img">
-          		<img src="img/twitt-footer.png" alt="shymow" class="img-responsive">
-	        	<img src="img/face-footer.png" alt="shymow" class="img-responsive">
-	        	<img src="img/youtube-footer.png" alt="shymow" class="img-responsive">
-          </div>
-        </div>
-      </div>  
     </div>
 @endsection
 
 
 @section('scripts')
+<script type="text/javascript" src="{{url('https://maps.googleapis.com/maps/api/js?key=AIzaSyDssPGqiz3lLJ8RoKvlXlUk2OGR97z4zVk')}}"></script>
+<script>
+  <?php if ($_GET['like'] == "2" || $_GET['like'] == "all"): ?>
+    function initMap() {
+      var myLatLng = {lat: 19.508020, lng: -99.096680};
+
+      var map = new google.maps.Map(document.getElementById('mapa'), {
+        zoom: 3,
+        center: myLatLng
+      });
+      <?php if(count($localAll) > 0): ?>
+        @foreach($localAll as $local)
+
+          var contentString = 
+          '<div id="content">'+
+            '<div class="col-xs-3">'+
+              '<img src="{{$local["img"]}}" style="width:100%;">'+
+            '</div>'+
+            '<div class="col-xs-9">'+
+              '<h4> {{$local["alias"]}}</h4>'+
+            '</div>'+
+          '</div>';
+          var cor = {lat: {{$local['lat']}}, lng: {{$local['lng']}}}
+          // var infowindow = new google.maps.InfoWindow({
+          //   content: contentString,
+          //   maxWidth:300
+          // });
+          infoWindow = new google.maps.InfoWindow({ content: contentString,maxWidth:300 });
+
+          var icon = {
+              url: '{{$local["icon"]}}', // url
+              scaledSize: new google.maps.Size(30, 30), // scaled size
+              origin: new google.maps.Point(0,0), // origin
+              anchor: new google.maps.Point(0, 0) // anchor
+          };
+          var marker = new google.maps.Marker({
+            position: cor,
+            map: map,
+            title: '{{$local["address"]}}',
+            icon:icon,
+            info: contentString
+          });
+
+          google.maps.event.addListener(marker, 'click', function(){
+            infoWindow.setContent( this.info );
+            infoWindow.open( map, this );
+          });
+        @endforeach
+      <?php endif ?>
+
+
+    }
+    initMap();
+  <?php endif ?>
+</script>
 <script>
   $.ajaxSetup({
     headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
   });
+
   $('.crsl-items').carousel({
     visible: 3,
     itemMinWidth: 180,
     itemEqualHeight: 370,
     itemMargin: 9,
   });
+
+
   $('#preview').click(function(event) {
     /* Act on the event */
     $('#navbtns').find('.next').click();
@@ -584,5 +820,94 @@
       }
       /* Act on the event */
   });
+
+
+  $('#SearchPeople').click(function(event) {
+    /* Act on the event */
+    $('#actComercial').slideUp('slow');
+    $('#searchcategories').slideUp('slow');
+
+    $('#searchGender').slideDown('slow');
+    $('#searchEdad').slideDown('slow');
+    $('#interesting').css('visibility', 'visible');
+
+    $('#filtroredes').slideDown('slow');
+    $('#filtrostream').slideDown('slow');
+  });
+
+  $('#SearchBusiness').click(function(event) {
+    /* Act on the event */
+    $('#actComercial').slideDown('slow');
+    $('#searchcategories').slideDown('slow');
+    $('#searchcategories').css('visibility', 'visible');
+    $('#actComercial').css('visibility', 'visible');
+
+
+    $('#interesting').css('visibility', 'hidden');
+    $('#searchGender').slideUp('slow');
+    $('#searchEdad').slideUp('slow');
+    $('#filtroredes').slideUp('slow');
+    $('#filtrostream').slideUp('slow');
+
+
+  });
+
+  $('#SearchCelebrities').click(function(event) {
+    /* Act on the event */
+    $('#actComercial').slideUp('slow');
+    $('#searchcategories').slideUp('slow');
+
+    $('#searchGender').slideDown('slow');
+    $('#searchEdad').slideDown('slow');
+    $('#interesting').css('visibility', 'visible');
+
+    $('#filtroredes').slideDown('slow');
+    $('#filtrostream').slideDown('slow');
+  });
+
+  $('#searchcategories').change(function(event) {
+    /* Act on the event */
+    $('#actComercial').css('visibility', 'hidden');
+    $('#searchcategories').css('visibility', 'visible');
+  });
+
+  $('#actComercial').change(function(event) {
+    /* Act on the event */
+    $('#searchcategories').css('visibility', 'hidden');
+    $('#actComercial').css('visibility', 'visible');
+  });
+
+  $('#searching').keyup(function(event) {
+    $('#interesting').css('visibility', 'visible');
+
+    var txt = $(this).val();
+    if (txt.length > 0) {
+      // $('#SearchPeople').prop('checked', true);
+      $('#actComercial').slideUp('slow');
+      $('#searchcategories').slideUp('slow');
+      $('#SearchPeople').is('checked');
+    }else{
+      $('#actComercial').slideDown('slow');
+      $('#searchcategories').slideDown('slow');
+    }
+  });
+
+  $('#searching').select(function(event) {
+    $('#interesting').css('visibility', 'visible');
+
+    var txt = $(this).val();
+    if (txt.length > 0) {
+      // $('#SearchPeople').prop('checked', true);
+      $('#actComercial').slideUp('slow');
+      $('#searchcategories').slideUp('slow');
+      $('#SearchPeople').is('checked');
+    }else{
+      $('#actComercial').slideDown('slow');
+      $('#searchcategories').slideDown('slow');
+    }
+  });
+
+
+
   </script>
 @endsection

@@ -16,17 +16,19 @@ class CreateEmpresasTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('profile_id')->unsigned();
-			$table->foreign('profile_id')->references('id')->on('perfils')->onDelete('cascade');;
+			$table->foreign('profile_id')->references('id')->on('perfils')->onDelete('cascade');
 			$table->string('responsable')->nullable();
 			$table->string('email_responsable')->nullable();
 			$table->string('empresa');
 			$table->string('alias');
 			$table->string('dni');
-			$table->string('actividad_comercial');
+			$table->integer('actividad_comercial');
+			$table->foreign('actividad_comercial')->references('id')->on('business_sub_categories')->onDelete('cascade');
 			$table->string('descripcion');
 			$table->string('empresa_pais');
 			$table->string('empresa_provincia');
 			$table->string('empresa_municipio');
+			$table->mediumText('local')->nullable();
 			$table->boolean('active')->default(true);
 			$table->timestamps();
 		});

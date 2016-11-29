@@ -91,6 +91,8 @@
                   <b>{{ $error}}</b>             
                 </p>
                 @endforeach
+
+                <span id="startS"></span>
                 {!! Form::open(array('url' => 'registro','method'=>'post','class' => 'welcome-registry')) !!}
                 <div class="form-group">
                   {!! Form::text('name','',['class'=>'form-control', 'placeholder'=>'Nombre y Apellido','required' => 'required']) !!}
@@ -226,20 +228,20 @@
     <div class="content">
       <div class="row">
         <div class="col-sm-3 col-md-3 contentSearch">
-          <section class="header">
-            <img src="img/finder.png" alt="Finder">
-          </section>
-          <section class="content-for">
-            <div class="row">
-              <br>
-              <div class="col-md-12">
-                @if(Auth::check())
-                {!! Form::open(array('url' => 'busqueda_inicio','method'=>'get','id'=>'buscador')) !!}
-                @else
-                {!! Form::open(array('url' => '','method'=>'get')) !!}
-                @endif
-                                    <div class="input-group col-md-12">
-                      {!! Form::text('search','',['placeholder'=>'Search for...','class'=>'form-control','aria-describedby'=>'basic-addon2','style'=>'padding:0']) !!}
+            <section class="header">
+              <img src="img/finder.png" alt="Finder">
+            </section>
+            <section class="content-for">
+              <div class="row">
+                <br>
+                <div class="col-md-12">
+                  @if(Auth::check())
+                    {!! Form::open(array('url' => 'busqueda_inicio','method'=>'get','id'=>'buscador')) !!}
+                  @else
+                    {!! Form::open(array('url' => '','method'=>'get','id'=>'buscadorOut')) !!}
+                  @endif
+                    <div class="input-group col-md-12">
+                      {!! Form::text('search','',['placeholder'=>'Search for...','class'=>'form-control','aria-describedby'=>'basic-addon2','style'=>'padding:0','id'=>'searching']) !!}
                       <span class="input-group-addon" id="basic-addon2" style="padding:0;"><span style="border:none;padding:0px;"><img src="img/search.png" alt="search" width="38" height="32"></span></span>
                     </div>
                 </div>
@@ -251,39 +253,46 @@
                         {!! Form::label('Quiero encontrar:')!!}
                         <div class="form-group">
                           <div class="col-sm-6">
-                            {!! Form::radio('like', 'all', true);!!} {!! Form::label('Todo')!!} <br>
-                            {!! Form::radio('like', '0')!!} {!! Form::label('Personas')!!} <br>
-                            {!! Form::radio('like', '2') !!} {!! Form::label('Empresas')!!} <br>
-                            {!! Form::radio('like', '1') !!} {!! Form::label('Celebridad')!!}
+                            <input type="radio" value="all" name="like" id="searchAll" checked="checked">
+                            <label for="like">Todo</label><br>
 
-                          </div>
-                          <div class="col-sm-6">
-                            {!! Form::radio('like', 'youtubers') !!} {!! Form::label('Youtubers')!!} <br>
+                            <input type="radio" value="0" name="like" id="SearchPeople">
+                            <label for="like">Personas</label><br>
+
+                            <input type="radio" value="2" name="like" id="SearchBusiness">
+                            <label for="like">Empresas</label><br>
+                            
+                            <input type="radio" value="1" name="like" id="SearchCelebrities">
+                            <label for="like">Celebridad</label>
+                            <br>
+
+                            <input type="radio" value="youtubers" name="like" id="searchYoutubers" ">
+                            <label for="like">Youtubers</label><br>
                           </div>
                         </div>
                       </div>
                     </div>
                     <div class="form-group">
                     <br>
-                      <div class="col-sm-12 col-md-6 padd-right">
+                      <div class="col-sm-12 col-md-6 padd-right" id="actComercial">
                         {!! Form::label('Act. comercial')!!}
-                        {!! Form::select('comercio',array('all' => 'Todo'),'',['class'=>'form-control','required' => 'required','id'=>'comercio']) !!}
+                        {!! Form::select('comercio',array('all' => 'Todo') + $subCategories,'',['class'=>'form-control','required' => 'required','id'=>'comercio']) !!}
                         <hr>
                       </div>
-                      <div class="col-sm-12 col-md-6 padd-left">
+                      <div class="col-sm-12 col-md-6 padd-left" id="searchcategories">
                         {!! Form::label('Categoría')!!}
-                        {!! Form::select('categoria',array('all' => 'Todo'),'',['class'=>'form-control','required' => 'required','id'=>'categoria']) !!}
+                        {!! Form::select('categoria',array('all' => 'Todo') + $categories,'',['class'=>'form-control','required' => 'required','id'=>'categoria']) !!}
                         <hr>
                       </div>
                     </div>
 
                     <div class="form-group">
-                      <div class="col-sm-12 col-md-6 padd-right">
+                      <div class="col-sm-12 col-md-6 padd-right" id="searchGender">
                         {!! Form::label('Genero')!!}
                         {!! Form::select('genero',array('all' => 'Todo','m' => 'Hombre', 'f' => 'Mujer'),'',['class'=>'form-control','required' => 'required','id'=>'genero']) !!}
                         <hr>
                       </div>
-                      <div class="col-sm-12 col-md-6 padd-left">
+                      <div class="col-sm-12 col-md-6 padd-left" id="searchEdad">
                         {!! Form::label('Edad')!!}
                         <select name="edad" id="" class="form-control">
                           <option value="all">Todo</option>
@@ -295,7 +304,7 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <div class="col-sm-12 col-md-6 padd-right">
+                      <div class="col-sm-12 col-md-6 padd-right" id="interesting">
                         <label>Intereses</label>
                         {!! Form::select('interes',array('all' => 'Todo') + $interest,'',['class'=>'form-control','required' => 'required','id'=>'interes']) !!}
                         <hr>
@@ -309,18 +318,18 @@
                     <div class="form-group">
                       <div class="col-sm-12 col-md-6 padd-right">
                         <label>Provincia</label>
-                        {!! Form::select('provincia',array('all' => 'Todo'),'',['class'=>'form-control', 'required' => 'required','id'=>'state']); !!}
+                        {!! Form::select('provincia',array('all' => 'Seleccione pais'),'',['class'=>'form-control', 'required' => 'required','id'=>'state']); !!}
                       </div>
                       <div class="col-md-6 col-sm-12 padd-left">
                         <label>Municipio</label>
-                        {!! Form::select('municipio',array('all' => 'Todo'),'',['class'=>'form-control', 'required' => 'required','id'=>'city']); !!}
+                        {!! Form::select('municipio',array('all' => 'Seleccione Provincia'),'',['class'=>'form-control', 'required' => 'required','id'=>'city']); !!}
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-12">
                       <hr>
                     </div>
 
-                    <div class="form-group center-block">
+                    <div class="form-group center-block" id="buscado">
                       <div class="col-md-12">
                         <label>Lo más buscado</label>
                       </div>
@@ -350,7 +359,7 @@
                       {!! Form::hidden('interest','all',['id' => 'interest']) !!}
                     </div>
                     <div class="clearfix"></div>
-                    <div class="form-group center-block">
+                    <div class="form-group center-block" id="filtroredes">
                       <div class="col-md-12">
                       <hr>
                         <label>Filtrar por red social</label>
@@ -391,7 +400,7 @@
                       </div>
                     </div>
                     <div class="clearfix"></div>
-                    <div class="form-group center-block">
+                    <div class="form-group center-block" id="filtrostream">
                       <div class="col-md-12">
                       <hr>
                         <label>Filtrar por plataforma de streaming</label>
@@ -401,21 +410,31 @@
                           <img src="img/twich.png" alt="twitch" data-stream="twitch" class="img-responsive">
                         <!-- </div> -->
                         <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
-                          <img src="img/bambuser.png" alt="bambuser" data-stream="bambuser" class="img-responsive">
+                          <img src="img/bambuser.png" alt="bambuser" data-stream="livestream" class="img-responsive">
                         <!-- </div> -->
                         <!-- <div class="muchtSearch col-xs-4 col-sm-6 col-md-3"> -->
-                          <img src="img/lives.png" alt="lives" data-stream="lives" class="img-responsive">
+                          <img src="img/lives.png" alt="lives" data-stream="bambuser" class="img-responsive">
                         <!-- </div> -->
                         {!! Form::hidden('stream','all',['id' => 'stream']) !!}
                       </div>
+
+                    </div>
+
                       <div class="col-md-12 center-block center-text">
                         <br>
-                        {!! Form::submit('BUSCAR',['class'=>'butto-formns center-block']) !!}
+                        @if(Auth::check())
+                          {!! Form::submit('BUSCAR',['class'=>'butto-formns center-block']) !!}
+                        @else
+                          <button type="submit" class="butto-formns center-block" data-toggle="modal" data-target="#myModal" id="searchingData">
+                            BUSCAR
+                          </button>
+                        @endif
                       </div>
-                    </div>
                   {!! Form::close() !!}
-          </section>
-        </div>
+                </div>
+              </div>
+            </section>
+          </div>
         <div class="col-sm-9 col-md-9" id="contentArt">
           <section class="video">
             <video src="video/shymow.mp4" controls loop muted preload="auto" >
@@ -598,7 +617,25 @@
       <img src="img/youtube-footer.png" alt="shymow" class="img-responsive">
     </div>
   </div>
-</div>  
+</div> 
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="background: transparent;border: none;box-shadow: none;color:#FFF;">
+      <div class="modal-body" >
+        <div id="contentSearchModal"></div>
+        <div class="modalFooter">
+          <h2>Conoce más sobre tu búsqueda haciendo clic en</h2>
+          <div class="col-xs-4"><hr></div>
+          <div class="col-xs-4"><a href="#star" class="btn btn-default" id="initS">INICIAR SESIÓN</a></div>
+          <div class="col-xs-4"><hr></div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
 </div>
 @endsection
 
@@ -765,6 +802,152 @@
         });
       }
       /* Act on the event */
+  });
+
+
+  $('#SearchPeople').click(function(event) {
+    /* Act on the event */
+    $('#actComercial').slideUp('slow');
+    $('#searchcategories').slideUp('slow');
+
+    $('#searchGender').slideDown('slow');
+    $('#searchEdad').slideDown('slow');
+    $('#interesting').css('visibility', 'visible');
+
+    $('#filtroredes').slideDown('slow');
+    $('#filtrostream').slideDown('slow');
+  });
+
+  $('#SearchBusiness').click(function(event) {
+    /* Act on the event */
+    $('#actComercial').slideDown('slow');
+    $('#searchcategories').slideDown('slow');
+    $('#searchcategories').css('visibility', 'visible');
+    $('#actComercial').css('visibility', 'visible');
+
+
+    $('#interesting').css('visibility', 'hidden');
+    $('#searchGender').slideUp('slow');
+    $('#searchEdad').slideUp('slow');
+    $('#filtroredes').slideUp('slow');
+    $('#filtrostream').slideUp('slow');
+
+
+  });
+
+  $('#SearchCelebrities').click(function(event) {
+    /* Act on the event */
+    $('#actComercial').slideUp('slow');
+    $('#searchcategories').slideUp('slow');
+
+    $('#searchGender').slideDown('slow');
+    $('#searchEdad').slideDown('slow');
+    $('#interesting').css('visibility', 'visible');
+
+    $('#filtroredes').slideDown('slow');
+    $('#filtrostream').slideDown('slow');
+  });
+
+  $('#searchcategories').change(function(event) {
+    /* Act on the event */
+    $('#actComercial').css('visibility', 'hidden');
+    $('#searchcategories').css('visibility', 'visible');
+  });
+
+  $('#actComercial').change(function(event) {
+    /* Act on the event */
+    $('#searchcategories').css('visibility', 'hidden');
+    $('#actComercial').css('visibility', 'visible');
+  });
+
+  $('#searching').keyup(function(event) {
+    $('#interesting').css('visibility', 'visible');
+
+    var txt = $(this).val();
+    if (txt.length > 0) {
+      // $('#SearchPeople').prop('checked', true);
+      $('#actComercial').slideUp('slow');
+      $('#searchcategories').slideUp('slow');
+      $('#SearchPeople').is('checked');
+    }else{
+      $('#actComercial').slideDown('slow');
+      $('#searchcategories').slideDown('slow');
+    }
+  });
+
+  $('#searching').select(function(event) {
+    $('#interesting').css('visibility', 'visible');
+
+    var txt = $(this).val();
+    if (txt.length > 0) {
+      // $('#SearchPeople').prop('checked', true);
+      $('#actComercial').slideUp('slow');
+      $('#searchcategories').slideUp('slow');
+      $('#SearchPeople').is('checked');
+    }else{
+      $('#actComercial').slideDown('slow');
+      $('#searchcategories').slideDown('slow');
+    }
+  });
+
+  // $("#searchingData"). contentSearchModal
+  $("#buscadorOut").submit(function(event) {
+    /* Act on the event */
+    event.preventDefault();
+    var form = $(this).serialize();
+    var url = $(this).attr('action');
+    console.log(form);
+    $.ajax({
+      url: '/searchAll',
+      type: 'GET',
+      dataType: 'JSON',
+      data: {data: form},
+      success: function(data){
+        if(!data.error){
+
+          for (var i = 0; i <= data.data.length; i++) {
+            var user = data.data[i];
+
+            var html = '<div class="container-busquedas">'+
+            '<div class="sub-content-busqueda">'+
+              '<div class="img-busqueda col-sm-3" style="padding:0px !important;"><img src="'+user.img_profile+'" alt="shymow"></div>'+
+
+              '<div class="busquedas-content col-sm-6" style="padding:0px !important;">'+
+                '<div class="content-busqueda-header">'+
+                  '<span class="first-title">'+user.name+'</span>'+
+                   '<span class="sub-title"> '+user.pais+'</span>'+
+                '</div>'
+                '<p>{{$user->descripcion}}</p>'+
+              '</div>'+
+
+              '<div class="busquedas-settings" style="padding:0px !important;">'+
+                  '<a href="{{url('view_user/'.$user->id)}}" class="show-more">VER +</a>'+
+                '</div>'+
+              '</div>'+
+              
+            '</div>'+
+          '</div>';
+            if (i < 1) {
+              $('#contentSearchModal').html('<div style="margin-bottom:10px;">'+html+'</div>');
+            }else{
+              $('#contentSearchModal').append('<div style="margin-bottom:10px;">'+html+'</div>');
+            }
+          }
+        }
+      }
+    })
+    .fail(function() {
+      $('#contentSearchModal').html('<h2>Ocurrio un error</h2>');
+      console.log("error");
+    });
+    $('#initS').click(function(event) {
+      /* Act on the event */
+      $('#myModal').modal('hide');
+
+      $('html,body').animate({
+          scrollTop: $("#startS").offset().top
+      }, 2000);
+    });
   });
     // $('#buscador').submit(function(event) {
     //   /* Act on the event */

@@ -12,6 +12,8 @@ use App\Interest;
 use App\Chat;
 use App\User_chat;
 use App\Message;
+use App\BusinessCategories;
+use App\BusinessSubCategories;
 use App\Type_send_product;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
@@ -32,6 +34,8 @@ class DatabaseSeeder extends Seeder {
         $this->call('TypeSendTableSeeder');
         $this->call('ChatTableSeeder');
         $this->call('MessageTableSeeder');
+        $this->call('BusinessCategoriesSeeder');
+        $this->call('BusinessSubCategoriesSeeder');
     }
 
 }
@@ -108,37 +112,37 @@ class FriendTableSeeder extends Seeder {
         Friend::create(array(
 	        	'user1' => 1,
 	        	'user2' => 2,
-	        	'friend' => false
+	        	'status' => 0
         ));
 
         Friend::create(array(
 	        	'user1' => 1,
 	        	'user2' => 3,
-	        	'friend' => true
+	        	'status' => 1
         ));
 
         Friend::create(array(
 	        	'user1' => 1,
 	        	'user2' => 4,
-	        	'friend' => true
+	        	'status' => 1
         ));
 
         Friend::create(array(
 	        	'user1' => 2,
 	        	'user2' => 3,
-	        	'friend' => true
+	        	'status' => 1
         ));
 
         Friend::create(array(
 	        	'user1' => 2,
 	        	'user2' => 4,
-	        	'friend' => true
+	        	'status' => 1
         ));
 
         Friend::create(array(
 	        	'user1' => 3,
 	        	'user2' => 4,
-	        	'friend' => true
+	        	'status' => 1
         ));
     }
 
@@ -698,6 +702,192 @@ class MessageTableSeeder extends seeder{
 	        'emisor' => 4,
 	        'receptor' => 1,
 	        'message' => "Por que? jaja",
+        ));
+	}
+}
+
+class BusinessCategoriesSeeder extends seeder{
+	public function run(){
+		DB::table('business_categories')->delete();
+
+		BusinessCategories::create(array(
+	        'name' => 'Moda',
+        ));
+        BusinessCategories::create(array(
+	        'name' => 'Deporte',
+        ));
+        BusinessCategories::create(array(
+	        'name' => 'Establecimientos',
+        ));
+        BusinessCategories::create(array(
+	        'name' => 'Empresas',
+        ));
+	}
+}
+class BusinessSubCategoriesSeeder extends seeder{
+	public function run(){
+		DB::table('business_sub_categories')->delete();
+
+		BusinessSubCategories::create(array(
+	        'business_id' => 3,
+	        'name' => 'Agricultura',
+        ));
+        BusinessSubCategories::create(array(
+	        'business_id' => 3,
+	        'name' => 'Alimentación',
+        ));
+        BusinessSubCategories::create(array(
+	        'business_id' => 3,
+	        'name' => 'Animales',
+        ));
+        BusinessSubCategories::create(array(
+	        'business_id' => 3,
+	        'name' => 'Arte & Cultura',
+        ));
+        BusinessSubCategories::create(array(
+	        'business_id' => 4,
+	        'name' => 'Banca',
+        ));
+        BusinessSubCategories::create(array(
+	        'business_id' => 1,
+	        'name' => 'Belleza',
+        ));
+        BusinessSubCategories::create(array(
+	        'business_id' => 4,
+	        'name' => 'Bodas',
+        ));
+        BusinessSubCategories::create(array(
+	        'business_id' => 4,
+	        'name' => 'Coches',
+        ));
+        BusinessSubCategories::create(array(
+	        'business_id' => 4,
+	        'name' => 'Construcción',
+        ));
+        BusinessSubCategories::create(array(
+	        'business_id' => 2,
+	        'name' => 'Deporte',
+        ));
+
+        BusinessSubCategories::create(array(
+	        'business_id' => 3,
+	        'name' => 'Despachos',
+        ));
+        BusinessSubCategories::create(array(
+	        'business_id' => 4,
+	        'name' => 'Transporte',
+        ));
+        BusinessSubCategories::create(array(
+	        'business_id' => 3,
+	        'name' => 'Enseñanza',
+        ));
+
+        BusinessSubCategories::create(array(
+	        'business_id' => 3,
+	        'name' => 'Establecimientos',
+        ));
+
+        BusinessSubCategories::create(array(
+	        'business_id' => 3,
+	        'name' => 'Hogar',
+        ));
+
+        BusinessSubCategories::create(array(
+	        'business_id' => 3,
+	        'name' => 'Hotel',
+        ));
+
+        BusinessSubCategories::create(array(
+	        'business_id' => 4,
+	        'name' => 'Imagen & Sonido',
+        ));
+
+        BusinessSubCategories::create(array(
+	        'business_id' => 4,
+	        'name' => 'Informática',
+        ));
+        BusinessSubCategories::create(array(
+	        'business_id' => 4,
+	        'name' => 'Ingeniería',
+        ));
+
+        BusinessSubCategories::create(array(
+	        'business_id' => 3,
+	        'name' => 'Jardinería',
+        ));
+
+        BusinessSubCategories::create(array(
+	        'business_id' => 3,
+	        'name' => 'Joyería',
+        ));
+
+        BusinessSubCategories::create(array(
+	        'business_id' => 3,
+	        'name' => 'Mantenimiento',
+        ));
+
+        BusinessSubCategories::create(array(
+	        'business_id' => 1,
+	        'name' => 'Moda',
+        ));
+
+        BusinessSubCategories::create(array(
+	        'business_id' => 4,
+	        'name' => 'Muebles',
+        ));
+
+        BusinessSubCategories::create(array(
+	        'business_id' => 3,
+	        'name' => 'Pisos',
+        ));
+        BusinessSubCategories::create(array(
+	        'business_id' => 4,
+	        'name' => 'Productos industriales',
+        ));
+
+        BusinessSubCategories::create(array(
+	        'business_id' => 4,
+	        'name' => 'Publicidad',
+        ));
+
+        BusinessSubCategories::create(array(
+	        'business_id' => 3,
+	        'name' => 'Restaurantes',
+        ));
+
+        BusinessSubCategories::create(array(
+	        'business_id' => 3,
+	        'name' => 'Salud',
+        ));
+
+        BusinessSubCategories::create(array(
+	        'business_id' => 4,
+	        'name' => 'Seguridad',
+        ));
+
+        BusinessSubCategories::create(array(
+	        'business_id' => 4,
+	        'name' => 'Seguros',
+        ));
+
+        BusinessSubCategories::create(array(
+	        'business_id' => 4,
+	        'name' => 'Servicios',
+        ));
+
+        BusinessSubCategories::create(array(
+	        'business_id' => 3,
+	        'name' => 'Funerales',
+        ));
+
+        BusinessSubCategories::create(array(
+	        'business_id' => 4,
+	        'name' => 'Servicios industriales',
+        ));
+
+        BusinessSubCategories::create(array(
+	        'business_id' => 4,
+	        'name' => 'Telecomunicaciones',
         ));
 	}
 }

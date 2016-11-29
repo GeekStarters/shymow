@@ -57,6 +57,7 @@ jQuery(document).ready(function($) {
 	     			html += addressInput;
 	     			html += "</a><li>";
 	     			$('#sucursales').append(html);
+	     			$('#nothingLocal').slideUp('slow');
 	     		}
 	     	}
 	      })
