@@ -700,7 +700,8 @@
       console.log("error");
     })
   });
-    $('#state').change(function(event) {
+
+  $('#state').change(function(event) {
     /* Act on the event */
     $('#city').html('<option>Cargando..</option>');
     var id = $(this).val();

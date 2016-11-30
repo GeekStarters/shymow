@@ -334,6 +334,7 @@
 	</div>
 	<!-- AQUI FINALIZA LO CORTADO -->
 </div>
+@extends('logueado.layouts.content-modal')
 @extends('logueado.layouts.content-float-chat')
 @stop
 @section('scripts')

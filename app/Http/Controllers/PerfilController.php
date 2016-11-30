@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Perfil;
 use App\Empresa;
+use App\Countrie;
+use App\State;
+use App\Citie;
 use Image;
 use Input;
 class PerfilController extends Controller {
@@ -242,7 +245,110 @@ class PerfilController extends Controller {
 	public function editImg(){
 		return view('logueado.editar_img_perfil');
 	}
+	public function editHobbies(Request $request){
+		$v = Validator::make($request->all(), [
+	        'hobbies' => 'required',
+	    ]);
 
+	    if ($v->fails())
+	    {
+	        flash('No se encontraron hobbies', 'danger');
+	        return redirect()->back();
+	    }
+
+	    $hobbies = $request->input("hobbies");
+
+	    try {
+	    	Perfil::where('id',Auth::id())->update(["more_hobbies"=>$hobbies]);
+	    	flash('Sus hobbies fueron guardados', 'success');
+	    	return redirect()->back();
+	    } catch (Exception $e) {
+	    	
+	    }
+	}
+	public function editHome(Request $request){
+		$v = Validator::make($request->all(), [
+	        'pais' => 'required',
+	        'provincia' => 'required',
+	        'municipio' => 'required',
+	    ]);
+
+	    if ($v->fails())
+	    {
+	        flash('Seleccione los datos correspondientes', 'danger');
+	        return redirect()->back();
+	    }
+	    $countrie = (int) $request->input('pais');
+	    $province = (int) $request->input('provincia');
+	    $state = (int) $request->input('municipio');
+	    try {
+	    	$pais = Countrie::where('id',$countrie)->get();
+	    	if (count($pais)>0) {
+	    		$provincia = State::where('id',$province)->where('countrie_id',$pais[0]->id)->get();
+	    		if (count($provincia) > 0) {
+	    			$municipio = Citie::where('id',$state)->where('state_id',$provincia[0]->id)->get();
+	    			if (count($municipio)>0) {
+	    				try {
+	    					Perfil::where('id',Auth::id())->update(["pais" => $pais[0]->name,"provincia"=>$provincia[0]->name,"municipio" => $municipio[0]->name]);
+
+	    					flash('Residencia guardada con éxito', 'success');
+        					return redirect()->back();
+	    				} catch (Exception $e) {
+	    					flash('Error al actualizar residencia', 'danger');
+        					return redirect()->back();
+	    				}
+	    			}else{
+	    				flash('Error al actualizar residencia', 'danger');
+        				return redirect()->back();
+	    			}
+	    		}else{
+	    			flash('Error al actualizar residencia', 'danger');
+        			return redirect()->back();
+	    		}
+	    	}else{
+	    		flash('Error al actualizar residencia', 'danger');
+        		return redirect()->back();
+	    	}
+	    } catch (Exception $e) {
+	    	
+	    }
+	}
+	public function editBorn(Request $request){
+		$messages = [
+			"required" => "Seleccione los datos correspondientes",
+		];
+		$v = Validator::make($request->all(), [
+	        'day' => 'required',
+	        'month' => 'required',
+	        'year' => 'required',
+	    ],$messages);
+
+	    if ($v->fails())
+	    {
+	        flash('Seleccione los datos correspondientes', 'danger');
+	        return redirect()->back();
+	    }
+
+	    $day = (int) $request->input('day');
+	    $month = (int) $request->input('month');
+	    $year = (int) $request->input('year');
+
+
+	    $date = date('Y-m-d', strtotime($year."-".$month."-".$day));
+	    if(checkdate($month,$day,$year)){
+	    	try {
+	    		Perfil::where('id',Auth::id())->update(["birthdate" => $date]);
+	    		flash('Fecha actualizada', 'success');
+	    		return redirect()->back();
+	    	} catch (Exception $e) {
+	    		flash('Error al actualizar fecha', 'danger');
+	    		return redirect()->back();
+	    	}
+	    }
+
+	    flash('Fecha no valida', 'danger');
+	    return redirect()->back();
+	}
 	public function editCover(){
 		return view('logueado.editar_img_portada');
 	}
@@ -277,7 +383,7 @@ class PerfilController extends Controller {
 		try {
 			Image::make( $img->getRealPath() )->resize(700,300)->crop($width, $height, $x1, $y1)->resize(700,300)->save($path);
 			Perfil::where('id',Auth::id())->update(['img_portada'=>'img/profile/' . $filename]);
-			
+
 			flash('Portada Cambiada con éxito', 'success');
 			return redirect('perfil');
 		} catch (Exception $e) {

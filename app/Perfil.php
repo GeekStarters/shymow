@@ -11,7 +11,7 @@ class Perfil extends Model implements AuthenticatableContract {
 	use Authenticatable;
 	protected $table = 'perfils';
 
-	protected $fillable = ['name', 'email','birthdate','genero','pais','provincia','municipio','hobbies','redes','streamings','webs','blogs','role','mi_frase','descripcion','active','img_profile','img_portada','edad','password','work','phone'];
+	protected $fillable = ['name', 'email','birthdate','genero','pais','provincia','municipio','hobbies','redes','streamings','webs','blogs','role','mi_frase','descripcion','active','img_profile','img_portada','edad','password','work','phone','more_hobbies'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.

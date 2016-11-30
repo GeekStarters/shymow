@@ -30,6 +30,7 @@ class CreatePerfilsTable extends Migration {
 			$table->string('img_profile')->default('img/profile/default.png');
 			$table->string('img_portada')->default('img/profile/portada.jpg');
 			$table->mediumText('hobbies')->nullable();
+			$table->mediumText('more_hobbies')->nullable();
 			$table->mediumText('redes')->nullable();
 			$table->mediumText('streamings')->nullable();
 			$table->mediumText('webs')->nullable();

@@ -11,6 +11,8 @@ use App\Like_post;
 use App\Friend;
 use App\Perfil;
 use App\Empresa;
+use App\Celebritie;
+use App\Countrie;
 use Auth;
 use Illuminate\Http\Request;
 use Validator;
@@ -70,18 +72,26 @@ class InsideController extends Controller {
 		$buildings = [];
 		$empresa=[];
 		$builds = [];
+		$celebritie = [];
 		if (Auth::user()->role == 2) {
 			$buildings = Empresa::where('profile_id',Auth::id())->where('active',true)->get();
 			if(count($buildings) > 0){
 				$empresa = DB::table('empresas')
-				->where('profile_id',Auth::id())->get();
+				->where('profile_id',Auth::id())->first();
 
-				$alias = $empresa[0]->alias;
-				$builds = json_decode($buildings[0]->local,true);
+				
+				
 				
 			}
 		}
-		return view('logueado.amigos',compact('user_contents','alias'));
+		if (Auth::user()->role == 1) {
+			$celebridad = Celebritie::where('profile_id',Auth::id())->where('active',true)->get();
+			if (count($celebridad) > 0) {
+				$celebritie = Celebritie::where('profile_id',Auth::id())->first();
+			}
+		}
+		$countries = Countrie::lists('name','id');
+		return view('logueado.amigos',compact('user_contents','empresa','celebritie','countries'));
 	}
 	public function favorites(){
 		//ID this user
@@ -140,18 +150,22 @@ class InsideController extends Controller {
 		$buildings = [];
 		$empresa=[];
 		$builds = [];
+		$celebritie = [];
 		if (Auth::user()->role == 2) {
 			$buildings = Empresa::where('profile_id',Auth::id())->where('active',true)->get();
 			if(count($buildings) > 0){
-				$empresa = DB::table('empresas')
-				->where('profile_id',Auth::id())->get();
+				$empresa = DB::table('empresas')->where('profile_id',Auth::id())->first();
 
-				$alias = $empresa[0]->alias;
-				$builds = json_decode($buildings[0]->local,true);
-				
 			}
 		}
-		return view('logueado.favoritos',compact('categories','post_content','alias'));
+		if (Auth::user()->role == 1) {
+			$celebridad = Celebritie::where('profile_id',Auth::id())->where('active',true)->get();
+			if (count($celebridad) > 0) {
+				$celebritie = Celebritie::where('profile_id',Auth::id())->first();
+			}
+		}
+		$countries = Countrie::lists('name','id');
+		return view('logueado.favoritos',compact('categories','post_content','empresa','celebritie','countries'));
 	}
 	public function perfil(){
 		$category = Category_post::lists('name','id');
@@ -181,18 +195,23 @@ class InsideController extends Controller {
 		$buildings = [];
 		$empresa=[];
 		$builds = [];
+		$celebritie = [];
 		if (Auth::user()->role == 2) {
 			$buildings = Empresa::where('profile_id',Auth::id())->where('active',true)->get();
 			if(count($buildings) > 0){
-				$empresa = DB::table('empresas')
-				->where('profile_id',Auth::id())->get();
+				$empresa = DB::table('empresas')->where('profile_id',Auth::id())->first();
 
-				$alias = $empresa[0]->alias;
-				$builds = json_decode($buildings[0]->local,true);
-				
+				$builds = json_decode($empresa->local,true);
 			}
 		}
-		return view('logueado.perfil',compact('category','posts','socialNet','streamNet','streams','socials','builds','alias'));
+		if (Auth::user()->role == 1) {
+			$celebridad = Celebritie::where('profile_id',Auth::id())->where('active',true)->get();
+			if (count($celebridad) > 0) {
+				$celebritie = Celebritie::where('profile_id',Auth::id())->first();
+			}
+		}
+		$countries = Countrie::lists('name','id');
+		return view('logueado.perfil',compact('category','posts','socialNet','streamNet','streams','socials','builds','empresa','celebritie','countries'));
 		// dd($posts);
 		// return view('logueado.perfil',compact('category','posts','socialNet','streamNet','streams','socials'));
 	}
@@ -210,18 +229,26 @@ class InsideController extends Controller {
 		$buildings = [];
 		$empresa=[];
 		$builds = [];
+
+		$celebritie = [];
+		$apodo = [];
 		if (Auth::user()->role == 2) {
 			$buildings = Empresa::where('profile_id',Auth::id())->where('active',true)->get();
 			if(count($buildings) > 0){
 				$empresa = DB::table('empresas')
-				->where('profile_id',Auth::id())->get();
+				->where('profile_id',Auth::id())->first();
 
-				$alias = $empresa[0]->alias;
-				$builds = json_decode($buildings[0]->local,true);
-				
 			}
 		}
-		return view('logueado.tendencias',compact('trends','topTrends','alias'));
+		if (Auth::user()->role == 1) {
+			$celebridad = Celebritie::where('profile_id',Auth::id())->where('active',true)->get();
+			if (count($celebridad) > 0) {
+				$celebritie = Celebritie::where('profile_id',Auth::id())->first();
+			}
+		}
+		$countries = Countrie::lists('name','id');
+
+		return view('logueado.tendencias',compact('trends','topTrends','empresa','celebritie','countries'));
 	}
 
 	public function tendencia($name){
@@ -249,18 +276,26 @@ class InsideController extends Controller {
 		$buildings = [];
 		$empresa=[];
 		$builds = [];
+		$celebritie = [];
 		if (Auth::user()->role == 2) {
 			$buildings = Empresa::where('profile_id',Auth::id())->where('active',true)->get();
 			if(count($buildings) > 0){
 				$empresa = DB::table('empresas')
-				->where('profile_id',Auth::id())->get();
+				->where('profile_id',Auth::id())->first();
 
-				$alias = $empresa[0]->alias;
-				$builds = json_decode($buildings[0]->local,true);
+				
+				
 				
 			}
 		}
-			return view('logueado.tendencia', compact('trends','images','name_trends','alias'));													
+		if (Auth::user()->role == 1) {
+			$celebridad = Celebritie::where('profile_id',Auth::id())->where('active',true)->get();
+			if (count($celebridad) > 0) {
+				$celebritie = Celebritie::where('profile_id',Auth::id())->first();
+			}
+		}
+		$countries = Countrie::lists('name','id');
+			return view('logueado.tendencia', compact('trends','images','name_trends','empresa','celebritie','countries'));													
 		}else{
 			return redirect('tendencias');
 		}

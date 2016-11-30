@@ -202,6 +202,9 @@ Route::group(['middleware' => 'auth'], function()
     Route::post('/uploadProfileImg','PerfilController@uploadProfileImg');
     Route::post('/uploadCoverImg','PerfilController@uploadCoverImg');
     Route::post('/edit_data_profile','PerfilController@editDataProfile');
+    Route::post('/editBorn','PerfilController@editBorn');
+    Route::post('/editHome','PerfilController@editHome');
+    Route::post('/edit_hobbies','PerfilController@editHobbies');
 
 
     //Friends

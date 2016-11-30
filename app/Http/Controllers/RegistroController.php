@@ -343,7 +343,7 @@ class RegistroController extends Controller {
 
 		    if (!($dia <= 0 || $dia > 31)) {
 		    	if (!($mes <= 0 || $mes > 12)) {
-		    		if ($anio < 1930 || $anio > 2016) {
+		    		if ($anio < date("Y")-100 || $anio > date("Y")) {
 		    			return redirect('data_user');
 		    		}
 		    	}else{
@@ -396,7 +396,7 @@ class RegistroController extends Controller {
 
 		    if (!($dia <= 0 || $dia > 31)) {
 		    	if (!($mes <= 0 || $mes > 12)) {
-		    		if ($anio < 1930 || $anio > 2016) {
+		    		if ($anio < date("Y")-100 || $anio > date("Y")) {
 		    			return redirect('datos_celebridad');
 		    		}
 		    	}else{
@@ -464,7 +464,7 @@ class RegistroController extends Controller {
 
 		    if (!($dia <= 0 || $dia > 31)) {
 		    	if (!($mes <= 0 || $mes > 12)) {
-		    		if ($anio < 1930 || $anio > 2016) {
+		    		if ($anio < date("Y")-100 || $anio > date("Y")) {
 		    			return redirect('datos_empresa');
 		    		}
 		    	}else{

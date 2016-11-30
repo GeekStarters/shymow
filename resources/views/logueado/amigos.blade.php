@@ -35,4 +35,5 @@
 	
 </div>
 @stop
+@extends('logueado.layouts.content-modal')
 @extends('logueado.layouts.content-float-chat')

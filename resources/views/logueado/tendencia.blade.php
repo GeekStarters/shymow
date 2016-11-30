@@ -29,7 +29,12 @@
 						<div class="post-header">
 
 							<div class="post-follow">
-								<a 
+								@if($trend->profil_id == Auth::id())
+									<a href="{{url('/delete_post/'.$trend->id_post)}}" class="delete_post">
+										<i class="glyphicon glyphicon-remove"></i>
+									</a>
+								@endif
+								<a id="foll"
 									@if($trend->follow)
 										class="follow-post-active"
 									@else
@@ -162,6 +167,7 @@
 
 </div>
 @stop
+@extends('logueado.layouts.content-modal')
 @extends('logueado.layouts.content-float-chat')
 @section('scripts')
 <script>

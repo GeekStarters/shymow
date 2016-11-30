@@ -87,7 +87,7 @@
 							<div class="data-profile">
 								<div class="name-profile text-center">
 									@if(Auth::user()->role == 2)
-										<h2>{{$alias}}</h2>
+										<h2>{{$empresa->alias}}</h2>
 									@endif
 
 									@if(Auth::user()->role == 0)
@@ -95,7 +95,7 @@
 									@endif
 
 									@if(Auth::user()->role == 1)
-										<h2>{{$apodo}}</h2>
+										<h2>{{$celebritie->apodo}}</h2>
 									@endif
 								</div>
 								<div class="profile-message text-center">
@@ -113,12 +113,12 @@
 									@else
 										<li><span class="glyphicon glyphicon-user"></span> <span class="val">Sin especificar</span> <span id="work" class="glyphicon glyphicon-pencil color-edit"></li>
 									@endif
-									<li><span class="glyphicon glyphicon-map-marker"></span> {{Auth::user()->provincia }}, {{Auth::user()->pais}} <span class="glyphicon glyphicon-pencil color-edit"></span></li>
+									<li><span class="glyphicon glyphicon-map-marker"></span> {{Auth::user()->provincia }}, {{Auth::user()->pais}} <span class="glyphicon glyphicon-pencil color-edit" data-toggle="modal" data-target="#editLocation"></span>></li>
 
 									@if(Auth::user()->role != 2)
 										<li>
 											<span class="glyphicon glyphicon-calendar"></span>
-											{{ date('j F \of Y', strtotime(Auth::user()->birthdate))}} <span class="glyphicon glyphicon-pencil color-edit"></span>
+											{{ date('j F \of Y', strtotime(Auth::user()->birthdate))}} <span class="glyphicon glyphicon-pencil color-edit" data-toggle="modal" data-target="#dateEdit"></span>
 										</li>
 									@endif
 								</ul>
@@ -161,11 +161,11 @@
 						</div>
 						<div class="more-interesting col-sm-3">
 							<div class="interesting-header">
-								<h2>Más de mis intereses</h2>
+								<h2>Más de mis intereses <span class="glyphicon glyphicon-pencil color-edit" data-toggle="modal" data-target="#moreHobbie"></span></h2>
 							</div>
 							<div class="more-interesting-body">
 								<p>
-									Super héroes, Arrow, Flash, Supergirl, Bella y bestia, Gotham, Arquitectura, Playa, Peliculas, Vintage, Graffiti, Ilustración, Educación, Comedia, Universidad, Leer, Escritores, Fantasias, Actores, Comediantes
+									{{Auth::user()->more_hobbies}}
 								</p>
 							</div>
 

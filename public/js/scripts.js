@@ -906,4 +906,59 @@ $( document ).ready(function() {
         });
     });
 
+  $('#pais').change(function(event) {
+    /* Act on the event */
+    $('#state').html('<option>Cargando..</option>');
+    $('#city').html('<option>Selecciona municipio</option>');
+    var id = $(this).val();
+    $.ajax({
+      url: 'state/'+id,
+      type: 'GET',
+      dataType: 'html',
+      success: function(data){
+        $('#state').html('<option value="all">Todo</option>'+data);
+      }
+    })
+    .fail(function() {
+      console.log("error");
+    })
+  });
+
+  $('#state').change(function(event) {
+    /* Act on the event */
+    $('#city').html('<option>Cargando..</option>');
+    var id = $(this).val();
+    $.ajax({
+      url: 'city/'+id,
+      type: 'GET',
+      dataType: 'html',
+      success: function(data){
+        $('#city').html('<option value="all">Todo</option>'+data);
+        if (data == "")
+          $('#city').html('<option value="all">Municipios no encontrados</option>');
+      }
+    })
+    .fail(function() {
+      console.log("error");
+    })
+  });
+
+  $('#state').change(function(event) {
+    /* Act on the event */
+    $('#city').html('<option>Cargando..</option>');
+    var id = $(this).val();
+    $.ajax({
+      url: 'city/'+id,
+      type: 'GET',
+      dataType: 'html',
+      success: function(data){
+        $('#city').html(data);
+        if (data == "")
+          $('#city').html('<option value="all">Municipios no encontrados</option>');
+      }
+    })
+    .fail(function() {
+      console.log("error");
+    })
+  });
 });
