@@ -631,7 +631,7 @@
 												<div class="sub-img-social">
 													<img src="{{url('img/profile/'.$socialNet[$i].'.png')}}" alt="shymow">
 												</div>
-												<img src="{{url('img/profile/redes_add/'.$socialNet[$i].'.jpg')}}" alt="shymow">
+												<img src="{{url('img/backred.png')}}" alt="shymow">
 											</div>
 										</a>
 										<div class="social-body">
@@ -646,13 +646,18 @@
 							@endif
 						@endfor
 					@endif
-
 					<div class="social-redes new_social"  data-name='{{explode(" ",Auth::user()->name)[0]}}'>
-						<div class="img-social">
-							<img src="img/profile/more.jpg" alt="shymow">
-						</div>
+						<a href="#" target="_blank">
+							<div class="img-social">
+								<div class="sub-img-social">
+								</div>
+								<img src="img/profile/more.jpg" alt="shymow">
+							</div>
+						</a>
 						<div class="social-body">
-							<h2 style="color:#60BBB2;">Agregar <br>Red social</h2>
+							<a href="https://www.facebook.com/" class="color_reds" target="_blank">
+								<h2 style="color:#60BBB2;">Agregar <br>Red social</h2>
+							</a>
 						</div>
 					</div>
 				</div>
@@ -672,7 +677,7 @@
 					</div>
 					<div class="col-sm-6 add-body out-padding">
 						<div class="form-group">
-							<input type="text" id="address-input" class="form-control" placeholder="Local"><button class="add-business button-add bussines-add"><span class="glyphicon glyphicon-plus"></span></button>
+							<input type="text" id="address-input" class="form-control" placeholder="Dirección"><button class="add-business button-add bussines-add"><span class="glyphicon glyphicon-plus"></span></button>
 						</div>
 					</div>
 					<div class="col-md-12">
@@ -817,7 +822,7 @@
 		$('.camera i').click(function(event) {
 			$('#uploadImg').click();
 		});
-
+		$('div.alert').not('.alert-important').delay(3000).fadeOut(350);
 		$("#uploadImg").change(function(){
 		    readURL(this,'#blah');
 		    $('#blah').fadeIn('slow');

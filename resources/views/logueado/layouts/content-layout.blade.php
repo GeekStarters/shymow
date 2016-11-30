@@ -31,6 +31,7 @@
 				    <input id="typesearch" class="typeahead form-control" name="top_search" data-provide="typeahead" placeholder="Search" autocomplete="off" type="text">
 				    <span class="input-group-addon" id="basic-addon2" style="padding:0;"><button style="border:none;padding:0px;"><img src="{{url('img/search.png')}}" alt="search" width="32" height="32"></button></span>
 				  </div>
+				  <a href="{{url('perfil')}}" class="btn btn-default"><span class="glyphicon glyphicon-user"></span></a href="index.html" class="btn btn-default">
 				</form>
 
 			</ul>
@@ -39,6 +40,7 @@
 			<div class="profiles-data-users">
 				<div class="profile-header col-sm-12">
 					<div class="header-port">
+						<a href="{{url('/edit_img_cover')}}" class="editar-portada"><i class="glyphicon glyphicon-camera"></i></a>
 						<img src="{{ url(Auth::user()->img_portada) }}" alt="shymow">
 						<a href="{{url('shymow-shop')}}" class="cart-shop"><i class="glyphicon glyphicon-shopping-cart"></i></a>
 					</div>
@@ -84,13 +86,24 @@
 							</a>
 							<div class="data-profile">
 								<div class="name-profile text-center">
-									<h2>{{Auth::user()->username}}</h2>
+									@if(Auth::user()->role == 2)
+										<h2>{{$alias}}</h2>
+									@endif
+
+									@if(Auth::user()->role == 0)
+										<h2>{{Auth::user()->name}}</h2>
+									@endif
+
+									@if(Auth::user()->role == 1)
+										<h2>{{$apodo}}</h2>
+									@endif
 								</div>
 								<div class="profile-message text-center">
-									<p>{{Auth::user()->mi_frase}} <span id="frase" class="glyphicon glyphicon-pencil color-edit"></p>
+
+									<p><span id="contentFra">{{Auth::user()->mi_frase}}</span> <span id="frase" class="glyphicon glyphicon-pencil color-edit"></p>
 								</div>
 								<div class="about-profile text-justify">
-									<p>{{Auth::user()->descripcion}} <span id="descripcion_profile" class="glyphicon glyphicon-pencil color-edit"></p>
+									<p><span id="myDescr">{{Auth::user()->descripcion}}</span> <span id="descripcion_profile" class="glyphicon glyphicon-pencil color-edit"></p>
 								</div>
 							</div>
 							<div class="more-data">
@@ -101,8 +114,13 @@
 										<li><span class="glyphicon glyphicon-user"></span> <span class="val">Sin especificar</span> <span id="work" class="glyphicon glyphicon-pencil color-edit"></li>
 									@endif
 									<li><span class="glyphicon glyphicon-map-marker"></span> {{Auth::user()->provincia }}, {{Auth::user()->pais}} <span class="glyphicon glyphicon-pencil color-edit"></span></li>
-									<li><span class="glyphicon glyphicon-calendar"></span>
-									{{ date('j F \of Y', strtotime(Auth::user()->birthdate))}} <span class="glyphicon glyphicon-pencil color-edit"></span></li>
+
+									@if(Auth::user()->role != 2)
+										<li>
+											<span class="glyphicon glyphicon-calendar"></span>
+											{{ date('j F \of Y', strtotime(Auth::user()->birthdate))}} <span class="glyphicon glyphicon-pencil color-edit"></span>
+										</li>
+									@endif
 								</ul>
 							</div>
 						</div>

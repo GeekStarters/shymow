@@ -63,7 +63,25 @@ class InsideController extends Controller {
 				}
 			}
 		}
-		return view('logueado.amigos',compact('user_contents'));
+			$alias = '';
+		$paises = [];
+		$provincias = [];
+		$estados = [];
+		$buildings = [];
+		$empresa=[];
+		$builds = [];
+		if (Auth::user()->role == 2) {
+			$buildings = Empresa::where('profile_id',Auth::id())->where('active',true)->get();
+			if(count($buildings) > 0){
+				$empresa = DB::table('empresas')
+				->where('profile_id',Auth::id())->get();
+
+				$alias = $empresa[0]->alias;
+				$builds = json_decode($buildings[0]->local,true);
+				
+			}
+		}
+		return view('logueado.amigos',compact('user_contents','alias'));
 	}
 	public function favorites(){
 		//ID this user
@@ -115,7 +133,25 @@ class InsideController extends Controller {
 		// dd($post_content);
 		//Post category
 		$categories = Category_post::where('active',true)->get();
-		return view('logueado.favoritos',compact('categories','post_content'));
+		$alias = '';
+		$paises = [];
+		$provincias = [];
+		$estados = [];
+		$buildings = [];
+		$empresa=[];
+		$builds = [];
+		if (Auth::user()->role == 2) {
+			$buildings = Empresa::where('profile_id',Auth::id())->where('active',true)->get();
+			if(count($buildings) > 0){
+				$empresa = DB::table('empresas')
+				->where('profile_id',Auth::id())->get();
+
+				$alias = $empresa[0]->alias;
+				$builds = json_decode($buildings[0]->local,true);
+				
+			}
+		}
+		return view('logueado.favoritos',compact('categories','post_content','alias'));
 	}
 	public function perfil(){
 		$category = Category_post::lists('name','id');
@@ -138,15 +174,27 @@ class InsideController extends Controller {
 			$socials = json_decode(Auth::user()->redes,true);
 		}
 
+		$alias = '';
+		$paises = [];
+		$provincias = [];
+		$estados = [];
+		$buildings = [];
+		$empresa=[];
+		$builds = [];
 		if (Auth::user()->role == 2) {
 			$buildings = Empresa::where('profile_id',Auth::id())->where('active',true)->get();
 			if(count($buildings) > 0){
+				$empresa = DB::table('empresas')
+				->where('profile_id',Auth::id())->get();
+
+				$alias = $empresa[0]->alias;
 				$builds = json_decode($buildings[0]->local,true);
-				return view('logueado.perfil',compact('category','posts','socialNet','streamNet','streams','socials','builds'));
+				
 			}
 		}
+		return view('logueado.perfil',compact('category','posts','socialNet','streamNet','streams','socials','builds','alias'));
 		// dd($posts);
-		return view('logueado.perfil',compact('category','posts','socialNet','streamNet','streams','socials'));
+		// return view('logueado.perfil',compact('category','posts','socialNet','streamNet','streams','socials'));
 	}
 
 	public function tendencias(){
@@ -154,7 +202,26 @@ class InsideController extends Controller {
 
 		$topTrends = DB::select('SELECT `post_trends`.`trend_id`, count(`post_trends`.`trend_id`) AS `TOTAL`,`trends`.`name` FROM `post_trends` LEFT JOIN `trends` ON `trends`.`id` = `post_trends`.`trend_id` GROUP BY `trend_id` ORDER BY `TOTAL` DESC LIMIT 0 , 10 ');
 		// dd($trends);
-		return view('logueado.tendencias',compact('trends','topTrends'));
+
+		$alias = '';
+		$paises = [];
+		$provincias = [];
+		$estados = [];
+		$buildings = [];
+		$empresa=[];
+		$builds = [];
+		if (Auth::user()->role == 2) {
+			$buildings = Empresa::where('profile_id',Auth::id())->where('active',true)->get();
+			if(count($buildings) > 0){
+				$empresa = DB::table('empresas')
+				->where('profile_id',Auth::id())->get();
+
+				$alias = $empresa[0]->alias;
+				$builds = json_decode($buildings[0]->local,true);
+				
+			}
+		}
+		return view('logueado.tendencias',compact('trends','topTrends','alias'));
 	}
 
 	public function tendencia($name){
@@ -175,7 +242,25 @@ class InsideController extends Controller {
 					array_push($images,$trend->path );
 				}
 			}
-			return view('logueado.tendencia', compact('trends','images','name_trends'));													
+			$alias = '';
+		$paises = [];
+		$provincias = [];
+		$estados = [];
+		$buildings = [];
+		$empresa=[];
+		$builds = [];
+		if (Auth::user()->role == 2) {
+			$buildings = Empresa::where('profile_id',Auth::id())->where('active',true)->get();
+			if(count($buildings) > 0){
+				$empresa = DB::table('empresas')
+				->where('profile_id',Auth::id())->get();
+
+				$alias = $empresa[0]->alias;
+				$builds = json_decode($buildings[0]->local,true);
+				
+			}
+		}
+			return view('logueado.tendencia', compact('trends','images','name_trends','alias'));													
 		}else{
 			return redirect('tendencias');
 		}

@@ -793,6 +793,30 @@ background:#00C1BE;
     padding: 13px 15px;
     border-radius: 50%;
 }
+.editar-portada{
+	position: absolute;
+    left: 40px;
+    top: 10px;
+    background: #36B5AC;
+    color: #fff;
+    padding: 13px 15px;
+    border-radius: 50%;
+}
+
+.editar-portada:hover, .editar-portada:visited{
+	color:#fff;
+}
+.editar-portada:hover{
+	background: #d50000;
+}
+.editar-portada i{
+	font-size: 1.8em;
+}
+
+
+
+
+
 .cart-shop:hover, .cart-shop:visited{
 	color:#fff;
 }
@@ -2330,6 +2354,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4f6f5', end
 .edit_img button, .edit_img a{
 	margin:20px;
 	display: none;
+}
+.edit_img .imgPortadaC{
+	display: none;
+	width: 700px;
+	margin:20px;
+	border:2px solid #696666;
 }
 .edit_img img{
 	display: none;

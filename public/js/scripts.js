@@ -487,12 +487,13 @@ $( document ).ready(function() {
                                 html +=            '<div class="sub-img-social">';
                                 html +=                '<img src="img/profile/'+page+'.png" alt="shymow">';
                                 html +=            '</div>';
-                                html +=           ' <img src="img/profile/redes_add/'+page+'.jpg" alt="shymow">';
+                                html +=           ' <img src="img/backred.png" alt="shymow">';
                                 html +=       ' </div>';
                             html +=       ' </a>';
                             html +=       ' <div class="social-body">';
                             html +=            '<h2>'+name+'</h2>';
                             html +=            '<p>'+page+'</p>';
+                            html +=            '<h6 class="text-danger delete_red" data-network="'+page+'" data-red="'+text+'" style="cursor:pointer;">Eliminar</h6>'
                             html +=        '</div>';
                             html +=    '</div>';
                             $('.container_social').prepend(html);
@@ -500,7 +501,6 @@ $( document ).ready(function() {
                     });
                 }
             }
-
             if (controlador < 1) {
                 $('.social-danger').fadeIn('slow');
             }
@@ -781,7 +781,7 @@ $( document ).ready(function() {
     $('#frase').click(function(event) {
         /* Act on the event */
         var text = $(this).parent('p').text();
-        var object = $(this).parent('p');
+        var object = $(this).parent('p').children('#contentFra');
         swal({
           title: "Mi frase",
           text: "Escribe una frase nueva:",
@@ -824,7 +824,7 @@ $( document ).ready(function() {
     $('#descripcion_profile').click(function(event) {
         /* Act on the event */
         var text = $(this).parent('p').text();
-        var object = $(this).parent('p');
+        var object = $(this).parent('p').children('#myDescr');
         swal({
           title: "Mi breve descripción",
           text: "Escribe una descripción nueva:",
@@ -866,7 +866,7 @@ $( document ).ready(function() {
     // Editar trabajo
     $('#work').click(function(event) {
         /* Act on the event */
-        var text = $(this).parent('p').text();
+        var text = $(this).siblings('.val').text();
         var object = $(this).siblings('.val');
         swal({
           title: "Mi profesión",

@@ -198,7 +198,9 @@ Route::group(['middleware' => 'auth'], function()
 
     //Edit profile img
     Route::get('/edit_img_user','PerfilController@editImg');
+    Route::get('/edit_img_cover','PerfilController@editCover');
     Route::post('/uploadProfileImg','PerfilController@uploadProfileImg');
+    Route::post('/uploadCoverImg','PerfilController@uploadCoverImg');
     Route::post('/edit_data_profile','PerfilController@editDataProfile');
 
 

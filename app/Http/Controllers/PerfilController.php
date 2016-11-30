@@ -242,6 +242,49 @@ class PerfilController extends Controller {
 	public function editImg(){
 		return view('logueado.editar_img_perfil');
 	}
+
+	public function editCover(){
+		return view('logueado.editar_img_portada');
+	}
+	public function uploadCoverImg(Request $request){
+		$messages = [
+			"required" => "Seleccione una imagen y el campo que desea",
+			"image" => "Seleccione una imagen valida"
+		];
+		$v = Validator::make($request->all(), [
+	        'img' => 'required|image:jpeg,png',
+	        'x1' => 'required',
+	        'x2' => 'required',
+	        'y1' => 'required',
+	        'y2' => 'required',
+	        'width' => 'required',
+	        'height' => 'required',
+	    ],$messages);
+
+	    if ($v->fails())
+	    {
+	        return redirect()->back()->withErrors($v->errors());
+	    }
+
+	    $img = Input::file('img');
+	    $width = $request->input('width');
+	    $height = $request->input('height');
+	    $x1 = $request->input('x1');
+	    $y1 = $request->input('y1');
+	    $filename  = time() . '.' . $img->getClientOriginalExtension();
+	    $path = public_path('img/profile/' . $filename);
+
+		try {
+			Image::make( $img->getRealPath() )->resize(700,300)->crop($width, $height, $x1, $y1)->resize(700,300)->save($path);
+			Perfil::where('id',Auth::id())->update(['img_portada'=>'img/profile/' . $filename]);
+			
+			flash('Portada Cambiada con éxito', 'success');
+			return redirect('perfil');
+		} catch (Exception $e) {
+			flash('Error al cambiar portada', 'danger');
+			return redirect('perfil');
+		}
+	}
 	public function uploadProfileImg(Request $request){
 		$messages = [
 			"required" => "Seleccione una imagen y el campo que desea",
@@ -273,9 +316,11 @@ class PerfilController extends Controller {
 		try {
 			Image::make( $img->getRealPath() )->resize(400,400)->crop($width, $height, $x1, $y1)->resize(400,400)->save($path);
 			Perfil::where('id',Auth::id())->update(['img_profile'=>'img/profile/' . $filename]);
+			flash('Foto de perfil cambiada con éxito', 'success');
 			return redirect('perfil');
 		} catch (Exception $e) {
-			
+			flash('Error al cambiar foto de perfil', 'danger');
+			return redirect('perfil');
 		}
 	}
 	/**

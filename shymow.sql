@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-11-2016 a las 17:59:34
+-- Tiempo de generación: 30-11-2016 a las 02:38:23
 -- Versión del servidor: 5.7.9
 -- Versión de PHP: 5.6.16
 
@@ -49328,14 +49328,15 @@ CREATE TABLE IF NOT EXISTS `empresas` (
   PRIMARY KEY (`id`),
   KEY `empresas_profile_id_foreign` (`profile_id`),
   KEY `empresas_actividad_comercial_foreign` (`actividad_comercial`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `empresas`
 --
 
 INSERT INTO `empresas` (`id`, `profile_id`, `responsable`, `email_responsable`, `empresa`, `alias`, `dni`, `actividad_comercial`, `descripcion`, `empresa_pais`, `empresa_provincia`, `empresa_municipio`, `local`, `active`, `created_at`, `updated_at`) VALUES
-(1, 5, 'Gustavo arnoldo', 'gustabo@gmail.com', 'Geekstarters corp', 'Geekstarters', '841568410', 18, '', 'Austria', 'Tirol', 'Absam', '[{"address":"1600 Amphitheatre Parkway, Mountain View, CA","lat":"37.4223664","lng":"-122.084406"},{"address":"Ilopango, san salvador, el salvador","lat":"13.6868163","lng":"-89.11818490000002"}]', 1, '2016-11-29 11:43:09', '2016-11-29 12:27:59');
+(1, 5, 'Gustavo arnoldo', 'gustabo@gmail.com', 'Geekstarters corp', 'Geekstarters', '841568410', 18, '', 'Austria', 'Tirol', 'Absam', '[{"address":"1600 Amphitheatre Parkway, Mountain View, CA","lat":"37.4223664","lng":"-122.084406"},{"address":"Ilopango, san salvador, el salvador","lat":"13.6868163","lng":"-89.11818490000002"}]', 1, '2016-11-29 11:43:09', '2016-11-29 12:27:59'),
+(2, 7, 'Pablo empresario', 'pablo@gmail.com', 'adoc corp', 'adoc', '841568410', 23, '', 'Bahrain', 'al-Muharraq', 'al-Muharraq', '[{"address":"distrito federal, mexico","lat":"19.2464696","lng":"-99.10134979999998"}]', 1, '2016-11-30 05:03:33', '2016-11-30 06:25:35');
 
 -- --------------------------------------------------------
 
@@ -49393,7 +49394,15 @@ CREATE TABLE IF NOT EXISTS `follow_posts` (
   PRIMARY KEY (`id`),
   KEY `follow_posts_perfil_id_foreign` (`perfil_id`),
   KEY `follow_posts_post_id_foreign` (`post_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `follow_posts`
+--
+
+INSERT INTO `follow_posts` (`id`, `perfil_id`, `post_id`, `active`, `created_at`, `updated_at`) VALUES
+(1, 4, 0, 0, '2016-11-30 01:46:35', '2016-11-30 01:46:50'),
+(2, 4, 2, 0, '2016-11-30 01:48:50', '2016-11-30 01:48:52');
 
 -- --------------------------------------------------------
 
@@ -49850,19 +49859,20 @@ CREATE TABLE IF NOT EXISTS `perfils` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `perfils_email_unique` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `perfils`
 --
 
 INSERT INTO `perfils` (`id`, `name`, `email`, `password`, `birthdate`, `genero`, `pais`, `provincia`, `municipio`, `work`, `phone`, `role`, `edad`, `img_profile`, `img_portada`, `hobbies`, `redes`, `streamings`, `webs`, `blogs`, `mi_frase`, `descripcion`, `active`, `policies_and_conditions`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Wilmer gilberto', 'wilmer@gmail.com', '$2y$10$Sud0p4PTEBjDebNCSiDmMuLDnQrh6zHQPHAfgeH86WyjmCigkSs3S', '1995-03-29', 'M', 'El Salvador', 'El refugio', 'La paz', '', '', 0, 22, 'img/profile/default.png', 'img/profile/portada.jpg', 'Musica, juegos, Economia', NULL, NULL, NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 1, 1, NULL, '2016-11-29 11:41:38', '2016-11-29 11:41:38'),
+(1, 'Wilmer gilberto', 'wilmer@gmail.com', '$2y$10$Sud0p4PTEBjDebNCSiDmMuLDnQrh6zHQPHAfgeH86WyjmCigkSs3S', '1995-03-29', 'M', 'El Salvador', 'El refugio', 'La paz', '', '', 0, 22, 'img/profile/default.png', 'img/profile/portada.jpg', 'Musica, juegos, Economia', NULL, NULL, NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 1, 1, 'k7TDFzdwQ47sUqLvTQ8S7vwQeUxgLwJmIUQEADfZoJJN2pH4WD1LKdnfIwHO', '2016-11-29 11:41:38', '2016-11-30 01:26:06'),
 (2, 'delmi solano', 'demi@gmail.com', '$2y$10$tGf5mMQ4mp0BVonKtHMXoe0jvaCaWyYi3kd4Y1sw1qVGZEFE35Epy', '1995-03-29', 'F', 'El Salvador', 'El refugio', 'La paz', '', '', 0, 29, 'img/profile/default.png', 'img/profile/portada.jpg', 'Musica, juegos, Economia', NULL, NULL, NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 1, 1, NULL, '2016-11-29 11:41:38', '2016-11-29 11:41:38'),
 (3, 'Gisela lara', 'Gisela@gmail.com', '$2y$10$yZLTQ0bzSW5fgojfCLRxouN.eTd4WiimBCxaITjL/an9Nu1qW9FF.', '1995-03-29', 'F', 'El Salvador', 'El refugio', 'La paz', '', '', 0, 21, 'img/profile/default.png', 'img/profile/portada.jpg', 'Musica, juegos, Economia', NULL, NULL, NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 1, 1, NULL, '2016-11-29 11:41:38', '2016-11-29 11:41:38'),
-(4, 'Developer prueba', 'developer@gmail.com', '$2y$10$O8gTgf27/GjiixKMzqrf1etVfpibKKOkqByzPQrmj25hwQShj6Qy6', '1995-03-29', 'M', 'El Salvador', 'El refugio', 'La paz', '', '', 0, 21, 'img/profile/default.png', 'img/profile/portada.jpg', 'Musica, juegos, Economia', NULL, NULL, NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 1, 1, 'icioe7nVz3zfAlrjZlHMzX8CEtrJKYURvEvwJzSOUJgSrjptrcN6JSregDlN', '2016-11-29 11:41:38', '2016-11-29 21:32:04'),
-(5, 'Everth Omar', 'omar@gmail.com', '$2y$10$EPwcmcTnm6AiK8WVSci1weB/PccNSeztHAM7UtHLPjFc8SvqarABC', '1995-03-29', 'm', 'Bahamas The', 'Abaco', 'Marsh Harbour', '', '', 2, 21, 'img/profile/default.png', 'img/profile/portada.jpg', 'Informatica', 'null', 'null', NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 1, 1, 'yrllLnQquHNZXSy1HNsMrkrTVEyXW6y8C2daDueqy27oQ4MhHuRdX18YFPHt', '2016-11-29 11:43:09', '2016-11-29 13:11:46'),
-(6, 'Melvin Celebridad', 'celebridad@gmail.com', '$2y$10$XDTHyF6U.WbNPYPaR6K5EOyqcDBY6psAo/gDOrY/eH2ZJ/G4tpLE2', '1940-03-29', 'm', 'Bahamas The', 'Mayaguana', 'Pirates Well', '', '', 1, 76, 'img/profile/default.png', 'img/profile/portada.jpg', 'Viajar', 'null', 'null', NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 1, 1, NULL, '2016-11-29 13:13:18', '2016-11-29 13:13:18');
+(4, 'Developer prueba', 'developer@gmail.com', '$2y$10$O8gTgf27/GjiixKMzqrf1etVfpibKKOkqByzPQrmj25hwQShj6Qy6', '1995-03-29', 'M', 'El Salvador', 'El refugio', 'La paz', '', '', 0, 21, 'img/profile/1480472793.jpg', 'img/profile/1480473259.jpg', 'Musica, juegos, Economia', NULL, NULL, NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 1, 1, 'xhXgeV8Oip20NYT6XleoU8gRO0saNfoAYUXhkDPuREyeKc43gOfUXor5pAoM', '2016-11-29 11:41:38', '2016-11-30 08:35:47'),
+(5, 'Everth Omar', 'omar@gmail.com', '$2y$10$EPwcmcTnm6AiK8WVSci1weB/PccNSeztHAM7UtHLPjFc8SvqarABC', '1995-03-29', 'm', 'Bahamas The', 'Abaco', 'Marsh Harbour', '', '', 2, 21, 'img/profile/default.png', 'img/profile/portada.jpg', 'Informatica', '{"facebook":["https:\\/\\/www.facebook.com\\/","https:\\/\\/www.facebook.com\\/"],"twitter":[]}', 'null', NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 1, 1, 'hXCZdgq2HJnDhRbYFPF2WcVezIcqHSjIyRdsHgUvvaA2YDIDssF5UbFrhzx2', '2016-11-29 11:43:09', '2016-11-30 06:24:53'),
+(6, 'Melvin Celebridad', 'celebridad@gmail.com', '$2y$10$XDTHyF6U.WbNPYPaR6K5EOyqcDBY6psAo/gDOrY/eH2ZJ/G4tpLE2', '1940-03-29', 'm', 'Bahamas The', 'Mayaguana', 'Pirates Well', '', '', 1, 76, 'img/profile/default.png', 'img/profile/portada.jpg', 'Viajar', 'null', 'null', NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 1, 1, NULL, '2016-11-29 13:13:18', '2016-11-29 13:13:18'),
+(7, 'Pablo hernandez', 'pablo@gmail.com', '$2y$10$ehBu6uEwMNTFxUk2ybkMU.LJh/r/fnXwxFY06pzusOdqjePgJ2GkW', '1964-03-29', 'm', 'Bahrain', 'Sitrah', 'Sitrah', 'desarrollador', '', 2, 52, 'img/profile/default.png', 'img/profile/portada.jpg', 'Arte,Belleza', '{"twitter":{"1":"https:\\/\\/twitter.com\\/MelvinGilbertoS"},"instagram":["https:\\/\\/www.instagram.com\\/suzycortezoficial\\/"]}', 'null', NULL, NULL, 'Un Día Más!', 'Soy alegre y feliz', 1, 1, '5urrW7WJ922tMouO97AfbXIkENwcm5LWSZUD2f6uZBmdGpXfv1FRrvMV97Jd', '2016-11-30 05:03:33', '2016-11-30 07:18:23');
 
 -- --------------------------------------------------------
 
@@ -49904,7 +49914,15 @@ CREATE TABLE IF NOT EXISTS `posts` (
   PRIMARY KEY (`id`),
   KEY `posts_category_post_id_foreign` (`category_post_id`),
   KEY `posts_profil_id_foreign` (`profil_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `posts`
+--
+
+INSERT INTO `posts` (`id`, `description`, `category_post_id`, `profil_id`, `like`, `qualification`, `posts`, `share`, `active`, `created_at`, `updated_at`) VALUES
+(1, 'Hola', 5, 1, 0, 0, 0, 0, 1, '2016-11-30 01:26:17', '2016-11-30 01:26:17'),
+(2, '#FelizDía', 3, 4, 0, 0, 0, 0, 1, '2016-11-30 01:26:36', '2016-11-30 04:54:48');
 
 -- --------------------------------------------------------
 
@@ -49923,7 +49941,14 @@ CREATE TABLE IF NOT EXISTS `post_trends` (
   PRIMARY KEY (`id`),
   KEY `post_trends_post_id_foreign` (`post_id`),
   KEY `post_trends_trend_id_foreign` (`trend_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `post_trends`
+--
+
+INSERT INTO `post_trends` (`id`, `post_id`, `trend_id`, `active`, `created_at`, `updated_at`) VALUES
+(1, 2, 1, 1, '2016-11-30 01:26:36', '2016-11-30 01:26:36');
 
 -- --------------------------------------------------------
 
@@ -54241,7 +54266,14 @@ CREATE TABLE IF NOT EXISTS `trends` (
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `trends`
+--
+
+INSERT INTO `trends` (`id`, `name`, `active`, `created_at`, `updated_at`) VALUES
+(1, 'FelizDía', 1, '2016-11-30 01:26:36', '2016-11-30 01:26:36');
 
 -- --------------------------------------------------------
 
