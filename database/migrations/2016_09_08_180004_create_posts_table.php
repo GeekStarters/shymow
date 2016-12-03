@@ -24,6 +24,7 @@ class CreatePostsTable extends Migration {
 			$table->integer('qualification')->default(0);
 			$table->integer('posts')->default(0);
 			$table->integer('share')->default(0);
+			$table->integer('type')->default(0);
 			$table->boolean('active')->default(true);
 			$table->timestamps();
 		});

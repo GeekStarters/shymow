@@ -134,35 +134,62 @@ $( document ).ready(function() {
     //PROCESO DEL LIKE
     	$('.like-me').click(function(event) {
     		/* Act on the event */
-    		var post = $(this).data('like');
-    		// alert(post);
+            var post = $(this).data('like');
+    		var user = $(this).data('user');
             var objecto = $(this);
-    		var no_like = $(this).hasClass('post-like-me');
+            if (user != null) {
+                // alert(post);
+                var no_like = $(this).hasClass('like-user');
+                
+                $.ajax({
+                    url: '/create_like_user/'+post,
+                    type: 'POST',
+                    dataType: 'HTML',
+                    success: function($data){
+                        if (no_like == false) {             
+                            objecto.addClass('like-user');
+                            objecto.removeClass('like-user-active');
 
-            var like = objecto.children('.number-post').text();
-            like = parseInt(like);
-    		
-			$.ajax({
-				url: '/create_like/'+post,
-				type: 'POST',
-				dataType: 'HTML',
-				success: function($data){
-                    if (no_like == false) {             
-                        objecto.addClass('post-like-me');
-                        objecto.removeClass('post-like-me-active');
-                        objecto.children('.number-post').text(like-1);
+                        }else{
+                            objecto.removeClass('like-user');
+                            objecto.addClass('like-user-active');
 
-                    }else{
-    					objecto.removeClass('post-like-me');
-        				objecto.addClass('post-like-me-active');
-                        objecto.children('.number-post').text(like+1);
-
+                        }
                     }
-				}
-			})
-			.fail(function() {
-				console.log("error");
-			});
+                })
+                .fail(function() {
+                    console.log("error");
+                });
+            }else{
+                // alert(post);
+                var no_like = $(this).hasClass('post-like-me');
+
+                var like = objecto.children('.number-post').text();
+                like = parseInt(like);
+                
+                $.ajax({
+                    url: '/create_like/'+post,
+                    type: 'POST',
+                    dataType: 'HTML',
+                    success: function($data){
+                        if (no_like == false) {             
+                            objecto.addClass('post-like-me');
+                            objecto.removeClass('post-like-me-active');
+                            objecto.children('.number-post').text(like-1);
+
+                        }else{
+                            objecto.removeClass('post-like-me');
+                            objecto.addClass('post-like-me-active');
+                            objecto.children('.number-post').text(like+1);
+
+                        }
+                    }
+                })
+                .fail(function() {
+                    console.log("error");
+                });
+
+            }
     	});
 
     //FIN PROCESO DE LIKE
@@ -172,36 +199,73 @@ $( document ).ready(function() {
         event.preventDefault();
         /* Act on the event */
         var value = $(this).data('star');
+
         var post_id = $(this).data('post');
+        var user_qualification = $(this).data('userqualification');
+
         var padre = $(this).parents('.post-qualification');
-        $.ajax({
-            url: '/create_qualification/'+post_id+'/'+value,
-            type: 'POST',
-            dataType: 'JSON',
-            success: function(data){
-                if (!data.error) {
-                    var html_append = "";
-                    if(data.qualification < 5)
-                    {
-                        for (var i = 1; i <= parseInt(data.qualification); i++)
-                            html_append += '<a data-star="'+i+'" class="glyphicon glyphicon-star qualification-popular" data-post="'+post_id+'"></a>'
-                  
-                        for (var i = 1; i <= (5-parseInt(data.qualification)); i++)
-                            html_append += '<a data-star="'+(parseInt(data.qualification)+i)+'" class="glyphicon glyphicon-star qualification-no-popular" data-post="'+post_id+'"></a>'
-                        
-                        padre.html(html_append);
-                    }else{
-                        for (var i = 1; i <= data.qualification; i++)
-                            html_append += '<a data-star="'+i+'" class="glyphicon glyphicon-star qualification-popular" data-post="'+post_id+'"></a>'
-                        
-                        padre.html(html_append);
+        
+        if (post_id != null && user_qualification == null) {
+            $.ajax({
+                url: '/create_qualification/'+post_id+'/'+value,
+                type: 'POST',
+                dataType: 'JSON',
+                success: function(data){
+                    if (!data.error) {
+                        var html_append = "";
+                        if(data.qualification < 5)
+                        {
+                            for (var i = 1; i <= parseInt(data.qualification); i++)
+                                html_append += '<a data-star="'+i+'" class="glyphicon glyphicon-star qualification-popular" data-post="'+post_id+'"></a>'
+                      
+                            for (var i = 1; i <= (5-parseInt(data.qualification)); i++)
+                                html_append += '<a data-star="'+(parseInt(data.qualification)+i)+'" class="glyphicon glyphicon-star qualification-no-popular" data-post="'+post_id+'"></a>'
+                            
+                            padre.html(html_append);
+                        }else{
+                            for (var i = 1; i <= data.qualification; i++)
+                                html_append += '<a data-star="'+i+'" class="glyphicon glyphicon-star qualification-popular" data-post="'+post_id+'"></a>'
+                            
+                            padre.html(html_append);
+                        }
                     }
                 }
-            }
-        })
-        .fail(function() {
-            console.log("error");
-        });
+            })
+            .fail(function() {
+                console.log("error");
+            });
+        }
+        if (post_id == null && user_qualification != null) {
+            $.ajax({
+                url: '/create_qualification_user/'+user_qualification+'/'+value,
+                type: 'POST',
+                dataType: 'JSON',
+                success: function(data){
+                    if (!data.error) {
+                        var html_append = "";
+                        if(data.qualification < 5)
+                        {
+                            for (var i = 1; i <= parseInt(data.qualification); i++)
+                                html_append += '<a data-star="'+i+'" class="glyphicon glyphicon-star qualification-popular" data-userqualification="'+user_qualification+'"></a>'
+                      
+                            for (var i = 1; i <= (5-parseInt(data.qualification)); i++)
+                                html_append += '<a data-star="'+(parseInt(data.qualification)+i)+'" class="glyphicon glyphicon-star qualification-no-popular" data-userqualification="'+user_qualification+'"></a>'
+                            
+                            padre.html(html_append);
+                        }else{
+                            for (var i = 1; i <= data.qualification; i++)
+                                html_append += '<a data-star="'+i+'" class="glyphicon glyphicon-star qualification-popular" data-userqualification="'+user_qualification+'"></a>'
+                            
+                            padre.html(html_append);
+                        }
+                    }
+                }
+            })
+            .fail(function() {
+                console.log("error");
+            });
+        }
+
         
     });
 
@@ -213,68 +277,127 @@ $( document ).ready(function() {
         var post_id = $(this).data('post_id');
         var user_id = $(this).data('user_id');
         var contenedor = $('#modal_container');
-        $.ajax({
-            url: '/share_post/'+post_id+'/'+user_id,
-            type: 'GET',
-            dataType: 'JSON',
-            beforeSend: function(){
-
-                var html = '<p class="text-center"><i class="block-center text-center fa fa-spinner fa-spin fa-3x fa-fw"></i>';
-                html+= '<span class="block-center text-center sr-only">Loading...</span><br></p>';
-
-                contenedor.html(html)
-            },
-            success: function(data){
-                var html = "";
-                console.log(data);
-                html += '<div class="modal-body">';
-                html += '<input type="text" name="new_description" class="form-control" placeholder="Haz un comentario..." style="border: 0px;box-shadow:none;">';
-                html += '<div class="col-sm-12" style="margin-top: 20px">';
-                html += '<br>';
-                html += '<div class="content-post no-background">';
-                html += '<div class="post-body tendencias-post">';
-                html += '<div class="post-header">';
-                html += '<div class="post-user">';
-                html += '<div class="post-icono"><img src="/'+data.img_profile+'" alt="shymow"></div>';
-                html += '<div class="post-user"><strong>'+data.user_name+'</strong></div>';
-                html += '</div>';
-                html += '</div>';
-                html += '<br>';
-                html += '<div class="clearfix"></div>';
-                html += '<div class="post-description hashtag-post">'+data.post_description+'</div>';
-                html += '<div class="post-media">';
-                        if (data.image.exists){
-                            html += '<img src="'+data.image.path+'" alt="Shymow-Shop">';
-                            html += '<input type="hidden" value="'+data.image.path+'" name="image">';             
-                        }
-                html += '</div>';
-                html += '<br>';
-                html += '</div>';
-                html += '</div>';
-                html += '</div>';
-                html += '</div>';
-
-                html += '<input type="hidden" value="'+data.post_description+'" name="description">';
-                html += '<input type="hidden" value="'+data.user_id+'" name="user_id">';
-                html += '<input type="hidden" value="'+data.post_id+'" name="post_id">';
-                html += '<div class="modal-footer">';
-                html += '<label style="float:left;margin-top: 20px">Seleccionar categoría</label>';
-                html += '<select name="category" class="form-control">';
-                        for (var i = 0; i < data.category.length; i++) {
-                            html += '<option value="'+data.category[i]['id']+'">'+data.category[i]['name']+'</option>';
-                        }
-                html += '</select>';
-                html += '<br>';
-                html += '<button type="submit" class="btn btn-primary">Publicar</button>';
-                html += '</div>';
-
-                contenedor.html(html);
-            }
-        })
-        .fail(function() {
-            console.log("error");
-        });
         
+        if (post_id != null && user_id != null) {
+            $.ajax({
+                url: '/share_post/'+post_id+'/'+user_id,
+                type: 'GET',
+                dataType: 'JSON',
+                beforeSend: function(){
+
+                    var html = '<p class="text-center"><i class="block-center text-center fa fa-spinner fa-spin fa-3x fa-fw"></i>';
+                    html+= '<span class="block-center text-center sr-only">Loading...</span><br></p>';
+
+                    contenedor.html(html)
+                },
+                success: function(data){
+                    var html = "";
+                    html += '<div class="modal-body">';
+                    html += '<input type="text" name="new_description" class="form-control" placeholder="Haz un comentario..." style="border: 0px;box-shadow:none;">';
+                    html += '<div class="col-sm-12" style="margin-top: 20px">';
+                    html += '<br>';
+                    html += '<div class="content-post no-background">';
+                    html += '<div class="post-body tendencias-post">';
+                    html += '<div class="post-header">';
+                    html += '<div class="post-user">';
+                    html += '<div class="post-icono"><img src="/'+data.img_profile+'" alt="shymow"></div>';
+                    html += '<div class="post-user"><strong>'+data.user_name+'</strong></div>';
+                    html += '</div>';
+                    html += '</div>';
+                    html += '<br>';
+                    html += '<div class="clearfix"></div>';
+                    html += '<div class="post-description hashtag-post">'+data.post_description+'</div>';
+                    html += '<div class="post-media">';
+                            if (data.image.exists){
+                                html += '<img src="'+data.image.path+'" alt="Shymow-Shop">';
+                                html += '<input type="hidden" value="'+data.image.path+'" name="image">';             
+                            }
+                    html += '</div>';
+                    html += '<br>';
+                    html += '</div>';
+                    html += '</div>';
+                    html += '</div>';
+                    html += '</div>';
+
+                    html += '<input type="hidden" value="'+data.post_description+'" name="description">';
+                    html += '<input type="hidden" value="'+data.user_id+'" name="user_id">';
+                    html += '<input type="hidden" value="'+data.post_id+'" name="post_id">';
+                    html += '<div class="modal-footer">';
+                    html += '<label style="float:left;margin-top: 20px">Seleccionar categoría</label>';
+                    html += '<select name="category" class="form-control">';
+                            for (var i = 0; i < data.category.length; i++) {
+                                html += '<option value="'+data.category[i]['id']+'">'+data.category[i]['name']+'</option>';
+                            }
+                    html += '</select>';
+                    html += '<br>';
+                    html += '<button type="submit" class="btn btn-primary">Publicar</button>';
+                    html += '</div>';
+
+                    contenedor.html(html);
+                }
+            })
+            .fail(function() {
+                console.log("error");
+            });
+        }
+        
+        if (post_id == null && user_id != null) {
+            $.ajax({
+                url: '/share_user/'+user_id,
+                type: 'GET',
+                dataType: 'JSON',
+                beforeSend: function(){
+
+                    var html = '<p class="text-center"><i class="block-center text-center fa fa-spinner fa-spin fa-3x fa-fw"></i>';
+                    html+= '<span class="block-center text-center sr-only">Loading...</span><br></p>';
+
+                    contenedor.html(html)
+                },
+                success: function(data){
+                    var html = "";
+                    html += '<div class="profiles">';
+                    html += '<div class="modal-body">';
+                    html += '<input type="text" name="new_description" class="form-control" placeholder="Haz un comentario..." style="border: 0px;box-shadow:none;">';
+                    html += '<div class="col-sm-12" style="margin-top: 20px">';
+                    html += '<br>';
+                    html += '<div class="content-post no-background">';
+                    html += '<div class="post-body tendencias-post">';
+                    html += '<div class="post-header">';
+                    html += '<div class="post-user">';
+                    html += '<div class="post-icono"><img src="/'+data.img_profile+'" alt="shymow"></div>';
+                    html += '<div class="post-user"><strong>'+data.user_name+'</strong></div>';
+                    html += '</div>';
+                    html += '</div>';
+                    html += '<br>';
+                    html += '<div class="clearfix"></div>';
+                    html += '<div class="post-description hashtag-post"><div class="busquedas-social"><a href="/view_user/'+data.user_id+'" style="background: #66C1BF;padding: 5px 5px;color: #fff;font-family: gothamTwo;border-radius: 5px;float: right;top: -25px;position: relative;">VER +</a></div></div>';
+                    html += '<div class="post-media">';
+                    html += '</div>';
+                    html += '<br>';
+                    html += '</div>';
+                    html += '</div>';
+                    html += '</div>';
+                    html += '</div>';
+                    html += '<input type="hidden" value="'+data.user_id+'" name="user_id">';
+                    html += '<div class="modal-footer">';
+                    html += '<label style="float:left;margin-top: 20px">Seleccionar categoría</label>';
+                    html += '<select name="category" class="form-control">';
+                            for (var i = 0; i < data.category.length; i++) {
+                                html += '<option value="'+data.category[i]['id']+'">'+data.category[i]['name']+'</option>';
+                            }
+                    html += '</select>';
+                    html += '<br>';
+                    html += '<button type="submit" class="btn btn-primary">Compartir</button>';
+                    html += '</div>';
+                    html += '</div>';
+
+                    contenedor.html(html);
+                }
+            })
+            .fail(function() {
+                console.log("error");
+            });
+        }
     });
 
     $('body').on('click', '.post-follow #foll', function(event) {

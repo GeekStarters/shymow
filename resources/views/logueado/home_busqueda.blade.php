@@ -247,7 +247,47 @@
                               </div>
 
                               <div class="busquedas-settings" style="padding:0px !important;">
-                                
+                                <ul>
+                                    <li class="busquedas-qualification">
+                                      <div class="qualification-header">
+                                        Calificación
+                                        <div class="qualification">
+                                          <span class="post-qualification mini-star border-right-post-tendencias" style="border: 0px;padding: 0px;">
+                                            @if((int)$user->qualification < 5)
+                                                @for ($i = 1; $i <= (int)$user->qualification; $i++)
+                                                  <a data-star="{{$i}}" class="glyphicon glyphicon-star qualification-popular" data-userqualification="{{$user->id}}" ></a>
+                                                @endfor
+                                                @for ($i = 1; $i <= 5-(int)$user->qualification; $i++)
+                                                  <a  data-star="{{(int)$user->qualification+$i}}" class="glyphicon glyphicon-star qualification-no-popular" data-userqualification="{{$user->id}}"></a>
+                                                @endfor
+                                            @else
+                                                @for ($i = 1; $i <= (int)$user->qualification; $i++)
+                                                  <a data-star="{{$i}}" class="glyphicon glyphicon-star qualification-popular" data-userqualification="{{$user->id}}" ></a>
+                                                @endfor
+                                            @endif
+                                            
+                                             
+                                          </span>
+                                        </div>
+                                      </div>
+                                    </li>
+                                    <div class="busquedas-sub-options">
+                                      <li class="busquedas-share">
+                                        <i class="fa fa-share-alt share-icon share_post_shymow" data-user_id="{{$user->id}}" aria-hidden="true" data-toggle="modal" data-target="#myModal"></i>
+                                      </li>
+                                      @if($user->profil_id == Auth::user()->id)
+                                        <span class="like-me like-user-active" data-like="{{$user->id}}" data-user="true">
+                                          <span class="glyphicon glyphicon-heart"></span>
+                                        </span>
+                                      @else
+                                        <span class="like-me like-user" data-like="{{$user->id}}" data-user="true">
+                                          <span class="glyphicon glyphicon-heart"></span>
+                                        </span> 
+                                      @endif
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <hr class="bottom-hr-effects">
+                                  </ul>
                                 <div class="busquedas-social">
                                 @if(isset($user->redes))
                                   @for($i=0; $i<count($socialNet);$i++)
@@ -300,7 +340,46 @@
                               </div>
 
                               <div class="busquedas-settings" style="padding:0px !important;">
-                                
+                                <ul>
+                                    <li class="busquedas-qualification">
+                                      <div class="qualification-header">
+                                        Calificación
+                                        <div class="qualification">
+                                          <span class="post-qualification mini-star border-right-post-tendencias" style="border: 0px;padding: 0px;">
+                                            @if((int)$user->qualification < 5)
+                                                @for ($i = 1; $i <= (int)$user->qualification; $i++)
+                                                  <a data-star="{{$i}}" class="glyphicon glyphicon-star qualification-popular" data-userqualification="{{$user->id}}" ></a>
+                                                @endfor
+                                                @for ($i = 1; $i <= 5-(int)$user->qualification; $i++)
+                                                  <a  data-star="{{(int)$user->qualification+$i}}" class="glyphicon glyphicon-star qualification-no-popular" data-userqualification="{{$user->id}}"></a>
+                                                @endfor
+                                            @else
+                                                @for ($i = 1; $i <= (int)$user->qualification; $i++)
+                                                  <a data-star="{{$i}}" class="glyphicon glyphicon-star qualification-popular" data-userqualification="{{$user->id}}" ></a>
+                                                @endfor
+                                            @endif
+                                            
+                                             
+                                          </span>
+                                        </div>
+                                    </li>
+                                    <div class="busquedas-sub-options">
+                                      <li class="busquedas-share">
+                                        <i class="fa fa-share-alt share-icon share_post_shymow" data-user_id="{{$user->id}}" aria-hidden="true" data-toggle="modal" data-target="#myModal"></i>
+                                      </li>
+                                      @if($user->profil_id == Auth::user()->id)
+                                        <span class="like-me like-user-active" data-like="{{$user->id}}" data-user="true">
+                                          <span class="glyphicon glyphicon-heart"></span>
+                                        </span>
+                                      @else
+                                        <span class="like-me like-user" data-like="{{$user->id}}" data-user="true">
+                                          <span class="glyphicon glyphicon-heart"></span>
+                                        </span> 
+                                      @endif
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <hr class="bottom-hr-effects">
+                                  </ul>
                                 <div class="busquedas-social">
                                 @if(isset($user->redes))
                                   @for($i=0; $i<count($socialNet);$i++)
@@ -353,7 +432,46 @@
                               </div>
 
                               <div class="busquedas-settings" style="padding:0px !important;">
-                                
+                                <ul>
+                                    <li class="busquedas-qualification">
+                                      <div class="qualification-header">
+                                        Calificación
+                                        <div class="qualification">
+                                          <span class="post-qualification mini-star border-right-post-tendencias" style="border: 0px;padding: 0px;">
+                                            @if((int)$user->qualification < 5)
+                                                @for ($i = 1; $i <= (int)$user->qualification; $i++)
+                                                  <a data-star="{{$i}}" class="glyphicon glyphicon-star qualification-popular" data-userqualification="{{$user->id}}" ></a>
+                                                @endfor
+                                                @for ($i = 1; $i <= 5-(int)$user->qualification; $i++)
+                                                  <a  data-star="{{(int)$user->qualification+$i}}" class="glyphicon glyphicon-star qualification-no-popular" data-userqualification="{{$user->id}}"></a>
+                                                @endfor
+                                            @else
+                                                @for ($i = 1; $i <= (int)$user->qualification; $i++)
+                                                  <a data-star="{{$i}}" class="glyphicon glyphicon-star qualification-popular" data-userqualification="{{$user->id}}" ></a>
+                                                @endfor
+                                            @endif
+                                            
+                                             
+                                          </span>
+                                        </div>
+                                    </li>
+                                    <div class="busquedas-sub-options">
+                                      <li class="busquedas-share">
+                                        <i class="fa fa-share-alt share-icon share_post_shymow" data-user_id="{{$user->id}}" aria-hidden="true" data-toggle="modal" data-target="#myModal"></i>
+                                      </li>
+                                      @if($user->profil_id == Auth::user()->id)
+                                        <span class="like-me like-user-active" data-like="{{$user->id}}" data-user="true">
+                                          <span class="glyphicon glyphicon-heart"></span>
+                                        </span>
+                                      @else
+                                        <span class="like-me like-user" data-like="{{$user->id}}" data-user="true">
+                                          <span class="glyphicon glyphicon-heart"></span>
+                                        </span> 
+                                      @endif
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <hr class="bottom-hr-effects">
+                                  </ul>
                                 <div class="busquedas-social">
                                 @if(isset($user->redes))
                                   @for($i=0; $i<count($socialNet);$i++)
@@ -407,7 +525,46 @@
                                 </div>
 
                                 <div class="busquedas-settings" style="padding:0px !important;">
-                                  
+                                  <ul>
+                                    <li class="busquedas-qualification">
+                                      <div class="qualification-header">
+                                        Calificación
+                                        <div class="qualification">
+                                          <span class="post-qualification mini-star border-right-post-tendencias" style="border: 0px;padding: 0px;">
+                                            @if((int)$user->qualification < 5)
+                                                @for ($i = 1; $i <= (int)$user->qualification; $i++)
+                                                  <a data-star="{{$i}}" class="glyphicon glyphicon-star qualification-popular" data-userqualification="{{$user->id}}" ></a>
+                                                @endfor
+                                                @for ($i = 1; $i <= 5-(int)$user->qualification; $i++)
+                                                  <a  data-star="{{(int)$user->qualification+$i}}" class="glyphicon glyphicon-star qualification-no-popular" data-userqualification="{{$user->id}}"></a>
+                                                @endfor
+                                            @else
+                                                @for ($i = 1; $i <= (int)$user->qualification; $i++)
+                                                  <a data-star="{{$i}}" class="glyphicon glyphicon-star qualification-popular" data-userqualification="{{$user->id}}" ></a>
+                                                @endfor
+                                            @endif
+                                            
+                                             
+                                          </span>
+                                        </div>
+                                    </li>
+                                    <div class="busquedas-sub-options">
+                                      <li class="busquedas-share">
+                                        <i class="fa fa-share-alt share-icon share_post_shymow" data-user_id="{{$user->id}}" aria-hidden="true" data-toggle="modal" data-target="#myModal"></i>
+                                      </li>
+                                      @if($user->profil_id == Auth::user()->id)
+                                        <span class="like-me like-user-active" data-like="{{$user->id}}" data-user="true">
+                                          <span class="glyphicon glyphicon-heart"></span>
+                                        </span>
+                                      @else
+                                        <span class="like-me like-user" data-like="{{$user->id}}" data-user="true">
+                                          <span class="glyphicon glyphicon-heart"></span>
+                                        </span> 
+                                      @endif
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <hr class="bottom-hr-effects">
+                                  </ul>
                                   <div class="busquedas-social">
                                   @if(isset($user->redes))
                                     @for($i=0; $i<count($socialNet);$i++)
@@ -459,7 +616,48 @@
                                 </div>
 
                                 <div class="busquedas-settings" style="padding:0px !important;">
-                                  
+                                  <ul>
+                                    <li class="busquedas-qualification">
+                                      <div class="qualification-header">
+                                        Calificación
+                                        <div class="qualification">
+                                          <span class="post-qualification mini-star border-right-post-tendencias" style="border: 0px;padding: 0px;">
+                                            @if((int)$user->qualification < 5)
+                                                @for ($i = 1; $i <= (int)$user->qualification; $i++)
+                                                  <a data-star="{{$i}}" class="glyphicon glyphicon-star qualification-popular" data-userqualification="{{$user->id}}" ></a>
+                                                @endfor
+                                                @for ($i = 1; $i <= 5-(int)$user->qualification; $i++)
+                                                  <a  data-star="{{(int)$user->qualification+$i}}" class="glyphicon glyphicon-star qualification-no-popular" data-userqualification="{{$user->id}}"></a>
+                                                @endfor
+                                            @else
+                                                @for ($i = 1; $i <= (int)$user->qualification; $i++)
+                                                  <a data-star="{{$i}}" class="glyphicon glyphicon-star qualification-popular" data-userqualification="{{$user->id}}" ></a>
+                                                @endfor
+                                            @endif
+                                            
+                                             
+                                          </span>
+                                        </div>
+                                    </li>
+                                    <div class="busquedas-sub-options">
+                                      <li class="busquedas-share">
+                                        <i class="fa fa-share-alt share-icon share_post_shymow" data-user_id="{{$user->id}}" aria-hidden="true" data-toggle="modal" data-target="#myModal"></i>
+                                      </li>
+                                      @if($user->profil_id == Auth::user()->id)
+                                        <span class="like-me like-user-active" data-like="{{$user->id}}" data-user="true">
+                                          <span class="glyphicon glyphicon-heart"></span>
+                                        </span>
+                                      @else
+                                        <span class="like-me like-user" data-like="{{$user->id}}" data-user="true">
+                                          <span class="glyphicon glyphicon-heart"></span>
+                                        </span> 
+                                      @endif
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <hr class="bottom-hr-effects">
+                                  </ul>
+
+
                                   <div class="busquedas-social">
                                   @if(isset($user->redes))
                                     @for($i=0; $i<count($socialNet);$i++)
@@ -512,7 +710,46 @@
                                   </div>
 
                                   <div class="busquedas-settings" style="padding:0px !important;">
-                                    
+                                    <ul>
+                                    <li class="busquedas-qualification">
+                                      <div class="qualification-header">
+                                        Calificación
+                                        <div class="qualification">
+                                          <span class="post-qualification mini-star border-right-post-tendencias" style="border: 0px;padding: 0px;">
+                                            @if((int)$user->qualification < 5)
+                                                @for ($i = 1; $i <= (int)$user->qualification; $i++)
+                                                  <a data-star="{{$i}}" class="glyphicon glyphicon-star qualification-popular" data-userqualification="{{$user->id}}" ></a>
+                                                @endfor
+                                                @for ($i = 1; $i <= 5-(int)$user->qualification; $i++)
+                                                  <a  data-star="{{(int)$user->qualification+$i}}" class="glyphicon glyphicon-star qualification-no-popular" data-userqualification="{{$user->id}}"></a>
+                                                @endfor
+                                            @else
+                                                @for ($i = 1; $i <= (int)$user->qualification; $i++)
+                                                  <a data-star="{{$i}}" class="glyphicon glyphicon-star qualification-popular" data-userqualification="{{$user->id}}" ></a>
+                                                @endfor
+                                            @endif
+                                            
+                                             
+                                          </span>
+                                        </div>
+                                    </li>
+                                    <div class="busquedas-sub-options">
+                                      <li class="busquedas-share">
+                                        <i class="fa fa-share-alt share-icon share_post_shymow" data-user_id="{{$user->id}}" aria-hidden="true" data-toggle="modal" data-target="#myModal"></i>
+                                      </li>
+                                      @if($user->profil_id == Auth::user()->id)
+                                        <span class="like-me like-user-active" data-like="{{$user->id}}" data-user="true" >
+                                          <span class="glyphicon glyphicon-heart"></span>
+                                        </span>
+                                      @else
+                                        <span class="like-me like-user" data-like="{{$user->id}}" data-user="true">
+                                          <span class="glyphicon glyphicon-heart"></span>
+                                        </span> 
+                                      @endif
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <hr class="bottom-hr-effects">
+                                  </ul>
                                     <div class="busquedas-social">
                                     @if(isset($user->redes))
                                       @for($i=0; $i<count($socialNet);$i++)
@@ -567,7 +804,47 @@
                                   </div>
 
                                   <div class="busquedas-settings" style="padding:0px !important;">
-                                    
+                                    <ul>
+                                    <li class="busquedas-qualification">
+                                      <div class="qualification-header">
+                                        Calificación
+                                        <div class="qualification">
+                                          <span class="post-qualification mini-star border-right-post-tendencias" style="border: 0px;padding: 0px;">
+                                            @if((int)$user->qualification < 5)
+                                                @for ($i = 1; $i <= (int)$user->qualification; $i++)
+                                                  <a data-star="{{$i}}" class="glyphicon glyphicon-star qualification-popular" data-userqualification="{{$user->id}}" ></a>
+                                                @endfor
+                                                @for ($i = 1; $i <= 5-(int)$user->qualification; $i++)
+                                                  <a  data-star="{{(int)$user->qualification+$i}}" class="glyphicon glyphicon-star qualification-no-popular" data-userqualification="{{$user->id}}"></a>
+                                                @endfor
+                                            @else
+                                                @for ($i = 1; $i <= (int)$user->qualification; $i++)
+                                                  <a data-star="{{$i}}" class="glyphicon glyphicon-star qualification-popular" data-userqualification="{{$user->id}}" ></a>
+                                                @endfor
+                                            @endif
+                                            
+                                             
+                                          </span>
+                                        </div>
+                                      </div>
+                                    </li>
+                                    <div class="busquedas-sub-options">
+                                      <li class="busquedas-share">
+                                        <i class="fa fa-share-alt share-icon share_post_shymow" data-user_id="{{$user->id}}" aria-hidden="true" data-toggle="modal" data-target="#myModal"></i>
+                                      </li>
+                                      @if($user->profil_id == Auth::user()->id)
+                                        <span class="like-me like-user-active" data-like="{{$user->id}}" data-user="true">
+                                          <span class="glyphicon glyphicon-heart"></span>
+                                        </span>
+                                      @else
+                                        <span class="like-me like-user" data-like="{{$user->id}}" data-user="true">
+                                          <span class="glyphicon glyphicon-heart"></span>
+                                        </span> 
+                                      @endif
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <hr class="bottom-hr-effects">
+                                  </ul>
                                     <div class="busquedas-social">
                                     @if(isset($user->redes))
                                       @for($i=0; $i<count($socialNet);$i++)
@@ -611,8 +888,27 @@
           </div>
         </div>
       </div>
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Compartir</h4>
+            </div>
+            {!! Form::open(['url' => 'create_share_user','method' => 'post','files' => false]) !!}
 
+              <div class="col-md-12" id="modal_container">
+                
+              </div>
+            <div class="clearfix"></div>
 
+            
+        {!! Form::close() !!}
+          </div>
+        </div>
+      </div>
+            
 
     </div>
 @endsection

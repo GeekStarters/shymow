@@ -536,7 +536,6 @@ class PostController extends Controller {
 
 	public function createSharePost(Request $request){
 		$validator = Validator::make($request->all(), [
-		    'new_description' => 'required',
             'user_id' => 'required',
             'post_id' => 'required',
             'category' => 'required',

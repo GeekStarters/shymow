@@ -37,6 +37,8 @@ class CreatePerfilsTable extends Migration {
 			$table->mediumText('blogs')->nullable();
 			$table->string('mi_frase')->default('¡Bienvenid@ a Shymow!');
 			$table->string('descripcion')->default('Edita tu descripción');
+			$table->integer('like')->default(0);
+			$table->integer('qualification')->default(0);
 			$table->boolean('active')->default(true);
 			$table->boolean('policies_and_conditions')->default(true);
 			$table->rememberToken();

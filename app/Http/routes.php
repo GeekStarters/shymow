@@ -153,16 +153,21 @@ Route::group(['middleware' => 'auth'], function()
 
     //Crear like.
     Route::post('/create_like/{post}','PostController@createLike');
+    Route::post('/create_like_user/{post}','PerfilController@createLike');
 
     //Crear calificacion.
     Route::post('/create_qualification/{post_id}/{quaification}','PostController@createQualification');
-
+    //Crear calificacion.
+    Route::post('/create_qualification_user/{post_id}/{quaification}','PerfilController@createQualification');
 
     //Compartir view post.
     Route::get('/share_post/{post_id}/{id_user}','PostController@sharePost');
+    //Compartir usuario
+    Route::get('/share_user/{id_user}','PerfilController@shareUser');
 
     //crear post compartido.
     Route::post('/create_share_post/','PostController@createSharePost');
+    Route::post('/create_share_user/','PerfilController@createShareUser');
     //Seguir post.
     Route::post('/follow_post','PostController@followPost');
     //Eliminar post

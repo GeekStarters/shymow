@@ -71,6 +71,29 @@
 													@if(isset($post->path))
 														<img src="{{url($post->path)}}" class="img-responsive" alt="Shymow"></img>
 													@endif
+													<br>
+													@if(isset($post->friend))
+														<div class="col-sm-12">
+															<br>
+															<div class="content-post no-background">
+																<div class="post-body tendencias-post">
+																	<div class="post-header">
+																		<div class="post-user">
+																			<div class="post-icono"><a href="{{url('view_user/'.$post->user_id_friend)}}"><img src="{{url($post->imagen_perfil_friend)}}" alt="shymow"></a></div>
+																			<div class="post-user"><a href="{{url('view_user/'.$post->user_id_friend)}}">{{$post->friend_name}}</a></div>
+																			<div class="post-twitt"><span></span></div>
+																		</div>
+																	</div>
+																	<br>
+																	<div class="clearfix"></div>
+																	<div class="post-description hashtag-post">
+																		<a href="{{url('view_user/'.$post->user_id_friend)}}" class="button-more">VER +</a>
+																	</div>
+																</div>
+																<br>
+															</div>
+														</div>
+													@endif
 												</div>
 												<div class="post-media">
 
@@ -101,8 +124,8 @@
 																	<span class="number-post">{{$post->share}}</span> <i class="fa fa-share-alt" aria-hidden="true"></i>
 																  </span>
 																  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-																    <li><a href="#">Facebook</a></li>
-																    <li><a href="#">Twitter</a></li>
+																    <!-- <li><a href="#">Facebook</a></li>
+																    <li><a href="#">Twitter</a></li> -->
 																    <li role="separator" class="divider"></li>
 																    <li><a data-post_id="{{$post->id_post}}" data-user_id="{{$post->id_user}}" class="share_post_shymow" data-toggle="modal" data-target="#myModal">Compartir</a></li>
 																  </ul>
@@ -152,11 +175,6 @@
 										<div class="content-post no-background">
 											<div class="post-body tendencias-post">
 												<div class="post-header">
-													<div>
-														<a href="#" class="delete_post">
-															<i class="glyphicon glyphicon-remove"></i>
-														</a>
-													</div>
 													<div class="post-follow">
 														@if($post->profil_id == Auth::id())
 															<a href="{{url('/delete_post/'.$post->id_post)}}" class="delete_post">
@@ -248,8 +266,8 @@
 																	<span class="number-post">{{$post->share}}</span> <i class="fa fa-share-alt" aria-hidden="true"></i>
 																  </span>
 																  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-																    <li><a href="#">Facebook</a></li>
-																    <li><a href="#">Twitter</a></li>
+																    <!-- <li><a href="#">Facebook</a></li>
+																    <li><a href="#">Twitter</a></li> -->
 																    <li role="separator" class="divider"></li>
 																    <li><a data-post_id="{{$post->id_post}}" data-user_id="{{$post->id_user}}" class="share_post_shymow" data-toggle="modal" data-target="#myModal">Compartir</a></li>
 																  </ul>

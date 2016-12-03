@@ -11,6 +11,7 @@ use App\Interest;
 use App\BusinessCategories;
 use App\BusinessSubCategories;
 use Validator;
+use Auth;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller {
@@ -66,7 +67,7 @@ class SearchController extends Controller {
 			if (isset($comercio)) {
 				if ($comercio != "all") {
 					$users = DB::table('perfils')
-					->select('perfils.name',DB::raw('YEAR(CURDATE())-YEAR(perfils.birthdate) as edad'),'perfils.pais','perfils.descripcion','perfils.id','perfils.email','perfils.birthdate','perfils.img_profile','perfils.redes','perfils.streamings','perfils.webs','perfils.blogs','perfils.mi_frase','empresas.id as empresas_id','empresas.profile_id as empresas_perfil_id','empresas.empresa','empresas.alias','empresas.actividad_comercial','empresas.local')
+					->select('perfils.name','perfils.qualification','perfils.like',DB::raw('YEAR(CURDATE())-YEAR(perfils.birthdate) as edad'),'perfils.pais','perfils.descripcion','perfils.id','perfils.email','perfils.birthdate','perfils.img_profile','perfils.redes','perfils.streamings','perfils.webs','perfils.blogs','perfils.mi_frase','empresas.id as empresas_id','empresas.profile_id as empresas_perfil_id','empresas.empresa','empresas.alias','empresas.actividad_comercial','empresas.local')
 					->join('empresas','empresas.profile_id','=','perfils.id')
 					->where('perfils.active',true)
 					->where('empresas.active',true)
@@ -74,7 +75,7 @@ class SearchController extends Controller {
 					->take(3)->get();
 				}else{
 					$users = DB::table('perfils')
-					->select('perfils.name',DB::raw('YEAR(CURDATE())-YEAR(perfils.birthdate) as edad'),'perfils.pais','perfils.descripcion','perfils.id','perfils.email','perfils.birthdate','perfils.img_profile','perfils.redes','perfils.streamings','perfils.webs','perfils.blogs','perfils.mi_frase','empresas.id as empresas_id','empresas.profile_id as empresas_perfil_id','empresas.empresa','empresas.alias','empresas.actividad_comercial','empresas.local')
+					->select('perfils.name','perfils.qualification','perfils.like',DB::raw('YEAR(CURDATE())-YEAR(perfils.birthdate) as edad'),'perfils.pais','perfils.descripcion','perfils.id','perfils.email','perfils.birthdate','perfils.img_profile','perfils.redes','perfils.streamings','perfils.webs','perfils.blogs','perfils.mi_frase','empresas.id as empresas_id','empresas.profile_id as empresas_perfil_id','empresas.empresa','empresas.alias','empresas.actividad_comercial','empresas.local')
 					->join('empresas','empresas.profile_id','=','perfils.id')
 					->where('perfils.active',true)
 					->where('empresas.active',true)
@@ -85,7 +86,7 @@ class SearchController extends Controller {
 					$categoriaId = BusinessCategories::find($categoria);
 					if (count($categoriaId) > 0) {
 						$users = DB::table('perfils')
-						->select('perfils.name',DB::raw('YEAR(CURDATE())-YEAR(perfils.birthdate) as edad'),'perfils.role','perfils.pais','perfils.descripcion','perfils.id','perfils.email','perfils.birthdate','perfils.img_profile','perfils.redes','perfils.streamings','perfils.webs','perfils.blogs','perfils.mi_frase','empresas.id as empresas_id','empresas.profile_id as empresas_perfil_id','empresas.empresa','empresas.alias','empresas.actividad_comercial','empresas.local')
+						->select('perfils.name','perfils.qualification','perfils.like',DB::raw('YEAR(CURDATE())-YEAR(perfils.birthdate) as edad'),'perfils.role','perfils.pais','perfils.descripcion','perfils.id','perfils.email','perfils.birthdate','perfils.img_profile','perfils.redes','perfils.streamings','perfils.webs','perfils.blogs','perfils.mi_frase','empresas.id as empresas_id','empresas.profile_id as empresas_perfil_id','empresas.empresa','empresas.alias','empresas.actividad_comercial','empresas.local')
 						->join('empresas','empresas.profile_id','=','perfils.id')
 						->where('perfils.active',true)
 						->where('empresas.active',true)
@@ -98,7 +99,7 @@ class SearchController extends Controller {
 					$categoriaId = BusinessCategories::find($categoria);
 					if (count($categoriaId) > 0) {
 						$users = DB::table('perfils')
-						->select('perfils.name',DB::raw('YEAR(CURDATE())-YEAR(perfils.birthdate) as edad'),'perfils.pais','perfils.descripcion','perfils.id','perfils.email','perfils.birthdate','perfils.img_profile','perfils.redes','perfils.streamings','perfils.webs','perfils.blogs','perfils.mi_frase','empresas.id as empresas_id','empresas.profile_id as empresas_perfil_id','empresas.empresa','empresas.alias','empresas.actividad_comercial','empresas.local')
+						->select('perfils.name','perfils.qualification','perfils.like',DB::raw('YEAR(CURDATE())-YEAR(perfils.birthdate) as edad'),'perfils.pais','perfils.descripcion','perfils.id','perfils.email','perfils.birthdate','perfils.img_profile','perfils.redes','perfils.streamings','perfils.webs','perfils.blogs','perfils.mi_frase','empresas.id as empresas_id','empresas.profile_id as empresas_perfil_id','empresas.empresa','empresas.alias','empresas.actividad_comercial','empresas.local')
 						->join('empresas','empresas.profile_id','=','perfils.id')
 						->where('perfils.active',true)
 						->where('empresas.active',true)
@@ -112,14 +113,14 @@ class SearchController extends Controller {
 			}
 		}elseif($type == "all"){
 			$users = DB::table('perfils')
-			->select('perfils.name','perfils.role',DB::raw('YEAR(CURDATE())-YEAR(perfils.birthdate) as edad'),'perfils.pais','perfils.descripcion','perfils.id','perfils.email','perfils.birthdate','perfils.img_profile','perfils.redes','perfils.streamings','perfils.webs','perfils.blogs','perfils.mi_frase','empresas.id as empresas_id','empresas.profile_id as empresas_perfil_id','empresas.empresa','empresas.alias','empresas.local','empresas.actividad_comercial')
+			->select('perfils.name','perfils.qualification','perfils.like','perfils.role',DB::raw('YEAR(CURDATE())-YEAR(perfils.birthdate) as edad'),'perfils.pais','perfils.descripcion','perfils.id','perfils.email','perfils.birthdate','perfils.img_profile','perfils.redes','perfils.streamings','perfils.webs','perfils.blogs','perfils.mi_frase','empresas.id as empresas_id','empresas.profile_id as empresas_perfil_id','empresas.empresa','empresas.alias','empresas.local','empresas.actividad_comercial')
 			->leftJoin('empresas','empresas.profile_id','=','perfils.id')
 			->where('perfils.active',true)
 			->take(3)->get();
 		}else{
 			return response()->json(['error'=>true]);
 		}
-		// dd($localAll);
+		dd($users);
 		$socialNet = ['facebook','twitter','linkedin','youtube','pinterest','instagram'];
 		return response()->json(['error'=>false,'data'=>$users,'redes'=>$socialNet]);
 	}
@@ -178,24 +179,45 @@ class SearchController extends Controller {
 		$interests = Interest::find($interes);
 
 		// dd($interests['attributes']['categories_id']);
-
+		if($edad == "all"){
+			$edad = 0;
+		}else{
+			$edad = (int) $edad;
+		}
 		$paginate = 15;
 		if ($type == "0" || $type == "1") {
-			$users = Perfil::user($name)->type($type)->genero($genero)->edad($edad)->pais($pais)->provincia($provincia)->municipio($municipio)->hobbie($interests['attributes']['name'])->redes($social)->stream($stream)->paginate($paginate);
+			$users = Perfil::user($name)->type($type)->genero($genero)->edad($edad)->pais($pais)->provincia($provincia)->municipio($municipio)->hobbie($interests['attributes']['name'])->redes($social)->stream($stream)->leftJoin('user_likes', function($join)
+			        {
+			            $join->on('user_likes.user_id', '=', 'perfils.id')
+			            ->where('user_likes.profil_id','=',Auth::id())
+			            ->where('user_likes.like','=',true);
+			        })->select('user_likes.profil_id','perfils.name','perfils.qualification','perfils.like','perfils.role',DB::raw('YEAR(CURDATE())-YEAR(perfils.birthdate) as edad'),'perfils.pais','perfils.descripcion','perfils.id','perfils.email','perfils.birthdate','perfils.img_profile','perfils.redes','perfils.streamings','perfils.webs','perfils.blogs','perfils.mi_frase')->paginate($paginate);
 		}elseif($type == "2"){
 			if (isset($comercio)) {
 				if ($comercio != "all") {
 					$users = DB::table('perfils')
-					->select('perfils.name',DB::raw('YEAR(CURDATE())-YEAR(perfils.birthdate) as edad'),'perfils.pais','perfils.descripcion','perfils.id','perfils.email','perfils.birthdate','perfils.img_profile','perfils.redes','perfils.streamings','perfils.webs','perfils.blogs','perfils.mi_frase','empresas.id as empresas_id','empresas.profile_id as empresas_perfil_id','empresas.empresa','empresas.alias','empresas.actividad_comercial','empresas.local')
+					->select('user_likes.profil_id','perfils.name','perfils.qualification','perfils.like',DB::raw('YEAR(CURDATE())-YEAR(perfils.birthdate) as edad'),'perfils.pais','perfils.descripcion','perfils.id','perfils.email','perfils.birthdate','perfils.img_profile','perfils.redes','perfils.streamings','perfils.webs','perfils.blogs','perfils.mi_frase','empresas.id as empresas_id','empresas.profile_id as empresas_perfil_id','empresas.empresa','empresas.alias','empresas.actividad_comercial','empresas.local')
 					->join('empresas','empresas.profile_id','=','perfils.id')
+					->leftJoin('user_likes', function($join)
+			        {
+			            $join->on('user_likes.user_id', '=', 'perfils.id')
+			            ->where('user_likes.profil_id','=',Auth::id())
+			            ->where('user_likes.like','=',true);
+			        })
 					->where('perfils.active',true)
 					->where('empresas.active',true)
 					->where('empresas.actividad_comercial',$comercio)
 					->paginate($paginate);
 				}else{
 					$users = DB::table('perfils')
-					->select('perfils.name',DB::raw('YEAR(CURDATE())-YEAR(perfils.birthdate) as edad'),'perfils.pais','perfils.descripcion','perfils.id','perfils.email','perfils.birthdate','perfils.img_profile','perfils.redes','perfils.streamings','perfils.webs','perfils.blogs','perfils.mi_frase','empresas.id as empresas_id','empresas.profile_id as empresas_perfil_id','empresas.empresa','empresas.alias','empresas.actividad_comercial','empresas.local')
+					->select('user_likes.profil_id','perfils.name','perfils.qualification','perfils.like',DB::raw('YEAR(CURDATE())-YEAR(perfils.birthdate) as edad'),'perfils.pais','perfils.descripcion','perfils.id','perfils.email','perfils.birthdate','perfils.img_profile','perfils.redes','perfils.streamings','perfils.webs','perfils.blogs','perfils.mi_frase','empresas.id as empresas_id','empresas.profile_id as empresas_perfil_id','empresas.empresa','empresas.alias','empresas.actividad_comercial','empresas.local')
 					->join('empresas','empresas.profile_id','=','perfils.id')
+					->leftJoin('user_likes', function($join)
+			        {
+			            $join->on('user_likes.user_id', '=', 'perfils.id')
+			            ->where('user_likes.profil_id','=',Auth::id())
+			            ->where('user_likes.like','=',true);
+			        })
 					->where('perfils.active',true)
 					->where('empresas.active',true)
 					->paginate($paginate);
@@ -205,8 +227,14 @@ class SearchController extends Controller {
 					$categoriaId = BusinessCategories::find($categoria);
 					if (count($categoriaId) > 0) {
 						$users = DB::table('perfils')
-						->select('perfils.name',DB::raw('YEAR(CURDATE())-YEAR(perfils.birthdate) as edad'),'perfils.role','perfils.pais','perfils.descripcion','perfils.id','perfils.email','perfils.birthdate','perfils.img_profile','perfils.redes','perfils.streamings','perfils.webs','perfils.blogs','perfils.mi_frase','empresas.id as empresas_id','empresas.profile_id as empresas_perfil_id','empresas.empresa','empresas.alias','empresas.actividad_comercial','empresas.local')
+						->select('user_likes.profil_id','user_likes.profile_id','user_likes.user_id','perfils.name','perfils.qualification','perfils.like',DB::raw('YEAR(CURDATE())-YEAR(perfils.birthdate) as edad'),'perfils.role','perfils.pais','perfils.descripcion','perfils.id','perfils.email','perfils.birthdate','perfils.img_profile','perfils.redes','perfils.streamings','perfils.webs','perfils.blogs','perfils.mi_frase','empresas.id as empresas_id','empresas.profile_id as empresas_perfil_id','empresas.empresa','empresas.alias','empresas.actividad_comercial','empresas.local')
 						->join('empresas','empresas.profile_id','=','perfils.id')
+						->leftJoin('user_likes', function($join)
+				        {
+				            $join->on('user_likes.user_id', '=', 'perfils.id')
+				            ->where('user_likes.profil_id','=',Auth::id())
+				            ->where('user_likes.like','=',true);
+				        })
 						->where('perfils.active',true)
 						->where('empresas.active',true)
 						->where('empresas.actividad_comercial',$categoriaId->id)
@@ -218,8 +246,14 @@ class SearchController extends Controller {
 					$categoriaId = BusinessCategories::find($categoria);
 					if (count($categoriaId) > 0) {
 						$users = DB::table('perfils')
-						->select('perfils.name',DB::raw('YEAR(CURDATE())-YEAR(perfils.birthdate) as edad'),'perfils.pais','perfils.descripcion','perfils.id','perfils.email','perfils.birthdate','perfils.img_profile','perfils.redes','perfils.streamings','perfils.webs','perfils.blogs','perfils.mi_frase','empresas.id as empresas_id','empresas.profile_id as empresas_perfil_id','empresas.empresa','empresas.alias','empresas.actividad_comercial','empresas.local')
+						->select('user_likes.profil_id','perfils.name','perfils.qualification','perfils.like',DB::raw('YEAR(CURDATE())-YEAR(perfils.birthdate) as edad'),'perfils.pais','perfils.descripcion','perfils.id','perfils.email','perfils.birthdate','perfils.img_profile','perfils.redes','perfils.streamings','perfils.webs','perfils.blogs','perfils.mi_frase','empresas.id as empresas_id','empresas.profile_id as empresas_perfil_id','empresas.empresa','empresas.alias','empresas.actividad_comercial','empresas.local')
 						->join('empresas','empresas.profile_id','=','perfils.id')
+						->leftJoin('user_likes', function($join)
+				        {
+				            $join->on('user_likes.user_id', '=', 'perfils.id')
+				            ->where('user_likes.profil_id','=',Auth::id())
+				            ->where('user_likes.like','=',true);
+				        })
 						->where('perfils.active',true)
 						->where('empresas.active',true)
 						->paginate($paginate);
@@ -232,8 +266,14 @@ class SearchController extends Controller {
 			}
 		}elseif($type == "all"){
 			$users = DB::table('perfils')
-			->select('perfils.name','perfils.role',DB::raw('YEAR(CURDATE())-YEAR(perfils.birthdate) as edad'),'perfils.pais','perfils.descripcion','perfils.id','perfils.email','perfils.birthdate','perfils.img_profile','perfils.redes','perfils.streamings','perfils.webs','perfils.blogs','perfils.mi_frase','empresas.id as empresas_id','empresas.profile_id as empresas_perfil_id','empresas.empresa','empresas.alias','empresas.local','empresas.actividad_comercial')
+			->select('user_likes.profil_id','perfils.name','perfils.qualification','perfils.like','perfils.role',DB::raw('YEAR(CURDATE())-YEAR(perfils.birthdate) as edad'),'perfils.pais','perfils.descripcion','perfils.id','perfils.email','perfils.birthdate','perfils.img_profile','perfils.redes','perfils.streamings','perfils.webs','perfils.blogs','perfils.mi_frase','empresas.id as empresas_id','empresas.profile_id as empresas_perfil_id','empresas.empresa','empresas.alias','empresas.local','empresas.actividad_comercial')
 			->leftJoin('empresas','empresas.profile_id','=','perfils.id')
+			->leftJoin('user_likes', function($join)
+	        {
+	            $join->on('user_likes.user_id', '=', 'perfils.id')
+	            ->where('user_likes.profil_id','=',Auth::id())
+	            ->where('user_likes.like','=',true);
+	        })
 			->where('perfils.active',true)
 			->paginate($paginate);
 		}else{
@@ -261,7 +301,7 @@ class SearchController extends Controller {
     		}
     	}
 
-		// dd($localAll);
+		// dd($users);
 		return \View::make('logueado.home_busqueda',compact('countries','users','interest','userslider','socialNet','subCategories','categories','localAll'));
 		
 	}

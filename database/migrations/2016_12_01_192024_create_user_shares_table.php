@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSharePostsTable extends Migration {
+class CreateUserSharesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,20 +12,16 @@ class CreateSharePostsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('share_posts', function(Blueprint $table)
+		Schema::create('user_shares', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('post_id')->unsigned();
-			$table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
-			$table->integer('profil_id')->unsigned();
+			$table->integer('user_id')->unsigned(); // User to share
+			$table->foreign('user_id')->references('id')->on('posts')->onDelete('cascade');
+			$table->integer('profil_id')->unsigned(); // user make share
 			$table->foreign('profil_id')->references('id')->on('profils')->onDelete('cascade');
 
 			$table->integer('new_post_id')->unsigned();
 			$table->foreign('new_post_id')->references('id')->on('posts')->onDelete('cascade');
-			$table->integer('new_profil_id')->unsigned();
-			$table->foreign('new_profil_id')->references('id')->on('profils')->onDelete('cascade');
-
-			$table->string('description_old_post')->nullable();
 			
 			$table->boolean('active')->default(true);
 			$table->timestamps();
@@ -39,7 +35,7 @@ class CreateSharePostsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('share_posts');
+		Schema::drop('user_shares');
 	}
 
 }

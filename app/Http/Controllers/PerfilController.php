@@ -10,7 +10,13 @@ use App\Empresa;
 use App\Countrie;
 use App\State;
 use App\Citie;
+use App\Post;
+use App\Category_post;
+use App\UserQualification;
+use App\UserLikes;
+use App\UserShare;
 use Image;
+use DB;
 use Input;
 class PerfilController extends Controller {
 
@@ -53,6 +59,266 @@ class PerfilController extends Controller {
 	public function show($id)
 	{
 		//
+	}
+
+	public function createLike($post){
+		$count_user = DB::select('SELECT * FROM perfils WHERE active = true and id = '.$post);
+		$user_id = Auth::user()->id;
+
+		if (count($count_user)>0) {
+
+			$like = DB::select('SELECT * FROM `user_likes` WHERE (`user_id` = '.$post.' and `profil_id` = '.$user_id.') and (`active` = true and `like` = true)');
+
+			$like_edit = DB::select('SELECT * FROM `user_likes` WHERE (`user_id` = '.$post.' and `profil_id` = '.$user_id.') and (`active` = true and `like` = false)');
+
+			if (count($like) < 1 and count($like_edit)<1) {
+				$new_like = new UserLikes();
+					$new_like->like = true;
+					$new_like->user_id = $post;
+					$new_like->profil_id = $user_id;
+				$new_like->save();
+
+				$count_like = DB::select('SELECT * FROM user_likes WHERE user_id = '.$post.' and (user_likes.like = true and user_likes.active = true)');
+
+				$count_like = count($count_like);
+
+				if ($count_like > 0) {
+					$edit_user = Perfil::find($post);
+						$edit_user->like = $count_like;
+					try {
+						$edit_user->save();
+						echo "Like";
+					} catch (Exception $e) {
+						echo "error";
+					}
+				}
+			}elseif (count($like_edit) > 0) {
+				$like_id = $like_edit['0']->id;
+
+				$edit_like = UserLikes::find($like_id);
+					$edit_like->like = true;
+				$edit_like->save();
+
+				$count_like = DB::select('SELECT * FROM user_likes WHERE user_id = '.$post.' and (user_likes.like = true and user_likes.active = true)');
+				
+				try {
+					$edit_user = Perfil::where('id','=',$post)->update(['like'=>count( $count_like)]);
+					echo "like";
+				} catch (Exception $e) {
+					echo "error";
+				}
+			}
+
+			if (count($like) > 0) {
+				$like_id = $like['0']->id;
+
+				$edit_like = UserLikes::find($like_id);
+					$edit_like->like = false;
+				$edit_like->save();
+
+				$count_like = DB::select('SELECT * FROM user_likes WHERE user_id = '.$post.' and (user_likes.like = true and user_likes.active = true)');
+
+				$edit_user = Perfil::where('id','=',$post)->update(["like"=>count($count_like)]);
+		
+				
+				
+				echo "like";
+			}
+		}
+	}
+
+	public function createShareUser(Request $request){
+		$validator = Validator::make($request->all(), [
+            'user_id' => 'required',
+            'category' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/perfil')
+                        ->withErrors($validator);
+        }
+
+        $user_id =(int) $request->input('user_id');
+        $new_description = $request->input('new_description');
+        $category = (int)$request->input('category');
+
+		$user_count = Perfil::where('id','=',$user_id)->where('active','=',true)->count();
+
+
+		if ($user_count < 1) {
+			flash('No se Compartio usuario', 'danger');
+			return redirect('favoritos');
+		}
+
+		$newPost = new Post();
+			$newPost->description = $new_description;
+			$newPost->category_post_id = $category;
+			$newPost->profil_id = Auth::user()->id;
+			$newPost->type = 1;
+		try {
+			$newPost->save();
+
+			$newShare = new UserShare();
+				$newShare->user_id = $user_id;
+				$newShare->profil_id = Auth::user()->id;
+				$newShare->new_post_id = $newPost->id;
+			$newShare->save();
+
+			flash('Usuario compartido', 'success');
+			return redirect('favoritos');
+		} catch (Exception $e) {
+			flash('sucedio un error', 'danger');
+			return redirect('favoritos');
+		}
+	}
+	public function shareUser($user_id){
+		$user_count = Perfil::where('id','=',$user_id)->where('active','=',true)->count();
+		if ($user_count < 1) {
+			return response()->json(['error' => true, 'message' => "Al parecer ocurrio un error"]);
+		}
+		$user = Perfil::where('id','=',$user_id)->where('active','=',true)->get();
+		$category = Category_post::all();
+		$data_category = [];
+		foreach ($category as $data) {
+			array_push($data_category, ["id" => $data->id,"name" => $data->name]);
+		}
+		return response()->json(['error' => false,
+								'message' => "Get user success",
+								"user_name" => $user[0]->name,
+								"img_profile" => $user[0]->img_profile,
+								"user_id" => $user[0]->id,
+								"category" => $data_category
+								]);
+		
+	}
+	public function createQualification($id,$qualification){
+		//user ID
+		$user_id = Auth::user()->id;
+		//Verificar si el usuario a calificado user
+		$exists_user_active = UserQualification::where('active','=',true)->where('user_id','=',$id)->where('profil_id',$user_id)->count();
+
+		//Verifica si el usuario no ha calificado user
+		$exists_user_false = UserQualification::where('active',false)->where('user_id',$id)->where('profil_id',$user_id)->count();
+
+		//Id user
+
+		//Verificamos si existe user
+		$user_exist = Perfil::where('active',true)->where('id',$id)->count();
+
+		//Pasamos la puntuacion a un entero
+		if (!empty($qualification)) {
+			$qualification = (int) $qualification;
+		}
+
+		if ($user_exist > 0) {
+			//Validamos que no exista calificacion
+
+			if ($exists_user_active < 1 && $exists_user_false < 1) {
+				//Si no existe calificacion del user por este usuario la creamos
+				$newQualification = new UserQualification();
+					$newQualification->user_id = $id;
+					$newQualification->profil_id = $user_id;
+					$newQualification->qualification = $qualification;
+
+				try {
+					$newQualification->save();
+
+					//Traemos todas las calificaciones
+					$get_qualification_user = UserQualification::where('active',true)
+												->where('user_id',$id)->get();
+					//Creamos un arreglo
+					$stack_qualification = [];
+
+					//Recorremos el arreglo
+					foreach ($get_qualification_user as $data) {
+						//Guardamos la calificacion en el arreglo
+						
+						array_push($stack_qualification, $data->qualification);
+					}
+					//Sacamos el promedio de las calificaciones
+					$media = array_sum($stack_qualification)/count($stack_qualification);
+					$media = round($media);
+					try {
+						//Guardamos la nueva calificacion de user
+							$saveNewQualificationPost = Perfil::where('active',true)->where('id',$id) ->update(['qualification' => $media]);
+						//retornamos el promedio o el error
+						return response()->json(['error' => false, 'qualification' => $media]);
+					} catch (Exception $e) {
+						return response()->json(['error' => true, 'description' => $e->getMessage()]);
+					}
+				} catch (Exception $e) {
+					return response()->json(['error' => true, 'description' => $e->getMessage()]);
+				}
+
+				// Si el usuario ya califico editamos esa misma calificacion
+			}elseif ($exists_user_active > 0 && $exists_user_false < 1) {
+				//Guardamos lo editado
+				try {
+					$qualification_edit = UserQualification::where('active',true)->where('user_id',$id)->where('profil_id',$user_id)->update(['qualification' => $qualification]);
+
+					//Traemos todas las calificaciones
+					$get_qualification_post = UserQualification::where('active',true)
+												->where('user_id',$id)->get();
+					//Creamos un arreglo
+					$stack_qualification = [];
+
+					//Recorremos el arreglo
+					foreach ($get_qualification_post as $data) {
+						//Guardamos la calificacion en el arreglo
+						array_push($stack_qualification, $data->qualification);
+					}
+					//Sacamos el promedio de las calificaciones
+					$media = array_sum($stack_qualification)/count($stack_qualification);
+					$media = round($media);
+					try {
+						//Guardamos la nueva calificacion de los posteos
+							$saveNewQualificationPost = Perfil::where('active',true)->where('id',$id)->update(['qualification' => $media]);
+
+						//retornamos el promedio o el error
+						return response()->json(['error' => false, 'qualification' => $media]);
+					} catch (Exception $e) {
+						return response()->json(['error' => true, 'description' => $e->getMessage()]);
+					}
+				} catch (Exception $e) {
+					return response()->json(['error' => true, 'description' => $e->getMessage()]);
+				}
+
+				//Si el usuario habia calificado antes pero esta desactivada la activamos y editamos
+			}elseif ($exists_user_active < 1 && $exists_user_false > 0) {
+				try {
+					$qualification_edit = UserQualification::where('active',false)->where('user_id',$id)->where('profil_id',$user_id)->update(['qualification' => $qualification,'active' => true]);
+					
+
+					//Traemos todas las calificaciones
+					$get_qualification_post = UserQualification::where('active',true)
+												->where('user_id',$id)->get();
+					//Creamos un arreglo
+					$stack_qualification = [];
+
+					//Recorremos el arreglo
+					foreach ($get_qualification_post as $data) {
+						//Guardamos la calificacion en el arreglo
+						array_push($stack_qualification, $data->qualification);
+					}
+					//Sacamos el promedio de las calificaciones
+					$media = array_sum($stack_qualification)/count($stack_qualification);
+					$media = round($media);
+
+					try {
+						//Guardamos la nueva calificacion de los posteos
+							$saveNewQualificationPost = Perfil::where('active',true)->where('id',$id) ->update(['qualification' => $media]);
+						//retornamos el promedio o el error
+						return response()->json(['error' => false, 'qualification' => $media]);
+					} catch (Exception $e) {
+						return response()->json(['error' => true, 'description' => $e->getMessage()]);
+					}
+				} catch (Exception $e) {
+					return response()->json(['error' => true, 'description' => $e->getMessage()]);
+				}
+			}
+		}
+
+	
 	}
 	public function delete_local($address = null,$lat = null,$lng = null){
 		if (isset($address)) {

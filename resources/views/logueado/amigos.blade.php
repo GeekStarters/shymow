@@ -3,8 +3,9 @@
 
 @section('content-logueo')
 <div class="col-sm-offset-4 col-sm-8 friends">
+	
+	@include('flash::message')
 	@if(count($user_contents) > 0)
-
 		@foreach ($user_contents as $friend)
 			<div class="col-sm-4">
 				<div class="content-friends">
@@ -30,9 +31,8 @@
 		@endforeach
 
 	@else
-		<h2>Agrega amigos</h2>
+		<a href="{{url('all_users')}}"><h2>Agrega amigos</h2></a>
 	@endif
-	
 </div>
 @stop
 @extends('logueado.layouts.content-modal')
