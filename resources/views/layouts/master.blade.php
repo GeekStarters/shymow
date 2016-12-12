@@ -27,7 +27,9 @@
     <![endif]-->
   </head>
   <body @yield('bodyStyle')>
-
+      @if(Auth::check())
+        <div style="display: none" id="unvalus" data-unvalus="{{Auth::user()->identification}}"></div>
+      @endif
       @yield('header')
       @yield('content')
 
@@ -38,6 +40,7 @@
     <script src="{{ asset('js/caroufredsel-carousel.js')}}"></script><!-- CarouFredSel carousel plugin -->
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src=" {{ asset('js/bootstrap.min.js') }} "></script>
+    <script src=" {{ asset('js/jquery.gritter.js') }} "></script>
     <script src=" {{ asset('js/validate.min.js') }} "></script>
     <script src=" {{ asset('js/hashtag.js') }} "></script>
     <script src=" {{ asset('js/handlebars.js') }} "></script>
@@ -45,6 +48,7 @@
     <script src=" {{ asset('js/sweetalert.js') }}"></script>
     <script src=" {{ asset('js/scripts.js') }} "></script>
     <script src=" {{ asset('js/validate.js') }} "></script>
+    @if(Auth::check())<script src=" {{ asset('js/notification.js') }} "></script>@endif
     <script src=" {{ asset('js/messages.js') }} "></script>
     <script type="text/javascript" src="{{ asset('js/responsiveCarousel.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/jquery.imgareaselect.min.js') }}"></script>

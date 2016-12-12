@@ -113,7 +113,6 @@ $( document ).ready(function() {
     			success: function($data){
     					
     					count = parseInt(count) + 1;
-                        console.log(count);
     					padre.find('.post_change').text('');
                         padre.find('.post_change').text(count);
 
@@ -731,14 +730,15 @@ $( document ).ready(function() {
     $('#chat-proper-options').popover();
     $('#chat-proper').popover({
         content:function(){
+            $('#online-user').popover('destroy')
             var html ="";
             html +=            '<div class="row chat-content-view">'
                 html +=            '<div style="color:#000;cursor:pointer;">'
                 html +=                '<div class="clearfix"></div>';
-                html +=                '<div class="col-sm-3">';
+                html +=                '<div class="col-xs-3">';
                 html +=                    '<img style="width:100%;" src="/img/profile/star/7.jpg" alt="shymow">';
                 html +=                '</div>';
-                html +=                '<div class="col-sm-9">';
+                html +=                '<div class="col-xs-9">';
                 html +=                    '<div style="font-weight: bold;">';
                 html +=                        '<div style="float:left;">';
                 html +=                            'Nombre';
@@ -763,7 +763,94 @@ $( document ).ready(function() {
         },
         html: true,
         placement:"top",
+    });
+    $('body').on('mouseenter', '.online-detail-user', function(event) {
+        /* Act on the event */
+        var userId = $(this).data('user');
+        var i = $(this);
+        $.ajax({
+            url: '/online_detail/'+userId,
+            type: 'GET',
+            dataType: 'html',
+            success: function(data){
+                i.popover({
+                    content:data,
+                    html: true,
+                       title:"Online", 
+                    placement:"left",
+                });
+            }
+        })
+        .fail(function() {
+            console.log("error");
         });
+    });
+    // $('#online-user').popover({
+    //     content:function(){
+    //         var html ="";
+    //         html +=            '<div class="online-detail-user" data-user="2" tabindex="0" role="button" data-toggle="popover" data-trigger="focus">'
+    //             html +=            '<div class="row chat-content-view">'
+    //                 html +=            '<div style="color:#000;cursor:pointer;">'
+    //                 html +=                '<div class="clearfix"></div>';
+    //                 html +=                '<div class="col-xs-4" style="position:relative;">';
+    //                 html +=                    '<img style="width:100%;border-radius:5px;" src="/img/profile/star/7.jpg" alt="shymow">';
+    //                 html +=                     '<span style="position:absolute;background:#00A02F;bottom:5px;right: 20px;padding:3px;border-radius: 50%;border: 1px solid #fff;"></span>';
+    //                 html +=                '</div>';
+    //                 html +=                '<div class="col-xs-6">';
+    //                 html +=                    '<div style="font-weight: bold;">';
+    //                 html +=                        '<div style="font-size:1.1em;float:left;margin-top:10px;color:#676665;">';
+    //                 html +=                            'Nombre';
+    //                 html +=                        '</div>';
+    //                 html +=                    '</div>';
+    //                 html +=                    '<div class="clearfix"></div>';
+    //                 html +=                '</div>';
+    //                 html +=            '</div>';
+    //             html +=            '</div>';
+    //         html +=            '</div>';
+    //         html +=            '<div class="clearfix"></div>';
+
+    //         html +=            '<hr>';
+
+    //         html += '<a href="/messages" class="text-center">Ver todos</>';
+            
+    //         return html;
+    //     },
+    //     html: true,
+    //     placement:"top",
+    // });
+    $('#online-user').click(function(event) {
+        /* Act on the event */
+        var i = $(this);
+        if (i.next('div.popover:visible').length == 0){
+            var text = $.ajax({
+                url: '/online',
+                type: 'GET',
+                dataType: 'html',
+                async: false,
+                success: function(data){
+                    return data;
+                }
+            })
+            .fail(function() {
+                return "Error";
+            });
+            i.popover({
+                trigger: 'manual',
+                content:text.responseText,
+                html: true,
+                title:"Online", 
+                placement:"top",
+            });
+            i.popover('show');
+        }else{
+            i.popover('destroy');
+        }
+    });
+    $('body').on('mouseenter', '#online-user', function(event) {
+        event.preventDefault();
+        var i = $(this);
+        
+    });
     $('body').on('click', '#chat-proper', function(event) {
         $('.float-chat').find('.popover-content').addClass('chat-float-view');
     });
@@ -776,7 +863,7 @@ $( document ).ready(function() {
     $('body').on('mouseout', '.chat-content-view', function(event) {
         event.preventDefault();
         /* Act on the event */
-        $(this).css('background', '#EEEFEE');
+        $(this).css('background', 'none');
     });
 
 

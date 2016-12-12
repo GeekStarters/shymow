@@ -49,6 +49,7 @@ class UserTableSeeder extends Seeder {
 	        	'email' => 'wilmer@gmail.com',
 	        	'name' => 'Wilmer gilberto',
 	        	'password' => Hash::make('12345678'),
+	        	'identification' => Hash::make('1'),
 	        	'birthdate' => date('Y-m-d', strtotime('29-03-1995')),
 	        	'genero' => 'M',
 	        	'pais' => 'El Salvador',
@@ -62,6 +63,7 @@ class UserTableSeeder extends Seeder {
 	        	'email' => 'demi@gmail.com',
 	        	'name' => 'delmi solano',
 	        	'password' => Hash::make('12345678'),
+	        	'identification' => Hash::make('2'),
 	        	'birthdate' => date('Y-m-d', strtotime('29-03-1995')),
 	        	'genero' => 'F',
 	        	'pais' => 'El Salvador',
@@ -75,6 +77,7 @@ class UserTableSeeder extends Seeder {
 	        	'email' => 'Gisela@gmail.com',
 	        	'name' => 'Gisela lara',
 	        	'password' => Hash::make('12345678'),
+	        	'identification' => Hash::make('3'),
 	        	'birthdate' => date('Y-m-d', strtotime('29-03-1995')),
 	        	'genero' => 'F',
 	        	'pais' => 'El Salvador',
@@ -89,15 +92,16 @@ class UserTableSeeder extends Seeder {
 	        	'email' => 'developer@gmail.com',
 	        	'name' => 'Developer prueba',
 	        	'password' => Hash::make('12345678'),
+	        	'identification' => Hash::make('4'),
 	        	'birthdate' => date('Y-m-d', strtotime('29-03-1995')),
 	        	'genero' => 'M',
 	        	'pais' => 'El Salvador',
 	        	'provincia' => 'El refugio',
 	        	'municipio' => 'La paz',
 	        	'hobbies' => 'Musica, juegos, Economia',
-	        	'role' => 0
-	,        	'edad' => 
-     21   	));
+	        	'role' => 0,
+	        	'edad' => 21
+	   	));
 
 
     }

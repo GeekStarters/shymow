@@ -44,7 +44,7 @@
 																<i class="glyphicon glyphicon-remove"></i>
 															</a>
 														@endif
-														<a id="foll"
+														<a id="foll" data-user_id="{{$post->profil_id}}"
 															@if($post->follow)
 																class="follow-post-active"
 															@else
@@ -101,7 +101,7 @@
 												</div>
 												<div class="post-footer block-center text-center">
 													<div class="post-data-footer-face ">
-														<span class="post-qualification  border-right-post-tendencias">
+														<span class="post-qualification  border-right-post-tendencias" data-user_id="{{$post->profil_id}}">
 															@if((int)$post->qualification < 5)
 																	@for ($i = 1; $i <= (int)$post->qualification; $i++)
 																		<a data-star="{{$i}}" class="glyphicon glyphicon-star qualification-popular" data-post="{{$post->id_post}}"></a>
@@ -132,11 +132,11 @@
 															</span>
 														</div>
 														@if($post->userLike == Auth::user()->id)
-															<span class="like-me post-like-me-active border-right-post-tendencias" data-like="{{$post->id_post}}">
+															<span class="like-me post-like-me-active border-right-post-tendencias" data-like="{{$post->id_post}}" data-user_id="{{$post->profil_id}}">
 																<span class="number-post">{{$post->like}}</span> <span class="glyphicon glyphicon-heart"></span>
 															</span> 
 														@else
-															<span class="like-me post-like-me border-right-post-tendencias" data-like="{{$post->id_post}}">
+															<span class="like-me post-like-me border-right-post-tendencias" data-like="{{$post->id_post}}" data-user_id="{{$post->profil_id}}">
 																<span class="number-post">{{$post->like}}</span> <span class="glyphicon glyphicon-heart"></span>
 															</span> 
 														@endif
@@ -150,7 +150,7 @@
 												</div>
 											</div>
 											<div class="box-comment-content">
-												<div class="box-comment-header center-block" style="width:90%;">
+												<div class="box-comment-header center-block" data-user_id="{{$post->profil_id}}" style="width:90%;">
 													<div class="form-group">
 														<label>Comentario</label>
 														<label class="text-danger"></label>
@@ -242,7 +242,7 @@
 												</div>
 												<div class="post-footer block-center text-center">
 													<div class="post-data-footer-face ">
-														<span class="post-qualification  border-right-post-tendencias">
+														<span class="post-qualification  border-right-post-tendencias" data-user_id="{{$post->profil_id}}">
 															@if((int)$post->qualification < 5)
 																	@for ($i = 1; $i <= (int)$post->qualification; $i++)
 																		<a data-star="{{$i}}" class="glyphicon glyphicon-star qualification-popular" data-post="{{$post->id_post}}" ></a>
@@ -274,11 +274,11 @@
 															</span>
 														</div>
 														@if($post->userLike == Auth::user()->id)
-															<span class="like-me post-like-me-active border-right-post-tendencias" data-like="{{$post->id_post}}">
+															<span class="like-me post-like-me-active border-right-post-tendencias" data-like="{{$post->id_post}}" data-user_id="{{$post->profil_id}}">
 																<span class="number-post">{{$post->like}}</span> <span class="glyphicon glyphicon-heart"></span>
 															</span> 
 														@else
-															<span class="like-me post-like-me border-right-post-tendencias" data-like="{{$post->id_post}}">
+															<span class="like-me post-like-me border-right-post-tendencias" data-like="{{$post->id_post}}" data-user_id="{{$post->profil_id}}">
 																<span class="number-post">{{$post->like}}</span> <span class="glyphicon glyphicon-heart"></span>
 															</span> 
 														@endif
@@ -292,7 +292,7 @@
 
 											</div>
 											<div class="box-comment-content">
-												<div class="box-comment-header center-block" style="width:90%;">
+												<div class="box-comment-header center-block" data-user_id="{{$post->profil_id}}" style="width:90%;">
 													<div class="form-group">
 														<label>Comentario</label>
 														<label class="text-danger"></label>

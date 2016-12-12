@@ -14,12 +14,19 @@
   						<li class="dropdown-submenu">
 					        <a class="test" tabindex="-1" href="#">Configuración <span class="caret"></span></a>
 					        <ul class="dropdown-menu">
-					          <li><a tabindex="-1" href="#">2nd level dropdown</a></li>
+					     	  <li><a href="{{ url('agregar-producto') }}">Editar perfil</a></li>
 					          <li><a tabindex="-1" href="{{url('identificate')}}">Shymow Shop</a></li>
 					        </ul>
 					      </li>
+					     <li><a href="{{ url('notification') }}">Notificaciones 
+					     	<span class="notification-g">
+								<span class="number-notify-g">
+									2
+								</span>
+							</span>
+							</a>
+						</li>
 					     <li><a href="{{ url('agregar-producto') }}">Shymow Shop</a></li>
-					     <li><a href="{{ url('agregar-producto') }}">Editar perfil</a></li>
   						<li><a href="{{ url('logout') }}">Cerrar sesión</a></li>
   					</ul>
   				</li>
@@ -113,7 +120,7 @@
 									@else
 										<li><span class="glyphicon glyphicon-user"></span> <span class="val">Sin especificar</span> <span id="work" class="glyphicon glyphicon-pencil color-edit"></li>
 									@endif
-									<li><span class="glyphicon glyphicon-map-marker"></span> {{Auth::user()->provincia }}, {{Auth::user()->pais}} <span class="glyphicon glyphicon-pencil color-edit" data-toggle="modal" data-target="#editLocation"></span>></li>
+									<li><span class="glyphicon glyphicon-map-marker"></span> {{Auth::user()->provincia }}, {{Auth::user()->pais}} <span class="glyphicon glyphicon-pencil color-edit" data-toggle="modal" data-target="#editLocation"></span></li>
 
 									@if(Auth::user()->role != 2)
 										<li>

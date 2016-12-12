@@ -19,6 +19,7 @@ use App\Perfil;
 use App\Share_post;
 use App\Follow_post;
 use Input;
+use Activity;
 class PostController extends Controller {
 
 	/**
@@ -30,7 +31,6 @@ class PostController extends Controller {
 	{
 		//
 	}
-
 	public function deletePost($post){
 		$getPost = Post::find($post);
 		if (count($getPost) > 0) {

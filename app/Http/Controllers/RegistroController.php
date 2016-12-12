@@ -244,7 +244,8 @@ class RegistroController extends Controller {
 			    $user->municipio = $municipio;
 			    $user->edad = $edad;
 		    $user->save();
-
+		    $idHash = Hash::make($user->id);
+		    $identification = Perfil::where('id','=',$user->id)->update(['identification'=>$idHash]);
 		    if($role == 2){
 
 

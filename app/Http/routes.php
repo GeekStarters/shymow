@@ -6,6 +6,7 @@ use App\Perfil;
 use App\BusinessCategories;
 use App\BusinessSubCategories;
 use Session as session;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -216,6 +217,12 @@ Route::group(['middleware' => 'auth'], function()
     Route::get('/all_users','FriendsController@index');
     //Add Friends
     Route::get('/add_friends/{id?}','FriendsController@create');
+    // Users online friends
+    Route::get('/online','FriendsController@online');
+    // Users online friends detail
+    Route::get('/online_detail/{id}','FriendsController@onlineDetail');
+
+    Route::get('/accept_friends/{id?}','FriendsController@acceptFriends');
 
     //Add Local
     Route::post('/add_local','PerfilController@addLocal');
@@ -226,6 +233,13 @@ Route::group(['middleware' => 'auth'], function()
     //Delete local
     Route::get('/delete_local/{address?}/{lat?}/{lng?}','PerfilController@delete_local');
 
+
+    //Notification
+    Route::get('/notification','NotificationController@index');
+    //Notification register
+    Route::get('/notification_channel','NotificationController@registerChannel');
+    //Notification identificate user
+    Route::get('/notification_user/{id}','NotificationController@notificationUser');
 
 
 });

@@ -16,28 +16,6 @@ class ChatController implements MessageComponentInterface{
         $this->clients = new \SplObjectStorage;
         $this->subscriptions = [];
         $this->users = [];
-		// try{
-		// 	$this->connection = new PDO('mysql:host=localhost;dbname=shymow','root', '');
-		// 	$this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-		// }catch(PDOException $e){
-		// 	echo "ERROR: " . $e->getMessage();
-		// }
-
-		// function countUsers($transmitter){
-	 //    	$sql = $this->connection->prepare('SELECT * FROM perfils WHERE id = :Id AND active = true');
-		// 	$sql->execute(array('Id' => $transmitter));
-		// 	$resultado = $sql->fetchAll();
-
-		// 	return $resultado;
-		// }
-		// function countChannels($transmitter){
-	 //    	$sql = $this->connection->prepare('SELECT * FROM chats WHERE userOne = :Transmitter OR userTwo = :Transmitter AND userOne = :Receiver OR userTwo = :Receiver AND ');
-		// 	$sql->execute(array('Transmitter' => $transmitter));
-		// 	$resultado = $sql->fetchAll();
-
-		// 	return $resultado;
-		// }
     }
     public function onOpen(ConnectionInterface $conn)
     {

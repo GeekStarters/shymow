@@ -149,7 +149,7 @@ return [
 		Laravel\Socialite\SocialiteServiceProvider::class,
 		Intervention\Image\ImageServiceProvider::class,
 		Laracasts\Flash\FlashServiceProvider::class,
-
+		Kim\Activity\ActivityServiceProvider::class,
 	],
 
 	/*
@@ -200,8 +200,8 @@ return [
 		'Form' => 'Collective\Html\FormFacade',
       	'Html' => 'Collective\Html\HtmlFacade',
       	'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+      	'Activity' => Kim\Activity\ActivityFacade::class,
       	'Image' => Intervention\Image\Facades\Image::class,
-
 	],
 
 ];

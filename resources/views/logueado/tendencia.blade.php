@@ -34,7 +34,7 @@
 										<i class="glyphicon glyphicon-remove"></i>
 									</a>
 								@endif
-								<a id="foll"
+								<a id="foll" data-user_id="{{$trend->profil_id}}"
 									@if($trend->follow)
 										class="follow-post-active"
 									@else
@@ -68,7 +68,7 @@
 						</div>
 						<div class="post-footer block-center text-center">
 							<div class="post-data-footer-face ">
-								<span class="post-qualification  border-right-post-tendencias">
+								<span class="post-qualification  border-right-post-tendencias" data-user_id="{{$trend->profil_id}}">
 									@if((int)$trend->qualification < 5)
 											@for ($i = 1; $i <= (int)$trend->qualification; $i++)
 												<a data-star="{{$i}}" class="glyphicon glyphicon-star qualification-popular" data-post="{{$trend->id_post}}"></a>
@@ -99,11 +99,11 @@
 									</span>
 								</div>
 								@if($trend->userLike == Auth::user()->id)
-									<span class="like-me post-like-me-active border-right-post-tendencias" data-like="{{$trend->id_post}}">
+									<span class="like-me post-like-me-active border-right-post-tendencias" data-user_id="{{$trend->profil_id}}" data-like="{{$trend->id_post}}">
 										<span class="number-post">{{$trend->like}}</span> <span class="glyphicon glyphicon-heart"></span>
 									</span> 
 								@else
-									<span class="like-me post-like-me border-right-post-tendencias" data-like="{{$trend->id_post}}">
+									<span class="like-me post-like-me border-right-post-tendencias" data-user_id="{{$trend->profil_id}}" data-like="{{$trend->id_post}}">
 										<span class="number-post">{{$trend->like}}</span> <span class="glyphicon glyphicon-heart"></span>
 									</span> 
 								@endif
@@ -117,7 +117,7 @@
 						</div>
 					</div>
 					<div class="box-comment-content">
-						<div class="box-comment-header center-block" style="width:90%;">
+						<div class="box-comment-header center-block" data-user_id="{{$trend->profil_id}}" style="width:90%;">
 							<div class="form-group">
 								<label>Comentario</label>
 								<label class="text-danger"></label>

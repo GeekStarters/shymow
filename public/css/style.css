@@ -2228,6 +2228,24 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4f6f5', end
 	font-family: gothamTwo;
 	padding: 5px;
 }
+.notification-g{
+	background: #E1010E;
+	position: relative;
+	border-radius: 2px;
+	right: 0px;
+	color:#fff;
+	display: none;
+}
+.number-notify-g{
+	font-size: .8em;
+	font-family: gothamTwo;
+	padding: 5px;
+}
+.popover-title{
+	color: #828282 !important;
+	font-family: gothamTwo !important;
+}
+
 
 .chat-float-view{
 	background: #EEEFEE !important;
@@ -2407,8 +2425,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4f6f5', end
 .btn-default-s{
 	background: #37B5AA;color: #fff
 }
+.btn-default-ac{
+	background: #226959;color: #fff
+}
 .btn-default-s:hover{
 	background: #fff; color:#37B5AA;border:1px solid #37B5AA;
+}
+.btn-default-ac:hover{
+	background: #fff; color:#226959;border:1px solid #226959;
 }
 .img_cat_search{
 	position: absolute;
@@ -2494,4 +2518,9 @@ bottom: -5px;
 	color: #EF4D0D;
 	font-size: 1.1em;
 	cursor: pointer;
+}
+
+.popover-content{
+	overflow-x:hidden; overflow-y:scroll;
+	max-height: 350px;
 }

@@ -18,6 +18,7 @@ class CreatePerfilsTable extends Migration {
 			$table->string('name');
 			$table->string('email')->nullable()->unique();
 			$table->string('password', 60);
+			$table->string('identification', 60)->nullable();
 			$table->date('birthdate');
 			$table->string('genero');
 			$table->string('pais');

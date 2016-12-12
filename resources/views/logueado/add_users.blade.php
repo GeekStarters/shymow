@@ -48,17 +48,28 @@
 			        				@if($pendings->id == $user->id)
 			        					<a href="{{url('add_friends/'.$user->id)}}" class="btn btn-warning" role="button">Cancelar</a>
 			        					<?php $countA++ ?>
+
+			        					@foreach($user_accept as $accept)
+					        				@if($accept[0] == $pendings->id && $accept[1] == Auth::id())
+					        					<a href="{{url('accept_friends/'.$user->id)}}" class="btn btn-default-ac" role="button">Aceptar</a>
+					        					<?php $countA++ ?>
+					        				@endif
+					        			@endforeach
 			        				@endif
 			        			@endforeach
 				        	@endif
 
-				        	@if(count($user_declined) > 0 || countA < 1)
+				        	@if(count($user_declined) > 0 || $countA < 1)
 			        			@foreach($user_declined as $declineds)
 			        				@if($declineds->id == $user->id)
 			        					<a href="{{url('add_friends/'.$user->id)}}" class="btn btn-default-s" role="button">Agregar</a>
 			        					<?php $countA++ ?>
 			        				@endif
 			        			@endforeach
+			        			@if($countA < 1)
+		        					<a href="{{url('add_friends/'.$user->id)}}" class="btn btn-default-s" role="button">Agregar</a>
+		        					<?php $countA++ ?>
+		        				@endif
 				        	@endif	   	
 				        </p>
 				      </div>
