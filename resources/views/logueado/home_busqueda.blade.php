@@ -976,7 +976,7 @@
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
   });
-
+  $('#flash-overlay-modal').modal();
   $('.crsl-items').carousel({
     visible: 3,
     itemMinWidth: 180,

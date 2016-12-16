@@ -90,6 +90,7 @@
 @section('scripts')
 <script>
 	jQuery(document).ready(function($) {
+		$('#flash-overlay-modal').modal();
 		var price = parseInt($('#precio').text());
 		$('#cantidad').keyup(function(event) {
 			/* Act on the event */

@@ -28,8 +28,7 @@ class AuthenticationController extends Controller {
 		
 		$user = [
     		'email' => $request->input('email'),
-    		'password' => $request->input('password'),
-    		'active' => true
+    		'password' => $request->input('password')
 		];
 		$v = Validator::make($user, [
 			'email' => 'email|required|exists:perfils',
@@ -48,6 +47,10 @@ class AuthenticationController extends Controller {
 
 	    if (Auth::attempt($user,$remember))
 		{	
+			if (!Auth::user()->active) {
+				Perfil::where('id','=',Auth::id())->update(['active'=>true]);
+				flash()->overlay('Tu cuenta fue activada', Auth::user()->name);
+			}
 	        return redirect()->intended('favoritos');
 		}else
 		{

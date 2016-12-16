@@ -8,17 +8,25 @@
 				<a href="{{url('/')}}">
 					<img src="{{url('img/logo.png')}}" alt="shymow" style="max-width:200px; margin-right:20px; margin-left:20px;">
 				</a>
-			  <li class="dropdown">
+			  	<li class="dropdown">
   					<a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="{{ url(Auth::user()->img_profile) }}" alt=""> {{Auth::user()->name}} <b class="caret"></b></a>
   					<ul class="dropdown-menu">
   						<li class="dropdown-submenu">
 					        <a class="test" tabindex="-1" href="#">Configuración <span class="caret"></span></a>
 					        <ul class="dropdown-menu">
-					          <li><a tabindex="-1" href="#">2nd level dropdown</a></li>
+					     	  <li><a href="{{ url('identificate_perfil') }}">Editar perfil</a></li>
 					          <li><a tabindex="-1" href="{{url('identificate')}}">Shymow Shop</a></li>
 					        </ul>
 					      </li>
-  						<li><a href="{{ url('agregar-producto') }}">Shymow Shop</a></li>
+					     <li><a href="{{ url('notification') }}">Notificaciones 
+					     	<span class="notification-g">
+								<span class="number-notify-g">
+									2
+								</span>
+							</span>
+							</a>
+						</li>
+					     <li><a href="{{ url('agregar-producto') }}">Shymow Shop</a></li>
   						<li><a href="{{ url('logout') }}">Cerrar sesión</a></li>
   					</ul>
   				</li>

@@ -179,6 +179,7 @@
 		    }
 		});
 		Hashtag.replaceTags('.hashtag-post','fb');
+		$('#flash-overlay-modal').modal();
 	});
 </script>
 @stop

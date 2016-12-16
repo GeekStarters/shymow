@@ -37,3 +37,10 @@
 @stop
 @extends('logueado.layouts.content-modal')
 @extends('logueado.layouts.content-float-chat')
+@section('scripts')
+<script>
+	jQuery(document).ready(function($) {
+		$('#flash-overlay-modal').modal();
+	});
+</script>
+@stop

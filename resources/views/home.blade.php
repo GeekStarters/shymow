@@ -642,6 +642,8 @@
 
 @section('scripts')
 <script>
+
+  $('#flash-overlay-modal').modal();
   $.ajaxSetup({
     headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

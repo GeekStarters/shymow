@@ -12,6 +12,7 @@ use Hash;
 use DB;
 use Carbon\Carbon;
 use DateTime;
+use App\Helpers\DataHelpers;
 class MessagesController extends Controller{
 
 	/**
@@ -21,52 +22,7 @@ class MessagesController extends Controller{
 	 */
 	public function index()
 	{
-		function getSubString($string,$length)
-		{
-		    //Si no se especifica la longitud por defecto es 50
-		    if ($length == NULL)
-		        $length = 50;
-		    //Primero eliminamos las etiquetas html y luego cortamos el string
-		    $stringDisplay = substr(strip_tags($string), 0, $length);
-		    //Si el texto es mayor que la longitud se agrega puntos suspensivos
-		    // if (strlen(strip_tags($string)) > $length)
-		    if (strlen($string) > $length)
-		        $stringDisplay .= ' ...';
-		    return $stringDisplay;
-		}
-		$chats = Message::chatMessage(Auth::user()->id);
-
-		// dd($chats);
-		$messages = [];
-		foreach ($chats as $chat) {
-			$id = Auth::user()->id;
-			$getUser = "";
-			if ($chat->emisor == $id){
-				$getUser = Perfil::where('id',$chat->receptor)->get();
-			}else{
-				$getUser = Perfil::where('id',$chat->emisor)->get();
-			}
-
-			$tiempo = Carbon::createFromFormat('Y-m-d H:i:s', $chat->created_at);
-			$tiempo = $tiempo->format('Y-m-d H:i');
-			
-
-			$texto = getSubString($chat->message,15);
-			$newContainer = [
-				"emisor" => $chat->emisor,
-				"receptor" => $chat->receptor,
-				"chat" => $chat->chatId,
-				"key" => $chat->channel,
-				"read" => $chat->read,
-				"message" => $texto,
-				"userViewName" => $getUser[0]->name,
-				"userViewImage" => $getUser[0]->img_profile,
-				"userViewId" => $getUser[0]->id,
-				"messageTime" => $tiempo,
-			];
-
-			array_push($messages, $newContainer);
-		}
+		$messages = DataHelpers::latestPosts(Auth::id());
 		return view('logueado.messages',compact('messages'));
 	}
 

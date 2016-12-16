@@ -112,6 +112,7 @@
 @section('scripts')
 <script>
 	jQuery(document).ready(function($) {
+		$('#flash-overlay-modal').modal();
 		$('.product-category-select').click(function(event) {
 			/* Act on the event */
 			var category = $(this);

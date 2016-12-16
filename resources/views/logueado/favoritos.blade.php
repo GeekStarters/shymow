@@ -365,6 +365,8 @@
 		});
 		Hashtag.replaceTags('.hashtag-post','fb');
 		Hashtag.replaceTags('.hashtag-top','fb');
+
+		$('#flash-overlay-modal').modal();
 	});
 </script>
 @stop

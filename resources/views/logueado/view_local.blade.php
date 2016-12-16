@@ -43,6 +43,7 @@
 
 <?php  ?>
 <script>
+	$('#flash-overlay-modal').modal();
 	var latitude = $('#position').data('lat');
 	var longitude = $('#position').data('lng');
 	var title = $('.title-trends').text();

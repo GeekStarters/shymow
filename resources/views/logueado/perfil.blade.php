@@ -842,6 +842,7 @@
 	<script type="text/javascript" src="{{ asset('js/map.js') }}"></script>
 	<script>
 	jQuery(document).ready(function($) {
+		$('#flash-overlay-modal').modal();
 		$('.camera i').click(function(event) {
 			$('#uploadImg').click();
 		});

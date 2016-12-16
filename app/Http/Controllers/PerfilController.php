@@ -15,9 +15,14 @@ use App\Category_post;
 use App\UserQualification;
 use App\UserLikes;
 use App\UserShare;
+use App\usersDesabilited;
+use App\Options_desactive;
 use Image;
 use DB;
+use Hash;
 use Input;
+use Session;
+use Carbon\Carbon;
 class PerfilController extends Controller {
 
 	/**
@@ -25,9 +30,208 @@ class PerfilController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function validacion(Request $request){
+		$password = $request->all();
+		$user = DB::table('perfils')
+	        ->select('password')
+	        ->where('id', Auth::user()->id);
+	    $user = $user->first();
+		$messages = [
+			'required' => 'Identifiquese por favor',
+		];
+		$v = Validator::make($password, [
+			'password' => 'required|min:8',
+	    ],$messages);
+
+	    if ($v->fails())
+	    {
+		    return redirect('identificate_perfil')->withErrors($v)->withInput($request->all());
+	    }
+		if(Hash::check($request->input('password'),$user->password)) {
+			Session::put('configuracion_shymow_profile', true);
+			if (session::has('configuracion_shymow_profile'))
+			{
+        		return redirect('edit-profile');
+			}
+   		}else{
+   			return redirect('identificate_perfil');
+   		}
+
+	}
+	public function outEditData(){
+		if (Session::has('configuracion_shymow_profile'))
+		{
+		    Session::forget('configuracion_shymow_profile');
+		}
+
+		return redirect('perfil');
+	}
+	public function desabilitedUser(Request $re){
+		$desactives = Options_desactive::all();
+		$reasons = "";
+		$f = 0;
+		if (count($desactives) > 0) {
+			foreach ($desactives as $desactive) {
+				if ($re->input('opt'.$desactive->id) != "") {
+					if ($f<1) {
+						$f++;
+						$reasons .= $re->input('opt'.$desactive->id);
+					}else{
+						$reasons .= ",".$re->input('opt'.$desactive->id);
+					}
+					
+				}
+			}
+			if (empty($reasons)) {
+				flash('Debe seleccionar un motivo para dar de baja su cuenta', 'danger');
+	    		return redirect()->back()->withInput();
+			}
+
+			try {
+				$desabilite = new usersDesabilited();
+				$desabilite->profile_id = Auth::user()->id;
+				$desabilite->description = $re->input('description');
+				$desabilite->reasons = $reasons;
+				$desabilite->save();
+
+				Perfil::where('id','=',Auth::user()->id)->update(['active'=>false]);
+				flash()->overlay('Tu cuenta fue desactivada', Auth::user()->name);
+				return redirect('logout');
+
+			} catch (Exception $e) {
+				flash('Intentelo nuevamente', 'danger');
+				return redirect()->back();			
+			}
+		}
+	}
+	public function recoverPass(Request $request)
+	{	
+		$v = Validator::make($request->all(), [
+	        'recover_pass' => 'required|unique:perfils,recover_pass,'.Auth::id(),
+	    ]);
+
+	    if ($v->fails())
+	    {
+	        return redirect()->back()->withErrors($v->errors())->withInput();
+	    }
+
+	    try {
+	    	Perfil::where('id','=',Auth::id())->update(['recover_pass'=>$request->input('recover_pass')]);
+	    	flash('Correo actualizado', 'success');
+	    	return redirect()->back()->withInput();
+	    } catch (Exception $e) {
+	    	flash('Intentelo nuevamente', 'danger');
+	    	return redirect()->back()->withInput();
+	    }
+		return view('logueado.config-security',compact('desactives'));
+	}
+	public function editSecurity()
+	{	
+		$desactives = Options_desactive::all();
+		return view('logueado.config-security',compact('desactives'));
+	}
+	public function savePass(Request $request)
+	{	
+		$v = Validator::make($request->all(), [
+	        'last_password' => 'required|min:8',
+	        'password' => 'required|min:8|confirmed',
+	        'password_confirmation' => 'required|min:8',
+	    ]);
+
+	    if ($v->fails())
+	    {
+	        return redirect()->back()->withErrors($v->errors())->withInput();
+	    }
+
+	    $password = $request->input('last_password');
+	   if (!Hash::check($password,Auth::user()->password)){
+	   		flash('Password no coincide con el actual', 'danger');
+	    	return redirect()->back()->withInput();
+	    }
+
+	    $password = Hash::make($request->input('password'));
+	    try {
+	    	Perfil::where('id','=',Auth::id())->update(['password'=>$password]);
+	    	flash('Password actualizado', 'success');
+	    	return redirect()->back()->withInput();
+	    } catch (Exception $e) {
+	    	flash('Intentelo nuevamente', 'danger');
+	    	return redirect()->back()->withInput();
+	    }
+		return view('logueado.config-security');
+	}
+	public function saveGeneralProfile(Request $request)
 	{
-		//
+		$v = Validator::make($request->all(), [
+	        'nombre' => 'required',
+	        'apellido' => 'required',
+	        'email' => 'unique:perfils,email,'.Auth::id(),
+	        'celular' => 'required',
+	        'cp' => 'required',
+	        'code' => 'required',
+	        'pais' => 'required',
+	        'dia' => 'required',
+	        'mes' => 'required',
+	        'anio' => 'required',
+	        'genero' => 'required'
+	    ]);
+
+	    if ($v->fails())
+	    {
+	        return redirect()->back()->withErrors($v->errors())->withInput();
+	    }
+
+	    $month = $request->input('mes');
+	    $day = $request->input('dia');
+	    $year = $request->input('anio');
+
+	    $nombre = $request->input('nombre');
+	    $apellido = $request->input('apellido');
+	    $email = $request->input('email');
+	    $celular = $request->input('celular');
+	    $cp = $request->input('cp');
+	    $code = $request->input('code');
+	    $pais = $request->input('pais');
+	    $genero = $request->input('genero');
+
+	    $view_cp = $request->input('view_cp');
+	    $view_gender = $request->input('view_gender');
+	    $view_country = $request->input('view_country');
+	    $view_birth = $request->input('view_birth');
+	    $view_phone = $request->input('view_phone');
+	    $view_email = $request->input('view_email');
+
+	    $view_cp = $view_cp == "true" ? true : false;
+	    $view_gender = $view_gender == "true" ? true : false;
+	    $view_country = $view_country == "true" ? true : false;
+	    $view_birth = $view_birth == "true" ? true : false;
+	    $view_email = $view_email == "true" ? true : false;
+	    $view_phone = $view_phone == "true" ? true : false;
+
+	    $allname = $nombre." ".$apellido;
+
+	    if (!checkdate ((int)$month , (int)$day , (int) $year )) {
+	    	flash('Fecha no valida', 'danger');
+	    	return redirect()->back();
+	    }
+	    $myCountry = DB::select('SELECT * FROM `countries` WHERE name = "'.Auth::user()->pais.'"');
+		if (count($myCountry) > 0) {
+			$myCountry = $myCountry[0]->name;
+		}else{
+			flash('País no valido', 'danger');
+	    	return redirect()->back();
+		}
+	    $phone = $code.$celular;
+	    $date = date("Y-m-d",strtotime($year."-".$month."-".$day));     
+	    try {
+	    	Perfil::where('id','=',Auth::id())->update(['fname'=>$nombre,'lname'=>$apellido,'birthdate' => $date,'email' => $email,'phone'=>$phone,'code_phone'=>$code,'pais' => $myCountry,'genero' => $genero,'name' => $allname,'view_cp'=>$view_cp,'view_gender'=>$view_gender,'view_country'=>$view_country,'view_birth'=>$view_birth,'view_email'=>$view_email,'view_phone'=>$view_phone,'cp'=>$cp]);
+
+	    	return redirect('perfil');
+	    } catch (Exception $e) {
+	    	flash('Ocurrio un error', 'danger');
+	    	return redirect()->back();
+	    }
+
 	}
 
 	/**
@@ -35,9 +239,29 @@ class PerfilController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function editProfile()
 	{
-		//
+		$codes = DB::select('SELECT * FROM `code_phones`');
+		$countries = Countrie::all()->lists('name','id');
+		$myCountry = DB::select('SELECT * FROM `countries` WHERE name = "'.Auth::user()->pais.'"');
+		if (count($myCountry) > 0) {
+			$myCountry = $myCountry[0];
+		}
+
+		$date = Auth::user()->birthdate;
+		$date = explode("-", $date);
+		$y = $date[0];
+		$m = $date[1];
+		$d = $date[2];
+
+		$myCode = [];
+		if (!empty(Auth::user()->code_phone)) {
+			$myCode = DB::select('SELECT * FROM `code_phones` WHERE phonecode = "'.Auth::user()->code_phone.'"');
+			if (count($myCode) > 0) {
+				$myCode = $myCode[0];
+			}
+		}
+		return view('logueado.config-perfil',compact('codes','countries','myCountry','y','m','d','myCode'));
 	}
 
 	/**

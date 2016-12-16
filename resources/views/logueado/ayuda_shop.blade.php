@@ -104,3 +104,10 @@
   </div>
   
 @endsection
+@section('scripts')
+<script>
+  jQuery(document).ready(function($) {
+    $('#flash-overlay-modal').modal();
+  });
+</script>
+@stop

@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Validator;
 use App\Citie;
 use App\State;
+use App\Notification_setting;
 use App\Countrie;
 
 class RegistroController extends Controller {
@@ -243,7 +244,12 @@ class RegistroController extends Controller {
 			    $user->provincia = $provincia;
 			    $user->municipio = $municipio;
 			    $user->edad = $edad;
+			    $user->recover_pass = $data_user['email'];
 		    $user->save();
+		    $notifications = new Notification_setting();
+		    $notifications->perfil_id = $user->id;
+		    $notifications->save();
+
 		    $idHash = Hash::make($user->id);
 		    $identification = Perfil::where('id','=',$user->id)->update(['identification'=>$idHash]);
 		    if($role == 2){

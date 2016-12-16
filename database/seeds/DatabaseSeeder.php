@@ -10,11 +10,13 @@ use App\Last_spesification;
 use App\Category;
 use App\Interest;
 use App\Chat;
+use App\options_desactive;
 use App\User_chat;
 use App\Message;
 use App\BusinessCategories;
 use App\BusinessSubCategories;
 use App\Type_send_product;
+use App\Notification_setting;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -36,6 +38,8 @@ class DatabaseSeeder extends Seeder {
         $this->call('MessageTableSeeder');
         $this->call('BusinessCategoriesSeeder');
         $this->call('BusinessSubCategoriesSeeder');
+        $this->call('OptionsDesactive');
+        $this->call('NotificationSeeder');
     }
 
 }
@@ -151,6 +155,29 @@ class FriendTableSeeder extends Seeder {
     }
 
 }
+class NotificationSeeder extends Seeder {
+
+    public function run()
+    {
+        DB::table('notification_settings')->delete();
+        Notification_setting::create(array(
+	        	'perfil_id' => 1,
+        ));
+
+        Notification_setting::create(array(
+	        	'perfil_id' => 2,
+        ));
+
+        Notification_setting::create(array(
+	        	'perfil_id' => 3,
+        ));
+
+        Notification_setting::create(array(
+	        	'perfil_id' => 4,
+        ));
+    }
+
+}
 class TypeSendTableSeeder extends Seeder {
 
     public function run()
@@ -166,6 +193,35 @@ class TypeSendTableSeeder extends Seeder {
 
         Type_send_product::create(array(
 	        	'name' => 'Acordar con el comprador',
+        ));
+    }
+
+}
+class OptionsDesactive extends Seeder {
+
+    public function run()
+    {
+        DB::table('options_desactives')->delete();
+        Options_desactive::create(array(
+	        	'name' => 'Me parece aburrido',
+        ));
+        Options_desactive::create(array(
+	        	'name' => 'Me parece complicado',
+        ));
+        Options_desactive::create(array(
+	        	'name' => 'Creo que Shymow no aporta nada nuevo',
+        ));
+        Options_desactive::create(array(
+	        	'name' => 'Tengo demaciadas redes sociales',
+        ));
+        Options_desactive::create(array(
+	        	'name' => 'He tenido problemas técnicos',
+        ));
+        Options_desactive::create(array(
+	        	'name' => 'No funciona bien el buscador',
+        ));
+        Options_desactive::create(array(
+	        	'name' => 'Otro',
         ));
     }
 

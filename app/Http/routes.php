@@ -233,13 +233,47 @@ Route::group(['middleware' => 'auth'], function()
     //Delete local
     Route::get('/delete_local/{address?}/{lat?}/{lng?}','PerfilController@delete_local');
 
-
-    //Notification
-    Route::get('/notification','NotificationController@index');
     //Notification register
     Route::get('/notification_channel','NotificationController@registerChannel');
     //Notification identificate user
     Route::get('/notification_user/{id}','NotificationController@notificationUser');
+    //Notification get messages
+    Route::get('/notifyGetMessages','NotificationController@notifyGetMessages');
+
+    Route::get('identificate_perfil',function(){
+        return view('logueado.identificate_perfil');
+    });
 
 
+    // Autentificar user editar perfil
+    Route::post('/validacion_perfil','PerfilController@validacion');
+    // delete session
+    Route::get('/out_edit_profile','PerfilController@outEditData');
+    
+    Route::group(['middleware' => 'edit_profile'], function()
+    {
+        //Edit profile
+        Route::get('/edit-profile','PerfilController@editProfile');
+
+        //Save general data profile
+        Route::post('/save-general-profile','PerfilController@saveGeneralProfile');
+
+        // Edit security
+        Route::get('/edit-security','PerfilController@editSecurity');
+
+        // Save new password
+        Route::post('/save-password','PerfilController@savePass');
+
+        //recover password
+        Route::post('/recover-password','PerfilController@recoverPass');
+
+        //desabilited user
+        Route::post('/desabilited-user','PerfilController@desabilitedUser');
+
+        //Notification
+        Route::get('/notification','NotificationController@index');
+
+        //Save config notification
+        Route::post('/save_config_notification','NotificationController@saveConfNotification');
+    });
 });
