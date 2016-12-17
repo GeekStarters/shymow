@@ -17,6 +17,7 @@ use App\BusinessCategories;
 use App\BusinessSubCategories;
 use App\Type_send_product;
 use App\Notification_setting;
+use App\options_desactives_store;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -40,6 +41,7 @@ class DatabaseSeeder extends Seeder {
         $this->call('BusinessSubCategoriesSeeder');
         $this->call('OptionsDesactive');
         $this->call('NotificationSeeder');
+        $this->call('OptionsDesactiveStore');
     }
 
 }
@@ -193,6 +195,29 @@ class TypeSendTableSeeder extends Seeder {
 
         Type_send_product::create(array(
 	        	'name' => 'Acordar con el comprador',
+        ));
+    }
+
+}
+class OptionsDesactiveStore extends Seeder {
+
+    public function run()
+    {
+        DB::table('options_desactives_stores')->delete();
+        options_desactives_store::create(array(
+	        	'name' => 'Me parece complicado',
+        ));
+        options_desactives_store::create(array(
+	        	'name' => 'Creo que Shymow Shop no aporta nada nuevo',
+        ));
+        options_desactives_store::create(array(
+	        	'name' => '	Mis productos no tienen visibilidad',
+        ));
+        options_desactives_store::create(array(
+	        	'name' => 'He tenido problemas técnicos',
+        ));
+        options_desactives_store::create(array(
+	        	'name' => 'Otro',
         ));
     }
 

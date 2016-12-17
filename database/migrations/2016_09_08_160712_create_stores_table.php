@@ -21,8 +21,13 @@ class CreateStoresTable extends Migration {
 			$table->string('last_name');
 			$table->string('email_store');
 			$table->string('phone');
+			$table->string('code_phone');
+			$table->string('cp');
 			$table->string('address');
 			$table->string('further_office');
+			$table->string('pais');
+			$table->boolean('view_country')->default(true);
+			$table->boolean('view_cp')->default(true);
 			$table->boolean('store_close')->default(false);
 			$table->boolean('active')->default(true);
 			$table->timestamps();

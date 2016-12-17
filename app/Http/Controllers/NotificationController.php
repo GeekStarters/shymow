@@ -104,7 +104,7 @@ class NotificationController extends Controller {
 		        'play_reseiver_notification' => $bool_s_n,
 		        'play_reseiver_msg' => $bool_s_msg,
 	   		]);
-	   		flash('Configuración de ediciones guardada', 'success');
+	   		flash('Configuración de notificaciones guardada', 'success');
 	    	return redirect()->back();
 	   	} catch (Exception $e) {
 	   		flash('Intentalo nuevamente', 'danger');

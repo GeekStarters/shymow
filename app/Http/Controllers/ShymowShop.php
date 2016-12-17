@@ -6,10 +6,12 @@ use App\Product;
 use App\Images_product;
 use App\Http\Controllers\Controller;
 use DB;
-use App\Notification_settings_store;
 use App\Type_send_product;
 use App\Store;
+use App\disableStore;
 use App\Order;
+use App\Notification_settings_store;
+use App\options_desactives_store;
 use Validator;
 use Input;
 use Illuminate\Http\Request;
@@ -17,6 +19,7 @@ use Session;
 use App\Countrie;
 use Auth;
 use Hash;
+use Image;
 class ShymowShop extends Controller {
 
 	/**
@@ -30,8 +33,8 @@ class ShymowShop extends Controller {
 		return view('logueado.agregar-producto',compact('categorys'));
 	}
 	public function shymowView(){
-		$products = DB::select('SELECT * FROM `products` LEFT JOIN images_products on images_products.product_id = products.id  WHERE products.active = true GROUP BY products.id ORDER BY products.id DESC LIMIT 5');
-		// dd($products);
+		$products = DB::select('SELECT images_products.path, images_products.name, images_products.active,products.id,products.title,products.description,products.price,products.stock,products.qualification,products.like,products.share,products.comments,products.profile_id FROM `products` LEFT JOIN images_products on images_products.product_id = products.id  WHERE products.active = true GROUP BY products.id ORDER BY products.id DESC LIMIT 5');
+		// dd($products);	
 		$count_data = count($products);
 		return view('logueado.shymow-shop',compact('products','count_data'));
 	}
@@ -71,7 +74,7 @@ class ShymowShop extends Controller {
 	    					break;
 	    			}
 	    			$store_id = Store::userStore(Auth::user()->id)->first();
-	    			$count_data = $store_id->count();
+	    			$count_data = count($store_id);
 	    			if($count_data > 0){
 		    			$product = new Product();
 			    			$product->title = session('producto')['title'];
@@ -119,6 +122,7 @@ class ShymowShop extends Controller {
 		    			Session::forget('informacion-producto');
 			    		return redirect('shymow-shop');
 	    			}else{
+	    				flash('Debes crear una tienda', 'danger');
 	    				return redirect('perfil');
 	    			}
 
@@ -359,6 +363,9 @@ class ShymowShop extends Controller {
 		}
 	}
 
+	public function informacionProductoPro(){
+		return view('logueado.informacion_producto');
+	}
 	public function informacionProducto(Request $request){
 		$producto = $request->all();
 		$messages = [
@@ -383,7 +390,7 @@ class ShymowShop extends Controller {
 	    }
 	    Session(['producto' => $request->all()]);
 
-	    return view('logueado.informacion_producto');
+	    return redirect('informacion-producto-pro');
 	}
 
 	public function envioProducto(Request $request){
@@ -416,13 +423,19 @@ class ShymowShop extends Controller {
 		{
 			if ($request->file('oneImage')->isValid())
 			{
-			    $file = $request->file('oneImage');
-			    $fileName  = time() . '-' . $file->getClientOriginalName();
-			    $destinationPath = 'img/productos/';
-			    $request->file('oneImage')->move($destinationPath, $fileName);
-			    $fullDestinationPath = $destinationPath.$fileName;
+				$img = Input::file('oneImage');
+			    $filename  = time() . '.' . $img->getClientOriginalExtension();
+			    $path = public_path('img/productos/' . $filename);
+			    $fullDestinationPath = 'img/productos/'.$filename;
+				Image::make( $img->getRealPath() )->resize(320,220)->save($path);
 
-			    $oneDataImage = [$fileName,$fullDestinationPath];
+			    // $file = $request->file('oneImage');
+			    // $fileName  = time() . '-' . $file->getClientOriginalName();
+			    // $destinationPath = 'img/productos/';
+			    // $request->file('oneImage')->move($destinationPath, $fileName);
+			    // $fullDestinationPath = $destinationPath.$fileName;
+
+			    $oneDataImage = [$filename,$fullDestinationPath];
 			    session::push('informacion-producto.dataOneImage', $oneDataImage);
 			}
 		}
@@ -431,13 +444,18 @@ class ShymowShop extends Controller {
 		{
 			if ($request->file('twoImage')->isValid())
 			{
-			    $file = $request->file('twoImage');
-			    $fileName  = time() . '-' . $file->getClientOriginalName();
-			    $destinationPath = 'img/productos/';
-			    $request->file('twoImage')->move($destinationPath, $fileName);
-			    $fullDestinationPath = $destinationPath.$fileName;
+				$img = Input::file('twoImage');
+			    $filename  = time() . '.' . $img->getClientOriginalExtension();
+			    $path = public_path('img/productos/' . $filename);
+			    $fullDestinationPath = 'img/productos/'.$filename;
+				Image::make( $img->getRealPath() )->resize(320,220)->save($path);
+			    // $file = $request->file('twoImage');
+			    // $fileName  = time() . '-' . $file->getClientOriginalName();
+			    // $destinationPath = 'img/productos/';
+			    // $request->file('twoImage')->move($destinationPath, $fileName);
+			    // $fullDestinationPath = $destinationPath.$fileName;
 
-			    $oneDataImage = [$fileName,$fullDestinationPath];
+			    $oneDataImage = [$filename,$fullDestinationPath];
 			    session::push('informacion-producto.dataTwoImage', $oneDataImage);
 			}
 		}
@@ -446,13 +464,18 @@ class ShymowShop extends Controller {
 		{
 			if ($request->file('threeImage')->isValid())
 			{
-			    $file = $request->file('threeImage');
-			    $fileName  = time() . '-' . $file->getClientOriginalName();
-			    $destinationPath = 'img/productos/';
-			    $request->file('threeImage')->move($destinationPath, $fileName);
-			    $fullDestinationPath = $destinationPath.$fileName;
+				$img = Input::file('threeImage');
+			    $filename  = time() . '.' . $img->getClientOriginalExtension();
+			    $path = public_path('img/productos/' . $filename);
+			    $fullDestinationPath = 'img/productos/'.$filename;
+				Image::make( $img->getRealPath() )->resize(320,220)->save($path);
+			    // $file = $request->file('threeImage');
+			    // $fileName  = time() . '-' . $file->getClientOriginalName();
+			    // $destinationPath = 'img/productos/';
+			    // $request->file('threeImage')->move($destinationPath, $fileName);
+			    // $fullDestinationPath = $destinationPath.$fileName;
 
-			    $oneDataImage = [$fileName,$fullDestinationPath];
+			    $oneDataImage = [$filename,$fullDestinationPath];
 			    session::push('informacion-producto.dataThreeImage', $oneDataImage);
 			}
 		}
@@ -489,21 +512,21 @@ class ShymowShop extends Controller {
 
 	}
 	public function generalConfigure(){
-		if (session::has('configuracion_shymow_shop')) {
-			$codes = DB::select('SELECT * FROM `code_phones`');
-			$countries = Countrie::all()->lists('name','id');
-            return view('logueado.config-shymow-shop',compact('codes','countries'));
-        }else{
-            return redirect('identificate');
-        }
-	}
-	public function processorNotificationConfig(Request $request){
-		if (!session::has('configuracion_shymow_shop')) {
-			if (!session::has('configuracion_shymow_shop.general')) {
-				dd(session::get('configuracion_shymow_shop.general'));
-				return redirect('identificate');
+		$codes = DB::select('SELECT * FROM `code_phones`');
+		$countries = Countrie::all()->lists('name','id');
+		$store = Store::where('profile_id','=',Auth::id())->first();
+		$myCountry = [];
+		$myCode = [];
+		if (count($store) > 0) {
+			$myCountry = DB::select('SELECT * FROM `countries` WHERE name = "'.$store->pais.'"');
+			$myCode = DB::select('SELECT * FROM `code_phones` WHERE phonecode = "'.$store->code_phone.'"');
+			if (count($myCode) > 0) {
+				$myCode = $myCode[0];
 			}
 		}
+        return view('logueado.config-shymow-shop',compact('codes','countries','store','myCountry','myCode'));
+	}
+	public function processorNotificationConfig(Request $request){
 		$data = $request->all();
 		$messages = [
 			'sale.required' => 'Notificación de venta efectuada requerdida',
@@ -529,15 +552,47 @@ class ShymowShop extends Controller {
 
 	    if ($v->fails())
 	    {
-		    return redirect('notification_shop')->withErrors($v)->withInput($request->all());
+		    return redirect()->back()->withErrors($v)->withInput($request->all());
 	    }
-	    Session::push('configuracion_shymow_shop.noification', $data);
+	    function validateBool($data){
+			if($data == "true"){
+				return true;
+			}else{
+				return false;
+			}
+		}
+	    $sound_notification = validateBool($request->input('sound_new_notification'));
+	    $sound_message = validateBool($request->input('sound_new_message'));
+	    $sound_sale = validateBool($request->input('sound_new_sale'));
+
+    	$store = Store::where('profile_id','=',Auth::id())->first();
+		if (count($store) > 0) {
+			try {
+				Notification_settings_store::where('store_id','=',$store->id)->update([
+					"store_id" => $store->id,
+					"sound_notification" => $sound_notification,
+					"sound_new_message" => $sound_message,
+					"sound_sale" => $sound_sale,
+					"buy_notification" => $request->input('sale'),
+					"label_notification" => $request->input('label'),
+					"share_notification" => $request->input('share'),
+					"like_notification" => $request->input('like'),
+					"message_notification" => $request->input('message'),
+					"comments_notification" => $request->input('comment'),
+					"qualification_notification" => $request->input('qualification'),
+					"email_notification" => $request->input('notificacion_email')
+				]);
+
+				flash('Configuración de notificaciones guardada', 'success');
+	    		return redirect()->back();
+			} catch (Exception $e) {
+				
+			}
+		}
+
 	    return redirect('close_shop');
 	}
 	public function processorGeneralConfig(Request $request){
-		if (!session::has('configuracion_shymow_shop')) {
-			return redirect('identificate');
-		}
 		$data = $request->all();
 		$messages = [
 			'nombre.required' => 'Su nombre es requerido',
@@ -563,9 +618,82 @@ class ShymowShop extends Controller {
 	    {
 		    return redirect('configurar-shymow-shop')->withErrors($v)->withInput($request->all());
 	    }
-	    Session::push('configuracion_shymow_shop.general', $data);
 
-	    return redirect('notification_shop');
+	    function validateBool($data){
+			if($data == "true"){
+				return true;
+			}else{
+				return false;
+			}
+		}
+
+		$country = DB::select('SELECT * FROM countries WHERE id = "'.$request->input('ciudad').'"');
+
+		if (count($country) > 0) {
+			$country = $country[0];
+		}else{
+			flash('Intentlo nuevamente', 'danger');
+			return redirect()->back();	
+		}
+		$store_exist = Store::where('profile_id','=',Auth::id())->first();
+		if (count($store_exist) > 0) {
+			try {
+				$view_ciudad = validateBool($request->input('viewciudad'));
+				$view_cp = validateBool($request->input('viewcp'));
+
+				$store = Store::find($store_exist->id);
+					$store->profile_id = Auth::user()->id;
+					$store->first_name = $request->input('nombre');
+					$store->last_name = $request->input('apellido');
+					$store->email_store = $request->input('email');
+					$store->phone = $request->input('celular');
+					$store->address = $request->input('faddress');
+					$store->further_office = $request->input('laddress');
+					$store->cp = $request->input('cp');
+					$store->pais = $country->name;
+					$store->code_phone = $request->input('code');
+					$store->view_cp = $view_cp;
+					$store->view_country = $view_ciudad;
+				$store->save();
+
+				flash('Datos guardados', 'success');
+				return redirect()->back();
+			} catch (Exception $e) {
+				flash('Intentlo nuevamente', 'danger');
+				return redirect()->back();					
+			}
+		}else{
+
+			try {
+				$view_ciudad = validateBool($request->input('viewciudad'));
+				$view_cp = validateBool($request->input('viewcp'));
+
+				$store = new Store();
+					$store->profile_id = Auth::user()->id;
+					$store->first_name = $request->input('nombre');
+					$store->last_name = $request->input('apellido');
+					$store->email_store = $request->input('email');
+					$store->phone = $request->input('celular');
+					$store->address = $request->input('faddress');
+					$store->further_office = $request->input('laddress');
+					$store->cp = $request->input('cp');
+					$store->code_phone = $request->input('code');
+					$store->view_cp = $view_cp;
+					$store->pais = $country->name;
+					$store->view_country = $view_ciudad;
+				$store->save();
+
+				$notification_store = new Notification_settings_store();
+					$notification_store->store_id = $store->id;
+				$notification_store->save();
+
+				flash('Datos guardados', 'success');
+				return redirect()->back();
+			} catch (Exception $e) {
+				flash('Intentlo nuevamente', 'danger');
+				return redirect()->back();					
+			}
+		}
 	}
 
 	public function outShymowShop(){
@@ -578,129 +706,114 @@ class ShymowShop extends Controller {
 	}
 
 	public function notificationShop(){
-		if (!session::has('configuracion_shymow_shop')) {
-			return redirect('identificate');
+		$store = Store::where('profile_id','=',Auth::id())->first();
+		if (count($store) > 0) {
+			$notify = Notification_settings_store::where('store_id','=',$store->id)->first();
+			$opt1 = true;
+			$opt2 = true;
+			$opt3 = true;
+			$opt4 = true;
+			if (count($notify)>0) {
+				if ($notify->email_notification != "0") {
+					$opt1 = false;
+					if ($notify->email_notification != "1") {
+						$opt2 = false;
+					}
+					if ($notify->email_notification != "2") {
+						$opt3 = false;
+					}
+					if ($notify->email_notification != "3") {
+						$opt4 = false;
+					}
+				}elseif($notify->email_notification != "1") {
+					$opt2 = false;
+					if ($notify->email_notification != "0") {
+						$opt1 = false;
+					}
+					if ($notify->email_notification != "2") {
+						$opt3 = false;
+					}
+
+					if ($notify->email_notification != "3") {
+						$opt4 = false;
+					}
+				}elseif($notify->email_notification != "2") {
+					$opt3 = false;
+					if ($notify->email_notification != "0") {
+						$opt1 = false;
+					}
+					if ($notify->email_notification != "1") {
+						$opt2 = false;
+					}
+
+					if ($notify->email_notification != "3") {
+						$opt4 = false;
+					}
+				}
+				elseif($notify->email_notification != "3") {
+					$opt4 = false;
+					if ($notify->email_notification != "0") {
+						$opt1 = false;
+					}
+					if ($notify->email_notification != "1") {
+						$opt2 = false;
+					}
+					
+					if ($notify->email_notification != "2") {
+						$opt3 = false;
+					}
+				}
+			}
+			return view('.logueado.config-notification-shymow-shop',compact('notify','opt1','opt2','opt3','opt4'));
 		}
-		if (!session::has('configuracion_shymow_shop.general')) {
-			return redirect('identificate');
-		}
-		return view('.logueado.config-notification-shymow-shop');
 	}
 	public function closeShop(){
-		if (!session::has('configuracion_shymow_shop')) {
-			return redirect('identificate');
-		}
-		if (!session::has('configuracion_shymow_shop.noification')) {
-			return redirect('notification_shop');
-		}
-		return view('.logueado.config-close-shop');
+		$desactives = options_desactives_store::all();
+		return view('.logueado.config-close-shop',compact('desactives'));
 	}
 
-	public function createNewStore(){
-		if (!session::has('configuracion_shymow_shop')) {
-			return redirect('identificate');
-		}
-		if (!session::has('configuracion_shymow_shop.noification')) {
-			return redirect('notification_shop');
-		}
-		if (!session::has('configuracion_shymow_shop.general')) {
-			return redirect('identificate');
-		}	
-		$search = Store::userStore(Auth::user()->id)->count();
-
-		$general = session::get('configuracion_shymow_shop.general')[0];
-		$notification = session::get('configuracion_shymow_shop.noification')[0];
-
-		$viewCp = false;
-		if (isset($general['viewcp'])) {
-			if ($general['viewcp'] == "true") {
-				$viewCp = true;
-			}else{
-				$viewCp = false;
+	public function activeStore(){
+		Store::where('profile_id','=',Auth::user()->id)->update(['active'=>true]);
+		flash('Cuanta activada', 'success');
+		return redirect()->back();
+	}
+	public function desactiveStore(Request $re){
+		$desactives = options_desactives_store::all();
+		$reasons = "";
+		$f = 0;
+		if (count($desactives) > 0) {
+			foreach ($desactives as $desactive) {
+				if ($re->input('opt'.$desactive->id) != "") {
+					if ($f<1) {
+						$f++;
+						$reasons .= $re->input('opt'.$desactive->id);
+					}else{
+						$reasons .= ",".$re->input('opt'.$desactive->id);
+					}
+					
+				}
 			}
-		}
-		$viewCiudad = false;
-		if (isset($general['viewciudad'])) {
-			if ($general['viewciudad'] == "true") {
-				$viewCiudad = true;
-			}else{
-				$viewCiudad = false;
+			if (empty($reasons)) {
+				flash('Debe seleccionar un motivo para dar de baja su cuenta', 'danger');
+	    		return redirect()->back()->withInput();
 			}
-		}
 
-		$sound_notification = false;
-		$sound_message = false;
-		$sound_sale = false;
+			try {
+				$store = Store::where('profile_id','=',Auth::user()->id)->first();
+				$desabilite = new disableStore();
+				$desabilite->store_id = $store->id;
+				$desabilite->description = $re->input('description');
+				$desabilite->reasons = $reasons;
+				$desabilite->save();
 
-		if (isset($notification['sound_new_notification'])) {
-			if ($notification['sound_new_notification'] == "true") {
-				$sound_notification = true;
-			}else{
-				$sound_notification = false;
+				Store::where('profile_id','=',Auth::user()->id)->update(['active'=>false]);
+				flash()->overlay('Tu cuenta Shymow Shop fue desactivada', Auth::user()->name);
+				return redirect('perfil');
+
+			} catch (Exception $e) {
+				flash('Intentelo nuevamente', 'danger');
+				return redirect()->back();			
 			}
-		}
-		if (isset($notification['sound_new_message'])) {
-			if ($notification['sound_new_message'] == "true") {
-				$sound_message = true;
-			}else{
-				$sound_message = false;
-			}
-		}
-		if (isset($notification['sound_new_sale'])) {
-			if ($notification['sound_new_sale'] == "true") {
-				$sound_sale = true;
-			}else{
-				$sound_sale = false;
-			}
-		}
-
-		// $sound_notification = validateBool($notification['sound_new_notification']);
-		$phone = '+'.$general['code'].$general['celular'];
-		// dd($notification);
-
-		function validateBool($data){
-			if($data == "true"){
-				return true;
-			}else{
-				return false;
-			}
-		}
-
-		$sale =validateBool($notification['sale']);
-		$label =validateBool($notification['label']);
-		$share =validateBool($notification['share']);
-		$like =validateBool($notification['like']);
-		$message =validateBool($notification['message']);
-		$comment =validateBool($notification['comment']);
-		$qualification =validateBool($notification['qualification']);
-		$notification_email = (int) $notification['notificacion_email'];
-		if($search < 1){
-			$store = new Store();
-				$store->profile_id = Auth::user()->id;
-				$store->first_name = $general['nombre'];
-				$store->last_name = $general['apellido'];
-				$store->email_store = $general['email'];
-				$store->phone = $phone;
-				$store->address = $general['faddress'];
-				$store->further_office = $general['laddress'];
-			$store->save();
-
-			$notification_store = new Notification_settings_store();
-				$notification_store->store_id = $store->id;
-				$notification_store->sound_notification = $sound_notification;
-				$notification_store->sound_new_message = $sound_message;
-				$notification_store->sound_sale = $sound_sale;
-				$notification_store->buy_notification = $sale;
-				$notification_store->label_notification = $label;
-				$notification_store->share_notification = $share;
-				$notification_store->like_notification = $like;
-				$notification_store->message_notification = $message;
-				$notification_store->comments_notification = $comment;
-				$notification_store->qualification_notification = $qualification;
-				$notification_store->email_notification = $notification_email;
-			$notification_store->save();
-
-			return redirect('shymow-shop');
 		}
 	}
 }

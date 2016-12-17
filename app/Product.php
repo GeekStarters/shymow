@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Images_product;
 class Product extends Model {
 
-	protected $fillable = ['id','store_id','title','description','price','stock','send_type','garantia','category_product_id','type_product_id','first_spesification_id','last_spesification_id','qualification','like','share','active'];
+	protected $fillable = ['id','store_id','title','description','price','stock','send_type','garantia','category_product_id','type_product_id','first_spesification_id','last_spesification_id','qualification','like','share','active','comments'];
 
 
 	public function scopeProductActive($query){

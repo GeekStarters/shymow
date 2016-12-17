@@ -39,13 +39,13 @@
 									</div>
 								</span>
 								<span class="post-share border-right-post-tendencias">
-									<span class="number-post">120</span> <i class="fa fa-share-alt" aria-hidden="true"></i>
+									<span class="number-post">{{$product->share}}</span> <i class="fa fa-share-alt" aria-hidden="true"></i>
 								</span>
 								<span class="post-like-me border-right-post-tendencias">
-									<span class="number-post">380</span> <span class="glyphicon glyphicon-heart"></span>
+									<span class="number-post">{{$product->like}}</span> <span class="glyphicon glyphicon-heart"></span>
 								</span>
 								<span class="post-comment border-right-post-tendencias">
-									<span class="number-post">52</span> <span class="glyphicon glyphicon-comment"></span>
+									<span class="number-post">{{$product->comments}}</span> <span class="glyphicon glyphicon-comment"></span>
 								</span>
 								<br>
 							</div>

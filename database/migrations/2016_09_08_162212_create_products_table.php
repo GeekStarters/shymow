@@ -17,6 +17,8 @@ class CreateProductsTable extends Migration {
 			$table->increments('id');
 			$table->integer('store_id')->unsigned();
 			$table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
+			$table->integer('profile_id')->unsigned();
+			$table->foreign('profile_id')->references('id')->on('perfils')->onDelete('cascade');
 			$table->string('title');
 			$table->string('description');
 			$table->decimal('price', 6, 2);
@@ -32,6 +34,7 @@ class CreateProductsTable extends Migration {
 			$table->foreign('first_spesification_id')->references('id')->on('first_spesifications')->onDelete('cascade');
 			$table->integer('last_spesification_id')->unsigned();
 			$table->foreign('last_spesification_id')->references('id')->on('last_spesifications')->onDelete('cascade');
+			$table->integer('comments')->default(0);
 			$table->integer('qualification')->default(0);
 			$table->integer('like')->default(0);
 			$table->integer('share')->default(0);

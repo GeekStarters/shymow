@@ -32,6 +32,7 @@
                 @endforeach
 				<h2 class="text-danger" style="display:none;color: #a94442;font-size:1em;" id="errors-validate"></h2>
 					<h2>Sube hasta 3 fotos de tu producto</h2>
+					<div class="alert alert-danger" role="alert">Las imágenes que subas serán redimensionadas a 320x220</div>
 				</div>
 				<br>
 				<div class="clearfix"></div>

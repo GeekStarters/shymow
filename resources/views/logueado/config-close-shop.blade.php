@@ -7,14 +7,18 @@
 	<div class="col-md-10 col-md-offset-1 out-padding create-product-container">
 		<div class="create-product-header">
 			<div class="col-md-4 active-background-product-agregate border-right-active">
-				<h2 class="text-center">
-					General
-				</h2>
+				<a href="/configurar-shymow-shop">
+					<h2 class="text-center">
+						General
+					</h2>
+				</a>
 			</div>
 			<div class="col-md-4 active-background-product-agregate border-right-active">
-				<h2 class="text-center">
-					Notificaciones
-				</h2>
+				<a href="/notification_shop">
+					<h2 class="text-center">
+						Notificaciones
+					</h2>
+				</a>
 			</div>
 			<div class="col-md-4 " style="background: #F3F3F3;">
 				<h2 class="text-center">
@@ -23,12 +27,13 @@
 			</div>
 			<div class="clearfix"></div>
 		</div>
-		{!! Form::open(array('name' => 'general-config', 'url' => 'create_store','method'=>'Post')) !!}
+		{!! Form::open(array('name' => 'general-config', 'url' => 'desactive_store','method'=>'Post')) !!}
 			<div class="create-product-content">
 				<br><br>
 					
 				<div class="col-sm-10 col-sm-offset-1 shymow-shop-general">
 					<div class="row">
+						@include('flash::message')
 						<p class="text-danger" id="errors-validate" style="color: #a94442 !important;font-size:1em;font-weight:bold;display:none;"></p>
 						@foreach($errors->all(('<p class="text-danger" style="color: #a94442 !important;font-size:1em;font-weight:bold;">:message</p>') )as $message)
 							{!!$message!!}
@@ -54,23 +59,23 @@
 							</p>
 
 							<h2 class="color-shymow">¿Por qué quieres darte de baja de Shymow Shop?</h2>
-							{!! Form::checkbox('complicated', 'true') !!} <span style="color:#999999; font-size:1.1em;">Me parece complicado</span><br>
-							{!! Form::checkbox('nothing_new', 'true') !!} <span style="color:#999999; font-size:1.1em;">Creo que Shymow Shop no aporta nada nuevo</span><br>
-							{!! Form::checkbox('visibility', 'true') !!} <span style="color:#999999; font-size:1.1em;">Mis productos no tienen visibilidad </span><br>
-							{!! Form::checkbox('technical', 'true') !!} <span style="color:#999999; font-size:1.1em;">He tenido problemas técnicos</span><br>
-							{!! Form::checkbox('another', 'true') !!} <span style="color:#999999; font-size:1.1em;">Otro</span><br>
+							@foreach($desactives as $desactive)
+								<div class="checkbox">
+									 <label style="color:#8E8E8E;">
+									<input type="checkbox" name="opt{{$desactive->id}}" value="{{$desactive->id}}"> {{$desactive->name}}</label>
+								</div>
+							@endforeach
 
 							<h2 class="color-shymow">¿En qué podemos mejorar?</h2>
-							<textarea name="comment_close"></textarea>
+							<textarea name="description"></textarea>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-12 next-right">
 					<br>
 					<br>
-					<button type="submit" class="butto-formns navbar-right botton-margin">GUARDAR</button>
+					<button type="submit" class="butto-danger navbar-right botton-margin">CERRAR MI CUENTA</button>
 					<a href="{{url('out-config-shymow-shop')}}"  class="butto-blank navbar-right botton-margin">CANCELAR</a>
-					<a href="{{url('out-config-shymow-shop')}}"  class="butto-danger navbar-right botton-margin">CERRAR MI CUENTA</a>
 				</div>	
 			</div>
 		{!! Form::close() !!}
@@ -80,51 +85,6 @@
 
 @section('scripts')
 <script>
-	jQuery(document).ready(function($) {
-		var validator = new FormValidator('general-config', [{
-		    name: 'nombre',
-		    display: 'Nombre',
-		    rules: 'required'
-		},{
-		    name: 'apellido',
-		    display: 'Apellido',
-		    rules: 'required'
-		},{
-		    name: 'email',
-		    display: 'Correo',
-		    rules: 'required'
-		},{
-		    name: 'celular',
-		    display: 'Celular',
-		    rules: 'required'
-		},{
-		    name: 'cp',
-		    display: 'Código postal',
-		    rules: 'required'
-		},{
-		    name: 'codigo',
-		    display: 'Código de area',
-		    rules: 'required'
-		},{
-		    name: 'faddres',
-		    display: 'Direccion',
-		    rules: 'required'
-		},{
-		    name: 'ciudad',
-		    display: 'Ciudad',
-		    rules: 'required'
-		}], function(errors, event) {
-		    if (errors.length > 0) {
-		        var errorString = '';
-
-		        for (var i = 0, errorLength = errors.length; i < errorLength; i++) {
-		            errorString += errors[i].message + '<br />';
-		        }
-		        $('#errors-validate').slideDown('fast');
-		        $('#errors-validate').html(errorString);
-		    }
-		});
-	});
 		
 </script>
 @stop
