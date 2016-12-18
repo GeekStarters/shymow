@@ -296,18 +296,22 @@ class InsideController extends Controller {
 
 	public function typeaSearch(Request $request)
 	{
-        $search = $request->input('searching');
+		if(Auth::check()){
+	        $search = $request->input('searching');
 
-        $users = DB::select('SELECT * FROM perfils WHERE active = true and name LIKE "%'.$search.'%"');
-        $data = [];
-        if (count($users) > 0) {
-        	foreach ($users as $user) {
-        		array_push($data,["name" => $user->name, "img" => $user->img_profile, "id" => $user->id]);
-        	}
-        	return response()->json(['error' => false, 'data' => $data]);
-        }else{
-        	return response()->json(['error' => true]);
-        }
+	        $users = DB::select('SELECT * FROM perfils WHERE active = true and name LIKE "%'.$search.'%"');
+	        $data = [];
+	        if (count($users) > 0) {
+	        	foreach ($users as $user) {
+	        		array_push($data,["name" => $user->name, "img" => $user->img_profile, "id" => $user->id]);
+	        	}
+	        	return response()->json(['error' => false, 'data' => $data]);
+	        }else{
+	        	return response()->json(['error' => true]);
+	        }
+		}else{
+			return response()->json(['error' => true]);
+		}
 
         
 	}

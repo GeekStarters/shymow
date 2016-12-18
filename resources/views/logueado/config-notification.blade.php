@@ -219,3 +219,4 @@
 	</div>
 </div>
 @stop
+@extends('logueado.layouts.content-float-chat')

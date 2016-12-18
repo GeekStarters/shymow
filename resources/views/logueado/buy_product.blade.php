@@ -6,10 +6,9 @@
 	<br>
 	<div class="col-md-10 col-md-offset-1 out-padding create-product-container">
 		@if($count > 0)
-			{!! Form::open(array('name' => 'buy', 'url' => 'https://www.sandbox.paypal.com/cgi-bin/webscr','method'=>'Post')) !!}
+			{!! Form::open(array('name' => 'buy', 'url' => 'https://www.paypal.com/cgi-bin/webscr','method'=>'Post')) !!}
 				<input type="hidden" name="cmd" value="_xclick">
-			    <input type="hidden" name="business" value="melvingilberto-facilitator@gmail.com">
-			    <!-- <input type="hidden" name="business" value="{{$store['original']['email_store']}}"> -->
+			    <input type="hidden" name="business" value="{{$store->email_store}}">
 			    <input type="hidden" name="no_shipping" value="2">
 			    <input type="hidden" name="no_note" value="1">
 			    <input type="hidden" name="currency_code" value="USD">
@@ -86,7 +85,7 @@
 	</div>
 </div>
 @stop
-
+@extends('logueado.layouts.content-float-chat')
 @section('scripts')
 <script>
 	jQuery(document).ready(function($) {

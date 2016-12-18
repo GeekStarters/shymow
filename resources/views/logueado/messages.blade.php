@@ -111,3 +111,4 @@
 @stop
 @section('scripts')
 @stop
+@extends('logueado.layouts.content-float-chat')

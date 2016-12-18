@@ -46,3 +46,4 @@
   </div>
   
 @endsection
+@extends('logueado.layouts.content-float-chat')

@@ -250,8 +250,7 @@ class ShymowShop extends Controller {
 	public function buyView($id){
 		$products = Product::find($id)->productImage($id)->take(1)->get();
 		$count = $products->count();
-		$store = Store::userStore(Auth::user()->id)->first();
-		// dd($store['original']['email_store']);
+		$store = Store::where("profile_id","=",$products[0]->profile_id)->first();
 		return view('logueado.buy_product',compact('products','count','store'));
 	}
 	/**

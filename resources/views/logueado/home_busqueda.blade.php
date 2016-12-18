@@ -913,7 +913,7 @@
     </div>
 @endsection
 
-
+@extends('logueado.layouts.content-float-chat')
 @section('scripts')
 <script type="text/javascript" src="{{url('https://maps.googleapis.com/maps/api/js?key=AIzaSyDssPGqiz3lLJ8RoKvlXlUk2OGR97z4zVk')}}"></script>
 <script>
