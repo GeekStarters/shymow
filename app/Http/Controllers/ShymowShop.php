@@ -12,11 +12,16 @@ use App\disableStore;
 use App\Order;
 use App\Notification_settings_store;
 use App\options_desactives_store;
+use App\LikeProduct;
+use App\Qualification_product;
+use App\CommentProduct;
 use Validator;
+use App\Helpers\DataHelpers;
 use Input;
 use Illuminate\Http\Request;
 use Session;
 use App\Countrie;
+use App\Perfil;
 use Auth;
 use Hash;
 use Image;
@@ -32,9 +37,111 @@ class ShymowShop extends Controller {
 		$categorys = Category_product::all();
 		return view('logueado.agregar-producto',compact('categorys'));
 	}
+
+	public function qualificationProduct($id,$qualification){
+		$qualificationModel = new Qualification_product();
+		$productModel = new Product();
+		return DataHelpers::createQualification($id,$qualification,$qualificationModel,$productModel,"product_id","profil_id");
+	}
+	public function likeProduct($id){
+		$product = Product::find($id);
+		if (count($product)>0) {
+			$new_like = new LikeProduct();
+			echo DataHelpers::createLike($id,"products","like_products","product_id","profil_id",$product,$new_like);
+		}
+	}
+
+	public function getComment($id){
+		$count = CommentProduct::comments($id)->count();
+		if ($count > 0) {
+			$comments = DB::select('SELECT comment_products.id AS id_comment,product_id,profil_id,description,comment_products.active,perfils.name, perfils.id, perfils.img_profile, comment_products.created_at FROM comment_products INNER JOIN perfils ON comment_products.profil_id = perfils.id WHERE comment_products.product_id = "'.$id.'"and comment_products.active = true ORDER BY id_comment ASC LIMIT 10 ');
+			foreach ($comments as $comment) {
+				$tiempo = DataHelpers::knowTime($comment->created_at);
+				
+				echo '
+				<div class="box-comment-data-content">
+					<div class="box-coment-data-header">
+						<a href=""><img style="width:50px;" src="'.url($comment->img_profile).'" alt="shymow"></a>
+						<a href="">'.$comment->name.'</a> |
+						<span>'.$tiempo.'</span>
+					</div>
+					<div class="box-coment-data-description">
+						'.$comment->description.'
+					</div>
+				</div>
+				';
+			}
+
+		}
+	}
+	public function deleteProduct($post){
+		$getPost = Product::find($post);
+		if (count($getPost) > 0) {
+			if ($getPost->profile_id == Auth::id()) {
+				Product::where('id',$post)->update(['active' => false]);
+				flash('Post eliminado', 'success');
+				return redirect()->back();
+			}else{
+				flash('Error al eliminar Post', 'danger');
+				return redirect()->back();
+			}
+
+		}
+	}
+	public function createComment(Request $request, $id){
+		if (isset($_POST['comment'])) {
+			if ($_POST['comment'] != "") {
+				$comment = $request->input('comment');
+
+				$editPost = Product::find($id);
+       
+		        if (is_null ($editPost))
+		        {
+		            echo "Error";
+		            exit();
+		        }
+
+		        $countPost= DB::select('SELECT * FROM `comment_products` WHERE `product_id` = '.$id);
+		        $countPost = count($countPost) + 1;
+
+		        	$editPost->comments = $countPost;
+		        $editPost->save();
+			
+				$newComment = new CommentProduct();
+					$newComment->product_id = $id;
+					$newComment->profil_id = Auth::user()->id;
+					$newComment->description = $comment;
+				$newComment->save();
+
+				$count = CommentProduct::comments($id)->count();
+				if ($count > 0) {
+					$coments = DB::select('SELECT comment_products.id AS id_comment,product_id,profil_id,description,comment_products.active,perfils.name, perfils.id, perfils.img_profile, comment_products.created_at FROM comment_products INNER JOIN perfils ON comment_products.profil_id = perfils.id WHERE comment_products.product_id = "'.$id.'"and comment_products.active = true ORDER BY id_comment ASC LIMIT 10');
+					foreach ($coments as $comment) {
+						$tiempo = DataHelpers::knowTime($comment->created_at);
+						// dd($tiempo);
+						echo '
+						<div class="box-comment-data-content">
+							<div class="box-coment-data-header">
+								<a href=""><img style="width:50px;" src="'.url($comment->img_profile).'" alt="shymow"></a>
+								<a href="">'.$comment->name.'</a> |
+								<span>'.$tiempo.'</span>
+							</div>
+							<div class="box-coment-data-description">
+								'.$comment->description.'
+							</div>
+						</div>
+						';
+					}
+
+				}
+			}
+		}
+	}
+
 	public function shymowView(){
-		$products = DB::select('SELECT images_products.path, images_products.name, images_products.active,products.id,products.title,products.description,products.price,products.stock,products.qualification,products.like,products.share,products.comments,products.profile_id FROM `products` LEFT JOIN images_products on images_products.product_id = products.id  WHERE products.active = true GROUP BY products.id ORDER BY products.id DESC LIMIT 5');
-		// dd($products);	
+		$id = Auth::id();
+		$products = DB::select('SELECT images_products.path, images_products.name, images_products.active,products.id,products.title,products.description,products.price,products.stock,products.qualification,products.like,products.share,products.comments,products.profile_id as id_user,like_products.product_id as product_id_like, like_products.profil_id as userLike, like_products.like as likeLike, like_products.active as likeActive, share_products.description_old_product,share_products.product_id as old_product_id, share_products.profil_id as creator_perfil,share_products.active as share_active FROM `products` LEFT JOIN images_products on images_products.product_id = products.id LEFT JOIN like_products ON products.id = like_products.product_id and like_products.profil_id = '.$id.' and (like_products.active = true and like_products.like = true) LEFT JOIN share_products ON share_products.new_product_id = products.id WHERE products.active = true GROUP BY products.id ORDER BY products.id DESC LIMIT 5');
+		// dd($products);
 		$count_data = count($products);
 		return view('logueado.shymow-shop',compact('products','count_data'));
 	}
@@ -88,6 +195,7 @@ class ShymowShop extends Controller {
 			    			$product->stock = session('informacion-producto')['stock'];
 			    			$product->garantia = $garantia;
 			    			$product->send_type = $request->input('send-product');
+			    			$product->profile_id = Auth::id();
 			    		$product->save();
 
 			    		if (session::has('informacion-producto.dataOneImage')) {
@@ -274,50 +382,44 @@ class ShymowShop extends Controller {
 		return redirect('shymow-shop');
 	}
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
+	public function shareProduct($post_id,$user_id){
+		$post_count = Product::where('id',$post_id)->where('active',true)->count();
+
+		$user_count = Perfil::where('id',$user_id)->where('active',true)->count();
+
+		$image_count = Images_product::where('product_id',$post_id)->where('active',true)->take(1)->count();
+
+		if ($post_count < 1 || $user_count < 1) {
+			return response()->json(['error' => true, 'message' => "Al parecer ocurrio un error"]);
+		}
+
+		if ($image_count>0) {
+			$image = Images_product::where('product_id',$post_id)->where('active',true)->take(1)->get();
+			$images = $image[0]->path;
+			$images_id = $image[0]->id;
+			$exist_image = true;
+		}else{
+			$images = null;
+			$images_id = null;
+			$exist_image = false;
+		}
+		$product = Product::where('id',$post_id)->where('active',true)->first();
+		return response()->json(['error' => false,
+								'message' => "Get post success",
+								"description" => $product->description,
+								"id" => $product->id,
+								"price" => $product->price,
+								"title" => $product->title,
+								"image" => [
+									"exists" => $exist_image,
+									"path" => $images,
+									"image_id" => $images_id
+								]
+							]);
+		
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
-
+	
 	public function ajaxCategories($id, Request $request){
 		$type = $request->input('type');
 		//Funcion recorre la consulta

@@ -42,6 +42,58 @@ $( document ).ready(function() {
 
     //PROCESO DE COMENTARIOS
     $('.box-comment').click(function(event) {
+        /* Act on the event */
+
+        // CONTENEDOR
+        var contenedor = $('.content-post');
+        // CONTENEDOR DEL POST
+        var padre = $(this).parents('.content-post');
+
+        // ID POST
+        var post = $(this).data('trend');
+
+        // IDENTIFICAR EL FORMULARIO
+        var boolean = padre.find('form').hasClass('form-comment');
+
+        if (boolean) {
+            padre.find('form').removeClass('form-comment');
+        }else{
+            //ELIMINANDO LAS CLASES DE OTROS FORM Y SUBIENDO EL CONTENIDO
+            $('.content-post').find('form').each(function(index, el) {
+                if ($(this).hasClass('form-comment')) {
+                    $(this).removeClass('form-comment');
+                }
+            });
+
+            // BAJANDO CONTENIDO
+            $('.content-post').find('.box-comment-content').slideUp('slow')
+            padre.find('form').addClass('form-comment');
+
+            //CANTIDAD DE POST
+            var numerComment = $(this).find('.number-post').text();
+            numerComment = parseInt(numerComment);
+            if (numerComment > 0) {
+                $.ajax({
+                    url: '/get_comment/'+post,
+                    type: 'GET',
+                    dataType: 'html',
+
+                    beforeSend: function(){
+                        padre.find('.box-comment-body').html('<h3 style="margin-left:10px; color:#CCC;margin-bottom: 10px; font-family:gothamTwo;">Cargando...</h3>');
+                    },
+                    success: function($data){
+                        padre.find('.box-comment-body').html($data);
+                    },
+                })
+                .fail(function() {
+                    console.log("error");
+                });
+                
+            }
+        }
+        padre.find('.box-comment-content').slideToggle('slow');
+    });
+    $('.box-comment-product').click(function(event) {
     	/* Act on the event */
 
     	// CONTENEDOR
@@ -74,7 +126,7 @@ $( document ).ready(function() {
     		numerComment = parseInt(numerComment);
     		if (numerComment > 0) {
     			$.ajax({
-    				url: '/get_comment/'+post,
+    				url: '/get_comment-product/'+post,
     				type: 'GET',
     				dataType: 'html',
 
@@ -92,6 +144,42 @@ $( document ).ready(function() {
     		}
     	}
     	padre.find('.box-comment-content').slideToggle('slow');
+    });
+
+
+
+    $(".box-comment-header-product").submit('.form-comment',function(event) {
+        /* Act on the event */
+        event.preventDefault();
+
+        // CONTENEDOR DEL POST
+        var padre = $(this).parents('.content-post');
+        var post = padre.find('.box-comment-product').data('trend');
+        var comment = $(this).find('input').val();
+        var count = padre.find('.post-comment ').children('.number-post').text();
+
+        if (comment.length > 0 ) {
+            $.ajax({
+                url: '/create_comment-product/'+post,
+                type: 'POST',
+                dataType: 'HTML',
+                data: {comment: comment},
+                success: function($data){
+                        
+                        count = parseInt(count) + 1;
+                        padre.find('.post_change').text('');
+                        padre.find('.post_change').text(count);
+
+                        padre.find('input').val("");
+                        padre.find('.box-comment-body').html($data);
+                }                   
+
+            })
+            .fail(function() {
+                console.log("error");
+            });
+            
+        }
     });
 
     $(".box-comment-header").submit('.form-comment',function(event) {
@@ -130,6 +218,70 @@ $( document ).ready(function() {
 
     //FIN PROCESO DE COMENTARIOS
 
+    //PROCESO DEL LIKE PRODUCTO
+        $('.like-me-product').click(function(event) {
+            /* Act on the event */
+            var post = $(this).data('like');
+            var user = $(this).data('user');
+            var objecto = $(this);
+            if (user != null) {
+                // alert(post);
+                var no_like = $(this).hasClass('like-user');
+                
+                $.ajax({
+                    url: '/create_like_product/'+post,
+                    type: 'POST',
+                    dataType: 'HTML',
+                    success: function($data){
+                        if (no_like == false) {             
+                            objecto.addClass('like-user');
+                            objecto.removeClass('like-user-active');
+
+                        }else{
+                            objecto.removeClass('like-user');
+                            objecto.addClass('like-user-active');
+
+                        }
+                    }
+                })
+                .fail(function() {
+                    console.log("error");
+                });
+            }else{
+                // alert(post);
+                var no_like = $(this).hasClass('post-like-me');
+
+                var like = objecto.children('.number-post').text();
+                like = parseInt(like);
+                
+                $.ajax({
+                    url: '/create_like_product/'+post,
+                    type: 'POST',
+                    dataType: 'HTML',
+                    success: function($data){
+                        if (no_like == false) {             
+                            objecto.addClass('post-like-me');
+                            objecto.removeClass('post-like-me-active');
+                            objecto.children('.number-post').text(like-1);
+
+                        }else{
+                            objecto.removeClass('post-like-me');
+                            objecto.addClass('post-like-me-active');
+                            objecto.children('.number-post').text(like+1);
+
+                        }
+                    }
+                })
+                .fail(function() {
+                    console.log("error");
+                });
+
+            }
+        });
+
+    //FIN PROCESO DE LIKE
+
+
     //PROCESO DEL LIKE
     	$('.like-me').click(function(event) {
     		/* Act on the event */
@@ -141,7 +293,7 @@ $( document ).ready(function() {
                 var no_like = $(this).hasClass('like-user');
                 
                 $.ajax({
-                    url: '/create_like_user/'+post,
+                    url: '/create_like/'+post,
                     type: 'POST',
                     dataType: 'HTML',
                     success: function($data){
@@ -193,7 +345,50 @@ $( document ).ready(function() {
 
     //FIN PROCESO DE LIKE
 
+    //PROCESO CALIFICACION PRODUCTO
+    $('.post-qualification-product').on('click', 'a', function(event) {
+        event.preventDefault();
+        /* Act on the event */
+        var value = $(this).data('star');
 
+        var post_id = $(this).data('post');
+
+        var padre = $(this).parents('.post-qualification-product');
+        
+        if (post_id != null) {
+            $.ajax({
+                url: '/create_qualification_product/'+post_id+'/'+value,
+                type: 'POST',
+                dataType: 'JSON',
+                success: function(data){
+                    if (!data.error) {
+                        var html_append = "";
+                        if(data.qualification < 5)
+                        {
+                            for (var i = 1; i <= parseInt(data.qualification); i++)
+                                html_append += '<a data-star="'+i+'" class="glyphicon glyphicon-star qualification-popular" data-post="'+post_id+'"></a>'
+                      
+                            for (var i = 1; i <= (5-parseInt(data.qualification)); i++)
+                                html_append += '<a data-star="'+(parseInt(data.qualification)+i)+'" class="glyphicon glyphicon-star qualification-no-popular" data-post="'+post_id+'"></a>'
+                            
+                            padre.html(html_append);
+                        }else{
+                            for (var i = 1; i <= data.qualification; i++)
+                                html_append += '<a data-star="'+i+'" class="glyphicon glyphicon-star qualification-popular" data-post="'+post_id+'"></a>'
+                            
+                            padre.html(html_append);
+                        }
+                    }
+                }
+            })
+            .fail(function() {
+                console.log("error");
+            });
+        }
+        
+    });
+
+    // PROCESO DE CALIFICACION
     $('.post-qualification').on('click', 'a', function(event) {
         event.preventDefault();
         /* Act on the event */
@@ -268,6 +463,71 @@ $( document ).ready(function() {
         
     });
 
+
+    $('body').on('click', '.share_product_shymow', function(event) {
+        /* Act on the event */
+        event.preventDefault();
+
+        var post_id = $(this).data('post_id');
+        var user_id = $(this).data('user_id');
+        var contenedor = $('#modal_container');
+        
+        if (post_id != null && user_id != null) {
+            $.ajax({
+                url: '/share_product/'+post_id+'/'+user_id,
+                type: 'GET',
+                dataType: 'JSON',
+                beforeSend: function(){
+
+                    var html = '<p class="text-center"><i class="block-center text-center fa fa-spinner fa-spin fa-3x fa-fw"></i>';
+                    html+= '<span class="block-center text-center sr-only">Loading...</span><br></p>';
+
+                    contenedor.html(html)
+                },
+                success: function(data){
+                    var html = "";
+                    html += '<div class="modal-body">';
+                        html += '<input type="text" name="new_description" class="form-control" placeholder="Haz un comentario..." style="border: 0px;box-shadow:none;">';
+                        html += '<div class="col-sm-12" style="margin-top: 20px">';
+                            html += '<br>';
+                            html += '<div class="post-media">';
+                                if (data.image.exists){
+                                    html += '<img src="'+data.image.path+'" style="width:100%;" alt="Shymow-Shop">';
+                                    html += '<input type="hidden" value="'+data.image.path+'" name="image">';             
+                                }
+                            html += '</div>';
+                            html += '<div class="shop-content">';
+                            html += '    <div class="col-sm-12 col-md-8">';
+                            html += '        <h2 class="title-shop">'+data.title+'</h2>';
+                            html += '        <p>'+data.description+'</p>';
+                            html += '    </div>';
+                            html += '    <div class="col-sm-12 col-md-4">';
+                            html += '        <h2 class="price" style="float:right;">'+data.price+'€</h2>';
+                            html += '        <br>';
+                            html += '        <br>';
+                            html += '        <div class="clearfix"></div>';
+                            html += '    </div>';
+                            html += '</div>';
+                        html += '</div>';
+                    html += '</div>';
+
+                    html += '<input type="hidden" value="'+data.description+'" name="description">';
+                    html += '<input type="hidden" value="'+data.id+'" name="user_id">';
+                    html += '<input type="hidden" value="'+data.id+'" name="product_id">';
+                    html += '<div class="modal-footer">';
+                        html += '<br>';
+                        html += '<br>';
+                        html += '<button type="submit" class="btn btn-primary" style="margin:10px !important;">Publicar</button>';
+                    html += '</div>';
+
+                    contenedor.html(html);
+                }
+            })
+            .fail(function() {
+                console.log("error");
+            });
+        }
+    });
 
     $('body').on('click', '.share_post_shymow', function(event) {
         /* Act on the event */

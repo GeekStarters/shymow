@@ -16,6 +16,7 @@ use App\UserQualification;
 use App\UserLikes;
 use App\UserShare;
 use App\usersDesabilited;
+use App\Product;
 use App\Options_desactive;
 use Image;
 use DB;
@@ -312,9 +313,9 @@ class PerfilController extends Controller {
 						$edit_user->like = $count_like;
 					try {
 						$edit_user->save();
-						echo "Like";
+						return "Like";
 					} catch (Exception $e) {
-						echo "error";
+						return "error";
 					}
 				}
 			}elseif (count($like_edit) > 0) {
@@ -328,9 +329,9 @@ class PerfilController extends Controller {
 				
 				try {
 					$edit_user = Perfil::where('id','=',$post)->update(['like'=>count( $count_like)]);
-					echo "like";
+					return "like";
 				} catch (Exception $e) {
-					echo "error";
+					return "error";
 				}
 			}
 
@@ -347,7 +348,7 @@ class PerfilController extends Controller {
 		
 				
 				
-				echo "like";
+				return "like";
 			}
 		}
 	}

@@ -159,31 +159,41 @@ Route::group(['middleware' => 'auth'], function()
 
     //Traer comentarios
     Route::get('/get_comment/{id}','PostController@getComment');
+    Route::get('/get_comment-product/{id}','ShymowShop@getComment');
 
     //Crear comentario.
     Route::post('/create_comment/{id}','PostController@createComment');
+    Route::post('/create_comment-product/{id}','ShymowShop@createComment');
 
     //Crear like.
     Route::post('/create_like/{post}','PostController@createLike');
-    Route::post('/create_like_user/{post}','PerfilController@createLike');
+
+    //Crear like product.
+    Route::post('/create_like_product/{post}','ShymowShop@likeProduct');
 
     //Crear calificacion.
     Route::post('/create_qualification/{post_id}/{quaification}','PostController@createQualification');
+    //Crear calificacion producto.
+    Route::post('/create_qualification_product/{post_id}/{quaification}','ShymowShop@qualificationProduct');
     //Crear calificacion.
     Route::post('/create_qualification_user/{post_id}/{quaification}','PerfilController@createQualification');
 
     //Compartir view post.
     Route::get('/share_post/{post_id}/{id_user}','PostController@sharePost');
+    //Compartir view product.
+    Route::get('/share_product/{product_id}/{id_user}','ShymowShop@shareProduct');
     //Compartir usuario
     Route::get('/share_user/{id_user}','PerfilController@shareUser');
 
     //crear post compartido.
+    Route::post('/create_share_product/','ShymowShop@createShareProduct');
     Route::post('/create_share_post/','PostController@createSharePost');
     Route::post('/create_share_user/','PerfilController@createShareUser');
     //Seguir post.
     Route::post('/follow_post','PostController@followPost');
     //Eliminar post
-    Route::get('/delete_post/{post}','PostController@deletePost')->where('id', '[0-9]+');;
+    Route::get('/delete_post/{post}','PostController@deletePost')->where('id', '[0-9]+');
+    Route::get('/delete_product/{post}','ShymowShop@deleteProduct')->where('id', '[0-9]+');
 
 
 

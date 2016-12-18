@@ -1255,10 +1255,16 @@ border-radius: 0px 0px 15px 15px;
 	font-size: 1.5em;
 	color: #707173;
 }
+.post-like-me:hover {
+	color:#EF4D0D !important;
+}
 .profiles .content-post .post-footer .post-like-me {
 	font-size: 1.5em;
 	color: #707173;
 	cursor: pointer;
+}
+.post-like-me-active:hover {
+	color:#707173 !important;
 }
 .profiles .content-post .post-footer .post-like-me-active {
 	font-size: 1.5em;
@@ -1293,7 +1299,7 @@ border-radius: 0px 0px 15px 15px;
 	font-size: 32px;
 	font-size: 1.5rem !important;
 }
-.post-qualification a {
+.post-qualification a, .post-qualification-product a{
 	text-decoration: none;
 	display: inline-block;
 	/* Volver a dar tamaño al texto */
@@ -1303,13 +1309,13 @@ border-radius: 0px 0px 15px 15px;
 	color: #888;
 }
 
-.post-qualification:hover a {
+.post-qualification:hover a, .post-qualification-product:hover a{
 	color: #FFD400;
 }
 /*
  * El selector de hijo, es necesario para aumentar la especifidad
  */
-.post-qualification > a:hover ~ a {
+.post-qualification > a:hover ~ a, .post-qualification-product > a:hover ~ a{
 	color: #888;
 }
 .qualification-popular{
@@ -2130,7 +2136,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4f6f5', end
 	margin:10px 0px;
 }
 
-.box-comment{
+.box-comment, .box-comment-product{
 	cursor: pointer;
 }
 .box-comment-content{

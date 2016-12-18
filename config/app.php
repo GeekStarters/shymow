@@ -202,6 +202,7 @@ return [
       	'Socialite' => Laravel\Socialite\Facades\Socialite::class,
       	'Activity' => Kim\Activity\ActivityFacade::class,
       	'Image' => Intervention\Image\Facades\Image::class,
+      	'DataHelpers' => App\Helpers\DataHelpers::class,
 	],
 
 ];
