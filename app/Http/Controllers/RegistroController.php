@@ -324,7 +324,7 @@ class RegistroController extends Controller {
 		return view('registro');
 	}
 	public function final_steps(Request $request)
-	{
+	{	
 		if(Session::has('data_user')){
 			$v = Validator::make($request->all(), [
 		        'dia' => 'required|numeric',
@@ -372,7 +372,7 @@ class RegistroController extends Controller {
 
 		   	return view('users_steps_final');
 		}else{
-			return redirect('/');
+			return redirect('/')->withInput();
 		}
 	}
 	public function celebridad_social(Request $request)

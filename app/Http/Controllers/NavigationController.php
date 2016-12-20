@@ -69,14 +69,28 @@ class NavigationController extends Controller {
 	// Funciones con Query Scope laravel return data ajax
 	public function state($id){
 		$state = State::stateOfCountry($id)->get();
-		foreach ($state as $data) {
-			echo '<option value="'.$data->id.'">'.$data->name.'</option>';
+		if (count($state) > 0) {
+			foreach ($state as $data) {
+				echo '<option value="'.$data->id.'">'.$data->name.'</option>';
+			}
+		}else{
+			$state = State::select('name','id')->where('name', 'like', '%No se encontro%')->get();
+			foreach ($state as $data) {
+				echo '<option value="'.$data->id.'">'.$data->name.'</option>';
+			}
 		}
 	}
 	public function city($id){
 		$city = Citie::cityOfState($id)->get();
-		foreach ($city as $data) {
-			echo '<option value="'.$data->id.'">'.$data->name.'</option>';
+		if (count($city) > 0) {
+			foreach ($city as $data) {
+				echo '<option value="'.$data->id.'">'.$data->name.'</option>';
+			}
+		}else{
+			$city = Citie::select('name','id')->where('name', 'like', '%No se encontro%')->get();
+			foreach ($city as $data) {
+				echo '<option value="'.$data->id.'">'.$data->name.'</option>';
+			}
 		}
 	}
 

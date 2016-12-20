@@ -48,17 +48,17 @@
 							</div>
 							<div class="grup-form">
 								{!! Form::label('País')!!}
-								{!! Form::select('pais',array('' => 'País') + $countries,'',['class'=>'form-control','required' => 'required','id'=>'pais']) !!}	
+								{!! Form::select('pais',array('' => 'País') + $countries,'',['class'=>'form-control','required' => 'required','id'=>'paisF']) !!}	
 							</div>
 							<div class="grup-form">
 								{!! Form::label('Provincia')!!}
 
-								{!! Form::select('provincia',array('' => 'Selecciona provincia'),'',['class'=>'form-control', 'required' => 'required','id'=>'state']); !!}
+								{!! Form::select('provincia',array('' => 'Selecciona provincia'),'',['class'=>'form-control', 'required' => 'required','id'=>'statesF']); !!}
 							</div>
 							<div class="grup-form">
 								{!! Form::label('Municipio')!!}
 								
-								{!! Form::select('municipio',array('' => 'Selecciona municipio'),'',['class'=>'form-control', 'required' => 'required','id'=>'city']); !!}
+								{!! Form::select('municipio',array('' => 'Selecciona municipio'),'',['class'=>'form-control', 'required' => 'required','id'=>'citiesF']); !!}
 							</div>
 							<div class="grup-form">
 								<div class="checkbox">
@@ -181,17 +181,17 @@
 				}
 			}
 		});	
-		$('#pais').change(function(event) {
+		$('#paisF').change(function(event) {
 			/* Act on the event */
-			$('#state').html('<option>Cargando..</option>');
-			$('#city').html('<option>Selecciona municipio</option>');
+			$('#statesF').html('<option>Cargando..</option>');
+			$('#citiesF').html('<option>Selecciona municipio</option>');
 			var id = $(this).val();
 			$.ajax({
 				url: 'state/'+id,
 				type: 'GET',
 				dataType: 'html',
 				success: function(data){
-					$('#state').html(data);
+					$('#statesF').html(data);
 				}
 			})
 			.fail(function() {
@@ -199,18 +199,18 @@
 			})
 		});
 
-		$('#state').change(function(event) {
+		$('#statesF').change(function(event) {
 			/* Act on the event */
-			$('#city').html('<option>Cargando..</option>');
+			$('#citiesF').html('<option>Cargando..</option>');
 			var id = $(this).val();
 			$.ajax({
 				url: 'city/'+id,
 				type: 'GET',
 				dataType: 'html',
 				success: function(data){
-					$('#city').html(data);
+					$('#citiesF').html(data);
 					if (data == "")
-						$('#city').html('<option value="">Municipios no encontrados</option>');
+						$('#citiesF').html('<option value="">Municipios no encontrados</option>');
 				}
 			})
 			.fail(function() {

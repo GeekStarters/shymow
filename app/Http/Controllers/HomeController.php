@@ -36,7 +36,6 @@ class HomeController extends Controller {
 	}
 	public function dataUser(){
 		$country = Countrie::lists('name','id');
-		// dd($country);
 		return view('usuarios_datos')->with('countries',$country);
 	}
 	public function celebridad(){
