@@ -225,7 +225,7 @@ class PerfilController extends Controller {
 	    $phone = $celular;
 	    $date = date("Y-m-d",strtotime($year."-".$month."-".$day));     
 	    try {
-	    	Perfil::where('id','=',Auth::id())->update(['fname'=>$nombre,'lname'=>$apellido,'birthdate' => $date,'email' => $email,'phone'=>$phone,'code_phone'=>$code,'pais' => $myCountry,'genero' => $genero,'name' => $allname,'view_cp'=>$view_cp,'view_gender'=>$view_gender,'view_country'=>$view_country,'view_birth'=>$view_birth,'view_email'=>$view_email,'view_phone'=>$view_phone,'cp'=>$cp]);
+	    	Perfil::where('id','=',Auth::id())->update(['fname'=>$nombre,'lname'=>$apellido,'birthdate' => $date,'email' => $email,'phone'=>$phone,'code_phone'=>$code,'pais' => $myCountry,'genero' => $genero,'name' => $allname,'view_cp'=>$view_cp,'view_gender'=>$view_gender,'view_country'=>$view_country,'view_birth'=>$view_birth,'view_email'=>$view_email,'view_phone'=>$view_phone,'cp'=>$cp,'update'=>true]);
 
 	    	flash('Datos guardados', 'success');
 	    	return redirect('perfil');

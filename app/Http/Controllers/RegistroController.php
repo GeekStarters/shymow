@@ -74,6 +74,7 @@ class RegistroController extends Controller {
 	    	}
 	        
 	    }
+	   	$is_youtuber = isset(Session::get('data_user')['is_youtuber']) ? true : false;
 	   	$data_user = Session::get('data_user');
 	    $socials = $request->input('social1').",".$request->input('social2').",".$request->input('social3').",".$request->input('social4').",".$request->input('social5');
 	    $streamings = $request->input('stream1').",".$request->input('stream2').",".$request->input('stream3').",".$request->input('stream4').",".$request->input('stream5');
@@ -245,6 +246,7 @@ class RegistroController extends Controller {
 			    $user->municipio = $municipio;
 			    $user->edad = $edad;
 			    $user->recover_pass = $data_user['email'];
+			    $user->is_youtuber = $is_youtuber;
 		    $user->save();
 		    $notifications = new Notification_setting();
 		    $notifications->perfil_id = $user->id;

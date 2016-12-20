@@ -167,6 +167,7 @@ Route::group(['middleware' => 'auth'], function()
 
     //Crear like.
     Route::post('/create_like/{post}','PostController@createLike');
+    Route::post('/create_like_user/{post}','PerfilController@createLike');
 
     //Crear like product.
     Route::post('/create_like_product/{post}','ShymowShop@likeProduct');

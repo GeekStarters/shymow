@@ -288,12 +288,13 @@ $( document ).ready(function() {
             var post = $(this).data('like');
     		var user = $(this).data('user');
             var objecto = $(this);
+            console.log(user);
             if (user != null) {
                 // alert(post);
                 var no_like = $(this).hasClass('like-user');
                 
                 $.ajax({
-                    url: '/create_like/'+post,
+                    url: '/create_like_user/'+post,
                     type: 'POST',
                     dataType: 'HTML',
                     success: function($data){

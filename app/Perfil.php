@@ -11,7 +11,7 @@ class Perfil extends Model implements AuthenticatableContract {
 	use Authenticatable;
 	protected $table = 'perfils';
 
-	protected $fillable = ['name', 'email','birthdate','genero','pais','provincia','municipio','hobbies','redes','streamings','webs','blogs','role','mi_frase','descripcion','active','img_profile','img_portada','edad','password','work','phone','more_hobbies','like','qualification'];
+	protected $fillable = ['name', 'email','birthdate','genero','pais','provincia','municipio','hobbies','redes','streamings','webs','blogs','role','mi_frase','descripcion','active','img_profile','img_portada','edad','password','work','phone','more_hobbies','like','qualification','is_youtuber','update'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -49,9 +49,11 @@ class Perfil extends Model implements AuthenticatableContract {
     public function scopeType($query, $type)
     {
     	if (trim($type) != "") {
-    		if ($type != "all") {
-    			$query->select('*')->where('role',$type);
-    		}else{
+    		if ($type == "0" || $type == "3" || $type == "5") {
+    			$query->select('*')->where('role',0);
+    		}elseif($type == "1" || $type == "4"){
+                $query->select('*')->where('role',1);
+            } else{
     			$query->select('*');
     		}
     	}
@@ -71,6 +73,39 @@ class Perfil extends Model implements AuthenticatableContract {
         if (trim($edad) != "") {
             if ($edad != "all") {
                 $query->select('*')->whereRaw('YEAR(CURDATE())-YEAR(perfils.birthdate) = '.$edad);
+            }else{
+                $query->select('*');
+            }
+        }
+    }
+    public function scopePic($query, $controlador)
+    {
+        if (trim($controlador) != "") {
+            if ($controlador) {
+                $query->select('*')->where('img_profile','<>','img/profile/default.png');
+                
+            }else{
+                $query->select('*');
+            }
+        }
+    }
+    public function scopeUserUpdate($query, $controlador)
+    {
+        if (trim($controlador) != "") {
+            if ($controlador) {
+                $query->select('*')->where('update',true);
+                
+            }else{
+                $query->select('*');
+            }
+        }
+    }
+    public function scopeYoutubers($query, $controlador)
+    {
+        if (trim($controlador) != "") {
+            if ($controlador) {
+                $query->select('*')->where('is_youtuber',true);
+                
             }else{
                 $query->select('*');
             }

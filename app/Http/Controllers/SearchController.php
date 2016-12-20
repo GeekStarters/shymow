@@ -61,8 +61,8 @@ class SearchController extends Controller {
 		// dd($interests['attributes']['categories_id']);
 
 		
-		if ($type == "0" || $type == "1") {
-			$users = Perfil::user($name)->type($type)->genero($genero)->edad($edad)->pais($pais)->provincia($provincia)->municipio($municipio)->hobbie($interests['attributes']['name'])->redes($social)->stream($stream)->take(3)->get();
+		if ($type == "0" || $type == "1" || $type == "3" || $type == "5" || $type == "4") {
+			$users = Perfil::user($name)->type($type)->genero($genero)->edad($edad)->pais($pais)->provincia($provincia)->municipio($municipio)->hobbie($interests['attributes']['name'])->redes($social)->stream($stream)->pic()->userUpdate($type)->youtuber($type)->take(3)->get();
 		}elseif($type == "2"){
 			if (isset($comercio)) {
 				if ($comercio != "all") {
@@ -120,7 +120,6 @@ class SearchController extends Controller {
 		}else{
 			return response()->json(['error'=>true]);
 		}
-		dd($users);
 		$socialNet = ['facebook','twitter','linkedin','youtube','pinterest','instagram'];
 		return response()->json(['error'=>false,'data'=>$users,'redes'=>$socialNet]);
 	}
@@ -185,13 +184,20 @@ class SearchController extends Controller {
 			$edad = (int) $edad;
 		}
 		$paginate = 15;
-		if ($type == "0" || $type == "1") {
-			$users = Perfil::user($name)->type($type)->genero($genero)->edad($edad)->pais($pais)->provincia($provincia)->municipio($municipio)->hobbie($interests['attributes']['name'])->redes($social)->stream($stream)->leftJoin('user_likes', function($join)
+
+		$pic = $type === '3' ? true : false; 
+		$update = $type === '5' ? true : false; 
+		$youtuber = $type === '4' ? true : false;
+
+
+		// dd($pic,$update,$youtuber);
+		if ($type == "0" || $type == "1" || $type == "3" || $type == "5" || $type == "4") {
+			$users = Perfil::user($name)->type($type)->genero($genero)->edad($edad)->pais($pais)->provincia($provincia)->municipio($municipio)->hobbie($interests['attributes']['name'])->redes($social)->stream($stream)->userUpdate($update)->youtubers($youtuber)->pic($pic)->leftJoin('user_likes', function($join)
 			        {
 			            $join->on('user_likes.user_id', '=', 'perfils.id')
 			            ->where('user_likes.profil_id','=',Auth::id())
 			            ->where('user_likes.like','=',true);
-			        })->select('user_likes.profil_id','perfils.name','perfils.qualification','perfils.like','perfils.role',DB::raw('YEAR(CURDATE())-YEAR(perfils.birthdate) as edad'),'perfils.pais','perfils.descripcion','perfils.id','perfils.email','perfils.birthdate','perfils.img_profile','perfils.redes','perfils.streamings','perfils.webs','perfils.blogs','perfils.mi_frase')->paginate($paginate);
+			        })->select('user_likes.profil_id','perfils.name','perfils.update','perfils.qualification','perfils.like','perfils.role',DB::raw('YEAR(CURDATE())-YEAR(perfils.birthdate) as edad'),'perfils.pais','perfils.descripcion','perfils.id','perfils.email','perfils.birthdate','perfils.img_profile','perfils.redes','perfils.streamings','perfils.webs','perfils.blogs','perfils.mi_frase')->paginate($paginate);
 		}elseif($type == "2"){
 			if (isset($comercio)) {
 				if ($comercio != "all") {

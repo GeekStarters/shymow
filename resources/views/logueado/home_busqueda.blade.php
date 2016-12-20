@@ -29,21 +29,53 @@
                         {!! Form::label('Quiero encontrar:')!!}
                         <div class="form-group">
                           <div class="col-sm-6">
-                            <input type="radio" value="all" name="like" id="searchAll" sele>
-                            <label for="like">Todo</label><br>
 
-                            <input type="radio" value="0" name="like" id="SearchPeople">
-                            <label for="like">Personas</label><br>
-
-                            <input type="radio" value="2" name="like" id="SearchBusiness">
-                            <label for="like">Empresas</label><br>
+                            <div class="checkbox">
+                              <label style="padding:0px !important; ">
+                               <input type="radio" value="all" name="like" id="searchAll" checked="checked"> Todo 
+                              </label>
+                            </div>
                             
-                            <input type="radio" value="1" name="like" id="SearchCelebrities">
-                            <label for="like">Celebridad</label>
-                            <br>
 
-                            <input type="radio" value="youtubers" name="like" id="searchYoutubers">
-                            <label for="like">Youtubers</label><br>
+                            <div class="checkbox">
+                              <label style="padding:0px !important; ">
+                               <input type="radio" value="0" name="like" id="SearchPeople"> Personas 
+                              </label>
+                            </div>
+                            
+
+                            <div class="checkbox">
+                              <label style="padding:0px !important; ">
+                               <input type="radio" value="2" name="like" id="SearchBusiness"> Empresas 
+                              </label>
+                            </div>
+                            
+
+                            <div class="checkbox">
+                              <label style="padding:0px !important; ">
+                               <input type="radio" value="1" name="like" id="SearchCelebrities"> Celebridad 
+                              </label>
+                            </div>
+                          </div>
+
+                          <div class="col-sm-6">
+                            
+                            <div class="checkbox">
+                              <label style="padding:0px !important; ">
+                               <input type="radio" value="3" name="like" id="userPic">Usuarios con foto 
+                              </label>
+                            </div>
+
+                            <div class="checkbox">
+                              <label style="padding:0px !important; ">
+                               <input type="radio" value="4" name="like" id="searchYoutubers">Youtubers
+                              </label>
+                            </div>
+                            <div class="checkbox">
+                              <label style="padding:0px !important; ">
+                               <input type="radio" value="5" name="like" id="userUp"> Perfiles actualizados 
+                              </label>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -218,7 +250,7 @@
                 @if($_GET['like'] == "2" || $_GET['like'] == "all")
                   <div id="mapa" style="height: 350px;margin-bottom: 50px"></div>
                 @endif
-                @if($_GET['like'] == "0")
+                @if($_GET['like'] == "0" || $_GET['like'] == "3" || $_GET['like'] == "5")
                   <div class="panel panel-default panel-changes">
                     <div class="panel-heading" role="tab" id="headingOne">
                       <h4 class="panel-title">
@@ -270,6 +302,98 @@
                                           </span>
                                         </div>
                                       </div>
+                                    </li>
+                                    <div class="busquedas-sub-options">
+                                      <li class="busquedas-share">
+                                        <i class="fa fa-share-alt share-icon share_post_shymow" data-user_id="{{$user->id}}" aria-hidden="true" data-toggle="modal" data-target="#myModal"></i>
+                                      </li>
+                                      @if($user->profil_id == Auth::user()->id)
+                                        <span class="like-me like-user-active" data-like="{{$user->id}}" data-user="true">
+                                          <span class="glyphicon glyphicon-heart"></span>
+                                        </span>
+                                      @else
+                                        <span class="like-me like-user" data-like="{{$user->id}}" data-user="true">
+                                          <span class="glyphicon glyphicon-heart"></span>
+                                        </span> 
+                                      @endif
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <hr class="bottom-hr-effects">
+                                  </ul>
+                                <div class="busquedas-social">
+                                @if(isset($user->redes))
+                                  @for($i=0; $i<count($socialNet);$i++)
+                                    @if(isset(json_decode($user->redes,true)[$socialNet[$i]]))
+                                      @foreach( json_decode($user->redes,true)[$socialNet[$i] ] as $red)
+
+                                      <a href="{{url($red)}}" target="_blank"><img src="{{url('img/profile/'.$socialNet[$i].'-post.png')}}" alt="shymow"></a>
+                                      @endforeach
+                                    @endif
+                                  @endfor
+                                @endif
+                                  <a href="{{url('view_user/'.$user->id)}}" class="show-more">VER +</a>
+                                </div>
+                              </div>
+                              
+                            </div>
+                          </div>
+                          <br>
+                        @endforeach
+                      </div>
+                    </div>
+                  </div>
+                @endif
+                @if($_GET['like'] == "4")
+                  <div class="panel panel-default panel-changes">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                      <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#CAT-NAME" aria-expanded="true" class="text-favorite" aria-controls="CAT-NAME">
+                          <img class="img_cat_search" class="img-responsive" src="img/icon_youtuber.png" alt="">
+                          Youtuber
+                          <span class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                      </h4>
+                    </div>
+                      <div id="CAT-NAME" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                      <div class="panel-body">
+
+                        @foreach($users as $user)
+                          <div class="container-busquedas">
+                            <div class="sub-content-busqueda">
+
+                              <div class="img-busqueda col-sm-3" style="padding:0px !important;"><img src="{{$user->img_profile}}" alt="shymow"></div>
+
+                              <div class="busquedas-content col-sm-6" style="padding:0px !important;">
+                                <div class="content-busqueda-header">
+                                  <span class="first-title">{{$user->name}}</span>
+                                   <span class="sub-title">{{$user->pais}}</span>
+                                </div>
+                                <p>{{$user->descripcion}}</p>
+                              </div>
+
+                              <div class="busquedas-settings" style="padding:0px !important;">
+                                <ul>
+                                    <li class="busquedas-qualification">
+                                      <div class="qualification-header">
+                                        Calificación
+                                        <div class="qualification">
+                                          <span class="post-qualification mini-star border-right-post-tendencias" style="border: 0px;padding: 0px;">
+                                            @if((int)$user->qualification < 5)
+                                                @for ($i = 1; $i <= (int)$user->qualification; $i++)
+                                                  <a data-star="{{$i}}" class="glyphicon glyphicon-star qualification-popular" data-userqualification="{{$user->id}}" ></a>
+                                                @endfor
+                                                @for ($i = 1; $i <= 5-(int)$user->qualification; $i++)
+                                                  <a  data-star="{{(int)$user->qualification+$i}}" class="glyphicon glyphicon-star qualification-no-popular" data-userqualification="{{$user->id}}"></a>
+                                                @endfor
+                                            @else
+                                                @for ($i = 1; $i <= (int)$user->qualification; $i++)
+                                                  <a data-star="{{$i}}" class="glyphicon glyphicon-star qualification-popular" data-userqualification="{{$user->id}}" ></a>
+                                                @endfor
+                                            @endif
+                                            
+                                             
+                                          </span>
+                                        </div>
                                     </li>
                                     <div class="busquedas-sub-options">
                                       <li class="busquedas-share">
@@ -1118,7 +1242,20 @@
   });
 
 
-  $('#SearchPeople').click(function(event) {
+  $('#searchAll').click(function(event) {
+    /* Act on the event */
+    $('#actComercial').slideDown('slow');
+    $('#searchcategories').slideDown('slow');
+
+    $('#searchGender').slideDown('slow');
+    $('#searchEdad').slideDown('slow');
+    $('#interesting').css('visibility', 'visible');
+
+    $('#filtroredes').slideDown('slow');
+    $('#filtrostream').slideDown('slow');
+  });
+
+  $('#SearchPeople, #searchYoutubers, #userPic, #userUp').click(function(event) {
     /* Act on the event */
     $('#actComercial').slideUp('slow');
     $('#searchcategories').slideUp('slow');

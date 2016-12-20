@@ -262,21 +262,53 @@
                         {!! Form::label('Quiero encontrar:')!!}
                         <div class="form-group">
                           <div class="col-sm-6">
-                            <input type="radio" value="all" name="like" id="searchAll" checked="checked">
-                            <label for="like">Todo</label><br>
 
-                            <input type="radio" value="0" name="like" id="SearchPeople">
-                            <label for="like">Personas</label><br>
-
-                            <input type="radio" value="2" name="like" id="SearchBusiness">
-                            <label for="like">Empresas</label><br>
+                            <div class="checkbox">
+                              <label style="padding:0px !important; ">
+                               <input type="radio" value="all" name="like" id="searchAll" checked="checked"> Todo 
+                              </label>
+                            </div>
                             
-                            <input type="radio" value="1" name="like" id="SearchCelebrities">
-                            <label for="like">Celebridad</label>
-                            <br>
 
-                            <input type="radio" value="youtubers" name="like" id="searchYoutubers" ">
-                            <label for="like">Youtubers</label><br>
+                            <div class="checkbox">
+                              <label style="padding:0px !important; ">
+                               <input type="radio" value="0" name="like" id="SearchPeople"> Personas 
+                              </label>
+                            </div>
+                            
+
+                            <div class="checkbox">
+                              <label style="padding:0px !important; ">
+                               <input type="radio" value="2" name="like" id="SearchBusiness"> Empresas 
+                              </label>
+                            </div>
+                            
+
+                            <div class="checkbox">
+                              <label style="padding:0px !important; ">
+                               <input type="radio" value="1" name="like" id="SearchCelebrities"> Celebridad 
+                              </label>
+                            </div>
+                          </div>
+
+                          <div class="col-sm-6">
+                            
+                            <div class="checkbox">
+                              <label style="padding:0px !important; ">
+                               <input type="radio" value="3" name="like" id="userPic">Usuarios con foto 
+                              </label>
+                            </div>
+
+                            <div class="checkbox">
+                              <label style="padding:0px !important; ">
+                               <input type="radio" value="4" name="like" id="searchYoutubers">Youtubers
+                              </label>
+                            </div>
+                            <div class="checkbox">
+                              <label style="padding:0px !important; ">
+                               <input type="radio" value="5" name="like" id="userUp"> Perfiles actualizados 
+                              </label>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -817,7 +849,20 @@
   });
 
 
-  $('#SearchPeople').click(function(event) {
+  $('#searchAll').click(function(event) {
+    /* Act on the event */
+    $('#actComercial').slideDown('slow');
+    $('#searchcategories').slideDown('slow');
+
+    $('#searchGender').slideDown('slow');
+    $('#searchEdad').slideDown('slow');
+    $('#interesting').css('visibility', 'visible');
+
+    $('#filtroredes').slideDown('slow');
+    $('#filtrostream').slideDown('slow');
+  });
+  
+  $('#SearchPeople, #searchYoutubers, #userPic, #userUp').click(function(event) {
     /* Act on the event */
     $('#actComercial').slideUp('slow');
     $('#searchcategories').slideUp('slow');
@@ -829,7 +874,6 @@
     $('#filtroredes').slideDown('slow');
     $('#filtrostream').slideDown('slow');
   });
-
   $('#SearchBusiness').click(function(event) {
     /* Act on the event */
     $('#actComercial').slideDown('slow');

@@ -60,6 +60,13 @@
 								
 								{!! Form::select('municipio',array('' => 'Selecciona municipio'),'',['class'=>'form-control', 'required' => 'required','id'=>'city']); !!}
 							</div>
+							<div class="grup-form">
+								<div class="checkbox">
+								    <label>
+								      <input type="checkbox" name="is_youtuber" value="true"> ¿Eres youtuber?
+								    </label>
+								  </div>
+							</div>
 						
 					</section>
 				</div>
