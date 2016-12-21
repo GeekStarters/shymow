@@ -9,13 +9,13 @@
 				<h2>Bandeja de entrada</h2>
 				<hr>
 			</div>
-			<div class="message-search">
+			<!-- <div class="message-search">
 				<div class="form-group has-feedback">
 				  <input type="text" class="form-control" id="inputSuccess2" aria-describedby="inputSuccess2Status">
 				  <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
 				  <span id="inputSuccess2Status" class="sr-only">(search)</span>
 				</div>
-			</div>
+			</div> -->
 			<div class="clearfix"></div>
 			<div class="content-messages">
 				@if(count($messages)>0)
