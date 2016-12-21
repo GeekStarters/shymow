@@ -133,7 +133,7 @@
 					</div>
 					<div class="more-interesting col-sm-3">
 						<div class="interesting-header">
-							<h2>Más de mis intereses <span class="glyphicon glyphicon-pencil color-edit" data-toggle="modal" data-target="#moreHobbie"></span></h2>
+							<h2>Más de mis intereses</span></h2>
 						</div>
 						<div class="more-interesting-body">
 							<p>
