@@ -17,6 +17,10 @@ use Session as session;
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::get('500', function()
+{
+    abort(500);
+});
 Route::get("error",function(){
     return view('errors.500');
 });
