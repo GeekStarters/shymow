@@ -39,7 +39,7 @@
 							</div>
 							<div class="grup-form">
 								{!! Form::label('Género')!!}
-								{!! Form::select('genero', array('m' => 'Hombre', 'f' => 'Mujer'), 'hombre',['class'=>'form-control','required' => 'required']); !!}
+								{!! Form::select('genero', array('m' => 'Hombre', 'f' => 'Mujer','n'=>'Neutro'), 'hombre',['class'=>'form-control','required' => 'required']); !!}
 							</div>
 							<div class="grup-form">
 								{!! Form::label('País')!!}

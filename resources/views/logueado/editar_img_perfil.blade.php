@@ -5,6 +5,9 @@
 <div class="col-sm-12 edit_img">
 	<div class="col-md-12 text-center block-center">
 		<h2>Seleccionar foto</h2>
+		<div class="alert alert-danger" role="alert">
+			Tamaño recomendado 400 x 400 px
+		</div>
 		{!! Form::open(['url'=>'/uploadProfileImg','method'=>'POST','files'=>'true']) !!}
 			<div class="form-group" id="contentImgSelect">
 				{!! Form::file('img',['style'=>'display:none','id'=>'imgProfile'])!!}

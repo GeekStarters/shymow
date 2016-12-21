@@ -15,7 +15,7 @@
 					        <a class="test" tabindex="-1" href="#">Configuración <span class="caret"></span></a>
 					        <ul class="dropdown-menu">
 					     	  <li><a href="{{ url('identificate_perfil') }}">Editar perfil</a></li>
-					          <li><a tabindex="-1" href="{{url('identificate')}}">Shymow Shop</a></li>
+					          <li><a tabindex="-1" href="{{url('identificate')}}">Mi Shymow Shop</a></li>
 					        </ul>
 					      </li>
 					     <li><a href="{{ url('notification') }}">Notificaciones 
@@ -115,7 +115,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="interesting col-sm-offset-4 col-sm-8">
+					<div class="interesting col-sm-offset-4 col-sm-5">
 						<div class="interesting-header">
 							<h2>Mis intereses</h2>
 						</div>
@@ -130,6 +130,52 @@
 								@endif
 							</div>
 						</div>
+					</div>
+					<div class="more-interesting col-sm-3">
+						<div class="interesting-header">
+							<h2>Más de mis intereses <span class="glyphicon glyphicon-pencil color-edit" data-toggle="modal" data-target="#moreHobbie"></span></h2>
+						</div>
+						<div class="more-interesting-body">
+							<p>
+								{{$users->more_hobbies}}
+							</p>
+						</div>
+						<ul>
+							<li class="busquedas-qualification" style="display: inline;">
+                              <div class="qualification-header">
+                                <p style="font-family: gothamTwo;font-size: 1.1em;margin-bottom: 2px">Calificación</p>
+                                <div class="qualification">
+                                  <span class="post-qualification mini-star border-right-post-tendencias" style="border: 0px;padding: 0px;">
+                                    @if((int)$users->qualification < 5)
+                                        @for ($i = 1; $i <= (int)$users->qualification; $i++)
+                                          <a data-star="{{$i}}" class="glyphicon glyphicon-star qualification-popular" data-userqualification="{{$users->user_id}}" ></a>
+                                        @endfor
+                                        @for ($i = 1; $i <= 5-(int)$users->qualification; $i++)
+                                          <a  data-star="{{(int)$users->qualification+$i}}" class="glyphicon glyphicon-star qualification-no-popular" data-userqualification="{{$users->user_id}}"></a>
+                                        @endfor
+                                    @else
+                                        @for ($i = 1; $i <= (int)$users->qualification; $i++)
+                                          <a data-star="{{$i}}" class="glyphicon glyphicon-star qualification-popular" data-userqualification="{{$users->user_id}}" ></a>
+                                        @endfor
+                                    @endif
+                                  </span>
+                                </div>
+                            </li>
+							<p style="font-family: gothamTwo;font-size: 1.1em;margin-bottom: 2px">Favotiros</p>
+                            <li style="display: inline;">
+                            	@foreach($dataUsers as $user)
+                                    @if($user->profil_id == Auth::user()->id)
+                                        <span class="like-me like-user-active" data-like="{{$user->id}}" data-user="true">
+                                          <span class="glyphicon glyphicon-heart"></span>
+                                        </span>
+                                    @else
+                                        <span class="like-me like-user" data-like="{{$user->id}}" data-user="true">
+                                          <span class="glyphicon glyphicon-heart"></span>
+                                        </span> 
+                                    @endif
+                                @endforeach
+                            </li>
+						</ul>
 					</div>
 				</div>
 			</div>

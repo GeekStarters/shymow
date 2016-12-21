@@ -49,9 +49,18 @@
 							</div>
 
 							<div class="post-user">
-								<div class="post-icono"><a href="{{url('view_user/'.$trend->profil_id)}}"><img src="{{url($trend->img_profile) }}" alt="shymow"></a></div>
-								<div class="post-user"><a href="{{url('view_user/'.$trend->profil_id)}}">{{$trend->user }}</a></div>
-								<div class="post-twitt"><span>@Robe_extremo</span></div>
+								<div class="post-icono"><a href="{{url('view_user/'.$trend->id_user)}}"><img src="{{url($trend->img_profile)}}" alt="shymow"></a></div>
+								@if(isset($trend->alias))
+									<div class="post-user"><a href="{{url('view_user/'.$trend->id_user)}}">{{$trend->alias}}</a></div>
+									<div class="post-twitt"><span>{{str_replace(" ","","@".$trend->alias)}}</span></div>
+								@elseif(isset($trend->apodo))
+									<div class="post-user"><a href="{{url('view_user/'.$trend->id_user)}}">{{$trend->apodo}}</a></div>
+									<div class="post-twitt"><span>{{str_replace(" ","","@".$trend->apodo)}}</span></div>
+								@else
+									<div class="post-user"><a href="{{url('view_user/'.$trend->id_user)}}">{{$trend->user}}</a></div>
+									<div class="post-twitt"><span>{{str_replace(" ","","@".$trend->user)}}</span></div>
+								@endif
+
 							</div>
 						</div>
 						<br>
@@ -164,7 +173,26 @@
 			<h2 class="text-center">No hay tendencias</h2>
 		</div>
 	@endif
+	<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title" id="myModalLabel">Compartir</h4>
+			      </div>
+			      {!! Form::open(['url' => 'create_share_post','method' => 'post','files' => false]) !!}
 
+			      	<div class="col-md-12" id="modal_container">
+			      		
+			      	</div>
+				    <div class="clearfix"></div>
+
+				    
+				{!! Form::close() !!}
+			    </div>
+			  </div>
+			</div>
 </div>
 @stop
 @extends('logueado.layouts.content-modal')

@@ -11,7 +11,7 @@
               <a class="test" tabindex="-1" href="#">Configuración <span class="caret"></span></a>
               <ul class="dropdown-menu">
               <li><a href="{{ url('identificate_perfil') }}">Editar perfil</a></li>
-                <li><a tabindex="-1" href="{{url('identificate')}}">Shymow Shop</a></li>
+                <li><a tabindex="-1" href="{{url('identificate')}}">Mi Shymow Shop</a></li>
               </ul>
             </li>
            <li><a href="{{ url('notification') }}">Notificaciones 

@@ -97,16 +97,19 @@
                     <div class="form-group">
                       <div class="col-sm-12 col-md-6 padd-right" id="searchGender">
                         {!! Form::label('Genero')!!}
-                        {!! Form::select('genero',array('all' => 'Todo','m' => 'Hombre', 'f' => 'Mujer'),'',['class'=>'form-control','required' => 'required','id'=>'genero']) !!}
+                        {!! Form::select('genero',array('all' => 'Todo','m' => 'Hombre', 'f' => 'Mujer','n'=>'Neutro'),'',['class'=>'form-control','required' => 'required','id'=>'genero']) !!}
                         <hr>
                       </div>
                       <div class="col-sm-12 col-md-6 padd-left" id="searchEdad">
                         {!! Form::label('Edad')!!}
                         <select name="edad" id="" class="form-control">
                           <option value="all">Todo</option>
-                          @for($i = 1;$i<=99;$i++)
-                            <option value="{{$i}}">{{$i}}</option>
-                          @endfor
+                          <option value="menores">-18</option>
+                          <option value="18-25">18-25</option>
+                          <option value="25-35">25-35</option>
+                          <option value="35-45">35-45</option>
+                          <option value="55-65">55-65</option>
+                          <option value="tedad">+65</option>
                         </select>
                         <hr>
                       </div>

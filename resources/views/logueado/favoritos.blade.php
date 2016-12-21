@@ -60,8 +60,16 @@
 
 													<div class="post-user">
 														<div class="post-icono"><a href="{{url('view_user/'.$post->profil_id)}}"><img src="{{url($post->img_profile) }}" alt="shymow"></a></div>
-														<div class="post-user"><a href="{{url('view_user/'.$post->profil_id)}}">{{$post->user }}</a></div>
-														<div class="post-twitt"><span>@Robe_extremo</span></div>
+														@if(isset($post->alias))
+															<div class="post-user"><a href="{{url('view_user/'.$post->id_user)}}">{{$post->alias}}</a></div>
+															<div class="post-twitt"><span>{{str_replace(" ","","@".$post->alias)}}</span></div>
+														@elseif(isset($post->apodo))
+															<div class="post-user"><a href="{{url('view_user/'.$post->id_user)}}">{{$post->apodo}}</a></div>
+															<div class="post-twitt"><span>{{str_replace(" ","","@".$post->apodo)}}</span></div>
+														@else
+															<div class="post-user"><a href="{{url('view_user/'.$post->id_user)}}">{{$post->user}}</a></div>
+															<div class="post-twitt"><span>{{str_replace(" ","","@".$post->user)}}</span></div>
+														@endif
 													</div>
 												</div>
 												<br>
@@ -197,8 +205,16 @@
 
 													<div class="post-user">
 														<div class="post-icono"><a href="{{url('view_user/'.$post->profil_id)}}"><img src="{{url($post->img_profile) }}" alt="shymow"></a></div>
-														<div class="post-user"><a href="{{url('view_user/'.$post->profil_id)}}">{{$post->user }}</a></div>
-														<div class="post-twitt"><span>@Robe_extremo</span></div>
+														@if(isset($post->alias))
+															<div class="post-user"><a href="{{url('view_user/'.$post->id_user)}}">{{$post->alias}}</a></div>
+															<div class="post-twitt"><span>{{str_replace(" ","","@".$post->alias)}}</span></div>
+														@elseif(isset($post->apodo))
+															<div class="post-user"><a href="{{url('view_user/'.$post->id_user)}}">{{$post->apodo}}</a></div>
+															<div class="post-twitt"><span>{{str_replace(" ","","@".$post->apodo)}}</span></div>
+														@else
+															<div class="post-user"><a href="{{url('view_user/'.$post->id_user)}}">{{$post->user}}</a></div>
+															<div class="post-twitt"><span>{{str_replace(" ","","@".$post->user)}}</span></div>
+														@endif
 													</div>
 												</div>
 												<br>

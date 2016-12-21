@@ -17,7 +17,9 @@ use Session as session;
 | and give it the controller to call when that URI is requested.
 |
 */
-
+Route::get("error",function(){
+    return view('errors.500');
+});
 // SOCIAL LOGIN
 Route::get('social/login/redirect/{provider}', ['uses' => 'Auth\AuthController@redirectToProvider', 'as' => 'social.login']);
 Route::get('social/login/{provider}', 'Auth\AuthController@handleProviderCallback');

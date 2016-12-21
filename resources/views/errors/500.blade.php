@@ -30,12 +30,17 @@
 				font-size: 72px;
 				margin-bottom: 40px;
 			}
+			.txtBody {
+				font-size: 50px;
+				margin-bottom: 40px;
+			}
 		</style>
 	</head>
 	<body>
 		<div class="container">
 			<div class="content">
 				<div class="title">Shymow</div>
+				<div class="txtBody">Ocurrió un error inténtalo nuevamente</div>
 			</div>
 		</div>
 	</body>

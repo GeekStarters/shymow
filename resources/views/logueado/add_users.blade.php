@@ -7,29 +7,29 @@
 	@if(count($users)>0)
 	<div class="row">
 		<div class="col-md-6 col-sm-offset-2">
-			{!! Form::open() !!}
+			<!-- {!! Form::open() !!}
 				<div class="form-group">
 					{!! Form::label('buscar','Buscar a:') !!}
 					{!! Form::text('buscar','',['class'=>'form-control','placeholder'=>'Usuario']) !!}
 				</div>
-			{!! Form::close() !!}
+			{!! Form::close() !!} -->
 		</div>
 	</div>
 	<div class="row">
     	@foreach($users as $user)
     		@if($user->id != Auth::id())
-    			<div class="col-sm-4 col-md-3">
+    			<div class="col-sm-5 col-md-3">
 			    	<div class="thumbnail">
 				      <img src="{{url($user->img_profile)}}" alt="{{$user->name}}">
 				      <div class="caption">
-				        <h3><a href="{{url('view_user/'.$user->user_id)}}">{{$user->name}}</a></h3>
+				        <h3><a href="{{url('view_user/'.$user->id)}}">{{$user->name}}</a></h3>
 				        <p>
 				        	<br>
 				        	<ul>
-				        		<li><b>País: </b>{{$user->pais}}</li>
-				        		<li><b>Estado: </b>{{$user->provincia}}</li>
-				        		<li><b>Municipio: </b>{{$user->municipio}}</li>
-				        		<li><b>Trabajo: </b>{{$user->work}}</li>
+				        		<li><b>País: </b>{{DataHelpers::getSubString($user->pais, 15)}}</li>
+				        		<li><b>Estado: </b>{{DataHelpers::getSubString($user->provincia, 15)}}</li>
+				        		<li><b>Municipio: </b>{{DataHelpers::getSubString($user->municipio, 10)}}</li>
+				        		<li><b>Trabajo: </b>{{DataHelpers::getSubString($user->work, 15)}}</li>
 				        	</ul>
 				        	<br>
 				        </p>

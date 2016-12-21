@@ -146,7 +146,38 @@ class SearchController extends Controller {
 		$genero = $request->input('genero');
 		$social = $request->input('redes');
 		$stream = $request->input('stream');
+
+
 		$edad = $request->input('edad');
+		$edadArray = explode("-",$edad);
+		$edadOne = "";
+		$edadTwo = "";
+		$posicion_coincidencia = strpos($edad, "-");
+		$menores = false;
+		$mayores = false;
+		$edades = false;
+		$all = false;
+		$oneEdad = (!empty($posicion_coincidencia)) ? true : false;
+		if ($edad == "menores") {
+			$menores = true;
+		}elseif($edad == "tedad"){
+			$mayores = true;
+		}elseif ($oneEdad) {
+			if (!empty($edadArray[0]) && !empty($edadArray[1])) {
+				if (((int)$edadArray[0]) < ((int)$edadArray[1])) {
+					$edades = true;
+					$edadOne = $edadArray[0];
+					$edadTwo = $edadArray[1];
+				}else{
+					return redirect('/');
+				}
+			}
+		}elseif($edad == "all"){
+			$all = true;
+		}else{
+			return redirect('/');
+		}
+
 		$paisId = $request->input('pais');
 		$provinciaId = $request->input('provincia');
 		$municipioId = $request->input('municipio');
@@ -192,7 +223,7 @@ class SearchController extends Controller {
 
 		// dd($pic,$update,$youtuber);
 		if ($type == "0" || $type == "1" || $type == "3" || $type == "5" || $type == "4") {
-			$users = Perfil::user($name)->type($type)->genero($genero)->edad($edad)->pais($pais)->provincia($provincia)->municipio($municipio)->hobbie($interests['attributes']['name'])->redes($social)->stream($stream)->userUpdate($update)->youtubers($youtuber)->pic($pic)->leftJoin('user_likes', function($join)
+			$users = Perfil::user($name)->type($type)->genero($genero)->edad($edadOne,$edadTwo,$menores,$mayores,$edades,$all)->pais($pais)->provincia($provincia)->municipio($municipio)->hobbie($interests['attributes']['name'])->redes($social)->stream($stream)->userUpdate($update)->youtubers($youtuber)->pic($pic)->leftJoin('user_likes', function($join)
 			        {
 			            $join->on('user_likes.user_id', '=', 'perfils.id')
 			            ->where('user_likes.profil_id','=',Auth::id())

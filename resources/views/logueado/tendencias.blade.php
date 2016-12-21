@@ -33,11 +33,19 @@
 									<i class="glyphicon glyphicon-plus"></i>
 								</a>
 							</div>
-
 							<div class="post-user">
-								<div class="post-icono"><a href="{{url('view_user/'.$trend->profil_id)}}"><img src="{{url($trend->img_profile) }}" alt="shymow"></a></div>
-								<div class="post-user"><a href="{{url('view_user/'.$trend->profil_id)}}">{{$trend->user }}</a></div>
-								<div class="post-twitt"><span>@Robe_extremo</span></div>
+								<div class="post-icono"><a href="{{url('view_user/'.$trend->id_user)}}"><img src="{{$trend->img_profile }}" alt="shymow"></a></div>
+								@if(isset($trend->alias))
+									<div class="post-user"><a href="{{url('view_user/'.$trend->id_user)}}">{{$trend->alias}}</a></div>
+									<div class="post-twitt"><span>{{str_replace(" ","","@".$trend->alias)}}</span></div>
+								@elseif(isset($trend->apodo))
+									<div class="post-user"><a href="{{url('view_user/'.$trend->id_user)}}">{{$trend->apodo}}</a></div>
+									<div class="post-twitt"><span>{{str_replace(" ","","@".$trend->apodo)}}</span></div>
+								@else
+									<div class="post-user"><a href="{{url('view_user/'.$trend->id_user)}}">{{$trend->user}}</a></div>
+									<div class="post-twitt"><span>{{str_replace(" ","","@".$trend->user)}}</span></div>
+								@endif
+
 							</div>
 						</div>
 						<br>

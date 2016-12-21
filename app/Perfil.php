@@ -68,14 +68,18 @@ class Perfil extends Model implements AuthenticatableContract {
     		}
     	}
     }
-    public function scopeEdad($query, $edad)
+    public function scopeEdad($query, $edadOne,$edadTwo,$menores,$mayores,$edades,$all)
     {
-        if (trim($edad) != "") {
-            if ($edad != "all") {
-                $query->select('*')->whereRaw('YEAR(CURDATE())-YEAR(perfils.birthdate) = '.$edad);
-            }else{
-                $query->select('*');
+        if ($menores) {
+            $query->select('*')->whereRaw('YEAR(CURDATE())-YEAR(perfils.birthdate) < 18');
+        }elseif ($mayores) {
+            $query->select('*')->whereRaw('YEAR(CURDATE())-YEAR(perfils.birthdate) > 63');
+        }elseif($edades){
+            if ($edadOne < $edadTwo) {
+                $query->select('*')->whereRaw('YEAR(CURDATE())-YEAR(perfils.birthdate) >='.$edadOne.' AND YEAR(CURDATE())-YEAR(perfils.birthdate) <='.$edadTwo);
             }
+        }elseif($all){
+            $query->select('*');
         }
     }
     public function scopePic($query, $controlador)

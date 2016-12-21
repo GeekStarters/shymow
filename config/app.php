@@ -150,6 +150,7 @@ return [
 		Intervention\Image\ImageServiceProvider::class,
 		Laracasts\Flash\FlashServiceProvider::class,
 		Kim\Activity\ActivityServiceProvider::class,
+		Ipunkt\LaravelAnalytics\AnalyticsServiceProvider::class,
 	],
 
 	/*
@@ -203,6 +204,7 @@ return [
       	'Activity' => Kim\Activity\ActivityFacade::class,
       	'Image' => Intervention\Image\Facades\Image::class,
       	'DataHelpers' => App\Helpers\DataHelpers::class,
+      	'Analytics' => Ipunkt\LaravelAnalytics\AnalyticsFacade::class,
 	],
 
 ];

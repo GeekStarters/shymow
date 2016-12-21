@@ -14,15 +14,25 @@
 							<img src="{{ $friend->img_profile }}" alt="shymow">
 						</div>
 						<div class="friend-social">
-							<a href="#"><img src="img/profile/facebook-post.png" alt="shymow"></a>
-							<a href="#"><img src="img/profile/twitter-post.png" alt="shymow"></a>
-							<a href="#"><img src="img/profile/linkedin-post.png" alt="shymow"></a>
-							<a href="#"><img src="img/profile/pinterest.png" alt="shymow"></a>
-							<a href="#"><img src="img/profile/instagram-post.png" alt="shymow"></a>
-							<a href="#"><img src="img/profile/youtube-post.png" alt="shymow"></a>
+							@if(isset($friend->redes))
+                              @for($i=0; $i<count($socialNet);$i++)
+                                @if(isset(json_decode($friend->redes,true)[$socialNet[$i]]))
+                                  @foreach( json_decode($friend->redes,true)[$socialNet[$i] ] as $red)
+
+                                  <a href="{{url($red)}}" target="_blank"><img src="{{url('img/profile/'.$socialNet[$i].'-post.png')}}" alt="shymow"></a>
+                                  @endforeach
+                                @endif
+                              @endfor
+                            @endif
 						</div>
 						<div class="friend-name">
-							<a href="#"><h2>{{ $friend->name }}</h2></a>
+							@if(isset($friend->alias))
+								<a href="{{url('view_user/'.$friend->user_id)}}"><h2>{{ $friend->alias }}</h2></a>
+							@elseif(isset($friend->apodo))
+								<a href="{{url('view_user/'.$friend->user_id)}}"><h2>{{ $friend->apodo }}</h2></a>
+							@else
+								<a href="{{url('view_user/'.$friend->user_id)}}"><h2>{{ $friend->name }}</h2></a>
+							@endif
 						</div>
 					</div>
 				</div>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-12-2016 a las 15:49:01
+-- Tiempo de generación: 21-12-2016 a las 17:42:07
 -- Versión del servidor: 5.7.9
 -- Versión de PHP: 5.6.16
 
@@ -237,14 +237,15 @@ CREATE TABLE IF NOT EXISTS `celebrities` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   KEY `celebrities_profile_id_foreign` (`profile_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `celebrities`
 --
 
 INSERT INTO `celebrities` (`id`, `profile_id`, `apodo`, `active`, `created_at`, `updated_at`) VALUES
-(1, 6, 'Melvin Celebridad', 1, '2016-12-20 21:44:34', '2016-12-20 21:44:34');
+(1, 6, 'Melvin Celebridad', 1, '2016-12-20 21:44:34', '2016-12-20 21:44:34'),
+(2, 11, 'Melvin star', 1, '2016-12-21 22:43:09', '2016-12-21 22:43:09');
 
 -- --------------------------------------------------------
 
@@ -49402,14 +49403,15 @@ CREATE TABLE IF NOT EXISTS `empresas` (
   PRIMARY KEY (`id`),
   KEY `empresas_profile_id_foreign` (`profile_id`),
   KEY `empresas_actividad_comercial_foreign` (`actividad_comercial`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `empresas`
 --
 
 INSERT INTO `empresas` (`id`, `profile_id`, `responsable`, `email_responsable`, `empresa`, `alias`, `dni`, `actividad_comercial`, `descripcion`, `empresa_pais`, `empresa_provincia`, `empresa_municipio`, `local`, `active`, `created_at`, `updated_at`) VALUES
-(1, 7, 'Gustavo arnoldo', 'gustabo@gmail.com', 'Geekstarters corp', 'Geekstarters', '78945123', 13, '', 'American Samoa', 'Swains Island', 'No se encontro municipio', NULL, 1, '2016-12-20 21:46:55', '2016-12-20 21:46:55');
+(1, 7, 'Gustavo arnoldo', 'gustabo@gmail.com', 'Geekstarters corp', 'Geekstarters', '78945123', 13, '', 'American Samoa', 'Swains Island', 'No se encontro municipio', NULL, 1, '2016-12-20 21:46:55', '2016-12-20 21:46:55'),
+(2, 10, 'Gustavo arnoldo', 'gustabo@gmail.com', 'Geekstarters corp', 'Geekstarters', '54456as12das56d41', 12, '', 'Australia', 'Hawthorn', 'Hawthorn', NULL, 1, '2016-12-21 21:31:06', '2016-12-21 21:31:06');
 
 -- --------------------------------------------------------
 
@@ -49487,7 +49489,7 @@ CREATE TABLE IF NOT EXISTS `friends` (
   PRIMARY KEY (`id`),
   KEY `friends_user1_foreign` (`user1`),
   KEY `friends_user2_foreign` (`user2`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `friends`
@@ -49499,7 +49501,9 @@ INSERT INTO `friends` (`id`, `user1`, `user2`, `active`, `status`, `created_at`,
 (3, 1, 4, 1, 1, '2016-12-20 21:02:17', '2016-12-20 21:02:17'),
 (4, 2, 3, 1, 1, '2016-12-20 21:02:17', '2016-12-20 21:02:17'),
 (5, 2, 4, 1, 1, '2016-12-20 21:02:17', '2016-12-20 21:02:17'),
-(6, 3, 4, 1, 1, '2016-12-20 21:02:17', '2016-12-20 21:02:17');
+(6, 3, 4, 1, 1, '2016-12-20 21:02:17', '2016-12-20 21:02:17'),
+(7, 10, 4, 1, 1, '2016-12-21 21:41:28', '2016-12-21 21:41:41'),
+(8, 10, 11, 1, 1, '2016-12-21 23:00:02', '2016-12-21 23:00:15');
 
 -- --------------------------------------------------------
 
@@ -49832,7 +49836,7 @@ CREATE TABLE IF NOT EXISTS `notification_settings` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   KEY `notification_settings_perfil_id_foreign` (`perfil_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `notification_settings`
@@ -49845,7 +49849,11 @@ INSERT INTO `notification_settings` (`id`, `perfil_id`, `follow_notification`, `
 (4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, '1', 0, '2016-12-20 21:02:17', '2016-12-20 21:02:17'),
 (5, 5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, '1', 0, '2016-12-20 21:42:10', '2016-12-20 21:42:10'),
 (6, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, '1', 0, '2016-12-20 21:44:34', '2016-12-20 21:44:34'),
-(7, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, '1', 0, '2016-12-20 21:46:54', '2016-12-20 21:46:54');
+(7, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, '1', 0, '2016-12-20 21:46:54', '2016-12-20 21:46:54'),
+(8, 8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, '1', 0, '2016-12-20 22:01:22', '2016-12-20 22:01:22'),
+(9, 9, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, '1', 0, '2016-12-20 22:07:22', '2016-12-20 22:07:22'),
+(10, 10, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, '1', 0, '2016-12-21 21:31:06', '2016-12-21 21:31:06'),
+(11, 11, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, '1', 0, '2016-12-21 22:43:09', '2016-12-21 22:43:09');
 
 -- --------------------------------------------------------
 
@@ -50044,20 +50052,24 @@ CREATE TABLE IF NOT EXISTS `perfils` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `perfils_email_unique` (`email`),
   UNIQUE KEY `perfils_recover_pass_unique` (`recover_pass`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `perfils`
 --
 
 INSERT INTO `perfils` (`id`, `name`, `fname`, `lname`, `email`, `password`, `identification`, `birthdate`, `genero`, `pais`, `provincia`, `municipio`, `recover_pass`, `work`, `code_phone`, `phone`, `cp`, `role`, `edad`, `img_profile`, `img_portada`, `hobbies`, `more_hobbies`, `redes`, `streamings`, `webs`, `blogs`, `mi_frase`, `descripcion`, `like`, `qualification`, `view_email`, `is_youtuber`, `update`, `view_phone`, `view_cp`, `view_country`, `view_gender`, `view_birth`, `active`, `policies_and_conditions`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Wilmer gilberto', NULL, NULL, 'wilmer@gmail.com', '$2y$10$JMe8Mlj5089PK6c8vap82O/TmIQpMHCnRuOjYgniDs5zTrYmhyURa', NULL, '1995-03-29', 'M', 'El Salvador', 'El refugio', 'La paz', NULL, '', NULL, NULL, NULL, 0, 22, 'img/profile/default.png', 'img/profile/portada.jpg', 'Musica, juegos, Economia', NULL, NULL, NULL, NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, NULL, '2016-12-20 21:02:16', '2016-12-20 21:02:16'),
-(2, 'delmi solano', NULL, NULL, 'demi@gmail.com', '$2y$10$iurSsrCne6tutsPwSyeLceKvfxzpu.kZ6cC7Esmfjgr9XVMczFsXy', NULL, '1995-03-29', 'F', 'El Salvador', 'El refugio', 'La paz', NULL, '', NULL, NULL, NULL, 0, 29, 'img/profile/default.png', 'img/profile/portada.jpg', 'Musica, juegos, Economia', NULL, NULL, NULL, NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, NULL, '2016-12-20 21:02:16', '2016-12-20 21:02:16'),
+(1, 'Wilmer gilberto', NULL, NULL, 'wilmer@gmail.com', '$2y$10$JMe8Mlj5089PK6c8vap82O/TmIQpMHCnRuOjYgniDs5zTrYmhyURa', NULL, '1995-03-29', 'M', 'El Salvador', 'El refugio', 'La paz', NULL, '', NULL, NULL, NULL, 0, 22, 'img/profile/default.png', 'img/profile/portada.jpg', 'Musica, juegos, Economia', NULL, NULL, NULL, NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 1, 2, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 'wfPNTzDfk3CVOtN60sCpb5tGMmP20W30rqShCox2UsjTLYyEmUITmb8fVaeM', '2016-12-20 21:02:16', '2016-12-21 21:04:29'),
+(2, 'delmi solano', NULL, NULL, 'demi@gmail.com', '$2y$10$iurSsrCne6tutsPwSyeLceKvfxzpu.kZ6cC7Esmfjgr9XVMczFsXy', NULL, '1995-03-29', 'F', 'El Salvador', 'El refugio', 'La paz', NULL, '', NULL, NULL, NULL, 0, 29, 'img/profile/default.png', 'img/profile/portada.jpg', 'Musica, juegos, Economia', NULL, NULL, NULL, NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 0, 5, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, NULL, '2016-12-20 21:02:16', '2016-12-21 23:26:52'),
 (3, 'Gisela lara', NULL, NULL, 'Gisela@gmail.com', '$2y$10$4F75CszFlrv.Ztx95nOKS.VIphqYdqxP7I5bpwP7kiz7OIBk9QZhy', NULL, '1995-03-29', 'F', 'El Salvador', 'El refugio', 'La paz', NULL, '', NULL, NULL, NULL, 0, 21, 'img/profile/default.png', 'img/profile/portada.jpg', 'Musica, juegos, Economia', NULL, NULL, NULL, NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, NULL, '2016-12-20 21:02:17', '2016-12-20 21:02:17'),
-(4, 'Developer prueba', NULL, NULL, 'developer@gmail.com', '$2y$10$3bv.HxYnOAINY4Q6kSOtceAntBIyb98Iy/K8pDYE9cNVyaTPGiqXq', NULL, '1995-03-29', 'M', 'El Salvador', 'El refugio', 'La paz', NULL, '', NULL, NULL, NULL, 0, 21, 'img/profile/default.png', 'img/profile/portada.jpg', 'Musica, juegos, Economia', NULL, NULL, NULL, NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, NULL, '2016-12-20 21:02:17', '2016-12-20 21:02:17'),
+(4, 'Developer prueba', NULL, NULL, 'developer@gmail.com', '$2y$10$3bv.HxYnOAINY4Q6kSOtceAntBIyb98Iy/K8pDYE9cNVyaTPGiqXq', NULL, '1995-03-29', 'M', 'El Salvador', 'El refugio', 'La paz', NULL, '', NULL, NULL, NULL, 0, 21, 'img/profile/1482300019.jpg', 'img/profile/1482300131.jpg', 'Musica, juegos, Economia', NULL, NULL, NULL, NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 1, 4, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 'A6cd5GOF0bT3qJdPJvrv6ipnBKDG3LrOn6e5HWKK0aNUypdvYD6Dd7AvEWxv', '2016-12-20 21:02:17', '2016-12-21 22:42:23'),
 (5, 'prueba num1', NULL, NULL, 'prueba@gmail.com', '$2y$10$96FfyuM9eCZXV86gVUQtV.gYVBF/vsAlb0ZmwYS9tVJ4etKh.b29G', '$2y$10$3Dd0WRkBlQU8SmYmzMiEiukCfhs9ebuKZZPpzelIE4vr1kVktf9eu', '1995-03-29', 'm', 'American Samoa', 'Swains Island', 'No se encontro municipio', 'prueba@gmail.com', '', NULL, NULL, NULL, 0, 21, 'img/profile/default.png', 'img/profile/portada.jpg', 'Exposiciones', NULL, 'null', 'null', NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, NULL, '2016-12-20 21:42:10', '2016-12-20 21:42:10'),
 (6, 'prueba num2', NULL, NULL, 'prueba2@gmail.com', '$2y$10$YDPPYKjmy8RaxIQ.xGzO6us14h7uWoJ8B6xLeafFSb9Eh8CeTI1O6', '$2y$10$Xfw26fZFucw0gsHLt6BAWuz.meAZrXervXEI.30ngrfrnHOVfNFSe', '1995-03-29', 'm', 'American Samoa', 'Swains Island', 'No se encontro municipio', 'prueba2@gmail.com', '', NULL, NULL, NULL, 1, 21, 'img/profile/default.png', 'img/profile/portada.jpg', '', NULL, 'null', 'null', NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, NULL, '2016-12-20 21:44:34', '2016-12-20 21:44:34'),
-(7, 'prueba num3', NULL, NULL, 'prueba3@gmail.com', '$2y$10$qB2i.b0zf5nExaBnxR6YQ.3Am6EDk3z0BRO32mhxbI0e6VZ1bBZZC', '$2y$10$4OtgjB3aS2UMWLjZgOX6neUYUlvwdcPvvGtl16lsqgdnyhMl.o8dO', '1995-03-29', 'm', 'American Samoa', 'Swains Island', 'No se encontro municipio', 'prueba3@gmail.com', '', NULL, NULL, NULL, 2, 21, 'img/profile/default.png', 'img/profile/portada.jpg', '', NULL, 'null', 'null', NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, NULL, '2016-12-20 21:46:54', '2016-12-20 21:46:55');
+(7, 'prueba num3', NULL, NULL, 'prueba3@gmail.com', '$2y$10$qB2i.b0zf5nExaBnxR6YQ.3Am6EDk3z0BRO32mhxbI0e6VZ1bBZZC', '$2y$10$4OtgjB3aS2UMWLjZgOX6neUYUlvwdcPvvGtl16lsqgdnyhMl.o8dO', '1995-03-29', 'm', 'American Samoa', 'Swains Island', 'No se encontro municipio', 'prueba3@gmail.com', '', NULL, NULL, NULL, 2, 21, 'img/profile/default.png', 'img/profile/portada.jpg', '', NULL, 'null', 'null', NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, NULL, '2016-12-20 21:46:54', '2016-12-20 21:46:55'),
+(8, 'prueba num3', NULL, NULL, 'prueba34@gmail.com', '$2y$10$2kV9rbkpR/5tkI2wldumheqIxyqiMgS7ITnwvYk1slm4usXym55hG', '$2y$10$nAyuFjGdTs4/WNivktb/M.8MeKpEq.ilrhE11L9kdP2WrqyysYN.2', '1995-03-29', 'n', 'Bangladesh', 'Feni', 'Feni', 'prueba34@gmail.com', '', NULL, NULL, NULL, 0, 21, 'img/profile/default.png', 'img/profile/portada.jpg', 'Ciencia,Escribir', NULL, 'null', 'null', NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, NULL, '2016-12-20 22:01:22', '2016-12-20 22:01:22'),
+(9, 'Ricardo Fuentes', NULL, NULL, 'richard@gmail.com', '$2y$10$/uup.6nUpbxEuNsrfyJQBefwuBvqfhqxPAAuJTnt/DjXEvH1kqTfm', '$2y$10$KxNmwsaDHC9sLcEHn.Sru.8DjbwSkULDSO9jq.baipZyIY4ovUgRO', '1996-04-03', 'n', 'American Samoa', 'Swains Island', 'No se encontro municipio', 'richard@gmail.com', '', NULL, NULL, NULL, 1, 20, 'img/profile/default.png', 'img/profile/portada.jpg', '', NULL, 'null', 'null', NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, NULL, '2016-12-20 22:07:22', '2016-12-20 22:07:22'),
+(10, 'Melvin Empresario', NULL, NULL, 'empresario@gmail.com', '$2y$10$YDYWUlUK9afYVRsib.cb5eIC6FpRuFL1Zm/xztCxc3u.9yxkKAw0u', '$2y$10$sEGGrKybVaFxT5Xa6XfWX.XRjkDvDe9.bQmrXxh3TgYHZJ3U9Yn/G', '1995-03-29', 'm', 'Austria', 'Styria', 'Sankt Bartholoma', 'empresario@gmail.com', '', NULL, NULL, NULL, 2, 21, 'img/profile/default.png', 'img/profile/portada.jpg', '', NULL, '{"facebook":["https:\\/\\/www.facebook.com\\/"]}', 'null', NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 'sC2YNsoVWnvyUR1NF179QS6Hsb2l30SO7OwqKDISanhrwLE3BgTyOFjrzZAH', '2016-12-21 21:31:06', '2016-12-21 22:41:59'),
+(11, 'Melvin Celebridad', NULL, NULL, 'celebridad@gmail.com', '$2y$10$TZy9En17Q0.OrZCrjfkxvehuUjyD1K5NaMf6kbIixFavdxRvw1QRe', '$2y$10$x0BHpUb2bAsVwjl37uJBQel44nEeemtXZmXIMZAAuLtsf0Eipo.6.', '1995-03-29', 'm', 'Austria', 'Schleswig-Holstein', 'Albersdorf', 'celebridad@gmail.com', '', NULL, NULL, NULL, 1, 21, 'img/profile/default.png', 'img/profile/portada.jpg', 'Exposiciones,Cocina,Jardinería,Escribir', NULL, 'null', 'null', NULL, NULL, '¡Bienvenid@ a Shymow!', 'Edita tu descripción', 0, 5, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 'MBlXTSkQLat3fvKzqJIQPJRkJkzYg1SDSoimecSFaRSTuMWCES6gYTNSM9iH', '2016-12-21 22:43:09', '2016-12-21 23:28:17');
 
 -- --------------------------------------------------------
 
@@ -50100,7 +50112,24 @@ CREATE TABLE IF NOT EXISTS `posts` (
   PRIMARY KEY (`id`),
   KEY `posts_category_post_id_foreign` (`category_post_id`),
   KEY `posts_profil_id_foreign` (`profil_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `posts`
+--
+
+INSERT INTO `posts` (`id`, `description`, `category_post_id`, `profil_id`, `like`, `qualification`, `posts`, `share`, `type`, `active`, `created_at`, `updated_at`) VALUES
+(1, 'Hola a todos', 1, 4, 0, 0, 0, 2, 0, 0, '2016-12-21 21:05:23', '2016-12-21 22:34:59'),
+(2, 'Hola a todos :)', 2, 10, 0, 0, 0, 0, 0, 1, '2016-12-21 21:31:57', '2016-12-21 21:31:57'),
+(3, '#SoyEmpresario', 3, 10, 0, 0, 0, 0, 0, 1, '2016-12-21 21:34:38', '2016-12-21 21:34:38'),
+(4, 'Que tal?', 1, 10, 0, 0, 0, 0, 0, 1, '2016-12-21 21:38:40', '2016-12-21 21:38:40'),
+(5, ';)', 1, 4, 0, 0, 0, 0, 0, 1, '2016-12-21 22:33:43', '2016-12-21 22:33:43'),
+(6, '#xD', 1, 10, 0, 0, 0, 1, 0, 1, '2016-12-21 22:34:27', '2016-12-21 23:25:15'),
+(7, '#SoyUsuario', 1, 4, 0, 0, 0, 0, 0, 1, '2016-12-21 22:39:00', '2016-12-21 22:39:00'),
+(8, 'Como estamos!!!! #UnDíaMas', 2, 11, 0, 0, 0, 1, 0, 1, '2016-12-21 22:44:54', '2016-12-21 22:56:57'),
+(9, 'Eso!!!', 1, 10, 0, 0, 0, 0, 0, 1, '2016-12-21 22:56:57', '2016-12-21 22:56:57'),
+(10, ':o', 1, 11, 0, 0, 0, 0, 0, 1, '2016-12-21 22:59:46', '2016-12-21 22:59:46'),
+(11, 'porque eso?', 1, 11, 0, 0, 0, 0, 0, 1, '2016-12-21 23:25:15', '2016-12-21 23:25:15');
 
 -- --------------------------------------------------------
 
@@ -50119,7 +50148,17 @@ CREATE TABLE IF NOT EXISTS `post_trends` (
   PRIMARY KEY (`id`),
   KEY `post_trends_post_id_foreign` (`post_id`),
   KEY `post_trends_trend_id_foreign` (`trend_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `post_trends`
+--
+
+INSERT INTO `post_trends` (`id`, `post_id`, `trend_id`, `active`, `created_at`, `updated_at`) VALUES
+(1, 3, 1, 1, '2016-12-21 21:34:38', '2016-12-21 21:34:38'),
+(2, 6, 2, 1, '2016-12-21 22:34:27', '2016-12-21 22:34:27'),
+(3, 7, 3, 1, '2016-12-21 22:39:00', '2016-12-21 22:39:00'),
+(4, 8, 4, 1, '2016-12-21 22:44:54', '2016-12-21 22:44:54');
 
 -- --------------------------------------------------------
 
@@ -50233,7 +50272,9 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `payload`, `user_id`, `last_activity`) VALUES
-('134397410257197f3c513248025803f6000fe99f', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiN2RvQlQ1ZTg4ZWkwRDJIWDY2dUhidXpZSERUazBBZ1FpZExUb1ZXSiI7czo1OiJmbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czo0NToiaHR0cDovL3NoeW1vdy5kZXY6ODA4MD91c2Vycz1Vc3VhcmlvJTIwY3JlYWRvIjt9czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozMjoiaHR0cDovL3NoeW1vdy5kZXY6ODA4MC9kYXRhX3VzZXIiO31zOjk6Il9zZjJfbWV0YSI7YTozOntzOjE6InUiO2k6MTQ4MjI0ODgxNTtzOjE6ImMiO2k6MTQ4MjI0Njg5MDtzOjE6ImwiO3M6MToiMCI7fX0=', NULL, 1482248815);
+('8cb2b22be34bcfd2a57071af95e948518c22574f', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiTkFtbmtQejBBektQOE91ZElHY2dOMmhwRUJFb2VHMkdnVHRVNXJPaiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzU6Imh0dHA6Ly9zaHltb3cuZGV2OjgwODAvdmlld191c2VyLzExIjt9czo1OiJmbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjM4OiJsb2dpbl84MmU1ZDJjNTZiZGQwODExMzE4ZjBjZjA3OGI3OGJmYyI7aToxMDtzOjE4OiJmbGFzaF9ub3RpZmljYXRpb24iO2E6MDp7fXM6OToiX3NmMl9tZXRhIjthOjM6e3M6MToidSI7aToxNDgyMzQxMTM2O3M6MToiYyI7aToxNDgyMzM3MzgyO3M6MToibCI7czoxOiIwIjt9fQ==', 10, 1482341136),
+('0702f31cdae527b3e66719991a755dc55e497d79', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoicXNjZUVJaFJKaTBBTTJIaW9pV0ZhdkZHek1GMFQ1WFJucTJGWXdRWCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjk6Imh0dHA6Ly9zaHltb3cuZGV2OjgwODAvcGVyZmlsIjt9czo1OiJmbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjE4OiJmbGFzaF9ub3RpZmljYXRpb24iO2E6MDp7fXM6Mzg6ImxvZ2luXzgyZTVkMmM1NmJkZDA4MTEzMThmMGNmMDc4Yjc4YmZjIjtpOjExO3M6OToiX3NmMl9tZXRhIjthOjM6e3M6MToidSI7aToxNDgyMzM4NjQyO3M6MToiYyI7aToxNDgyMzI4NTc2O3M6MToibCI7czoxOiIwIjt9fQ==', 11, 1482338642),
+('db28a45e6d16545326cd9a5f31439993a2cedbe2', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiQkRobDRZcXhiVlhaSGJXSDExcnhMbGlaUno2M3MzSEUyMjZIMmhCVyI7czozODoibG9naW5fODJlNWQyYzU2YmRkMDgxMTMxOGYwY2YwNzhiNzhiZmMiO2k6MTE7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjk6Imh0dHA6Ly9zaHltb3cuZGV2OjgwODAvcGVyZmlsIjt9czo1OiJmbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjE4OiJmbGFzaF9ub3RpZmljYXRpb24iO2E6MDp7fXM6OToiX3NmMl9tZXRhIjthOjM6e3M6MToidSI7aToxNDgyMzQxOTYxO3M6MToiYyI7aToxNDgyMzM4Njc4O3M6MToibCI7czoxOiIwIjt9fQ==', 11, 1482341961);
 
 -- --------------------------------------------------------
 
@@ -50257,7 +50298,17 @@ CREATE TABLE IF NOT EXISTS `share_posts` (
   KEY `share_posts_profil_id_foreign` (`profil_id`),
   KEY `share_posts_new_post_id_foreign` (`new_post_id`),
   KEY `share_posts_new_profil_id_foreign` (`new_profil_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `share_posts`
+--
+
+INSERT INTO `share_posts` (`id`, `post_id`, `profil_id`, `new_post_id`, `new_profil_id`, `description_old_post`, `active`, `created_at`, `updated_at`) VALUES
+(1, 1, 4, 4, 10, 'Hola a todos', 1, '2016-12-21 21:38:40', '2016-12-21 21:38:40'),
+(2, 1, 4, 5, 4, 'Hola a todos', 1, '2016-12-21 22:33:43', '2016-12-21 22:33:43'),
+(3, 8, 11, 9, 10, 'Como estamos!!!! #UnDíaMas', 1, '2016-12-21 22:56:57', '2016-12-21 22:56:57'),
+(4, 6, 10, 11, 11, '#xD', 1, '2016-12-21 23:25:15', '2016-12-21 23:25:15');
 
 -- --------------------------------------------------------
 
@@ -54512,7 +54563,17 @@ CREATE TABLE IF NOT EXISTS `trends` (
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `trends`
+--
+
+INSERT INTO `trends` (`id`, `name`, `active`, `created_at`, `updated_at`) VALUES
+(1, 'SoyEmpresario', 1, '2016-12-21 21:34:38', '2016-12-21 21:34:38'),
+(2, 'xD', 1, '2016-12-21 22:34:27', '2016-12-21 22:34:27'),
+(3, 'SoyUsuario', 1, '2016-12-21 22:39:00', '2016-12-21 22:39:00'),
+(4, 'UnDíaMas', 1, '2016-12-21 22:44:54', '2016-12-21 22:44:54');
 
 -- --------------------------------------------------------
 
@@ -54620,7 +54681,16 @@ CREATE TABLE IF NOT EXISTS `user_likes` (
   PRIMARY KEY (`id`),
   KEY `user_likes_user_id_foreign` (`user_id`),
   KEY `user_likes_profil_id_foreign` (`profil_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `user_likes`
+--
+
+INSERT INTO `user_likes` (`id`, `user_id`, `profil_id`, `like`, `active`, `created_at`, `updated_at`) VALUES
+(1, 4, 4, 1, 1, '2016-12-21 19:52:05', '2016-12-21 20:18:58'),
+(2, 1, 4, 1, 1, '2016-12-21 20:16:32', '2016-12-21 20:16:32'),
+(3, 11, 11, 0, 1, '2016-12-21 23:28:11', '2016-12-21 23:28:17');
 
 -- --------------------------------------------------------
 
@@ -54640,7 +54710,19 @@ CREATE TABLE IF NOT EXISTS `user_qualifications` (
   PRIMARY KEY (`id`),
   KEY `user_qualifications_user_id_foreign` (`user_id`),
   KEY `user_qualifications_profil_id_foreign` (`profil_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `user_qualifications`
+--
+
+INSERT INTO `user_qualifications` (`id`, `user_id`, `profil_id`, `qualification`, `active`, `created_at`, `updated_at`) VALUES
+(1, 4, 4, 5, 1, '2016-12-21 19:52:25', '2016-12-21 20:19:24'),
+(2, 1, 4, 3, 1, '2016-12-21 20:18:48', '2016-12-21 20:18:48'),
+(3, 1, 1, 1, 1, '2016-12-21 20:19:55', '2016-12-21 20:19:55'),
+(4, 4, 1, 3, 1, '2016-12-21 20:20:03', '2016-12-21 20:20:03'),
+(5, 2, 11, 5, 1, '2016-12-21 23:25:29', '2016-12-21 23:26:52'),
+(6, 11, 11, 5, 1, '2016-12-21 23:26:26', '2016-12-21 23:28:01');
 
 -- --------------------------------------------------------
 
