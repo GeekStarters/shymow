@@ -73,10 +73,10 @@
 				</div>
 				<div class="more-options">
 					<div class="btn btn-default" role="group" id="btn_create_message" aria-label="Nuevo mensaje"><span class="glyphicon glyphicon-plus"></span> Nuevo mensaje</div>
-					<span id="chat-proper-options" type="button" style="cursor: pointer;font-size:1.5em;" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+					<!-- <span id="chat-proper-options" type="button" style="cursor: pointer;font-size:1.5em;" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
 
 						<i class="fa fa-cog" aria-hidden="true"></i>
-					</span>
+					</span> -->
 				</div>
 				<div class="clearfix"></div>
 				<hr>
