@@ -177,40 +177,45 @@
 								</p>
 							</div>
 							<ul>
-								<li class="busquedas-qualification" style="display: inline;">
-                                  <div class="qualification-header">
-                                    <p style="font-family: gothamTwo;font-size: 1.1em;margin-bottom: 2px">Calificación</p>
-                                    <div class="qualification">
-                                      <span class="post-qualification mini-star border-right-post-tendencias" style="border: 0px;padding: 0px;">
-                                        @if((int)Auth::user()->qualification < 5)
-                                            @for ($i = 1; $i <= (int)Auth::user()->qualification; $i++)
-                                              <a data-star="{{$i}}" class="glyphicon glyphicon-star qualification-popular" data-userqualification="{{Auth::user()->id}}" ></a>
-                                            @endfor
-                                            @for ($i = 1; $i <= 5-(int)Auth::user()->qualification; $i++)
-                                              <a  data-star="{{(int)Auth::user()->qualification+$i}}" class="glyphicon glyphicon-star qualification-no-popular" data-userqualification="{{Auth::user()->id}}"></a>
-                                            @endfor
-                                        @else
-                                            @for ($i = 1; $i <= (int)Auth::user()->qualification; $i++)
-                                              <a data-star="{{$i}}" class="glyphicon glyphicon-star qualification-popular" data-userqualification="{{Auth::user()->id}}" ></a>
-                                            @endfor
-                                        @endif
-                                      </span>
-                                    </div>
-                                </li>
-								<p style="font-family: gothamTwo;font-size: 1.1em;margin-bottom: 2px">Favotiros</p>
-                                <li style="display: inline;">
-                                	@foreach($dataUsers as $user)
-	                                    @if($user->profil_id == Auth::user()->id)
-	                                        <span class="like-me like-user-active" data-like="{{$user->id}}" data-user="true">
-	                                          <span class="glyphicon glyphicon-heart"></span>
-	                                        </span>
-	                                    @else
-	                                        <span class="like-me like-user" data-like="{{$user->id}}" data-user="true">
-	                                          <span class="glyphicon glyphicon-heart"></span>
-	                                        </span> 
-	                                    @endif
-	                                @endforeach
-                                </li>
+								<div class="col-md-6">
+									<li class="busquedas-qualification" style="display: inline;">
+	                                  <div class="qualification-header">
+	                                    <p style="font-family: gothamTwo;font-size: 1.1em;margin-bottom: 2px">Calificación</p>
+	                                    <div class="qualification">
+	                                      <span class="post-qualification mini-star border-right-post-tendencias" style="border: 0px;padding: 0px;">
+	                                        @if((int)Auth::user()->qualification < 5)
+	                                            @for ($i = 1; $i <= (int)Auth::user()->qualification; $i++)
+	                                              <a data-star="{{$i}}" class="glyphicon glyphicon-star qualification-popular" data-userqualification="{{Auth::user()->id}}" ></a>
+	                                            @endfor
+	                                            @for ($i = 1; $i <= 5-(int)Auth::user()->qualification; $i++)
+	                                              <a  data-star="{{(int)Auth::user()->qualification+$i}}" class="glyphicon glyphicon-star qualification-no-popular" data-userqualification="{{Auth::user()->id}}"></a>
+	                                            @endfor
+	                                        @else
+	                                            @for ($i = 1; $i <= (int)Auth::user()->qualification; $i++)
+	                                              <a data-star="{{$i}}" class="glyphicon glyphicon-star qualification-popular" data-userqualification="{{Auth::user()->id}}" ></a>
+	                                            @endfor
+	                                        @endif
+	                                      </span>
+	                                    </div>
+	                                </li>
+								</div>
+								<div class="col-md-6">
+									
+									<p style="font-family: gothamTwo;font-size: 1.1em;margin-bottom: 2px">Favotiros</p>
+	                                <li style="display: inline;">
+	                                	@foreach($dataUsers as $user)
+		                                    @if($user->profil_id == Auth::user()->id)
+		                                        <span class="like-me like-user-active" data-like="{{$user->id}}" data-user="true">
+		                                          <span class="glyphicon glyphicon-heart"></span>
+		                                        </span>
+		                                    @else
+		                                        <span class="like-me like-user" data-like="{{$user->id}}" data-user="true">
+		                                          <span class="glyphicon glyphicon-heart"></span>
+		                                        </span> 
+		                                    @endif
+		                                @endforeach
+	                                </li>
+								</div>
 							</ul>
 						</div>
 					@endif

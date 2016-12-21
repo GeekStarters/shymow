@@ -1237,7 +1237,7 @@ $( document ).ready(function() {
               data: {type: 'frase',data:inputValue},
               success:function(data){
                 if (!data.error) {
-                    swal("Bien!", "Tu nueva frace: " + inputValue);
+                    swal("Bien!", "Tu nueva frase: " + inputValue);
                     object.text(inputValue);
                 }else{
                     swal("Error!", "Vuelve a intentarlo");
