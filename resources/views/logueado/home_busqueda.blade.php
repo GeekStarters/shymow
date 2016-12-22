@@ -809,7 +809,7 @@
                       </div>
                     </div>
                   </div>
-
+                  <!-- Celebridad  -->
                   <div class="panel panel-default panel-changes">
                     <div class="panel-heading" role="tab" id="headingOne">
                       <h4 class="panel-title">
@@ -997,6 +997,99 @@
                       </div>
                     </div>
                   </div>
+
+                  <div class="panel panel-default panel-changes">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                      <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#CAT-NAME" aria-expanded="true" class="text-favorite" aria-controls="CAT-NAME">
+                          <img class="img_cat_search" class="img-responsive" src="img/icon_youtuber.png" alt="">
+                          Youtuber
+                          <span class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                      </h4>
+                    </div>
+                      <div id="CAT-NAME" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                      <div class="panel-body">
+
+                        @foreach($users as $user)
+                          @if($user->is_youtuber)
+                            <div class="container-busquedas">
+                              <div class="sub-content-busqueda">
+
+                                <div class="img-busqueda col-sm-3" style="padding:0px !important;"><img src="{{$user->img_profile}}" alt="shymow"></div>
+
+                                <div class="busquedas-content col-sm-6" style="padding:0px !important;">
+                                  <div class="content-busqueda-header">
+                                    <span class="first-title">{{$user->name}}</span>
+                                     <span class="sub-title">{{$user->pais}}</span>
+                                  </div>
+                                  <p>{{$user->descripcion}}</p>
+                                </div>
+
+                                <div class="busquedas-settings" style="padding:0px !important;">
+                                  <ul>
+                                      <li class="busquedas-qualification">
+                                        <div class="qualification-header">
+                                          Calificación
+                                          <div class="qualification">
+                                            <span class="post-qualification mini-star border-right-post-tendencias" style="border: 0px;padding: 0px;">
+                                              @if((int)$user->qualification < 5)
+                                                  @for ($i = 1; $i <= (int)$user->qualification; $i++)
+                                                    <a data-star="{{$i}}" class="glyphicon glyphicon-star qualification-popular" data-userqualification="{{$user->id}}" ></a>
+                                                  @endfor
+                                                  @for ($i = 1; $i <= 5-(int)$user->qualification; $i++)
+                                                    <a  data-star="{{(int)$user->qualification+$i}}" class="glyphicon glyphicon-star qualification-no-popular" data-userqualification="{{$user->id}}"></a>
+                                                  @endfor
+                                              @else
+                                                  @for ($i = 1; $i <= (int)$user->qualification; $i++)
+                                                    <a data-star="{{$i}}" class="glyphicon glyphicon-star qualification-popular" data-userqualification="{{$user->id}}" ></a>
+                                                  @endfor
+                                              @endif
+                                              
+                                               
+                                            </span>
+                                          </div>
+                                      </li>
+                                      <div class="busquedas-sub-options">
+                                        <li class="busquedas-share">
+                                          <i class="fa fa-share-alt share-icon share_post_shymow" data-user_id="{{$user->id}}" aria-hidden="true" data-toggle="modal" data-target="#myModal"></i>
+                                        </li>
+                                        @if($user->profil_id == Auth::user()->id)
+                                          <span class="like-me like-user-active" data-like="{{$user->id}}" data-user="true">
+                                            <span class="glyphicon glyphicon-heart"></span>
+                                          </span>
+                                        @else
+                                          <span class="like-me like-user" data-like="{{$user->id}}" data-user="true">
+                                            <span class="glyphicon glyphicon-heart"></span>
+                                          </span> 
+                                        @endif
+                                      </div>
+                                      <div class="clearfix"></div>
+                                      <hr class="bottom-hr-effects">
+                                    </ul>
+                                  <div class="busquedas-social">
+                                  @if(isset($user->redes))
+                                    @for($i=0; $i<count($socialNet);$i++)
+                                      @if(isset(json_decode($user->redes,true)[$socialNet[$i]]))
+                                        @foreach( json_decode($user->redes,true)[$socialNet[$i] ] as $red)
+
+                                        <a href="{{url($red)}}" target="_blank"><img src="{{url('img/profile/'.$socialNet[$i].'-post.png')}}" alt="shymow"></a>
+                                        @endforeach
+                                      @endif
+                                    @endfor
+                                  @endif
+                                    <a href="{{url('view_user/'.$user->id)}}" class="show-more">VER +</a>
+                                  </div>
+                                </div>
+                                
+                              </div>
+                            </div>
+                            <br>
+                          @endif
+                        @endforeach
+                      </div>
+                    </div>
+                  </div>
                 @endif
                 
 
@@ -1047,7 +1140,7 @@
 <script>
   <?php if ($_GET['like'] == "2" || $_GET['like'] == "all"): ?>
     function initMap() {
-      var myLatLng = {lat: 19.508020, lng: -99.096680};
+      var myLatLng = {lat: <?php echo (float) $lat ?>, lng: <?php echo (float) $lng ?>};
 
       var map = new google.maps.Map(document.getElementById('mapa'), {
         zoom: 3,
