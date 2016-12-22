@@ -359,18 +359,20 @@
                       </div>
                       <div class="col-sm-12 col-md-6 padd-left">
                         <label>País</label>
-                        {!! Form::select('pais',array('all' => 'Todo') + $countries,'',['class'=>'form-control','required' => 'required','id'=>'pais']) !!}
+                        {!! Form::select('pais',array('all' => 'Todo') + $countries,'',['class'=>'form-control','required' => 'required','id'=>'paiss']) !!}
                         <hr>
                       </div>
                     </div>
                     <div class="form-group">
                       <div class="col-sm-12 col-md-6 padd-right">
                         <label>Provincia</label>
-                        {!! Form::select('provincia',array('all' => 'Seleccione pais'),'',['class'=>'form-control', 'required' => 'required','id'=>'state']); !!}
+                        {!! Form::select('provincia',array('all' => 'Seleccione pais'),'',['class'=>'form-control', 'required' => 'required','id'=>'states']); !!}
+                        <hr>
                       </div>
                       <div class="col-md-6 col-sm-12 padd-left">
                         <label>Municipio</label>
-                        {!! Form::select('municipio',array('all' => 'Seleccione Provincia'),'',['class'=>'form-control', 'required' => 'required','id'=>'city']); !!}
+                        {!! Form::select('municipio',array('all' => 'Seleccione Provincia'),'',['class'=>'form-control', 'required' => 'required','id'=>'citys']); !!}
+                        <hr>
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-12">
@@ -510,7 +512,7 @@
                     <div class="notice-text">
                       <h2>TENDENCIAS</h2>
                       <p>Enterate de las ultimas <br> tendencias en redes sociales</p><br>
-                      <a href="#">Ver +</a>
+                      <!-- <a href="#">Ver +</a> -->
                     </div>
                   </div>
                 </div>
@@ -530,7 +532,7 @@
                     <div class="notice-text">
                       <h2>INTERESES</h2>
                       <p>Encuentra perfiles de redes <br>sociales en tu ciudad</p>
-                      <a href="#">Ver +</a>
+                      <!-- <a href="#">Ver +</a> -->
                     </div>
                   </div>
                 </div>
@@ -552,7 +554,7 @@
                    <div class="notice-text">
                      <h2>DESTACADOS</h2>
                      <p>Conoce los productos <br>mas ranqueados</p>
-                     <a href="#">Ver +</a>
+                     <!-- <a href="#">Ver +</a> -->
                    </div>
                  </div>
                </div>
@@ -572,7 +574,7 @@
                  <div class="notice-text">
                    <h2>CELEBRIDADES</h2>
                    <p>Sigue las noticias de tus celebridades <br>favoritas</p>
-                   <a href="#">Ver +</a>
+                   <!-- <a href="#">Ver +</a> -->
                  </div>
                </div>
              </div>
@@ -714,17 +716,17 @@
   $("a[href=#]").on('click', function(e) {
     e.preventDefault();
   });
-  $('#pais').change(function(event) {
+  $('#paiss').change(function(event) {
     /* Act on the event */
-    $('#state').html('<option>Cargando..</option>');
-    $('#city').html('<option>Selecciona municipio</option>');
+    $('#states').html('<option>Cargando..</option>');
+    $('#citys').html('<option value="all">Selecciona municipio</option>');
     var id = $(this).val();
     $.ajax({
       url: 'state/'+id,
       type: 'GET',
       dataType: 'html',
       success: function(data){
-        $('#state').html('<option value="all">Todo</option>'+data);
+        $('#states').html('<option value="all">Todo</option>'+data);
       }
     })
     .fail(function() {
@@ -732,18 +734,18 @@
     })
   });
 
-  $('#state').change(function(event) {
+  $('#states').change(function(event) {
     /* Act on the event */
-    $('#city').html('<option>Cargando..</option>');
+    $('#citys').html('<option>Cargando..</option>');
     var id = $(this).val();
     $.ajax({
       url: 'city/'+id,
       type: 'GET',
       dataType: 'html',
       success: function(data){
-        $('#city').html('<option value="all">Todo</option>'+data);
+        $('#citys').html('<option value="all">Todo</option>'+data);
         if (data == "")
-          $('#city').html('<option value="all">Municipios no encontrados</option>');
+          $('#citys').html('<option value="all">Municipios no encontrados</option>');
       }
     })
     .fail(function() {
@@ -751,18 +753,18 @@
     })
   });
 
-  $('#state').change(function(event) {
+  $('#states').change(function(event) {
     /* Act on the event */
-    $('#city').html('<option>Cargando..</option>');
+    $('#citys').html('<option>Cargando..</option>');
     var id = $(this).val();
     $.ajax({
       url: 'city/'+id,
       type: 'GET',
       dataType: 'html',
       success: function(data){
-        $('#city').html(data);
+        $('#citys').html(data);
         if (data == "")
-          $('#city').html('<option value="all">Municipios no encontrados</option>');
+          $('#citys').html('<option value="all">Municipios no encontrados</option>');
       }
     })
     .fail(function() {
@@ -860,7 +862,7 @@
     /* Act on the event */
     $('#actComercial').slideDown('slow');
     $('#searchcategories').slideDown('slow');
-
+    $('#searchcategories').css('visibility', 'visible');
     $('#searchGender').slideDown('slow');
     $('#searchEdad').slideDown('slow');
     $('#interesting').css('visibility', 'visible');
@@ -872,7 +874,7 @@
   $('#SearchPeople, #searchYoutubers, #userPic, #userUp').click(function(event) {
     /* Act on the event */
     $('#actComercial').slideUp('slow');
-    $('#searchcategories').slideUp('slow');
+    $('#searchcategories').slideDown('slow');
 
     $('#searchGender').slideDown('slow');
     $('#searchEdad').slideDown('slow');
@@ -884,16 +886,17 @@
   $('#SearchBusiness').click(function(event) {
     /* Act on the event */
     $('#actComercial').slideDown('slow');
-    $('#searchcategories').slideDown('slow');
-    $('#searchcategories').css('visibility', 'visible');
+    // $('#searchcategories').slideUp('slow');
+    $('#searchcategories').css('visibility', 'hidden');
     $('#actComercial').css('visibility', 'visible');
 
 
     $('#interesting').css('visibility', 'hidden');
     $('#searchGender').slideUp('slow');
     $('#searchEdad').slideUp('slow');
-    $('#filtroredes').slideUp('slow');
-    $('#filtrostream').slideUp('slow');
+    $('#buscado').slideUp('slow');
+    // $('#filtroredes').slideUp('slow');
+    // $('#filtrostream').slideUp('slow');
 
 
   });
@@ -901,7 +904,7 @@
   $('#SearchCelebrities').click(function(event) {
     /* Act on the event */
     $('#actComercial').slideUp('slow');
-    $('#searchcategories').slideUp('slow');
+    $('#searchcategories').slideDown('slow');
 
     $('#searchGender').slideDown('slow');
     $('#searchEdad').slideDown('slow');
@@ -930,7 +933,7 @@
     if (txt.length > 0) {
       // $('#SearchPeople').prop('checked', true);
       $('#actComercial').slideUp('slow');
-      $('#searchcategories').slideUp('slow');
+      $('#searchcategories').slideDown('slow');
       $('#SearchPeople').is('checked');
     }else{
       $('#actComercial').slideDown('slow');
@@ -945,7 +948,7 @@
     if (txt.length > 0) {
       // $('#SearchPeople').prop('checked', true);
       $('#actComercial').slideUp('slow');
-      $('#searchcategories').slideUp('slow');
+      $('#searchcategories').slideDowb('slow');
       $('#SearchPeople').is('checked');
     }else{
       $('#actComercial').slideDown('slow');
@@ -959,7 +962,6 @@
     event.preventDefault();
     var form = $(this).serialize();
     var url = $(this).attr('action');
-    console.log(form);
     $.ajax({
       url: '/searchAll',
       type: 'GET',
@@ -967,34 +969,37 @@
       data: {data: form},
       success: function(data){
         if(!data.error){
+          if (data.data.length > 0) {
+            for (var i = 0; i <= data.data.length; i++) {
+              var user = data.data[i];
 
-          for (var i = 0; i <= data.data.length; i++) {
-            var user = data.data[i];
+              var html = '<div class="container-busquedas">'+
+              '<div class="sub-content-busqueda">'+
+                '<div class="img-busqueda col-sm-3" style="padding:0px !important;"><img src="'+user.img_profile+'" alt="shymow"></div>'+
 
-            var html = '<div class="container-busquedas">'+
-            '<div class="sub-content-busqueda">'+
-              '<div class="img-busqueda col-sm-3" style="padding:0px !important;"><img src="'+user.img_profile+'" alt="shymow"></div>'+
-
-              '<div class="busquedas-content col-sm-6" style="padding:0px !important;">'+
-                '<div class="content-busqueda-header">'+
-                  '<span class="first-title">'+user.name+'</span>'+
-                   '<span class="sub-title"> '+user.pais+'</span>'+
-                '</div>'
-                '<p>{{$user->descripcion}}</p>'+
-              '</div>'+
-
-              '<div class="busquedas-settings" style="padding:0px !important;">'+
-                  '<a href="{{url('view_user/'.$user->id)}}" class="show-more">VER +</a>'+
+                '<div class="busquedas-content col-sm-6" style="padding:0px !important;">'+
+                  '<div class="content-busqueda-header">'+
+                    '<span class="first-title">'+user.name+'</span>'+
+                     '<span class="sub-title"> '+user.pais+'</span>'+
+                  '</div>'
+                  '<p>{{$user->descripcion}}</p>'+
                 '</div>'+
+
+                '<div class="busquedas-settings" style="padding:0px !important;">'+
+                    '<a href="{{url('view_user/'.$user->id)}}" class="show-more">VER +</a>'+
+                  '</div>'+
+                '</div>'+
+                
               '</div>'+
-              
-            '</div>'+
-          '</div>';
-            if (i < 1) {
-              $('#contentSearchModal').html('<div style="margin-bottom:10px;">'+html+'</div>');
-            }else{
-              $('#contentSearchModal').append('<div style="margin-bottom:10px;">'+html+'</div>');
+            '</div>';
+              if (i < 1) {
+                $('#contentSearchModal').html('<div style="margin-bottom:10px;">'+html+'</div>');
+              }else{
+                $('#contentSearchModal').append('<div style="margin-bottom:10px;">'+html+'</div>');
+              }
             }
+          }else{
+            $('#contentSearchModal').html('<div style="margin-bottom:10px;"><h2>No hay resultados</h2></div>');
           }
         }
       }

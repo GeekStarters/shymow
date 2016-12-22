@@ -205,7 +205,7 @@
 								</div>
 								<div class="col-md-6">
 									
-									<p style="font-family: gothamTwo;font-size: 1.1em;margin-bottom: 2px">Favotiros</p>
+									<p style="font-family: gothamTwo;font-size: 1.1em;margin-bottom: 2px">Favoritos</p>
 	                                <li style="display: inline;">
 	                                	@foreach($dataUsers as $user)
 		                                    @if($user->profil_id == Auth::user()->id)

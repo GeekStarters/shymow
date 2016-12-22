@@ -122,19 +122,20 @@
                       </div>
                       <div class="col-sm-12 col-md-6 padd-left">
                         <label>País</label>
-                        {!! Form::select('pais',array('all' => 'Todo') + $countries,'',['class'=>'form-control','required' => 'required','id'=>'pais']) !!}
+                        {!! Form::select('pais',array('all' => 'Todo') + $countries,'',['class'=>'form-control','required' => 'required','id'=>'paiss']) !!}
                         <hr>
                       </div>
                     </div>
-                    
                     <div class="form-group">
                       <div class="col-sm-12 col-md-6 padd-right">
                         <label>Provincia</label>
-                        {!! Form::select('provincia',array('all' => 'Seleccione pais'),'',['class'=>'form-control', 'required' => 'required','id'=>'state']); !!}
+                        {!! Form::select('provincia',array('all' => 'Seleccione pais'),'',['class'=>'form-control', 'required' => 'required','id'=>'states']); !!}
+                        <hr>
                       </div>
                       <div class="col-md-6 col-sm-12 padd-left">
                         <label>Municipio</label>
-                        {!! Form::select('municipio',array('all' => 'Seleccione Provincia'),'',['class'=>'form-control', 'required' => 'required','id'=>'city']); !!}
+                        {!! Form::select('municipio',array('all' => 'Seleccione Provincia'),'',['class'=>'form-control', 'required' => 'required','id'=>'citys']); !!}
+                        <hr>
                       </div>
                     </div>
                     <div class="col-sm-12 col-md-12">
@@ -1123,42 +1124,6 @@
   $("a[href=#]").on('click', function(e) {
     e.preventDefault();
   });
-  $('#pais').change(function(event) {
-    /* Act on the event */
-    $('#state').html('<option>Cargando..</option>');
-    $('#city').html('<option>Selecciona municipio</option>');
-    var id = $(this).val();
-    $.ajax({
-      url: 'state/'+id,
-      type: 'GET',
-      dataType: 'html',
-      success: function(data){
-        $('#state').html(data);
-      }
-    })
-    .fail(function() {
-      console.log("error");
-    })
-  });
-
-  $('#state').change(function(event) {
-    /* Act on the event */
-    $('#city').html('<option>Cargando..</option>');
-    var id = $(this).val();
-    $.ajax({
-      url: 'city/'+id,
-      type: 'GET',
-      dataType: 'html',
-      success: function(data){
-        $('#city').html(data);
-        if (data == "")
-          $('#city').html('<option value="all">Municipios no encontrados</option>');
-      }
-    })
-    .fail(function() {
-      console.log("error");
-    })
-  });
 
 
   $('#img-interest img').on('click',function(event) {
@@ -1215,6 +1180,62 @@
       /* Act on the event */
   });
 
+ $('#paiss').change(function(event) {
+    /* Act on the event */
+    $('#states').html('<option>Cargando..</option>');
+    $('#citys').html('<option value="all">Selecciona municipio</option>');
+    var id = $(this).val();
+    $.ajax({
+      url: 'state/'+id,
+      type: 'GET',
+      dataType: 'html',
+      success: function(data){
+        $('#states').html('<option value="all">Todo</option>'+data);
+      }
+    })
+    .fail(function() {
+      console.log("error");
+    })
+  });
+
+  $('#states').change(function(event) {
+    /* Act on the event */
+    $('#citys').html('<option>Cargando..</option>');
+    var id = $(this).val();
+    $.ajax({
+      url: 'city/'+id,
+      type: 'GET',
+      dataType: 'html',
+      success: function(data){
+        $('#citys').html('<option value="all">Todo</option>'+data);
+        if (data == "")
+          $('#citys').html('<option value="all">Municipios no encontrados</option>');
+      }
+    })
+    .fail(function() {
+      console.log("error");
+    })
+  });
+
+  $('#states').change(function(event) {
+    /* Act on the event */
+    $('#citys').html('<option>Cargando..</option>');
+    var id = $(this).val();
+    $.ajax({
+      url: 'city/'+id,
+      type: 'GET',
+      dataType: 'html',
+      success: function(data){
+        $('#citys').html(data);
+        if (data == "")
+          $('#citys').html('<option value="all">Municipios no encontrados</option>');
+      }
+    })
+    .fail(function() {
+      console.log("error");
+    })
+  });
+
 
 
   $('#img-stream img').on('click',function(event) {
@@ -1244,46 +1265,45 @@
       /* Act on the event */
   });
 
-
-  $('#searchAll').click(function(event) {
-    /* Act on the event */
-    $('#actComercial').slideDown('slow');
-    $('#searchcategories').slideDown('slow');
-
-    $('#searchGender').slideDown('slow');
-    $('#searchEdad').slideDown('slow');
-    $('#interesting').css('visibility', 'visible');
-
-    $('#filtroredes').slideDown('slow');
-    $('#filtrostream').slideDown('slow');
-  });
-
-  $('#SearchPeople, #searchYoutubers, #userPic, #userUp').click(function(event) {
-    /* Act on the event */
-    $('#actComercial').slideUp('slow');
-    $('#searchcategories').slideUp('slow');
-
-    $('#searchGender').slideDown('slow');
-    $('#searchEdad').slideDown('slow');
-    $('#interesting').css('visibility', 'visible');
-
-    $('#filtroredes').slideDown('slow');
-    $('#filtrostream').slideDown('slow');
-  });
-
-  $('#SearchBusiness').click(function(event) {
+$('#searchAll').click(function(event) {
     /* Act on the event */
     $('#actComercial').slideDown('slow');
     $('#searchcategories').slideDown('slow');
     $('#searchcategories').css('visibility', 'visible');
+    $('#searchGender').slideDown('slow');
+    $('#searchEdad').slideDown('slow');
+    $('#interesting').css('visibility', 'visible');
+
+    $('#filtroredes').slideDown('slow');
+    $('#filtrostream').slideDown('slow');
+  });
+  
+  $('#SearchPeople, #searchYoutubers, #userPic, #userUp').click(function(event) {
+    /* Act on the event */
+    $('#actComercial').slideUp('slow');
+    $('#searchcategories').slideDown('slow');
+
+    $('#searchGender').slideDown('slow');
+    $('#searchEdad').slideDown('slow');
+    $('#interesting').css('visibility', 'visible');
+
+    $('#filtroredes').slideDown('slow');
+    $('#filtrostream').slideDown('slow');
+  });
+  $('#SearchBusiness').click(function(event) {
+    /* Act on the event */
+    $('#actComercial').slideDown('slow');
+    // $('#searchcategories').slideUp('slow');
+    $('#searchcategories').css('visibility', 'hidden');
     $('#actComercial').css('visibility', 'visible');
 
 
     $('#interesting').css('visibility', 'hidden');
     $('#searchGender').slideUp('slow');
     $('#searchEdad').slideUp('slow');
-    $('#filtroredes').slideUp('slow');
-    $('#filtrostream').slideUp('slow');
+    $('#buscado').slideUp('slow');
+    // $('#filtroredes').slideUp('slow');
+    // $('#filtrostream').slideUp('slow');
 
 
   });
@@ -1291,7 +1311,7 @@
   $('#SearchCelebrities').click(function(event) {
     /* Act on the event */
     $('#actComercial').slideUp('slow');
-    $('#searchcategories').slideUp('slow');
+    $('#searchcategories').slideDown('slow');
 
     $('#searchGender').slideDown('slow');
     $('#searchEdad').slideDown('slow');
@@ -1320,7 +1340,7 @@
     if (txt.length > 0) {
       // $('#SearchPeople').prop('checked', true);
       $('#actComercial').slideUp('slow');
-      $('#searchcategories').slideUp('slow');
+      $('#searchcategories').slideDown('slow');
       $('#SearchPeople').is('checked');
     }else{
       $('#actComercial').slideDown('slow');
@@ -1335,14 +1355,13 @@
     if (txt.length > 0) {
       // $('#SearchPeople').prop('checked', true);
       $('#actComercial').slideUp('slow');
-      $('#searchcategories').slideUp('slow');
+      $('#searchcategories').slideDowb('slow');
       $('#SearchPeople').is('checked');
     }else{
       $('#actComercial').slideDown('slow');
       $('#searchcategories').slideDown('slow');
     }
   });
-
 
 
   </script>
