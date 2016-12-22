@@ -12,7 +12,7 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
-use App\Perfils;
+use App\Perfil;
 use App\Social;
 use App\Countrie;
 class AuthController extends Controller {
@@ -78,7 +78,7 @@ class AuthController extends Controller {
         
        	$socialUser = null;
 
-        $userCheck = Perfils::where('email', '=', $user->email)->first();
+        $userCheck = Perfil::where('email', '=', $user->email)->first();
         if(!empty($userCheck))
         {
             $socialUser = $userCheck;
@@ -91,7 +91,7 @@ class AuthController extends Controller {
             {
             	
                 //There is no combination of this social id and provider, so create new one
-                $newSocialUser = new Perfils;
+                $newSocialUser = new Perfil;
                 $newSocialUser->email    = $user->email;
                 $newSocialUser->name = $user->name;
                 if ($provider == 'google') {
