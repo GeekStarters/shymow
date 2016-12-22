@@ -240,24 +240,73 @@ class SearchController extends Controller {
 		$comercio = $request->input('comercio');
 		$categoria = (int) $request->input('categoria');
 
+		$ubication = [];
+		
+
 		if ($paisId != 'all') {
 			$pais = DB::select('select name from countries where id ='.$paisId);
-			$pais = $pais[0]->name;
+			if (count($pais) > 0) {
+				$pais = $pais[0]->name;
+
+				if (!empty($pais)) {
+					$location = str_replace(' ', '+', $pais);
+					$location = str_replace(',', '', $location);
+					$url = "https://maps.googleapis.com/maps/api/geocode/json?address=".$location."&key=AIzaSyDssPGqiz3lLJ8RoKvlXlUk2OGR97z4zVk";
+				    $ch = curl_init();
+				    curl_setopt($ch, CURLOPT_URL, $url);
+				    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+				    curl_setopt($ch, CURLOPT_PROXYPORT, 3128);
+				    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+				    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+				    $response = curl_exec($ch);
+				  	curl_close($ch);
+				  	$ubication = json_decode($response, true);
+				}
+			}
 		}else{
 			$pais = "all";
 		}
 		if ($provinciaId != 'all') {
 			$provincia = DB::select('select name from states where id ='.$provinciaId);
-			$provincia = $provincia[0]->name;
+			if (count($provincia) > 0) {
+				$provincia = $provincia[0]->name;
+			}
 		}else{
 			$provincia = "all";
 		}
 		if ($municipioId != 'all') {
 			$municipio = DB::select('select name from cities where id ='.$municipioId);
-			$municipio = $municipio[0]->name;
+			if (count($municipio)>0) {
+				$municipio = $municipio[0]->name;
+			}
 		}else{
 			$municipio = "all";
 		}
+		$lat = "";
+		$lng = "";
+
+		if (!isset($ubication['results'][0]['geometry']['location'])) {
+			if (!empty($pais)) {
+					$location = str_replace(' ', '+', $pais);
+					$location = str_replace(',', '', $location);
+					$url = "https://maps.googleapis.com/maps/api/geocode/json?address=Spain&key=AIzaSyDssPGqiz3lLJ8RoKvlXlUk2OGR97z4zVk";
+				    $ch = curl_init();
+				    curl_setopt($ch, CURLOPT_URL, $url);
+				    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+				    curl_setopt($ch, CURLOPT_PROXYPORT, 3128);
+				    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+				    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+				    $response = curl_exec($ch);
+				  	curl_close($ch);
+				  	$ubication = json_decode($response, true);
+				}
+		}
+		if (isset($ubication['results'][0]['geometry']['location'])) {
+			$access = $ubication['results'][0]['geometry']['location'];
+			$lat = (float) $access['lat'];
+			$lng = (float) $access['lng'];
+		}
+
 		$countries = Countrie::lists('name','id');
 		$interest = Interest::lists('name','id');
 
@@ -274,6 +323,8 @@ class SearchController extends Controller {
 		$pic = $type === '3' ? true : false; 
 		$update = $type === '5' ? true : false; 
 		$youtuber = $type === '4' ? true : false;
+
+
 
 
 		// dd($pic,$update,$youtuber);
@@ -415,7 +466,7 @@ class SearchController extends Controller {
 				if ($provincia != "all") {
 					if ($municipio != "all") {
 						$users = DB::table('perfils')
-						->select('user_likes.profil_id','perfils.name','perfils.qualification','perfils.like','perfils.role',DB::raw('YEAR(CURDATE())-YEAR(perfils.birthdate) as edad'),'perfils.pais','perfils.descripcion','perfils.id','perfils.email','perfils.birthdate','perfils.img_profile','perfils.redes','perfils.streamings','perfils.webs','perfils.blogs','perfils.mi_frase','empresas.id as empresas_id','empresas.profile_id as empresas_perfil_id','empresas.empresa','empresas.alias','empresas.local','empresas.actividad_comercial')
+						->select('user_likes.profil_id','perfils.name','perfils.qualification','perfils.like','perfils.role',DB::raw('YEAR(CURDATE())-YEAR(perfils.birthdate) as edad'),'perfils.pais','perfils.descripcion','perfils.id','perfils.email','perfils.birthdate','perfils.img_profile','perfils.redes','perfils.streamings','perfils.webs','perfils.blogs','perfils.mi_frase','perfils.is_youtuber','empresas.id as empresas_id','empresas.profile_id as empresas_perfil_id','empresas.empresa','empresas.alias','empresas.local','empresas.actividad_comercial')
 						->leftJoin('empresas','empresas.profile_id','=','perfils.id')
 						->leftJoin('user_likes', function($join)
 				        {
@@ -431,7 +482,7 @@ class SearchController extends Controller {
 						->paginate($paginate);
 					}else{
 						$users = DB::table('perfils')
-						->select('user_likes.profil_id','perfils.name','perfils.qualification','perfils.like','perfils.role',DB::raw('YEAR(CURDATE())-YEAR(perfils.birthdate) as edad'),'perfils.pais','perfils.descripcion','perfils.id','perfils.email','perfils.birthdate','perfils.img_profile','perfils.redes','perfils.streamings','perfils.webs','perfils.blogs','perfils.mi_frase','empresas.id as empresas_id','empresas.profile_id as empresas_perfil_id','empresas.empresa','empresas.alias','empresas.local','empresas.actividad_comercial')
+						->select('user_likes.profil_id','perfils.name','perfils.qualification','perfils.like','perfils.role',DB::raw('YEAR(CURDATE())-YEAR(perfils.birthdate) as edad'),'perfils.pais','perfils.descripcion','perfils.id','perfils.email','perfils.birthdate','perfils.img_profile','perfils.redes','perfils.streamings','perfils.webs','perfils.blogs','perfils.mi_frase','perfils.is_youtuber','empresas.id as empresas_id','empresas.profile_id as empresas_perfil_id','empresas.empresa','empresas.alias','empresas.local','empresas.actividad_comercial')
 						->leftJoin('empresas','empresas.profile_id','=','perfils.id')
 						->leftJoin('user_likes', function($join)
 				        {
@@ -447,7 +498,7 @@ class SearchController extends Controller {
 					}
 				}else{
 					$users = DB::table('perfils')
-						->select('user_likes.profil_id','perfils.name','perfils.qualification','perfils.like','perfils.role',DB::raw('YEAR(CURDATE())-YEAR(perfils.birthdate) as edad'),'perfils.pais','perfils.descripcion','perfils.id','perfils.email','perfils.birthdate','perfils.img_profile','perfils.redes','perfils.streamings','perfils.webs','perfils.blogs','perfils.mi_frase','empresas.id as empresas_id','empresas.profile_id as empresas_perfil_id','empresas.empresa','empresas.alias','empresas.local','empresas.actividad_comercial')
+						->select('user_likes.profil_id','perfils.name','perfils.qualification','perfils.like','perfils.role',DB::raw('YEAR(CURDATE())-YEAR(perfils.birthdate) as edad'),'perfils.pais','perfils.descripcion','perfils.id','perfils.email','perfils.birthdate','perfils.img_profile','perfils.redes','perfils.streamings','perfils.webs','perfils.blogs','perfils.mi_frase','perfils.is_youtuber','empresas.id as empresas_id','empresas.profile_id as empresas_perfil_id','empresas.empresa','empresas.alias','empresas.local','empresas.actividad_comercial')
 						->leftJoin('empresas','empresas.profile_id','=','perfils.id')
 						->leftJoin('user_likes', function($join)
 				        {
@@ -462,7 +513,7 @@ class SearchController extends Controller {
 				}
 			}else{
 				$users = DB::table('perfils')
-				->select('user_likes.profil_id','perfils.name','perfils.qualification','perfils.like','perfils.role',DB::raw('YEAR(CURDATE())-YEAR(perfils.birthdate) as edad'),'perfils.pais','perfils.descripcion','perfils.id','perfils.email','perfils.birthdate','perfils.img_profile','perfils.redes','perfils.streamings','perfils.webs','perfils.blogs','perfils.mi_frase','empresas.id as empresas_id','empresas.profile_id as empresas_perfil_id','empresas.empresa','empresas.alias','empresas.local','empresas.actividad_comercial')
+				->select('user_likes.profil_id','perfils.name','perfils.qualification','perfils.like','perfils.role',DB::raw('YEAR(CURDATE())-YEAR(perfils.birthdate) as edad'),'perfils.pais','perfils.descripcion','perfils.id','perfils.email','perfils.birthdate','perfils.img_profile','perfils.redes','perfils.streamings','perfils.webs','perfils.is_youtuber','perfils.blogs','perfils.mi_frase','empresas.id as empresas_id','empresas.profile_id as empresas_perfil_id','empresas.empresa','empresas.alias','empresas.local','empresas.actividad_comercial')
 				->leftJoin('empresas','empresas.profile_id','=','perfils.id')
 				->leftJoin('user_likes', function($join)
 		        {
@@ -501,7 +552,7 @@ class SearchController extends Controller {
     	}
 
 		// dd($users);
-		return \View::make('logueado.home_busqueda',compact('countries','users','interest','userslider','socialNet','subCategories','categories','localAll'));
+		return \View::make('logueado.home_busqueda',compact('countries','users','interest','userslider','socialNet','subCategories','categories','localAll','lat','lng'));
 		
 	}
 
