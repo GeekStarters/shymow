@@ -50,20 +50,20 @@
 									
 									
 								</span>
-								<div class="dropup">
+								<!-- <div class="dropup">
 									<span class="post-share border-right-post-tendencias">
 										  <span class="dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 										    
 											<span class="number-post">{{$product->share}}</span> <i class="fa fa-share-alt" aria-hidden="true"></i>
 										  </span>
-										  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+										  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2"> -->
 										    <!-- <li><a href="#">Facebook</a></li>
 										    <li><a href="#">Twitter</a></li> -->
-										    <li role="separator" class="divider"></li>
+										   <!--  <li role="separator" class="divider"></li>
 										    <li><a data-post_id="{{$product->id}}" data-user_id="{{$product->id_user}}" class="share_product_shymow" data-toggle="modal" data-target="#myModal">Compartir</a></li>
 										  </ul>
 									</span>
-								</div>
+								</div> -->
 								@if($product->userLike == Auth::user()->id)
 									<span class="like-me-product post-like-me-active border-right-post-tendencias" data-like="{{$product->id}}" data-user_id="{{$product->id_user}}">
 										<span class="number-post">{{$product->like}}</span> <span class="glyphicon glyphicon-heart"></span>
@@ -150,7 +150,6 @@
 @section('scripts')
 <script>
   jQuery(document).ready(function($) {
-    $('#flash-overlay-modal').modal();
     $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
   });
 </script>

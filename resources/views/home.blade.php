@@ -22,7 +22,9 @@
               <a class="test" tabindex="-1" href="#">Configuración <span class="caret"></span></a>
               <ul class="dropdown-menu">
               <li><a href="{{ url('identificate_perfil') }}">Editar perfil</a></li>
-                <li><a tabindex="-1" href="{{url('identificate')}}">Shymow Shop</a></li>
+              @if(Auth::user()->role == "1" || Auth::user()->role == "2")
+                  <li><a tabindex="-1" href="{{url('identificate')}}">Shymow Shop</a></li>
+                @endif
               </ul>
             </li>
            <li><a href="{{ url('notification') }}">Notificaciones 
@@ -33,7 +35,9 @@
           </span>
           </a>
         </li>
+         @if(Auth::user()->role == "1" || Auth::user()->role == "2")
            <li><a href="{{ url('agregar-producto') }}">Mi Shymow Shop</a></li>
+           @endif
           <li><a href="{{ url('logout') }}">Cerrar sesión</a></li>
         </ul>
       </li>

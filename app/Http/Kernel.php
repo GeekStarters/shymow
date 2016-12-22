@@ -30,6 +30,7 @@ class Kernel extends HttpKernel {
 		'edit_profile' => 'App\Http\Middleware\EditProfile',
 		'have_store' => 'App\Http\Middleware\HaveStore',
 		'identificate_store' => 'App\Http\Middleware\IdentificateStore',
+		'out_user' => 'App\Http\Middleware\OutUser',
 	];
 
 }
