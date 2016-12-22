@@ -502,7 +502,7 @@
               <section class="col-sm-12 col-md-12">
                 <div class="notice">
                   <div class="col-md-3 imgArticle">
-                    <img src="img/familia.jpg" alt="Article" class="articleImg">
+                    <img src="{{url('img/tendencias.jpg')}}" alt="Article" class="articleImg">
                     <div class="binieta">
                       <img src="img/binieta.png" alt="Binieta" class="img-responsive">
                     </div>
@@ -522,7 +522,7 @@
               <section class="col-sm-12 col-md-12">
                 <div class="notice">
                   <div class="col-md-3 imgArticle">
-                    <img src="img/familia.jpg" alt="Article" class="articleImg">
+                    <img src="{{url('img/interes.jpg')}}" alt="Article" class="articleImg">
                     <div class="binieta">
                       <img src="img/binieta.png" alt="Binieta" class="img-responsive">
                     </div>
@@ -544,7 +544,7 @@
               <section class="col-sm-12 col-md-12">
                 <div class="notice">
                  <div class="col-md-3 imgArticle">
-                   <img src="img/familia.jpg" alt="Article" class="articleImg">
+                   <img src="{{url('img/destacados.jpg')}}" alt="Article" class="articleImg">
                    <div class="binieta">
                      <img src="img/binieta.png" alt="Binieta" class="img-responsive">
                    </div>
@@ -564,7 +564,7 @@
              <section class="col-sm-12 col-md-12">
               <div class="notice">
                <div class="col-md-3 imgArticle">
-                 <img src="img/familia.jpg" alt="Article" class="articleImg">
+                 <img src="{{url('img/celebridad.jpg')}}" alt="Article" class="articleImg">
                  <div class="binieta">
                    <img src="img/binieta.png" alt="Binieta" class="img-responsive">
                  </div>

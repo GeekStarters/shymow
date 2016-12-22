@@ -233,7 +233,9 @@ hr {
 	width: 100%;
 	margin-bottom: 20px;
 }
-
+.imgArticle{
+	padding: 0px;
+}
 .imgArticle .articleImg{
 	border: 15px solid #66C1BF;
 	float: left;
