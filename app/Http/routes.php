@@ -87,6 +87,27 @@ Route::group(['middleware' => 'auth'], function()
     Route::get('favoritos','InsideController@favorites');
     Route::get('tendencias','InsideController@tendencias');
 
+    Route::get('envio-producto',function(){
+        if (session::has('informacion-producto')) {  
+            $types = Type_send_product::all(); 
+            return view('logueado.informacion_envio_producto',compact('types'));
+        }else{
+            return redirect('informacion-producto');
+        }
+    });
+    Route::get('ayuda_shop',function(){
+        return view('logueado.ayuda_shop');
+    });
+    Route::get('politicas_shop',function(){
+        return view('logueado.politicas_shop');
+    });
+    Route::get('informacion-producto',function(){
+        if (session::has('producto')) {  
+            return view('logueado.informacion_producto');
+        }else{
+            return redirect('agregar-producto');
+        }
+    });
     Route::get('/tendencia/{name}','InsideController@tendencia');
     Route::get('shymow-shop','ShymowShop@shymowView');
     Route::get('amigos','InsideController@amigos');
@@ -100,55 +121,34 @@ Route::group(['middleware' => 'auth'], function()
     });
     Route::get('busqueda_inicio','SearchController@show');
 
-    Route::group(['middleware' => 'out_user'], function()
-    {
-        //CONFIGURAR SHYMOW SHOP
-    
-        Route::get('identificate',function(){
-            return view('logueado.identificate');
-        });
-        Route::group(['middleware' => 'have_store'], function()
-        {
-            //Shymow Shop
-            Route::get('agregar-producto','ShymowShop@index');
-            Route::get('buscar-categorias/{id}','ShymowShop@ajaxCategories');
-            Route::post('informacion-producto','ShymowShop@informacionProducto');
-            Route::get('informacion-producto-pro','ShymowShop@informacionProductoPro');
-            Route::post('envio-producto','ShymowShop@envioProducto');
-            Route::post('crear-producto','ShymowShop@create');
 
-            Route::group(['middleware' => 'identificate_store'], function()
-            {
-                Route::get('close_shop','ShymowShop@closeShop');
-                Route::get('notification_shop','ShymowShop@notificationShop');
-                Route::post('desactive_store','ShymowShop@desactiveStore');
-            });
-            Route::get('envio-producto',function(){
-                if (session::has('informacion-producto')) {  
-                    $types = Type_send_product::all(); 
-                    return view('logueado.informacion_envio_producto',compact('types'));
-                }else{
-                    return redirect('informacion-producto');
-                }
-            });
-            Route::get('ayuda_shop',function(){
-                return view('logueado.ayuda_shop');
-            });
-            Route::get('politicas_shop',function(){
-                return view('logueado.politicas_shop');
-            });
-            Route::get('informacion-producto',function(){
-                if (session::has('producto')) {  
-                    return view('logueado.informacion_producto');
-                }else{
-                    return redirect('agregar-producto');
-                }
-            });
+    Route::group(['middleware' => 'have_store'], function()
+    {
+        //Shymow Shop
+        Route::get('agregar-producto','ShymowShop@index');
+        Route::get('buscar-categorias/{id}','ShymowShop@ajaxCategories');
+        Route::post('informacion-producto','ShymowShop@informacionProducto');
+        Route::get('informacion-producto-pro','ShymowShop@informacionProductoPro');
+        Route::post('envio-producto','ShymowShop@envioProducto');
+        Route::post('crear-producto','ShymowShop@create');
+
+        Route::group(['middleware' => 'identificate_store'], function()
+        {
+            Route::get('close_shop','ShymowShop@closeShop');
+            Route::get('notification_shop','ShymowShop@notificationShop');
+            Route::post('desactive_store','ShymowShop@desactiveStore');
         });
     });
+
     Route::get('buy-product/{id}','ShymowShop@buyView');
 
 
+
+    //CONFIGURAR SHYMOW SHOP
+
+    Route::get('identificate',function(){
+        return view('logueado.identificate');
+    });
     Route::post('validacion','ShymowShop@validacion');
     Route::get('buy_success','ShymowShop@buySuccess');
     Route::get('success_buy','ShymowShop@successBuy');
