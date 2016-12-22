@@ -12,7 +12,7 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
-use App\Perfils;
+use App\User;
 use App\Social;
 use App\Countrie;
 class AuthController extends Controller {
@@ -78,7 +78,7 @@ class AuthController extends Controller {
         
        	$socialUser = null;
 
-        $userCheck = Perfils::where('email', '=', $user->email)->first();
+        $userCheck = User::where('email', '=', $user->email)->first();
         if(!empty($userCheck))
         {
             $socialUser = $userCheck;
@@ -91,9 +91,9 @@ class AuthController extends Controller {
             {
             	
                 //There is no combination of this social id and provider, so create new one
-                $newSocialUser = new Perfils;
+                $newSocialUser = new User;
                 $newSocialUser->email    = $user->email;
-                $newSocialUser->name = $user->name;
+                $newSocialUser->username = $user->name;
                 if ($provider == 'google') {
                     $newSocialUser->edad = $user->user['ageRange']['min'];
                     $genero = substr($user->user['gender'], 0,1);
@@ -101,7 +101,7 @@ class AuthController extends Controller {
                 }
                 if ($provider == 'facebook') {
                     if($user->name == null){
-                        $newSocialUser->name = $user->user['first_name'].' '.$user->user['last_name'];
+                        $newSocialUser->username = $user->user['first_name'].' '.$user->user['last_name'];
                     }
                     $date = date('Y-m-d', strtotime($user->user['birthday']));
                     $fecha = time() - strtotime($date);
@@ -118,8 +118,8 @@ class AuthController extends Controller {
                 $socialData->social_id = $user->id;
                 $socialData->provider= $provider;
                 $socialData->access_token= $user->token;
-                $socialData->profile_id= $newSocialUser->id;
-                $socialData->save();
+                $newSocialUser->social()->save($socialData);
+
                 // Add role
                 // $role = Role::whereName('user')->first();
                 // $newSocialUser->assignRole($role);
