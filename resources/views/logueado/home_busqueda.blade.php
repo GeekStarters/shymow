@@ -122,7 +122,7 @@
                       </div>
                       <div class="col-sm-12 col-md-6 padd-left">
                         <label>País</label>
-                        {!! Form::select('pais',array('all' => 'Todo') + $countries,'',['class'=>'form-control','required' => 'required','id'=>'paiss']) !!}
+                        {!! Form::select('pais',array('all' => 'Todo') + ['205'=>'Spain'] + $countries,'',['class'=>'form-control','required' => 'required','id'=>'paiss']) !!}
                         <hr>
                       </div>
                     </div>
@@ -904,7 +904,7 @@
                   </div>
 
 
-                  <div class="panel panel-default panel-changes">
+               <!--    <div class="panel panel-default panel-changes">
                     <div class="panel-heading" role="tab" id="headingOne">
                       <h4 class="panel-title">
                         <a role="button" data-toggle="collapse" data-parent="#accordion" href="#mayores" aria-expanded="true" class="text-favorite" aria-controls="mayores">
@@ -996,7 +996,7 @@
                         @endforeach
                       </div>
                     </div>
-                  </div>
+                  </div> -->
 
                   <div class="panel panel-default panel-changes">
                     <div class="panel-heading" role="tab" id="headingOne">

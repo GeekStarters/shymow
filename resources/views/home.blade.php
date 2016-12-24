@@ -360,7 +360,7 @@
                       </div>
                       <div class="col-sm-12 col-md-6 padd-left">
                         <label>País</label>
-                        {!! Form::select('pais',array('all' => 'Todo') + $countries,'',['class'=>'form-control','required' => 'required','id'=>'paiss']) !!}
+                        {!! Form::select('pais',array('all' => 'Todo') + ['205'=>'Spain'] + $countries,'',['class'=>'form-control','required' => 'required','id'=>'paiss']) !!}
                         <hr>
                       </div>
                     </div>
