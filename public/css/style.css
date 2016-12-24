@@ -2532,3 +2532,35 @@ bottom: -5px;
 	overflow-x:hidden; overflow-y:scroll;
 	max-height: 350px;
 }
+
+
+.notification_num{
+	background: #E1010E;
+	position: relative;
+	border-radius: 2px;
+	right: 0px;
+	color: #fff;
+	display: inline;
+	font-size: .6em;
+	top: -3px;
+	padding: 2px;
+}
+
+.list-notification{
+	width: 100%;
+}
+.list-notification li:hover{
+	background: #F0F0F0;
+	color:#6E6E6E;
+	font-family: gotham;
+}
+.list-notification li{
+	margin:5px;
+	padding: 5px 0px;
+	cursor: pointer;
+	font-family: gotham;
+	font-size: 1.1em;
+}
+.list-notification img{
+	margin:0px 5px;
+}

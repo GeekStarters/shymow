@@ -19,6 +19,12 @@
     <link rel="stylesheet" type="text/css" media="all" href="{{ asset('css/slider-horizontal.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
+    <meta property="og:url" content="http://shymow.com" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Shymow, tu red social y buscador de redes sociales" />
+    <meta property="og:description" content="Shymow es el primer buscador de redes sociales y una red social. ¡Sé el primero en registrarte y probar Shymow Beta! #EraShymow" /><!-- 
+    <meta property="og:image"              content="http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg" /> -->
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -31,6 +37,14 @@
       @if(Auth::check())
         <div style="display: none" id="unvalus" data-unvalus="{{Auth::user()->identification}}"></div>
       @endif
+      @if(Auth::check())
+        @if(Auth::user()->confirmed == false)
+          <div class="alert alert-warning alert-dismissible cookies" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Advertencia!</strong> Debes confirmar tu cuenta
+          </div>
+        @endif
+      @endif()
       @yield('header')
       @yield('content')
 

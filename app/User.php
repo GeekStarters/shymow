@@ -6,67 +6,110 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
     
+use DB;
+class Perfil extends Model implements AuthenticatableContract {
+    use Authenticatable;
+    protected $table = 'perfils';
 
-class User extends Model implements AuthenticatableContract {
+    protected $fillable = ['name', 'email','birthdate','genero','pais','provincia','municipio','hobbies','redes','streamings','webs','blogs','role','mi_frase','descripcion','active','img_profile','img_portada','edad','password','work','phone','more_hobbies','like','qualification','is_youtuber','confirmed','update'];
 
-	use Authenticatable;
-	/**
-	 * The database table used by the model.
-	 *
-	 * @var string
-	 */
-	protected $table = 'users';
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = ['password', 'remember_token'];
 
-	/**
-	 * The attributes that are mass assignable.
-	 *
-	 * @var array
-	 */
-	protected $fillable = ['apodo','username', 'email','fecha_nacimiento','genero','pais','provincia','municipio','hobbies','socials','streamings','webs','blogs','role','mi_frase','descripcion','active','img_profile','img_portada','edad','password'];
-
-	/**
-	 * The attributes excluded from the model's JSON form.
-	 *
-	 * @var array
-	 */
-	protected $hidden = ['password', 'remember_token'];
-
-	public function social() {
-		return $this->hasOne('App\Social');
-	}
-
-	public function scopeUser($query, $name)
+     public function getRememberToken()
     {
-    	if (trim($name) != "") {
-    		$query->select('*')->where('username', 'LIKE', '%'.$name.'%');
-    	}
+        return $this->remember_token;
+    }
+
+    public function setRememberToken($value)
+    {
+        $this->remember_token = $value;
+    }
+
+    public function getRememberTokenName()
+    {
+        return 'remember_token';
+    }
+
+    public function social() {
+        return $this->hasOne('App\Social');
+    }
+
+    public function scopeUser($query, $name)
+    {
+        if (trim($name) != "") {
+            $query->select('*')->where('name', 'LIKE', '%'.$name.'%');
+        }
     }
 
     public function scopeType($query, $type)
     {
-    	if (trim($type) != "") {
-    		if ($type != "all") {
-    			$query->select('*')->where('role',$type);
-    		}else{
-    			$query->select('*');
-    		}
-    	}
+        if (trim($type) != "") {
+            if ($type == "0" || $type == "3" || $type == "5") {
+                $query->select('*')->where('role',0);
+            }elseif($type == "1" || $type == "4"){
+                $query->select('*')->where('role',1);
+            } else{
+                $query->select('*');
+            }
+        }
     }
     public function scopeGenero($query, $genero)
     {
-    	if (trim($genero) != "") {
-    		if ($genero != "all") {
-    			$query->select('*')->where('genero',$genero);
-    		}else{
-    			$query->select('*');
-    		}
-    	}
+        if (trim($genero) != "") {
+            if ($genero != "all") {
+                $query->select('*')->where('genero',$genero);
+            }else{
+                $query->select('*');
+            }
+        }
     }
-    public function scopeEdad($query, $edad)
+    public function scopeEdad($query, $edadOne,$edadTwo,$menores,$mayores,$edades,$all)
     {
-        if (trim($edad) != "") {
-            if ($edad != "all") {
-                $query->select('*')->where('edad',$edad);
+        if ($menores) {
+            $query->select('*')->whereRaw('YEAR(CURDATE())-YEAR(perfils.birthdate) < 18');
+        }elseif ($mayores) {
+            $query->select('*')->whereRaw('YEAR(CURDATE())-YEAR(perfils.birthdate) > 63');
+        }elseif($edades){
+            if ($edadOne < $edadTwo) {
+                $query->select('*')->whereRaw('YEAR(CURDATE())-YEAR(perfils.birthdate) >='.$edadOne.' AND YEAR(CURDATE())-YEAR(perfils.birthdate) <='.$edadTwo);
+            }
+        }elseif($all){
+            $query->select('*');
+        }
+    }
+    public function scopePic($query, $controlador)
+    {
+        if (trim($controlador) != "") {
+            if ($controlador) {
+                $query->select('*')->where('img_profile','<>','img/profile/default.png');
+                
+            }else{
+                $query->select('*');
+            }
+        }
+    }
+    public function scopeUserUpdate($query, $controlador)
+    {
+        if (trim($controlador) != "") {
+            if ($controlador) {
+                $query->select('*')->where('update',true);
+                
+            }else{
+                $query->select('*');
+            }
+        }
+    }
+    public function scopeYoutubers($query, $controlador)
+    {
+        if (trim($controlador) != "") {
+            if ($controlador) {
+                $query->select('*')->where('is_youtuber',true);
+                
             }else{
                 $query->select('*');
             }
@@ -106,25 +149,32 @@ class User extends Model implements AuthenticatableContract {
     public function scopeHobbie($query, $hobbie)
     {
         if (trim($hobbie) != "") {
-            $query->select('*')->where('hobbies', 'LIKE', '%'.$hobbie.'%');
-        }else{
-            $query->select('*');
+            if ($hobbie != "all") {
+                $query->select('*')->where('hobbies', 'LIKE', '%'.$hobbie.'%');
+            }else{
+                $query->select('*');
+            }
         }
     }
-    public function scopeSocial($query, $social)
+    public function scopeRedes($query, $social)
     {
         if (trim($social) != "") {
-            $query->select('*')->where('socials', 'LIKE', '%'.$social.'%');
-        }else{
-            $query->select('*');
+            if ($social != "all") {
+                $query->select('*')->where('redes', 'LIKE', '%'.$social.'%');
+            }else{
+                $query->select('*');
+            }
         }
     }
     public function scopeStream($query, $stream)
     {
         if (trim($stream) != "") {
-            $query->select('*')->where('streamings', 'LIKE', '%'.$stream.'%');
-        }else{
-            $query->select('*');
+            if ($stream != "all") {
+                $query->select('*')->where('streamings', 'LIKE', '%'.$stream.'%');
+            }else{
+                $query->select('*');
+            }
         }
     }
+
 }

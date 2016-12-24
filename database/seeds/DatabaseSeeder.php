@@ -695,9 +695,83 @@ class CategoryPostTableSeeder extends seeder{
         Category_post::create(array(
 	        'name' => 'Empresas',
         ));
+
         Category_post::create(array(
 	        'name' => 'Movilidad y transporte',
         ));
+        Category_post::create(array(
+	        'name' => 'Educación',
+        ));
+        Category_post::create(array(
+	        'name' => 'Ciencias sociales',
+        ));
+        Category_post::create(array(
+	        'name' => 'Ciencias y matemáticas',
+        ));
+        Category_post::create(array(
+	        'name' => 'Política y gobierno',
+        ));
+        Category_post::create(array(
+	        'name' => 'Negocios y finanzas',
+        ));
+        Category_post::create(array(
+	        'name' => 'Empleo',
+        ));
+        Category_post::create(array(
+	        'name' => 'Medio ambiente',
+        ));
+        Category_post::create(array(
+	        'name' => 'Marketing',
+        ));
+        Category_post::create(array(
+	        'name' => 'Música, TV y cine',
+        ));
+        Category_post::create(array(
+	        'name' => 'Cómics y animación',
+        ));
+        Category_post::create(array(
+	        'name' => 'Automóviles y transporte',
+        ));
+        Category_post::create(array(
+	        'name' => 'Viajes',
+        ));
+        Category_post::create(array(
+	        'name' => 'Restaurantes',
+        ));
+        Category_post::create(array(
+	        'name' => 'Noticias y eventos',
+        ));
+        Category_post::create(array(
+	        'name' => 'Fitness y deportes',
+        ));
+        Category_post::create(array(
+	        'name' => 'Belleza y estilo',
+        ));
+        Category_post::create(array(
+	        'name' => 'Fashion',
+        ));
+        Category_post::create(array(
+	        'name' => 'Electrónica',
+        ));
+        Category_post::create(array(
+	        'name' => 'Ordenadores e Internet',
+        ));
+        Category_post::create(array(
+	        'name' => 'Juegos y aficiones',
+        ));
+        Category_post::create(array(
+	        'name' => 'Apps y Smartphones',
+        ));
+        Category_post::create(array(
+	        'name' => 'Hogar y jardinería',
+        ));
+        Category_post::create(array(
+	        'name' => 'Mascotas y animales',
+        ));
+        Category_post::create(array(
+	        'name' => 'Familia y amigos',
+        ));
+
 	}
 }
 
@@ -806,6 +880,21 @@ class BusinessCategoriesSeeder extends seeder{
         ));
         BusinessCategories::create(array(
 	        'name' => 'Empresas',
+        ));
+        BusinessCategories::create(array(
+	        'name' => 'Sociedad y cultura',
+        ));
+        BusinessCategories::create(array(
+	        'name' => 'Entretenimiento',
+        ));
+        BusinessCategories::create(array(
+	        'name' => 'Salud',
+        ));
+        BusinessCategories::create(array(
+	        'name' => 'Tecnología',
+        ));
+        BusinessCategories::create(array(
+	        'name' => 'Hogar',
         ));
 	}
 }

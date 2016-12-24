@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
+@include('flash::message')
 @if(!Auth::check())
 <div class="alert alert-warning alert-dismissible cookies" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -155,7 +156,7 @@
                   <div class="col-md-12" style="color:#C5C5C5;">
                     {!! Form::checkbox('remember','true',['required'=>'required']) !!}
                     <span style="color:#37B4AA">Recordar mis datos</span>
-                    | <a href="#" style="color:#37B4AA;">Olvidé mi contraseña</a>
+                    | <a href="{{url('forgot_password')}}" style="color:#37B4AA;">Olvidé mi contraseña</a>
                   </div>
                 </div>
 
@@ -1041,6 +1042,7 @@
 @section('scriptsTwo')
 <script>
   $(document).ready(function(){
+    $('#flash-overlay-modal').modal();
     $('.dropdown-submenu a.test').on("click", function(e){
       $(this).next('ul').toggle();
       e.stopPropagation();

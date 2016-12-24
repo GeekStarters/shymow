@@ -21,6 +21,16 @@ Route::get('500', function()
 {
     abort(500);
 });
+Route::controllers([
+   'password' => 'Auth\PasswordController',
+]);
+route::get('forgot_password',function(){
+    return view('auth.password');
+});
+Route::get('register/verify/{confirmationCode}', [
+    'as' => 'confirmation_path',
+    'uses' => 'UsersDatas@confirm'
+]);
 Route::get("error",function(){
     return view('errors.500');
 });
@@ -304,4 +314,7 @@ Route::group(['middleware' => 'auth'], function()
         //Save config notification
         Route::post('/save_config_notification','NotificationController@saveConfNotification');
     });
+
+    // My notifications
+    Route::get('my_notifications','NotificationController@myNotifications');
 });

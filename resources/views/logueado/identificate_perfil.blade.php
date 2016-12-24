@@ -22,7 +22,7 @@
 				<div class="clearfix"></div>
 				{!!Form::password('password',['class'=>'form-control'])!!}
 				<button class="butto-formns">INICIAR SESIÓN</button>
-				<a href="#">Olvidé mi contraseña</a>
+				<!-- <a href="{{url('forgot_password')}}">Olvidé mi contraseña</a> -->
 			</div>
 		{!!Form::close()!!}
 	</div>

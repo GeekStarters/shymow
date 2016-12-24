@@ -4,7 +4,6 @@ use App\Http\Requests;
 use Session;
 use Hash;
 use App\Celebritie;
-use App\Perfil;
 use App\Empresa;
 use App\Http\Controllers\Controller;
 
@@ -14,6 +13,10 @@ use App\Citie;
 use App\State;
 use App\Notification_setting;
 use App\Countrie;
+use App\Perfil;
+use Uuid;
+use Auth;
+use Mail;
 
 class RegistroController extends Controller {
 
@@ -247,13 +250,12 @@ class RegistroController extends Controller {
 			    $user->edad = $edad;
 			    $user->recover_pass = $data_user['email'];
 			    $user->is_youtuber = $is_youtuber;
+			    $user->identification = Uuid::generate(4);
+			    $user->confirmation_code = Uuid::generate(4);
 		    $user->save();
 		    $notifications = new Notification_setting();
 		    $notifications->perfil_id = $user->id;
 		    $notifications->save();
-
-		    $idHash = Hash::make($user->id);
-		    $identification = Perfil::where('id','=',$user->id)->update(['identification'=>$idHash]);
 		    if($role == 2){
 
 
@@ -283,8 +285,51 @@ class RegistroController extends Controller {
 		    	$celebrity->save();
 
 		    }
+		    
+		    $path = "http://".$_SERVER['HTTP_HOST']."/register/verify/".$user->confirmation_code;
+	   		$destinatario = $user->email;
+	   		$message = "Thanks for creating an account in shymow.
+            Please follow the link below to verify your email address";
 
-	   		Session::forget('data_user');
+				$asunto = "Verify Your Email Address"; 
+				$cuerpo = ' 
+				<html> 
+				<head> 
+				   <title>Welcome</title> 
+				</head> 
+				<body> 
+				<h1>Welcome to Shymow!</h1> 
+				<p><b>Name: </b>'.$user->name.'</p>
+				<p><b>Subject: </b>Accommodation message</p>
+				<p>'.$message.'</p>
+				<p><a href='.$path.'>Confirm account</a>;
+				</body> 
+				</html> 
+				'; 
+
+				//para el envío en formato HTML 
+				$headers = "MIME-Version: 1.0\r\n"; 
+				$headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
+
+				mail($destinatario,$asunto,$cuerpo,$headers);
+
+	   		
+	   		$tuser = [
+	    		'email' => $user->email,
+	    		'password' => Session::get('data_user')['pass']
+			];
+			Session::forget('data_user');
+		    if (Auth::attempt($tuser,true))
+			{	
+				flash()->overlay('Debes conformar tu correo', Auth::user()->name);
+		        return redirect()->intended('perfil');
+			}else
+			{
+				return redirect()->intended('/');
+			}
+
+
+
 	    	return Redirect('/?users=Usuario creado');
 	    } catch (Exception $e) {
 
@@ -318,7 +363,8 @@ class RegistroController extends Controller {
 		$email = $request->input('email');
 		$password = $request->input('password');
 		$password = Hash::make($password);
-		$data_user = ['name' => $name,'email'=>$email,'password'=>$password];
+		$pass = $request->input('password');
+		$data_user = ['name' => $name,'email'=>$email,'password'=>$password,'pass'=>$pass];
 
 		Session::put('data_user', $data_user);
 		return view('registro');
@@ -495,49 +541,6 @@ class RegistroController extends Controller {
 		}else{
 			return redirect('/');
 		}
-	}
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
 	}
 
 }
