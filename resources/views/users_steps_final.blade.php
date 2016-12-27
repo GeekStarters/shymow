@@ -19,12 +19,13 @@
 					<p>Si cuentas con redes sociales, cuéntale al mundo cuáles son</p>
 				</div>
 				<br><br>
+				@include('flash::message')
 			</div>
 			@foreach ($errors->register->all() as $error)
-                  <p class="text-danger">
-                    <b>{{ $error}}</b>             
+                  <p class="text-danger" style="color:#950c0c;">
+                    <b style="color:#950c0c;">{{ $error}}</b>             
                   </p>
-                  @endforeach
+            @endforeach
             {!! Form::open(array('url' => 'create_user','name'=>'steps_final')) !!}
 			<div class="col-sm-5" style="border-right: 2px solid #CCCCCC;">
 				<section class="reg_redes">

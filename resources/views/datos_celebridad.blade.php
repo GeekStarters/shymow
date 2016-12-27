@@ -19,6 +19,7 @@
 					<p>Queremos saber qué tan grande eres y qué te gusta, así mismo <br> otros usuarios podrán conocerte.</p>
 				</div>
 				<br><br>
+				@include('flash::message')
 			</div>
 			  @foreach ($errors->register->all() as $error)
               <p class="text-danger">

@@ -19,6 +19,7 @@
 					<p>Queremos saber sobre tu empresa y cuál es su rumbo. Así mismo<br> otros usuarios podrán conocerla y ser futuros clientes</p>
 				</div>
 				<br><br>
+				@include('flash::message')
 			</div>
 			@foreach ($errors->register->all() as $error)
               <p class="text-danger">

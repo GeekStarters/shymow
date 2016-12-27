@@ -151,7 +151,7 @@ class NotificationController extends Controller {
 	            $html .= '<a href="/messages" class="text-center">Ver todos</>';
 	            echo $html;
 		}else{
-			echo '<span style="color:#000; font-family:gothamTwo;">Mensajes 0</span>';
+			echo '<span style="color:#000; font-family:gothamTwo;">Mensajes 0</span><br><a href="/messages">Ver todos</a>';
 		}
 		
 	}

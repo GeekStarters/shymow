@@ -122,7 +122,7 @@ class RegistroController extends Controller {
 	    			$getSocial[$domainValor][$nameArraySocial] = $url;
 
 	    			Session::put('social_json',$getSocial);
-
+	    			return true;
 	    			// dd(Session::get('social_json'));
 	    		}else{
 	    			$count = Session::get('social_json');
@@ -135,8 +135,11 @@ class RegistroController extends Controller {
 	    			}
 	    			
 	    			Session::put('social_json',$array);
+	    			return true;
 	    			// dd(Session::get('social_json'));
 	    		}
+	    	}else{
+	    		return false;
 	    	}
 	    }
 	    // dd(Session::get('social_json'));
@@ -145,7 +148,25 @@ class RegistroController extends Controller {
 	    	
 		    $urlGet = $request->get('social'.$i);
 		    if($urlGet != ""){
-	   			$valor =  socialValidate($urlGet);
+		    	if (!socialValidate($urlGet)) {
+		    		flash('URL Red no valida', 'danger');
+		    		Session::forget('social_json');
+			    	switch ($role) {
+			    		case 0:
+			        			return redirect()->back()->withInput();
+			    			break;
+			    		case 1:
+			    				return redirect()->back()->withInput();
+			    			break;
+			    		case 2:
+			    				return redirect()->back()->withInput();
+			    			break;
+			    		
+			    		default:
+			    				return redirect('registro');
+			    			break;
+			    	}
+		    	}
 		    }
 	    }
 	    $jsonRedes = json_encode(Session::pull('social_json'));
@@ -180,7 +201,7 @@ class RegistroController extends Controller {
 	    			$getSocial[$domainValor][$nameArraySocial] = $url;
 
 	    			Session::put('stream_json',$getSocial);
-
+	    			return true;
 	    			// dd(Session::get('stream_json'));
 	    		}else{
 	    			$count = Session::get('stream_json');
@@ -194,8 +215,11 @@ class RegistroController extends Controller {
 	    			
 	    			// dd($array);
 	    			Session::put('stream_json',$array);
+	    			return true;
 	    			// dd(Session::get('stream_json'));
 	    		}
+	    	}else{
+	    		return false;
 	    	}
 	    }
 	    // dd(Session::get('stream_json'));
@@ -205,6 +229,25 @@ class RegistroController extends Controller {
 		    $urlGet = $request->get('stream'.$i);
 		    if($urlGet != ""){
 	   			$valor =  streamValidate($urlGet);
+	   			if (!streamValidate($urlGet)) {
+	   				flash('URL Stream no valida', 'danger');
+	   				Session::forget('stream_json');
+		   			switch ($role) {
+			    		case 0:
+			        			return redirect()->back()->withInput();
+			    			break;
+			    		case 1:
+			    				return redirect()->back()->withInput();
+			    			break;
+			    		case 2:
+			    				return redirect()->back()->withInput();
+			    			break;
+			    		
+			    		default:
+			    				return redirect('registro');
+			    			break;
+			    	}
+	   			}
 		    }
 	    }
 	    $jsonStream = json_encode(Session::pull('stream_json'));
@@ -395,17 +438,21 @@ class RegistroController extends Controller {
 		    $pais = $request->input('pais');
 		    $provincia = $request->input('provincia');
 		    $municipio = $request->input('municipio');
-
 		    if (!($dia <= 0 || $dia > 31)) {
 		    	if (!($mes <= 0 || $mes > 12)) {
-		    		if ($anio < date("Y")-100 || $anio > date("Y")) {
-		    			return redirect('data_user');
+		    		if ($anio > date("Y")-100 || $anio < date("Y")) {
+		    			if (!checkdate ($mes, $dia,$anio)){
+		    				flash('La fecha no es valida.', 'danger');
+		    				return redirect('data_users');
+		    			}
 		    		}
 		    	}else{
-		    		return redirect('data_user');
+		    		flash('La fecha no es valida.', 'danger');
+		    		return redirect('data_users');
 		    	}
 		    }else{
-		    	return redirect('data_user');
+		    	flash('La fecha no es valida.', 'danger');
+		    	return redirect('data_users');
 		    }
 		    $role = ['role' => 0];
 
@@ -418,7 +465,7 @@ class RegistroController extends Controller {
 
 		   	return view('users_steps_final');
 		}else{
-			return redirect('/')->withInput();
+		    return redirect('/');
 		}
 	}
 	public function celebridad_social(Request $request)
@@ -448,18 +495,23 @@ class RegistroController extends Controller {
 		    $pais = $request->input('pais');
 		    $provincia = $request->input('provincia');
 		    $municipio = $request->input('municipio');
-
 		    if (!($dia <= 0 || $dia > 31)) {
 		    	if (!($mes <= 0 || $mes > 12)) {
-		    		if ($anio < date("Y")-100 || $anio > date("Y")) {
-		    			return redirect('datos_celebridad');
+		    		if ($anio > date("Y")-100 || $anio < date("Y")) {
+		    			if (!checkdate ($mes, $dia,$anio)){
+		    				flash('La fecha no es valida.', 'danger');
+		    				return redirect('datos_celebridad');
+		    			}
 		    		}
 		    	}else{
+		    		flash('La fecha no es valida.', 'danger');
 		    		return redirect('datos_celebridad');
 		    	}
 		    }else{
+		    	flash('La fecha no es valida.', 'danger');
 		    	return redirect('datos_celebridad');
 		    }
+
 		    $role = ['role' => 1];
 
 		    $data_user = Session::get('data_user');
@@ -519,7 +571,8 @@ class RegistroController extends Controller {
 
 		    if (!($dia <= 0 || $dia > 31)) {
 		    	if (!($mes <= 0 || $mes > 12)) {
-		    		if ($anio < date("Y")-100 || $anio > date("Y")) {
+		    		if ($anio > date("Y")-100 || $anio < date("Y")) {
+		    			flash('La fecha no es valida.', 'danger');
 		    			return redirect('datos_empresa');
 		    		}
 		    	}else{

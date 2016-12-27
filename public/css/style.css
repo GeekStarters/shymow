@@ -2564,3 +2564,7 @@ bottom: -5px;
 .list-notification img{
 	margin:0px 5px;
 }
+
+.type-notification{
+	float:left;
+}

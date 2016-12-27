@@ -19,6 +19,12 @@
 					<p>Si cuentas con redes sociales ¡vincúlalas! y dálas a conocer a todos los usuarios Shymow</p>
 				</div>
 				<br><br>
+				@foreach ($errors->register->all() as $error)
+                  <p class="text-danger" style="color:#950c0c;">
+                    <b style="color:#950c0c;">{{ $error}}</b>             
+                  </p>
+            	@endforeach
+				@include('flash::message')
 			</div>
 			<div class="col-sm-5">
 				<section class="reg_redes">
