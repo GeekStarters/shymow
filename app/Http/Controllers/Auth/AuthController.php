@@ -110,6 +110,8 @@ class AuthController extends Controller {
                     $newSocialUser->genero = $genero;
                     $newSocialUser->fecha_nacimiento = $date;
                     $newSocialUser->edad = $edad;
+                    $newSocialUser->identification = Uuid::generate(4);
+                    $newSocialUser->confirmed = true;
                 }
 
                 $newSocialUser->save();
