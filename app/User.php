@@ -7,7 +7,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
     
 use DB;
-class Perfil extends Model implements AuthenticatableContract {
+class User extends Model implements AuthenticatableContract {
     use Authenticatable;
     protected $table = 'perfils';
 
