@@ -66,7 +66,7 @@ class AuthController extends Controller {
     
      public function handleProviderCallback($provider)
 	{
-	       dd($provider);
+	       
         if($provider == 'facebook'){
             $user = Socialite::driver($provider)->fields([
                 'first_name', 'last_name', 'email', 'gender', 'birthday'
@@ -75,7 +75,7 @@ class AuthController extends Controller {
             $user = Socialite::driver($provider)->user();
         }
         
-        
+        dd($user);
        	$socialUser = null;
 
         $userCheck = Perfil::where('email', '=', $user->email)->first();
