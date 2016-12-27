@@ -75,7 +75,6 @@ class AuthController extends Controller {
             $user = Socialite::driver($provider)->user();
         }
         
-        dd($user);
        	$socialUser = null;
 
         $userCheck = Perfil::where('email', '=', $user->email)->first();
