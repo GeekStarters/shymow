@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Perfil;
 use App\Social;
 use App\Countrie;
-use Uuid;
 class AuthController extends Controller {
 
 	/*
