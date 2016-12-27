@@ -12,7 +12,6 @@ class Perfil extends Model implements AuthenticatableContract,
     use Authenticatable, CanResetPassword;
 	protected $table = 'perfils';
 
-	protected $fillable = ['name', 'email','birthdate','genero','pais','provincia','municipio','hobbies','redes','streamings','webs','blogs','role','mi_frase','descripcion','active','img_profile','img_portada','edad','password','work','phone','more_hobbies','like','qualification','is_youtuber','confirmed','update'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
