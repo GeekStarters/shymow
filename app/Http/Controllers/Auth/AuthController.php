@@ -94,6 +94,8 @@ class AuthController extends Controller {
                 $newSocialUser = new Perfil;
                 $newSocialUser->email    = $user->email;
                 $newSocialUser->name = $user->name;
+                $newSocialUser->identification = Uuid::generate(4);
+                $newSocialUser->confirmed = true;
                 if ($provider == 'google') {
                     $newSocialUser->edad = $user->user['ageRange']['min'];
                     $genero = substr($user->user['gender'], 0,1);
@@ -111,9 +113,6 @@ class AuthController extends Controller {
                     $newSocialUser->fecha_nacimiento = $date;
                     $newSocialUser->edad = $edad;
                 }
-
-                $newSocialUser->identification = Uuid::generate(4);
-                $newSocialUser->confirmed = true;
                 $newSocialUser->save();
 
                 $socialData = new Social;
@@ -135,10 +134,7 @@ class AuthController extends Controller {
             }
 
         }
-        
-        dd($socialUser);
-        Auth::loginUsingId(1, true);
-        // Auth::login($socialUser, true);
+        Auth::login($socialUser, true);
 
         //after login redirecting to home page
         return redirect('favoritos');
