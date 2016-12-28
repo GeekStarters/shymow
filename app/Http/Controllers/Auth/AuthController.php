@@ -110,10 +110,10 @@ class AuthController extends Controller {
                     $newSocialUser->genero = $genero;
                     $newSocialUser->fecha_nacimiento = $date;
                     $newSocialUser->edad = $edad;
-                    $newSocialUser->identification = Uuid::generate(4);
-                    $newSocialUser->confirmed = true;
                 }
 
+                $newSocialUser->identification = Uuid::generate(4);
+                $newSocialUser->confirmed = true;
                 $newSocialUser->save();
 
                 $socialData = new Social;
@@ -135,8 +135,10 @@ class AuthController extends Controller {
             }
 
         }
-     
-        Auth::login($socialUser, true);
+        
+        dd($socialUser);
+        Auth::loginUsingId(1, true);
+        // Auth::login($socialUser, true);
 
         //after login redirecting to home page
         return redirect('favoritos');
