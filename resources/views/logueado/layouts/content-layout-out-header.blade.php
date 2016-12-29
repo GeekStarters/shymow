@@ -20,12 +20,13 @@
 					          @endif
 					        </ul>
 					      </li>
-					     <li><a href="{{ url('notification') }}">Notificaciones 
-					     	<span class="notification-g">
-								<span class="number-notify-g">
-									2
+					    <li>
+					     	<a href="{{ url('my_notifications') }}">Notificaciones 
+								<span class="notification-g">
+									<span class="number-notify-g">
+										{{DataHelpers::knowNotificationNum()}}
+									</span>
 								</span>
-							</span>
 							</a>
 						</li>
 						 @if(Auth::user()->role == "1" || Auth::user()->role == "2")

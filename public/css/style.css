@@ -2226,15 +2226,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4f6f5', end
 .count-notification{
 	background: #E1010E;
 	position: absolute;
-	border-radius: 2px;
 	right: 0px;
-	bottom: 15px;
-	display: none;
+	bottom: 13px;
+	padding: 0px 2px;
 }
 .number-notify{
 	font-size: .8em;
 	font-family: gothamTwo;
-	padding: 5px;
 }
 .notification-g{
 	background: #E1010E;
@@ -2242,7 +2240,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4f6f5', end
 	border-radius: 2px;
 	right: 0px;
 	color:#fff;
-	display: none;
 }
 .number-notify-g{
 	font-size: .8em;
@@ -2564,7 +2561,31 @@ bottom: -5px;
 .list-notification img{
 	margin:0px 5px;
 }
-
 .type-notification{
+	display: inline;
 	float:left;
+}
+.type-notification img:nth-child(1){
+	display: inline;
+	max-width: 72px;
+}
+.type-notification img:nth-child(2){
+	margin:0px 10px;
+}
+.type-notification:nth-child(1) {
+	vertical-align: middle;
+}
+
+.description-notification{
+	display: inline;
+	width: 100%;
+}
+
+.notification_unread{
+	padding: 5px;
+	background: #F9F8F8;
+}
+.list-notification li a{
+	color: #6E6E6E;
+	text-decoration: none;
 }

@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Perfil;
 use Auth;
-use App\Helpers\DataHelpers;
 use DateTime;
 use App\Notification_setting;
 use Validator;
+use DB;
+use DataHelpers;
+use App\MyNotification;
 class NotificationController extends Controller {
 
 	/**
@@ -125,7 +127,7 @@ class NotificationController extends Controller {
                 $html .=            '<div style="color:#000;cursor:pointer;">';
                 $html .=                '<div class="clearfix"></div>';
                 $html .=                '<div class="col-xs-3">';
-                $html .=                    '<img style="width:100%;" src="'.$message["userViewImage"].'" alt="shymow">';
+                $html .=                    '<img style="width:100%;" src="/'.$message["userViewImage"].'" alt="shymow">';
                 $html .=                '</div>';
                 $html .=                '<div class="col-xs-9">';
                 $html .=                    '<div style="font-weight: bold;">';
@@ -178,9 +180,100 @@ class NotificationController extends Controller {
 	 */
 	public function myNotifications()
 	{
-		return view('logueado.my_notifications');
+		$notifications = DB::table('my_notifications')
+							->join('perfils', 'perfils.id', '=', 'my_notifications.sender')
+							->leftJoin('posts', 'posts.id', '=', 'my_notifications.object_id')
+							->select('perfils.id as senderId', 'perfils.name', 'perfils.img_profile','my_notifications.sender','my_notifications.type','my_notifications.description','my_notifications.object_id','my_notifications.read','posts.description as postsDescription','my_notifications.created_at as time','my_notifications.id as notification_id')
+							->where('my_notifications.active',true)
+							->where('my_notifications.reseiver',Auth::id())
+							->where('my_notifications.type','<>',9)
+							->take(15)->orderBy('my_notifications.id', 'desc')->get();
+		//COUNT
+			$count = DB::table('my_notifications')
+			->where('my_notifications.active',true)
+			->where('my_notifications.read',false)
+			->where('my_notifications.type','<>',9)
+			->where('my_notifications.reseiver',Auth::id())
+			->count();
+
+		//READ					
+		DB::table('my_notifications')
+			->where('my_notifications.active',true)
+			->where('my_notifications.reseiver',Auth::id())
+			->where('my_notifications.type','<>',9)
+			->update(['read'=>true]);
+		return view('logueado.my_notifications',compact('notifications','count'));
 	}
 
+	public function getNotificationType(Request $request)
+	{
+		$v = Validator::make($request->all(), [
+	        'type' => 'required',
+	    ]);
+
+	    if ($v->fails())
+	    {
+	        return response()->json(['error'=>true]);
+	    }
+
+	    $type = (int) $request->input('type');
+	    $notifications = DB::table('my_notifications')
+						->join('perfils', 'perfils.id', '=', 'my_notifications.sender')
+						->join('posts', 'posts.id', '=', 'my_notifications.object_id')
+						->select('perfils.id as senderId', 'perfils.name', 'perfils.img_profile','my_notifications.sender','my_notifications.type','my_notifications.description','my_notifications.object_id','my_notifications.read','posts.description as postsDescription','my_notifications.created_at as time','my_notifications.id as notification_id')
+						->where('my_notifications.active',true)
+						->where('my_notifications.reseiver',Auth::id())
+						->where('my_notifications.type',$type)
+						->take(15)->orderBy('my_notifications.id', 'desc')->get();
+
+		foreach($notifications as $notification){
+			$html = "";
+
+			if($notification->read){
+				$html .= '<div class="content-notifications">';
+			}else{
+				$html .= '<div class="content-notifications notification_unread">';
+			}
+				$html .= '<div class="checkbox">';
+				    $html .= '<label style="width: 100%">';
+				      $html .= '<input type="checkbox" value="'.$notification->notification_id.'">';
+				      $html .= '<div class="notification-body">';
+				      	$html .= '<div class="type-notification">';
+				      		$html .= '<img src="/'.$notification->img_profile.'" class="img-responsive" alt="">';
+				      		$html .= '<img src="/img/icon_notification/'.$notification->type.'.png">';
+				      	$html .= '</div>';
+				      	$html .= '<span class="description-notification hashtag-post"><i><a href="/view_user/'.$notification->senderId.'"> '.$notification->name.'</a> '.$notification->description.'</i> - '.DataHelpers::knowTime($notification->time).' <br>'.$notification->postsDescription.'</span>';
+				      $html .= '</div>';
+				    $html .= '</label>';
+				$html .= '</div>';
+				$html .= '<hr>';
+			$html .= '</div>';
+
+			echo $html;
+		}
+	}
+	public function deleteNotification(Request $request){
+		$v = Validator::make($request->all(), [
+	        'data' => 'required',
+	    ]);
+
+	    if ($v->fails())
+	    {
+	        return response()->json(['error'=>true]);
+	    }
+
+	    $data = $request->input('data');
+	    $data = explode(',', $data);
+	    
+	    try {
+	    	foreach ($data as $val) {
+	    		MyNotification::where('id',$val)->update(['active'=>false]);
+	    	}
+	    	return response()->json(['error'=>false,'message' => 'Tus datos fueron eliminados']);
+	    } catch (Exception $e) {
+	    	return response()->json(['error'=>true,'message' => "Vuelve a intentarlo"]);
+	    }
+	}
 	/**
 	 * Show the form for editing the specified resource.
 	 *
@@ -212,6 +305,57 @@ class NotificationController extends Controller {
 	public function destroy($id)
 	{
 		//
+	}
+
+
+	function saveNotification(Request $request)
+	{
+		$v = Validator::make($request->all(), [
+	        'sender' => 'required',
+	        'reseiver' => 'required',
+	        'type' => 'required',
+	        'objectId' => 'required',
+	    ]);
+
+	    if ($v->fails())
+	    {
+	        return response()->json(['error'=>true]);
+	    }
+
+	    $sender = $request->input('sender');
+	    $reseiver = $request->input('reseiver');
+	    $type = (int) $request->input('type');
+	    $objectId = (int) $request->input('objectId');
+
+	    $userS = Perfil::where('identification','=',$sender)->first();
+	    if (count($userS)>0) {
+	    	$userR = Perfil::where('id','=',$reseiver)->first();
+	    	if (count($userR)>0) {
+	    		if (DataHelpers::knowTypeNotification($type) != false) {
+
+	    			try {
+	    				$newNoti = new MyNotification;
+		    			$newNoti->sender = $userS->id;
+		    			$newNoti->reseiver = $userR->id;
+		    			$newNoti->type = $type;
+		    			$newNoti->description = DataHelpers::knowTypeNotification($type);
+		    			$newNoti->object_id = $objectId;
+		    			$newNoti->save();
+
+	    				return response()->json(['error'=>false,'name' => Auth::user()->name, 'identification' => $userR->identification, 'img' => Auth::user()->img_profile, 'description' => DataHelpers::knowTypeNotification($type)]);
+	    			} catch (Exception $e) {
+	    				return response()->json(['error'=>true]);
+	    			}
+	    		}else{
+		    		return response()->json(['error'=>true]);
+		    	}
+	    	}else{
+		    	return response()->json(['error'=>true]);
+		    }
+	    }else{
+	    	return response()->json(['error'=>true]);
+	    }
+
 	}
 
 

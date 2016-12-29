@@ -6,7 +6,15 @@
 	
 	@if(count($users)>0)
 	<div class="row">
-		<div class="col-md-6 col-sm-offset-2">
+		<div class="col-md-12">
+			<a href="/solicitude_friendship" class="btn btn-default">
+				Solicitudes 
+				<span class="notification-g">
+					<span class="number-notify-g">
+						{{DataHelpers::knowPendingFriends()}}
+					</span>
+				</span>
+			</a>
 			<!-- {!! Form::open() !!}
 				<div class="form-group">
 					{!! Form::label('buscar','Buscar a:') !!}
@@ -15,6 +23,8 @@
 			{!! Form::close() !!} -->
 		</div>
 	</div>
+	<br>
+	<div class="clearfix"></div>
 	<div class="row">
     	@foreach($users as $user)
     		@if($user->id != Auth::id())

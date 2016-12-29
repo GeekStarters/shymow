@@ -13,6 +13,7 @@ use DB;
 use Carbon\Carbon;
 use DateTime;
 use App\Helpers\DataHelpers;
+use Uuid;
 class MessagesController extends Controller{
 
 	/**
@@ -77,7 +78,7 @@ class MessagesController extends Controller{
 					    	 	$newChat = new Chat();
 							    	$newChat->userOne = Auth::user()->id;
 							    	$newChat->userTwo = $destinatario_id;
-							    	$newChat->channel = Hash::make($newChat->id);
+							    	$newChat->channel = Uuid::generate();
 						    	$newChat->save();
 
 							    $newMessage = new Message();
@@ -361,9 +362,7 @@ class MessagesController extends Controller{
 	    $chat = Chat::where('channel',$channel)->get();
 
 	    try {
-	    	foreach ($chat as $data) {
-	    		$getMessages = Message::where('chat_id',$data->id)->update(['read' => true]);
-	    	}
+	    	Message::where('receptor',Auth::id())->update(['read' => true]);
 	    	return response()->json(['error' => false]);
 	    } catch (Exception $e) {
 	    	return response()->json(['error' => true, 'message'=>'Ocurrio un error']);

@@ -13,6 +13,7 @@ use App\Images_post;
 use DB;
 use App\Comment_post;
 use App\Like_post;
+use App\MyNotification;
 use DateTime;
 use App\Qualification_post;
 use App\Perfil;
@@ -579,6 +580,14 @@ class PostController extends Controller {
 				$newShare->description_old_post = $description;
 
 			$newShare->save();
+
+			$newNoti = new MyNotification;
+			$newNoti->sender = Auth::id();
+			$newNoti->reseiver = $user_id;
+			$newNoti->type = 3;
+			$newNoti->description = 'Compartió Post';
+			$newNoti->object_id = $post_id;
+			$newNoti->save();
 
 			$count_post_share = Share_post::where('post_id',$post_id)->where('active',true)->count();
 			$saveNewShareCount = Post::where('active',true)->where('id',$post_id) ->update(['share' => $count_post_share]);

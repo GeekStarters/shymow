@@ -8,7 +8,9 @@ use Auth;
 use DB;
 use App\Perfil;
 use App\Friend;
+use App\MyNotification;
 use Activity;
+use DataHelpers;
 class FriendsController extends Controller {
 
 	/**
@@ -322,6 +324,13 @@ class FriendsController extends Controller {
 							Friend::where('user1',$id)->where('user2',Auth::id())
 										->orWhere('user1',Auth::id())->where('user2',$id)
 										->update(['status'=>0,'user1'=>Auth::id(),'user2'=>$id]);
+							$newNoti = new MyNotification;
+			    			$newNoti->sender = Auth::id();
+			    			$newNoti->reseiver = $id;
+			    			$newNoti->type = 9;
+			    			$newNoti->description = DataHelpers::knowTypeNotification(9);
+			    			$newNoti->save();
+						flash('Solicitud de amistad enviada', 'success');
 							flash('Solicitud de amistad enviada', 'success');
 						}elseif($relation[0]->status == 0){
 							Friend::where('user1',$id)->where('user2',Auth::id())
@@ -335,6 +344,13 @@ class FriendsController extends Controller {
 							$newF->user2 = $id;
 							$newF->status = 0;
 						$newF->save();
+
+						$newNoti = new MyNotification;
+		    			$newNoti->sender = Auth::id();
+		    			$newNoti->reseiver = $id;
+		    			$newNoti->type = 9;
+		    			$newNoti->description = DataHelpers::knowTypeNotification(9);
+		    			$newNoti->save();
 						flash('Solicitud de amistad enviada', 'success');
 					}
 					return redirect('amigos');
@@ -361,7 +377,46 @@ class FriendsController extends Controller {
 	{
 
 	}
+	public function friendship(){
+		//Stack users
+		$user_pending = [];
+		//ID user pending
+		$id = Auth::id();
+		$pendings = DB::select('SELECT * FROM friends WHERE (user1 = '.$id.' OR user2 = '.$id.') AND status = 0');
+		// dd($pendings);
+		//If i had more than one pendings
+		if (count($pendings) > 0) {
+			// I get each users
+			foreach ($pendings as $pending) {
+				//declare a variable ID user
+				$user_id = "";
 
+				//If this user is equal to ID
+				if ($pending->user1 == $id)
+					//Add value to user_id of another user
+					$user_id = $pending->user2;
+				else
+					//If not add value user_id this user
+					$user_id = $pending->user1;
+
+				//let's search a user active
+				$user = Perfil::where('id',$user_id)
+								->where('active',true)
+								->first();
+				//If return user is more than one and less than two
+				if (count($user)>0 && count($user) < 2) {
+					array_push($user_pending, $user);
+				}
+			}
+		}
+		//READ					
+		DB::table('my_notifications')
+			->where('my_notifications.active',true)
+			->where('my_notifications.reseiver',Auth::id())
+			->where('my_notifications.type','=',9)
+			->update(['read'=>true]);
+		return view('logueado.friendship',compact('user_pending'));
+	}
 	/**
 	 * Display the specified resource.
 	 *

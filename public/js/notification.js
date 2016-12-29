@@ -3,12 +3,14 @@ jQuery(document).ready(function($) {
 	conn.onopen = function(e) {
 		console.log("Connection established! Notify");
 	};
+	actualuser = $( "#unvalus" ).data("unvalus");
 	conn.onmessage = function(e) {
-		console.log(e);
 		var data = JSON.parse(e.data);
-		var actualuser = $( "#unvalus" ).data("unvalus");
 		if(actualuser==data.channel)
 		{
+			var count = $('.number-notify-g').text();
+			count = parseInt(count) + 1;
+			$('.number-notify-g').text(count);
 			notifyMe(data.name,'/'+data.img,data.type);
 		}
 	};
@@ -16,18 +18,9 @@ jQuery(document).ready(function($) {
 	//NOTIFICACION CALIFICACION
 	$('.post-qualification').on('click', 'a', function(event) {
 		event.preventDefault();
-
+		var post_id = $(this).data('post');
 		var userId = $(this).parents('.post-qualification').data('user_id');
-		$.ajax({
-			url: '/notification_user/'+userId,
-			type: 'GET',
-			dataType: 'JSON',
-			success: function(data){
-				if (!data.error) {
-					conn.send(JSON.stringify({channel:data.identification,name:data.name,img:data.img,type:"Calificaron post" }));
-				}
-			}
-		});
+		saveNotification(userId,"Calificaron Post",actualuser,0,post_id);
 		
 	});
 
@@ -38,41 +31,29 @@ jQuery(document).ready(function($) {
 		var userId = $(this).data('user_id');
         var objecto = $(this);
         var no_like = $(this).hasClass('post-like-me-active');
-        
-        $.ajax({
-            url: '/notification_user/'+userId,
-            type: 'GET',
-            dataType: 'JSON',
-            success: function(data){
-				if (!data.error) {
-					if (no_like == false) {             
-                        conn.send(JSON.stringify({channel:data.identification,name:data.name,img:data.img,type:"Dieron like a post" }));
-                    }else{
-                        conn.send(JSON.stringify({channel:data.identification,name:data.name,img:data.img,type:"Quito like a post" }));
-                    }
-				}
-			}
+        var post_id = $(this).data('like');
+        if (post_id != null) {
+        	if (no_like == false) {             
+                saveNotification(userId,"Calificaron Post",actualuser,1,post_id);
 
-        });
+            }else{
+                saveNotification(userId,"Calificaron Post",actualuser,8,post_id);
+
+            }
+        	
+        }
+        
 	});
 
-	//PROCESO DE COMENTARIOS NOTIFICACION
+    //PROCESO DE COMENTARIOS NOTIFICACION
     $(".box-comment-header").submit('.form-comment',function(event) {
     	/* Act on the event */
 
     	var userId = $(this).data('user_id');
-    	$.ajax({
-			url: '/notification_user/'+userId,
-			type: 'GET',
-			dataType: 'JSON',
-			success: function(data){
-				if (!data.error) {
-					conn.send(JSON.stringify({channel:data.identification,name:data.name,img:data.img,type:"Comentaron tu post" }));
-				}
-			}
-		});
+    	var padre = $(this).parents('.content-post');
+    	var post_id = padre.find('.box-comment').data('trend');
+    	saveNotification(userId,"Calificaron Post",actualuser,4,post_id);
     });
-
 
     //PROCESO DE NOTIFICACION FOLLOW
     $('body').on('click', '.post-follow #foll', function(event) {
@@ -80,21 +61,13 @@ jQuery(document).ready(function($) {
         /* Act on the event */
         var classCss = $(this).hasClass('follow-post-active');
         var userId = $(this).data('user_id');
-        $.ajax({
-			url: '/notification_user/'+userId,
-			type: 'GET',
-			dataType: 'JSON',
-			success: function(data){
-				if (!data.error) {
-					if (classCss) {
-                        conn.send(JSON.stringify({channel:data.identification,name:data.name,img:data.img,type:"Dejo de seguir tu post" }));
-                    }else{
-                    	conn.send(JSON.stringify({channel:data.identification,name:data.name,img:data.img,type:"Sigue tu post" }));
-                    }
-					
-				}
-			}
-		});
+        var post_id = $(this).data('follow');
+        if (classCss) {
+            saveNotification(userId,"Calificaron Post",actualuser,6,post_id);
+        }else{
+        	saveNotification(userId,"Calificaron Post",actualuser,2,post_id);
+        }
+        
     });
 
 	function notifyMe(theBody,theIcon,theTitle,theText) {
@@ -152,5 +125,19 @@ jQuery(document).ready(function($) {
 	                    }
 	                }
 			});
+	}
+
+	function saveNotification(user_id,text_notification,key_sender,type,object){
+		$.ajax({
+			url: '/save_notification/',
+			type: 'GET',
+			dataType: 'JSON',
+			data: {sender: key_sender,reseiver:user_id,type:type,objectId:object},
+			success: function(data){
+				if (!data.error) {
+					conn.send(JSON.stringify({channel:data.identification,name:data.name,img:data.img,type:data.description }));
+				}
+			}
+		});
 	}
 });

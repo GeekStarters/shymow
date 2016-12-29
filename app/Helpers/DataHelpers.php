@@ -7,6 +7,13 @@ use App\Chat;
 use App\Message;
 use App\LikeProduct;
 use App\Perfil;
+use App\UserLikes;
+use App\UserQualification;
+use App\UserShare;
+use App\MyNotification;
+use App\Comment_post;
+use App\Post;
+use App\Friend;
 use Hash;
 use DB;
 use Carbon\Carbon;
@@ -62,10 +69,13 @@ class DataHelpers{
 
 			array_push($messages, $newContainer);
 		}
-
 		return $messages;
 	}
-
+	public static function knowMessageUnread()
+	{
+		$messages = Message::whereReceptor(Auth::id())->whereActive(true)->whereRead(false)->count();
+		return $messages;
+	}
 	public static function knowTime($time){
 		$from = new DateTime($time);
 		$to = new DateTime(date("Y-m-d H:i:s"));
@@ -310,5 +320,77 @@ class DataHelpers{
 	    return $stringDisplay;
 	}
 
+	public static function knowTypeNotification($type){
+			switch ($type) {
+				//Qualification
+				case 0:
+					return "Calificarón Post";
+					break;
+				//Like
+				case 1:
+					return "Me gusta Post";
+					break;
+				//Follow
+				case 2:
+					return "Sigue Post";
+					break;
+				//Share
+				case 3:
+					return "Compartió Post";
+					break;
+				//Comments
+				case 4:
+					return "Comento Post";
+					break;
+				//Friend
+				case 5:
+					return "Solicitud amistad";
+					break;
+				//Unfollow
+				case 6:
+					return "Dejo de seguir Post";
+					break;
+				//Message
+				case 7:
+					return "Envio Mensaje";
+					break;
+				//Unlike
+				case 8:
+					return "Dejo de gustar";
+					break;
+				//Unlike
+				case 9:
+					return "Solicito amistad";
+					break;
+				default:
+					return false;
+					break;
+			}
+	}
 
+	public static function knowNotificationNum(){
+		$count = DB::table('my_notifications')
+		->where('my_notifications.active',true)
+		->where('my_notifications.read',false)
+		->where('my_notifications.reseiver',Auth::id())
+		->count();
+		return $count;
+	}
+
+	public static function knowNotificationFriend(){
+		$count = DB::table('my_notifications')
+		->where('my_notifications.active',true)
+		->where('my_notifications.read',false)
+		->where('my_notifications.type',9)
+		->where('my_notifications.reseiver',Auth::id())
+		->count();
+		return $count;
+	}
+
+	public static function knowPendingFriends(){
+		$id = Auth::id();
+		$pendings = DB::select('SELECT * FROM friends WHERE (user1 = '.$id.' OR user2 = '.$id.') AND status = 0');
+
+		return count($pendings);
+	}
 }

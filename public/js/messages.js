@@ -5,12 +5,12 @@ jQuery(document).ready(function($) {
 	};
 
 	conn.onmessage = function(e) {
-		console.log(e);
 		var value = JSON.parse(e.data);
 	  	var count = $('.chatSelect').size();
 		var controlador = true;
 		var d = value.time;
 		var container = $('body').find('#stackMessages');
+
 		function dataUser(key,receiver,iam,img,name,time,msg){
 			var html = "";
 				html += '<div class="row">';
@@ -43,7 +43,6 @@ jQuery(document).ready(function($) {
 		}
 		$.get('/data_user',{transmitter:value.transmitter},function(data) {
 			var user = JSON.parse(data.data);	
-			console.log(user,d);
 			$('.chatSelect').each(function(index, el) {
 			  	if (!data.error) {
 			  		var val = $(this).data('key');
@@ -57,7 +56,13 @@ jQuery(document).ready(function($) {
 			});
 
 		  	if (controlador) {
-		  		console.log("entre");
+		  		var cMessages = parseInt($('#c-messages').text());
+		  		if (isNaN(cMessages)) {
+		  			cMessages = 1;
+		  		}else{
+		  			cMessages +=1;
+		  		}
+		  		$('#c-messages').text(cMessages);
 				$('.content-messages').prepend(dataUser(value.channel,value.transmitter,value.receiver,user.img,user.name,d,value.message));
 		  	}
 

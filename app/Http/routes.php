@@ -40,6 +40,7 @@ Route::get('social/login/{provider}', 'Auth\AuthController@handleProviderCallbac
 
 //SITIO
 Route::get('/',function(){
+    
     $countries = Countrie::lists('name','id');
     $interest = Interest::lists('name','id');
     $users = Perfil::where('active',true)
@@ -274,7 +275,7 @@ Route::group(['middleware' => 'auth'], function()
     //Notification register
     Route::get('/notification_channel','NotificationController@registerChannel');
     //Notification identificate user
-    Route::get('/notification_user/{id}','NotificationController@notificationUser');
+    Route::get('/save_notification','NotificationController@saveNotification');
     //Notification get messages
     Route::get('/notifyGetMessages','NotificationController@notifyGetMessages');
 
@@ -317,4 +318,11 @@ Route::group(['middleware' => 'auth'], function()
 
     // My notifications
     Route::get('my_notifications','NotificationController@myNotifications');
+    // My notifications type
+    Route::get('get_notification_type','NotificationController@getNotificationType');
+    //DELETE My notifications
+    Route::post('delete_notification','NotificationController@deleteNotification');
+
+    //Solicitudes amistad
+    Route::get('solicitude_friendship','FriendsController@friendship');
 });

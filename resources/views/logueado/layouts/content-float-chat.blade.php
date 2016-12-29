@@ -6,8 +6,10 @@
 		<div class="chat-float-message chat-over" id="chat-proper" tabindex="0" role="button" data-toggle="popover" data-trigger="focus">
 			<i class="fa fa-comments" aria-hidden="true"></i>
 			<span class="count-notification">
-				<span class="number-notify">
-					2
+				<span class="number-notify" id="c-messages">
+					@if(DataHelpers::knowMessageUnread() > 0)
+						{{DataHelpers::knowMessageUnread()}}
+					@endif
 				</span>
 			</span>
 		</div>
@@ -15,8 +17,15 @@
 			<i class="fa fa-cog" aria-hidden="true"></i>
 
 		</div>
-		<div class="chat-float-add chat-over">
+		<div class="chat-float-add chat-over" style="position: relative;">
 			<a href="{{url('all_users')}}" style="color: #fff"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
+			<span class="count-notification" style="right: 4px">
+				<span class="number-notify">
+					@if(DataHelpers::knowNotificationFriend() > 0)
+						{{DataHelpers::knowNotificationFriend()}}
+					@endif
+				</span>
+			</span>
 		</div>
 	</div>
 @endif
