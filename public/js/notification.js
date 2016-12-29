@@ -1,5 +1,6 @@
 jQuery(document).ready(function($) {
-	var conn = new WebSocket('ws://127.0.0.1:8282');
+	// var conn = new WebSocket('ws://127.0.0.1:8282');
+	var conn = new WebSocket('ws://52.42.76.191:8282');
 	conn.onopen = function(e) {
 		console.log("Connection established! Notify");
 	};
