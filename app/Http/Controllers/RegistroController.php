@@ -568,18 +568,25 @@ class RegistroController extends Controller {
 		   	$dia = (int) $request->input('dia');
 		    $mes = (int) $request->input('mes');
 		    $anio = (int) $request->input('anio');
-
+		    $genero = $request->input('genero');
+		    $pais = $request->input('pais');
+		    $provincia = $request->input('provincia');
+		    $municipio = $request->input('municipio');
 		    if (!($dia <= 0 || $dia > 31)) {
 		    	if (!($mes <= 0 || $mes > 12)) {
 		    		if ($anio > date("Y")-100 || $anio < date("Y")) {
-		    			flash('La fecha no es valida.', 'danger');
-		    			return redirect('datos_empresa');
+		    			if (!checkdate ($mes, $dia,$anio)){
+		    				flash('La fecha no es valida.', 'danger');
+		    				return redirect('data_users');
+		    			}
 		    		}
 		    	}else{
-		    		return redirect('datos_empresa');
+		    		flash('La fecha no es valida.', 'danger');
+		    		return redirect('data_users');
 		    	}
 		    }else{
-		    	return redirect('datos_empresa');
+		    	flash('La fecha no es valida.', 'danger');
+		    	return redirect('data_users');
 		    }
 		    $role = ['role' => 2];
 

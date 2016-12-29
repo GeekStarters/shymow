@@ -382,7 +382,7 @@ class FriendsController extends Controller {
 		$user_pending = [];
 		//ID user pending
 		$id = Auth::id();
-		$pendings = DB::select('SELECT * FROM friends WHERE (user1 = '.$id.' OR user2 = '.$id.') AND status = 0');
+		$pendings = DB::select('SELECT * FROM friends WHERE user2 = '.$id.' AND status = 0');
 		// dd($pendings);
 		//If i had more than one pendings
 		if (count($pendings) > 0) {

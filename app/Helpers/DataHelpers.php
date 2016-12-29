@@ -344,7 +344,7 @@ class DataHelpers{
 					break;
 				//Friend
 				case 5:
-					return "Solicitud amistad";
+					return false;
 					break;
 				//Unfollow
 				case 6:
@@ -358,7 +358,7 @@ class DataHelpers{
 				case 8:
 					return "Dejo de gustar";
 					break;
-				//Unlike
+				//Friend
 				case 9:
 					return "Solicito amistad";
 					break;
@@ -389,7 +389,7 @@ class DataHelpers{
 
 	public static function knowPendingFriends(){
 		$id = Auth::id();
-		$pendings = DB::select('SELECT * FROM friends WHERE (user1 = '.$id.' OR user2 = '.$id.') AND status = 0');
+		$pendings = DB::select('SELECT * FROM friends WHERE user2 = '.$id.' AND status = 0');
 
 		return count($pendings);
 	}

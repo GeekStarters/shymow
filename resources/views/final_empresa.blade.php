@@ -25,11 +25,19 @@
                   </p>
             	@endforeach
 				@include('flash::message')
+				<div class="alert alert-warning" role="alert">
+					Ejemplo: https://facebook.com <br>
+					https://www.youtube.com/
+				</div>
 			</div>
 			<div class="col-sm-5">
 				<section class="reg_redes">
 					<h3>¿Tienes redes sociales?</h3>
-				
+					<div class="alert alert-success alert-dismissible" role="alert">
+					  <button style="padding: 0px;background: none;border: 0px;color: #000;" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					  <strong>Warning!</strong> 
+					Redes validas: Facebook, Twitter, Youtube, Linkedin, Instagram, Snapchat, G+, Vine, Tumblr
+					</div>
 					{!! Form::open(array('url' => 'create_user','name'=>'steps_final')) !!}
 						<div class="form-group">
 							{!! Form::text('social1','',['placeholder'=>'Red Social','class'=>'form-control']) !!}<button><span class="glyphicon glyphicon-plus"></span></button>
@@ -58,6 +66,10 @@
 			<div class="col-sm-5">
 				<div class="reg_redes" style="border-left: 2px solid #CCCCCC;padding-left:10px;">
 					<h3>¿Tienes cuenta Streaming?</h3>
+					<div class="alert alert-success alert-dismissible" role="alert">
+					  <button style="padding: 0px;background: none;border: 0px;color: #000;" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					  <strong>Warning!</strong><br> Twitch, Bambuser, Livestream
+					</div>
 						<div class="form-group">
 							{!! Form::text('stream1','',['placeholder'=>'Streaming','class'=>'form-control']) !!}<button><span class="glyphicon glyphicon-plus"></span></button>
 						</div>

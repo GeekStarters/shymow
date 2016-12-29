@@ -20,6 +20,10 @@
 				</div>
 				<br><br>
 				@include('flash::message')
+				<div class="alert alert-warning" role="alert">
+					Ejemplo: https://facebook.com <br>
+					https://www.youtube.com/
+				</div>
 			</div>
 			@foreach ($errors->register->all() as $error)
                   <p class="text-danger" style="color:#950c0c;">
@@ -30,6 +34,11 @@
 			<div class="col-sm-5" style="border-right: 2px solid #CCCCCC;">
 				<section class="reg_redes">
 					<h3>¿Tienes redes sociales?</h3>
+					<div class="alert alert-success alert-dismissible" role="alert">
+					  <button style="padding: 0px;background: none;border: 0px;color: #000;" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					  <strong>Warning!</strong> 
+					Redes validas: Facebook, Twitter, Youtube, Linkedin, Instagram, Snapchat, G+, Vine, Tumblr
+					</div>
 						<div class="form-group">
 							{!! Form::text('social1','',['placeholder'=>'Red Social','class'=>'form-control']) !!}<button><span class="glyphicon glyphicon-plus"></span></button>
 						</div>
@@ -56,6 +65,10 @@
 			<div class="col-sm-5">
 				<div class="reg_redes">
 					<h3>¿Tienes cuenta Streaming?</h3>
+					<div class="alert alert-success alert-dismissible" role="alert">
+					  <button style="padding: 0px;background: none;border: 0px;color: #000;" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					  <strong>Warning!</strong><br> Twitch, Bambuser, Livestream
+					</div>
 						<div class="form-group">
 							{!! Form::text('stream1','',['placeholder'=>'Streaming','class'=>'form-control']) !!}<button><span class="glyphicon glyphicon-plus"></span></button>
 						</div>
