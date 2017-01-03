@@ -19,7 +19,7 @@
 		</div>
 		<div class="chat-float-add chat-over" style="position: relative;">
 			<a href="{{url('all_users')}}" style="color: #fff"><i class="fa fa-user-plus" aria-hidden="true"></i></a>
-			<span class="count-notification" style="right: 4px">
+			<span class="count-notification" style="right: 1px !important">
 				<span class="number-notify">
 					@if(DataHelpers::knowNotificationFriend() > 0)
 						{{DataHelpers::knowNotificationFriend()}}

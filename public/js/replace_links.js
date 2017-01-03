@@ -23,7 +23,7 @@ SOFTWARE.
 
 */
 
-var Hashtag = (function() {
+var Link = (function() {
 
 	if (!Array.prototype.forEach) {
 	  Array.prototype.forEach = function(fun)
@@ -48,17 +48,28 @@ var Hashtag = (function() {
 		var elems = document.querySelectorAll(elem);
 		[].forEach.call(elems, function(elem) {
 			var html = elem.innerHTML;
-			var matched = html.match(/^(#\S+)[^\s]|(\s#\S+)/gi);
+			var matched = html.match(/^((http|https|www)[^\s]+\.[a-zA-Z]{2,3}(\S*)?)|\s((http|https|www)[^\s]+\.[a-zA-Z]{2,3}(\S*)?)/gi);
+
 			if (matched != null) {
+
 				[].forEach.call(matched, function(m) {
-					var templ;
+					var templ;	
 					if(t) templ = templates[t];
 					else templ = template;
-					templ = templ.replace('{#}', m);
-					templ = templ.replace('{#n}', $.trim(m).slice(1));
-					
-					var regex = new RegExp(m, 'g');
-					html = html.replace(regex,templ);
+					if (m.substr(0,3) == "www") {
+						j = "http://"+m;
+
+						templ = templ.replace('{#}', m);
+						templ = templ.replace('{#n}', $.trim(j));
+						
+						// var regex = new RegExp(m, 'g');
+						html = html.replace(m,templ);
+					}else{
+						templ = templ.replace('{#}', m);
+						templ = templ.replace('{#n}', $.trim(m));
+						// var regex = new RegExp(m, 'g');
+						html = html.replace(m,templ);
+					}
 				});
 				elem.innerHTML = html;
 			}
@@ -71,8 +82,8 @@ var Hashtag = (function() {
 	}
 	
 	return {
-		replaceTags: repl,
-		setOptions: setopts
+		replaceTagsL: repl,
+		setOptionsL: setopts
 	}
 	
 }());

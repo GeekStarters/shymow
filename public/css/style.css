@@ -2228,7 +2228,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4f6f5', end
 	position: absolute;
 	right: 0px;
 	bottom: 13px;
-	padding: 0px 2px;
+	padding: 0px 5px;
 }
 .number-notify{
 	font-size: .8em;
@@ -2588,4 +2588,15 @@ bottom: -5px;
 .list-notification li a{
 	color: #6E6E6E;
 	text-decoration: none;
+}
+
+.notification-perfil{
+	background: red;
+	font-size: .7em;
+	position: absolute;
+	bottom: -7px;
+	right: 5px;
+	height: 15px;
+	width: 12px;
+	text-align: center;	
 }

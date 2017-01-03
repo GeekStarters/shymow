@@ -64,6 +64,7 @@
 													<div class="clearfix"></div>
 													<div class="post-description hashtag-post">
 														{{$post->description}}
+														{!!DataHelpers::viewPage($post->description)!!}
 														@if(isset($post->path))
 															<img src="{{url($post->path)}}" class="img-responsive" alt="Shymow"></img>
 														@endif
@@ -182,6 +183,7 @@
 														<div class="clearfix"></div>
 														<div class="post-description hashtag-post">
 															{{$post->description}}
+															{!!DataHelpers::viewPage($post->description)!!}
 															@if(isset($post->path))
 																<img src="{{url($post->path)}}" class="img-responsive" alt="Shymow"></img>
 															@endif
@@ -201,6 +203,7 @@
 																		<div class="clearfix"></div>
 																		<div class="post-description hashtag-post">
 																			{{$post->description_old_post}}
+																			{!!DataHelpers::viewPage($post->description_old_post)!!}
 																			@if(isset($post->img_share_active) && $post->img_share_active)
 																				<img src="{{url($post->path_share)}}" class="img-responsive" alt="Shymow"></img>
 																			@endif
@@ -309,6 +312,7 @@
 													<div class="clearfix"></div>
 													<div class="post-description hashtag-post">
 														{{$post->description}}
+														{!!DataHelpers::viewPage($post->description)!!}
 														@if(isset($post->path))
 															<img src="{{url($post->path)}}" class="img-responsive" alt="Shymow"></img>
 														@endif
@@ -338,6 +342,7 @@
 														<div class="clearfix"></div>
 														<div class="post-description hashtag-post">
 															{{$post->description}}
+															{!!DataHelpers::viewPage($post->description)!!}
 															@if(isset($post->path))
 																<img src="{{url($post->path)}}" class="img-responsive" alt="Shymow"></img>
 															@endif
@@ -357,6 +362,7 @@
 																		<div class="clearfix"></div>
 																		<div class="post-description hashtag-post">
 																			{{$post->description_old_post}}
+																			{!!DataHelpers::viewPage($post->description_old_post)!!}
 																			@if(isset($post->img_share_active) && $post->img_share_active)
 																				<img src="{{url($post->path_share)}}" class="img-responsive" alt="Shymow"></img>
 																			@endif
@@ -524,6 +530,15 @@
 		        reader.readAsDataURL(input.files[0]);
 		    }
 		}
+		//Links
+		Link.setOptionsL({
+		    templates: {
+		        'link': '<a href="{#n}" target="_blank">{#}</a>'
+		    }
+		});
+		Link.replaceTagsL('.hashtag-post','link');
+
+		//Hashtags
 		Hashtag.setOptions({
 		    templates: {
 		        'fb': '<a href="{{url("tendencia")}}/{#n}">{#}</a>'

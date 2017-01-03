@@ -76,10 +76,10 @@ class PostController extends Controller {
 	   	for ($i=0; $i <count($searchTrends); $i++) { 
 	   		$object = $searchTrends[$i];
 	   		if (strlen($object) > 1) {
-	   			$cadena = strstr($object, '#');
-				if (strlen($cadena) > 1) {
-					$trend = substr($cadena, 1 , strlen($cadena));
-					array_push($trends, $trend);
+	   			if (preg_match("/^(#\S+)[^\s]|(\s#\S+)/", $object)){
+	   				$trend = substr($object, 1 , strlen($object));
+					array_push($trends, trim($trend));
+	   			
 				}
 	   		}
 	   	}

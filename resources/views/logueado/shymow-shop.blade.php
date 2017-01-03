@@ -150,6 +150,14 @@
 @section('scripts')
 <script>
   jQuery(document).ready(function($) {
+  	//Links
+		Link.setOptionsL({
+		    templates: {
+		        'link': '<a href="{#n}" target="_blank">{#}</a>'
+		    }
+		});
+		Link.replaceTagsL('.hashtag-post','link');
+
     $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
   });
 </script>

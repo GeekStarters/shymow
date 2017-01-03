@@ -204,6 +204,7 @@ return [
       	'Activity' => Kim\Activity\ActivityFacade::class,
       	'Image' => Intervention\Image\Facades\Image::class,
       	'DataHelpers' => App\Helpers\DataHelpers::class,
+      	'OpenGraph' => App\Helpers\OpenGraph::class,
       	'Analytics' => Ipunkt\LaravelAnalytics\AnalyticsFacade::class,
       	'Uuid' => Webpatser\Uuid\Uuid::class,
 	],

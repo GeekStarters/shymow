@@ -52,6 +52,7 @@
 						<div class="clearfix"></div>
 						<div class="post-description hashtag-post">
 							{{$trend->description}}
+							{!!DataHelpers::viewPage($trend->description)!!}
 							@if(isset($trend->path))
 								<img src="{{url($trend->path)}}" class="img-responsive" alt="Shymow"></img>
 							@endif
@@ -184,6 +185,15 @@
 @section('scripts')
 <script>
 	jQuery(document).ready(function($) {
+		//Links
+		Link.setOptionsL({
+		    templates: {
+		        'link': '<a href="{#n}" target="_blank">{#}</a>'
+		    }
+		});
+		Link.replaceTagsL('.hashtag-post','link');
+
+		//Hashtags
 		Hashtag.setOptions({
 		    templates: {
 		        'fb': '<a href="{{url("tendencia")}}/{#n}">{#}</a>'

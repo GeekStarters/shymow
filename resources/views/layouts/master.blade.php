@@ -58,6 +58,7 @@
     <script src=" {{ asset('js/jquery.gritter.js') }} "></script>
     <script src=" {{ asset('js/validate.min.js') }} "></script>
     <script src=" {{ asset('js/hashtag.js') }} "></script>
+    <script src=" {{ asset('js/replace_links.js') }} "></script>
     <script src=" {{ asset('js/handlebars.js') }} "></script>
     <script src=" {{ asset('js/typeahead.js') }} "></script>
     <script src=" {{ asset('js/sweetalert.js') }}"></script>

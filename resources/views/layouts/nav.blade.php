@@ -5,7 +5,21 @@
     </a>
     @if(Auth::check())
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="{{ url(Auth::user()->img_profile) }}" alt=""> {{Auth::user()->name}} <b class="caret"></b></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+            <span style="position: relative;">
+                <img src="{{ url(Auth::user()->img_profile) }}" alt="">
+                @if(DataHelpers::knowNotificationNum()>0)
+                <span class="notification-perfil">
+                  <span>
+
+                    {{DataHelpers::knowNotificationNum()}}
+                  </span>
+                </span>
+                @endif
+            </span>
+
+              {{Auth::user()->name}} <b class="caret"></b>
+            </a>
         <ul class="dropdown-menu">
           <li class="dropdown-submenu">
               <a class="test" tabindex="-1" href="#">Configuración <span class="caret"></span></a>

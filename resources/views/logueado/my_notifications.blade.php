@@ -192,13 +192,21 @@
 			}
 		});
 	});
-	Hashtag.setOptions({
+	//Links
+		Link.setOptionsL({
+		    templates: {
+		        'link': '<a href="{#n}" target="_blank">{#}</a>'
+		    }
+		});
+		Link.replaceTagsL('.hashtag-post','link');
+
+		//Hashtags
+		Hashtag.setOptions({
 		    templates: {
 		        'fb': '<a href="{{url("tendencia")}}/{#n}">{#}</a>'
 		    }
 		});
 		Hashtag.replaceTags('.hashtag-post','fb');
-
 		$('#flash-overlay-modal').modal();
 </script>
 @stop

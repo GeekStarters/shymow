@@ -20,6 +20,7 @@ use Carbon\Carbon;
 use App\Product;
 use App\Qualification_product;
 use DateTime;
+use OpenGraph;
 class DataHelpers{
 
 	public static function latestPosts($idUser){
@@ -392,5 +393,37 @@ class DataHelpers{
 		$pendings = DB::select('SELECT * FROM friends WHERE user2 = '.$id.' AND status = 0');
 
 		return count($pendings);
+	}
+
+
+	public static function viewPage($text){
+		$graph = OpenGraph::fetch(OpenGraph::findURL($text));
+		$html = "";
+		$multimedia = "";
+
+		if ($graph != false) {
+			$html .= '<div class="well">';
+			foreach ($graph as $key => $value) {
+				if($key == "image"){
+					$multimedia ='<img class="img-responsive" src="'.$value.'">';
+				}
+				if ($key == "video:url") {
+					$multimedia ='<div class="embed-responsive embed-responsive-16by9">
+  							<iframe class="embed-responsive-item"  src="'.$value.'" frameborder="0" allowfullscreen>
+  							</iframe>
+  					</div>';
+				}
+				$html .= ($key == "title") ? '<h4> '.utf8_decode(strtoupper($value)).' </h4>' : '';
+				$html .= ($key == "site_name") ? '<h4> '.utf8_decode(strtoupper($value)).' </h4>' : '';
+  				$html .= ($key == "description")? "<p> ".utf8_decode($value)." </p>" : '';
+			}
+
+			$html .= $multimedia;
+  			$html .= "</div>";
+			return $html;
+		}
+
+		return '';
+		
 	}
 }
