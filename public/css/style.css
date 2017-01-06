@@ -2384,13 +2384,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4f6f5', end
 	display: none;
 }
 .edit_img .imgPortadaC{
-	display: none;
 	width: 700px;
 	margin:20px;
 	border:2px solid #696666;
 }
 .edit_img img{
-	display: none;
+
 	width: 400px;
 	margin:20px;
 	border:2px solid #696666;
