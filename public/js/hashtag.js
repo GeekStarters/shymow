@@ -48,7 +48,7 @@ var Hashtag = (function() {
 		var elems = document.querySelectorAll(elem);
 		[].forEach.call(elems, function(elem) {
 			var html = elem.innerHTML;
-			var matched = html.match(/^(#\S+)[^\s]|(\s#\S+)/gi);
+			var matched = html.match(/(^(#\S+)[^\s]|\s(#\S+))/gi);
 			if (matched != null) {
 				[].forEach.call(matched, function(m) {
 					var templ;

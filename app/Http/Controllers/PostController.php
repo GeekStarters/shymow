@@ -71,23 +71,30 @@ class PostController extends Controller {
 	        return redirect('perfil')->withErrors($v, 'post')->withInput($request->all());
 	    }
 
-	    $searchTrends = explode(' ', $request->input('description'));
+		$order   = array("\r\n", "\n", "\r");
+		$replace = ' ';
+		// Procesa primero \r\n así no es convertido dos veces.
+		$newstr = str_replace($order, $replace, $request->input('description'));
+	    $searchTrends = explode(' ', $newstr);
 	    $trends = [];
 	   	for ($i=0; $i <count($searchTrends); $i++) { 
 	   		$object = $searchTrends[$i];
-	   		if (strlen($object) > 1) {
-	   			if (preg_match("/^(#\S+)[^\s]|(\s#\S+)/", $object)){
+	   		if (strlen($object) > 0) {
+	   			if (preg_match("/(^(#\S+)[^\s]|(#\S+))[^\r\n]/", $object)){
 	   				$trend = substr($object, 1 , strlen($object));
+	   				
+
 					array_push($trends, trim($trend));
 	   			
 				}
 	   		}
 	   	}
-	    // dd($trends);
+	    // dd($newstr);
 	    try {
-	    	$newPost = new Post($post);
+	    	$newPost = new Post();
 		    	$newPost->category_post_id = $request->input('category');
 		    	$newPost->profil_id = Auth::user()->id;
+		    	$newPost->description = $newstr;
 		    	$newPost->qualification = 0;
 		    	$newPost->share = 0;
 		    	$newPost->like = 0;
