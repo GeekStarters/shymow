@@ -8,7 +8,7 @@
 		<div class="alert alert-danger" role="alert">
 			Tamaño recomendado 400 x 400 px
 		</div>
-		{!! Form::open(['url'=>'/uploadProfileImg','method'=>'POST','files'=>'true']) !!}
+		{!! Form::open(['url'=>'/uploadProfileImg','method'=>'POST','files'=>'true','id'=>'coords']) !!}
 			<div class="form-group" id="contentImgSelect">
 				{!! Form::file('img',['style'=>'display:none','id'=>'imgProfile'])!!}
 				@foreach ($errors->all() as $error)
@@ -20,7 +20,7 @@
 					<span id="displayImgProfile" class="glyphicon glyphicon-picture"></span>
 				</div>
 
-				<img src="{{Auth::user()->img_profile}}" id="viewImgProfile" alt="shymow">
+				<img src="" id="viewImgProfile" alt="shymow" style="display: none">
 				<input type="hidden" name="x1" value="" />
 				<input type="hidden" name="y1" value="" />
 				<input type="hidden" name="x2" value="" />
@@ -48,6 +48,11 @@
 		});
 		Hashtag.replaceTags('.hashtag-post','fb');
 
+		initJcrop();
+        function initJcrop()
+        {
+            jcrop_api = $.Jcrop('#viewImgProfile');
+        };
 
 		$('#displayImgProfile').click(function(event) {
 			/* Act on the event */
@@ -59,16 +64,35 @@
 		$("#imgProfile").change(function(){
 		    readURL(this,'#viewImgProfile');
 		    $('#avisoSelectImg').fadeIn('slow');
-		    $('#viewImgProfile').fadeIn('slow');
+		    // $('#viewImgProfile').fadeIn('slow');
 		    $('.edit_img button').fadeIn('slow');
 		    $('.edit_img a').fadeIn('slow');
 
-		    $('#displayImgProfile').css('visibility', 'hidden');
+		    $('#displayImgProfile').fadeOut('fast');
 
-		  
-			addImgAreaSelect($('#viewImgProfile'));
-		    // adds an image area select instance
+		    jcrop_api.setImage($('#viewImgProfile').attr('src')); 
+		    $('#viewImgProfile').Jcrop({
+		      onChange:   showCoords,
+		      onSelect:   showCoords,
+		      boxWidth: 400, 
+		      boxHeight: 400,
+		      bgColor: '',
+		      aspectRatio: 4 / 4,
+		      onRelease:  clearCoords
+		    },function(){
+		      jcrop_api = this;
+		    });
+		    $('#coords').on('change','input',function(e){
+		      var x1 = $('input[name="x1"]').val(),
+		          x2 = $('input[name="x2"]').val(),
+		          y1 = $('input[name="y1"]').val(),
+		          y2 = $('input[name="y2"]').val();
+		      jcrop_api.setSelect([x1,y1,x2,y2]);
+		    });
+
 		});
+
+
 
 		function readURL(input,id) {
 
@@ -77,54 +101,37 @@
 
 		        reader.onload = function (e) {
 		            $(id).attr('src', e.target.result);
+		            jcrop_api.setImage(e.target.result); 
 		        }
 
 		        reader.readAsDataURL(input.files[0]);
 		    }
 		}
 
-		function addImgAreaSelect( img ){
-	        img.imgAreaSelect({
-	                handles : true,
-	                aspectRatio : '4:4',
-	                fadeSpeed : 1,
-	                show : true,
-	                onSelectEnd: function (img, selection) {
-			            $('input[name="x1"]').val(selection.x1);
-			            $('input[name="y1"]').val(selection.y1);
-			            $('input[name="x2"]').val(selection.x2);
-			            $('input[name="y2"]').val(selection.y2);            
-			            $('input[name="width"]').val(selection.width);            
-			            $('input[name="height"]').val(selection.height);            
-			        }
-	        });
-	        img.load(function(){ // display initial image selection 16:9
-	                    var height = ( this.width / 4 ) * 4;	
-	                    if( height <= this.height ){
 
-	                            var diff = ( this.height - height ) / 2;
-	                            var coords = { x1 : 0, y1 : diff, x2 : this.width, y2 : height + diff };
-	                            $('input[name="x1"]').val(0);
-					            $('input[name="y1"]').val(Math.round(diff));
-					            $('input[name="x2"]').val(Math.round(this.width));
-					            $('input[name="y2"]').val(Math.round(height + diff));            
-					            $('input[name="width"]').val(Math.round(this.width));            
-					            $('input[name="height"]').val(Math.round(height));   
-	                    }   
-	                    else{ // if new height out of bounds, scale width instead
-	                            var width = ( this.height / 4 ) * 4; 
-	                            var diff = ( this.width - width ) / 2;
-	                            var coords = { x1 : diff, y1 : 0, x2 : width + diff, y2: this.height };
-	                            $('input[name="x1"]').val(Math.round(diff));
-					            $('input[name="y1"]').val(0);
-					            $('input[name="x2"]').val(Math.round(width + diff));
-					            $('input[name="y2"]').val(Math.round(this.height));            
-					            $('input[name="width"]').val(Math.round(width));            
-					            $('input[name="height"]').val(Math.round(this.height));    
-	                    }   
-	                $( this ).imgAreaSelect( coords );
-	        });
-		}
+		// Simple event handler, called from onChange and onSelect
+	  // event handlers, as per the Jcrop invocation above
+	  function showCoords(c)
+	  {
+	    $('input[name="x1"]').val(Math.round(c.x));
+	    $('input[name="y1"]').val(Math.round(c.y));
+	    $('input[name="x2"]').val(Math.round(c.x2));
+	    $('input[name="y2"]').val(Math.round(c.y2));
+	    $('input[name="width"]').val(Math.round(c.w));
+	    $('input[name="height"]').val(Math.round(c.h));
+	  };
+
+	  function clearCoords()
+	  {
+	    $('input[name="x1"]').val('');
+	    $('input[name="y1"]').val('');
+	    $('input[name="x2"]').val('');
+	    $('input[name="y2"]').val('');
+	    $('input[name="width"]').val('');
+	    $('input[name="height"]').val('');
+	  };
+
+
 	});
 </script>
 @stop

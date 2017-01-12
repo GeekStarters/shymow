@@ -22,7 +22,6 @@ class NotifyController implements MessageComponentInterface{
     {
 
     	$data = json_decode($msg);
-    	var_dump($msg);
         foreach ($this->clients as $client) {
             if ($conn !== $client) {
                 // The sender is not the receiver, send to each client connected

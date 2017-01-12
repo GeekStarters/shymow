@@ -873,7 +873,8 @@ class PerfilController extends Controller {
 	    $path = public_path('img/profile/' . $filename);
 
 		try {
-			Image::make( $img->getRealPath() )->resize(700,300)->crop($width, $height, $x1, $y1)->resize(700,300)->save($path);
+			Image::make( $img->getRealPath() )->encode('jpg', 75)->crop($width, $height, $x1, $y1)->save($path);
+			
 			Perfil::where('id',Auth::id())->update(['img_portada'=>'img/profile/' . $filename]);
 
 			flash('Portada Cambiada con éxito', 'success');
@@ -912,7 +913,7 @@ class PerfilController extends Controller {
 	    $path = public_path('img/profile/' . $filename);
 
 		try {
-			Image::make( $img->getRealPath() )->resize(400,400)->crop($width, $height, $x1, $y1)->resize(400,400)->save($path);
+			$jpg = (string) Image::make( $img->getRealPath() )->encode('jpg', 75)->crop($width, $height, $x1, $y1)->resize(400,400)->save($path);
 			Perfil::where('id',Auth::id())->update(['img_profile'=>'img/profile/' . $filename]);
 			flash('Foto de perfil cambiada con éxito', 'success');
 			return redirect('perfil');

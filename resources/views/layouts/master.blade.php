@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{ asset('/css/imgareaselect-animated') }}">
     <link rel="stylesheet" href="{{ asset('/css/imgareaselect-default.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/imgareaselect-deprecated.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/jquery.Jcrop.min.css') }}">
     <link rel="stylesheet" type="text/css" media="all" href="{{ asset('css/slider-horizontal.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
@@ -64,12 +65,25 @@
     <script src=" {{ asset('js/sweetalert.js') }}"></script>
     <script src=" {{ asset('js/scripts.js') }} "></script>
     <script src=" {{ asset('js/validate.js') }} "></script>
+    <script src=" {{ asset('js/jquery.Jcrop.min.js') }} "></script>
+    <script src=" {{ asset('js/jquery.color.js') }} "></script>
     @if(Auth::check())<script src=" {{ asset('js/notification.js') }} "></script>@endif
     <script src=" {{ asset('js/messages.js') }} "></script>
     <script type="text/javascript" src="{{ asset('js/responsiveCarousel.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/jquery.imgareaselect.min.js') }}"></script>
     @yield('scripts')
     @yield('scriptsTwo')
+    <!-- Hotjar Tracking Code for http://shymow.com/ -->
 
+  <script>
+      (function(h,o,t,j,a,r){
+          h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+          h._hjSettings={hjid:386524,hjsv:5};
+          a=o.getElementsByTagName('head')[0];
+          r=o.createElement('script');r.async=1;
+          r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+          a.appendChild(r);
+      })(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');
+  </script>
   </body>
 </html>

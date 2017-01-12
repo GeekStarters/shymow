@@ -2599,3 +2599,7 @@ bottom: -5px;
 	width: 12px;
 	text-align: center;	
 }
+
+.jcrop-holder{
+	margin: auto !important;
+}

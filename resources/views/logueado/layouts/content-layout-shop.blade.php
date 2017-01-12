@@ -42,7 +42,7 @@
 									</span>
 								</span>
 							</a>
-						</li>>
+						</li>
 						 @if(Auth::user()->role == "1" || Auth::user()->role == "2")
 					     <li><a href="{{ url('agregar-producto') }}">Mi Shymow Shop</a></li>
 					     @endif
