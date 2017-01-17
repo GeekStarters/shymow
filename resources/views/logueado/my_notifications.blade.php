@@ -2,23 +2,25 @@
 
 
 @section('content-logueo')
-<div class="create-product-header" style="border:1px solid #DDDDDD ;">
-	<div class="col-md-6 active-background-product-agregate border-right-active">
-		<a href="/my_notifications">
-			<h2 class="text-center">
-				Tu perfil
-			</h2>
-		</a>
+@if(Auth::user()->role != 0)
+	<div class="create-product-header" style="border:1px solid #DDDDDD ;">
+		<div class="col-md-6 active-background-product-agregate border-right-active">
+			<a href="/my_notifications">
+				<h2 class="text-center">
+					Tu perfil
+				</h2>
+			</a>
+		</div>
+		<div class="col-md-6">
+			<a href="/my_notification_shop">
+				<h2 class="text-center">
+					Shymow shop
+				</h2>
+			</a>
+		</div>
+		<div class="clearfix"></div>
 	</div>
-	<div class="col-md-6">
-		<a href="/my_notification_shop">
-			<h2 class="text-center">
-				Shymow shop
-			</h2>
-		</a>
-	</div>
-	<div class="clearfix"></div>
-</div>
+@endif
 <br>
 <div class="chat-messages-container">
 	<div class="col-sm-5">
