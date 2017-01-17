@@ -1816,6 +1816,24 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4f6f5', end
     left: 93.8%;
     z-index: 1;
 }
+.border-right-shop::before {
+    content: " ";
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: 27px solid transparent;
+        border-top-width: 27px;
+        border-top-style: solid;
+        border-top-color: transparent;
+    border-bottom: 27px solid transparent;
+    border-left:27px solid white;
+    position: absolute;
+    top: 50%;
+    margin-top: -27px;
+    margin-right: 12px;
+    left: 100%;
+    z-index: 1;
+}
 
 .border-right-active::before{
 	content: " ";
@@ -1846,6 +1864,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4f6f5', end
     border-bottom: 27px solid transparent;
 
     border-left: 27px solid #DDDDDD;
+
+    position: absolute; right: -10px; top: 0;
+}
+.create-product-header .border-right-shop:after{
+	    content: "";  
+
+    border-top: 27px solid transparent;
+
+    border-bottom: 27px solid transparent;
 
     position: absolute; right: -10px; top: 0;
 }

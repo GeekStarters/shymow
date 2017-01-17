@@ -12,14 +12,15 @@
   					<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
 						<span style="position: relative;">
 		  					<img src="{{ url(Auth::user()->img_profile) }}" alt="">
-		  					@if(DataHelpers::knowNotificationNum()>0)
-								<span class="notification-perfil">
-									<span>
-
-										{{DataHelpers::knowNotificationNum()}}
+		  					<span id="n-img-p">
+		  						@if(DataHelpers::knowNotificationNum()>0)
+									<span class="notification-perfil">
+										<span>
+											{{DataHelpers::knowNotificationNum()}}
+										</span>
 									</span>
-								</span>
-		  					@endif
+			  					@endif
+		  					</span>
 						</span>
 
 	  					{{Auth::user()->name}} <b class="caret"></b>

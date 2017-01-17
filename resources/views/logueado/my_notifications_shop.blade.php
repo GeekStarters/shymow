@@ -3,15 +3,15 @@
 
 @section('content-logueo')
 <div class="create-product-header" style="border:1px solid #DDDDDD ;">
-	<div class="col-md-6 active-background-product-agregate border-right-active">
+	<div class="col-md-6 border-right-shop">
 		<a href="/my_notifications">
 			<h2 class="text-center">
 				Tu perfil
 			</h2>
 		</a>
 	</div>
-	<div class="col-md-6">
-		<a href="/my_notification_shop">
+	<div class="col-md-6 active-background-product-agregate border-right-active">
+		<a href="/my_notification_shop'">
 			<h2 class="text-center">
 				Shymow shop
 			</h2>

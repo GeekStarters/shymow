@@ -205,6 +205,33 @@ class NotificationController extends Controller {
 		return view('logueado.my_notifications',compact('notifications','count'));
 	}
 
+	public function myNotificationsShop()
+	{
+		$notifications = DB::table('my_notifications')
+							->join('perfils', 'perfils.id', '=', 'my_notifications.sender')
+							->leftJoin('posts', 'posts.id', '=', 'my_notifications.object_id')
+							->select('perfils.id as senderId', 'perfils.name', 'perfils.img_profile','my_notifications.sender','my_notifications.type','my_notifications.description','my_notifications.object_id','my_notifications.read','posts.description as postsDescription','my_notifications.created_at as time','my_notifications.id as notification_id')
+							->where('my_notifications.active',true)
+							->where('my_notifications.reseiver',Auth::id())
+							->where('my_notifications.type','<>',9)
+							->take(15)->orderBy('my_notifications.id', 'desc')->get();
+		//COUNT
+			$count = DB::table('my_notifications')
+			->where('my_notifications.active',true)
+			->where('my_notifications.read',false)
+			->where('my_notifications.type','<>',9)
+			->where('my_notifications.reseiver',Auth::id())
+			->count();
+
+		//READ					
+		DB::table('my_notifications')
+			->where('my_notifications.active',true)
+			->where('my_notifications.reseiver',Auth::id())
+			->where('my_notifications.type','<>',9)
+			->update(['read'=>true]);
+		return view('logueado.my_notifications_shop',compact('notifications','count'));
+	}
+
 	public function getNotificationType(Request $request)
 	{
 		$v = Validator::make($request->all(), [
@@ -331,18 +358,18 @@ class NotificationController extends Controller {
 	    if (count($userS)>0) {
 	    	$userR = Perfil::where('id','=',$reseiver)->first();
 	    	if (count($userR)>0) {
-	    		if (DataHelpers::knowTypeNotification($type) != false) {
-
-	    			try {
+	    		$data = DataHelpers::knowTypeNotification($type,$reseiver);
+	    		if ($data != false) {
+	    			try {	
 	    				$newNoti = new MyNotification;
 		    			$newNoti->sender = $userS->id;
 		    			$newNoti->reseiver = $userR->id;
 		    			$newNoti->type = $type;
-		    			$newNoti->description = DataHelpers::knowTypeNotification($type);
+		    			$newNoti->description = $data['type'];
 		    			$newNoti->object_id = $objectId;
 		    			$newNoti->save();
 
-	    				return response()->json(['error'=>false,'name' => Auth::user()->name, 'identification' => $userR->identification, 'img' => Auth::user()->img_profile, 'description' => DataHelpers::knowTypeNotification($type)]);
+	    				return response()->json(['error'=>false,'name' => Auth::user()->name, 'identification' => $userR->identification, 'img' => Auth::user()->img_profile, 'description' => $data['type'], 'sound'=>$data['sound'],'notify'=>$data['notify']]);
 	    			} catch (Exception $e) {
 	    				return response()->json(['error'=>true]);
 	    			}

@@ -6,7 +6,6 @@ use App\Perfil;
 use App\BusinessCategories;
 use App\BusinessSubCategories;
 use Session as session;
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -17,6 +16,26 @@ use Session as session;
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::get('mail-p',function(){
+
+ 
+       //se envia el array y la vista lo recibe en llaves individuales {{ $email }} , {{ $subject }}...
+       \Mail::send('emails.welcome', [], function($message)
+       {
+           //remitente
+           $message->from('desarrollo@shymow.com', 'Melvin');
+ 
+           //asunto
+           $message->subject('Prueba');
+ 
+           //receptor
+           $message->to('desarrollo@shymow.com', 'melvin');
+ 
+       });
+
+    dd('Mail Send Successfully');
+});
+
 Route::get('500', function()
 {
     abort(500);
@@ -122,6 +141,7 @@ Route::group(['middleware' => 'auth'], function()
         {
             //Shymow Shop
             Route::get('agregar-producto','ShymowShop@index');
+            Route::get('my_notification_shop','NotificationController@myNotificationsShop');
             Route::get('buscar-categorias/{id}','ShymowShop@ajaxCategories');
             Route::post('informacion-producto','ShymowShop@informacionProducto');
             Route::get('informacion-producto-pro','ShymowShop@informacionProductoPro');
@@ -187,7 +207,7 @@ Route::group(['middleware' => 'auth'], function()
     Route::post('/create_like_user/{post}','PerfilController@createLike');
 
     //Crear like product.
-    Route::post('/create_like_product/{post}','ShymowShop@likeProduct');
+    Route::post('/create_like_product/{post}/{type}','ShymowShop@likeProduct');
 
     //Crear calificacion.
     Route::post('/create_qualification/{post_id}/{quaification}','PostController@createQualification');

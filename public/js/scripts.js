@@ -218,69 +218,6 @@ $( document ).ready(function() {
 
     //FIN PROCESO DE COMENTARIOS
 
-    //PROCESO DEL LIKE PRODUCTO
-        $('.like-me-product').click(function(event) {
-            /* Act on the event */
-            var post = $(this).data('like');
-            var user = $(this).data('user');
-            var objecto = $(this);
-            if (user != null) {
-                // alert(post);
-                var no_like = $(this).hasClass('like-user');
-                
-                $.ajax({
-                    url: '/create_like_product/'+post,
-                    type: 'POST',
-                    dataType: 'HTML',
-                    success: function($data){
-                        if (no_like == false) {             
-                            objecto.addClass('like-user');
-                            objecto.removeClass('like-user-active');
-
-                        }else{
-                            objecto.removeClass('like-user');
-                            objecto.addClass('like-user-active');
-
-                        }
-                    }
-                })
-                .fail(function() {
-                    console.log("error");
-                });
-            }else{
-                // alert(post);
-                var no_like = $(this).hasClass('post-like-me');
-
-                var like = objecto.children('.number-post').text();
-                like = parseInt(like);
-                
-                $.ajax({
-                    url: '/create_like_product/'+post,
-                    type: 'POST',
-                    dataType: 'HTML',
-                    success: function($data){
-                        if (no_like == false) {             
-                            objecto.addClass('post-like-me');
-                            objecto.removeClass('post-like-me-active');
-                            objecto.children('.number-post').text(like-1);
-
-                        }else{
-                            objecto.removeClass('post-like-me');
-                            objecto.addClass('post-like-me-active');
-                            objecto.children('.number-post').text(like+1);
-
-                        }
-                    }
-                })
-                .fail(function() {
-                    console.log("error");
-                });
-
-            }
-        });
-
-    //FIN PROCESO DE LIKE
-
 
     //PROCESO DEL LIKE
     	$('.like-me').click(function(event) {

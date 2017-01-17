@@ -14,6 +14,7 @@ use App\Notification_settings_store;
 use App\options_desactives_store;
 use App\LikeProduct;
 use App\Qualification_product;
+use App\MyNotificationShop;
 use App\CommentProduct;
 use Validator;
 use App\Helpers\DataHelpers;
@@ -43,11 +44,32 @@ class ShymowShop extends Controller {
 		$productModel = new Product();
 		return DataHelpers::createQualification($id,$qualification,$qualificationModel,$productModel,"product_id","profil_id");
 	}
-	public function likeProduct($id){
+	public function likeProduct($id,$type){
 		$product = Product::find($id);
 		if (count($product)>0) {
 			$new_like = new LikeProduct();
-			echo DataHelpers::createLike($id,"products","like_products","product_id","profil_id",$product,$new_like);
+
+			$productS = Product::where('id','=',$id)->first();
+			$userR = Perfil::find($productS->profile_id);
+			$store = Store::where('profile_id','=',$productS->profile_id)->first();
+
+
+			try {
+				DataHelpers::createLike($id,"products","like_products","product_id","profil_id",$product,$new_like);
+
+				$data = DataHelpers::verifyNotificationShop($type,$id,$store->id);
+				$newNoti = new MyNotificationShop;
+					$newNoti->sender = Auth::id();
+					$newNoti->reseiver = $userR->id;
+					$newNoti->type = $type;
+					$newNoti->description = $data['type'];
+					$newNoti->object_id = $id;
+				$newNoti->save();
+
+				return response()->json(['error'=>false,'name' => Auth::user()->name, 'identification' => $userR->identification, 'img' => Auth::user()->img_profile, 'description' => $data['type'], 'sound'=>$data['sound'],'notify'=>$data['notify']]);
+			} catch (Exception $e) {
+				return response()->json(['error'=>true]);
+			}
 		}
 	}
 

@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="{{ asset('/css/imgareaselect-default.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/imgareaselect-deprecated.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/jquery.Jcrop.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/jquery.gritter.css') }}">
     <link rel="stylesheet" type="text/css" media="all" href="{{ asset('css/slider-horizontal.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 

@@ -10,6 +10,8 @@ use App\Perfil;
 use App\UserLikes;
 use App\UserQualification;
 use App\UserShare;
+use App\Notification_setting;
+use App\Notification_settings_store;
 use App\MyNotification;
 use App\Comment_post;
 use App\Post;
@@ -19,6 +21,9 @@ use DB;
 use Carbon\Carbon;
 use App\Product;
 use App\Qualification_product;
+use App\CommentProduct;
+use App\ShareProduct;
+use App\Store;
 use DateTime;
 use OpenGraph;
 class DataHelpers{
@@ -180,6 +185,42 @@ class DataHelpers{
 		}
 	}
 
+	public static function verifyNotificationShop($type,$post_id,$store){
+		$config = Notification_settings_store::where('store_id','=',$store)->first();
+		if (count($store) > 0) {
+			switch ($type) {
+				//Qualification
+				case 0:
+					return ['type'=>'Calificarón Producto','notify'=>$config->qualification_notification,'sound'=>$config->sound_notification];
+					break;
+				//Like
+				case 1:
+
+					return ['type'=>'Me gusta Producto','notify'=>$config->like_notification,'sound'=>$config->sound_notification];
+					break;
+				//Sell
+				case 2:
+					return ['type'=>'Producto vendido','notify'=>$config->buy_notification,'sound'=>$config->sound_notification];
+					break;
+				//Share
+				case 3:
+					return ['type'=>'Compartió Post','notify'=>$config->share_notification,'sound'=>$config->sound_notification];
+					break;
+				//Comments
+				case 4:
+					return ['type'=>'Comento Post','notify'=>$config->comments_notification,'sound'=>$config->sound_notification];
+					break;
+				//Friend
+				case 5:
+					return ['type'=>'Dejo de gustar','notify'=>$config->like_notification,'sound'=>$config->sound_notification];
+					break;
+				default:
+					return false;
+					break;
+			}
+		}
+		
+	}
 	public static function createQualification($post_id,$qualification,$modelQualification,$modelProduct,$columnSearch,$profilIdColumn){
 		//user ID
 		$user_id = Auth::user()->id;
@@ -321,53 +362,58 @@ class DataHelpers{
 	    return $stringDisplay;
 	}
 
-	public static function knowTypeNotification($type){
+	public static function knowTypeNotification($type,$reseiver){
+			$config = Notification_setting::where('perfil_id','=',$reseiver)->first();
 			switch ($type) {
 				//Qualification
 				case 0:
-					return "Calificarón Post";
+					return ['type'=>'Calificarón Post','notify'=>$config->qualification_notification,'sound'=>$config->play_reseiver_notification];
 					break;
 				//Like
 				case 1:
-					return "Me gusta Post";
+
+					return ['type'=>'Me gusta Pos','notify'=>$config->like_notification,'sound'=>$config->play_reseiver_notification];
 					break;
 				//Follow
 				case 2:
-					return "Sigue Post";
+					return ['type'=>'Sigue post','notify'=>$config->follow_notification,'sound'=>$config->play_reseiver_notification];
 					break;
 				//Share
 				case 3:
-					return "Compartió Post";
+					return ['type'=>'Compartió Post','notify'=>$config->share_notification,'sound'=>$config->play_reseiver_notification];
 					break;
 				//Comments
 				case 4:
-					return "Comento Post";
+					return ['type'=>'Comento Post','notify'=>$config->comments_notification,'sound'=>$config->play_reseiver_notification];
 					break;
 				//Friend
 				case 5:
-					return false;
+					return ['type'=>false,'notify'=>false];
 					break;
 				//Unfollow
 				case 6:
-					return "Dejo de seguir Post";
+					return ['type'=>'Dejo de seguir Post','notify'=>$config->follow_out_notification,'sound'=>$config->play_reseiver_notification];
 					break;
 				//Message
 				case 7:
-					return "Envio Mensaje";
+					return ['type'=>'Envio Mensaje','notify'=>$config->message_notification,'sound'=>$config->play_reseiver_msg];
 					break;
 				//Unlike
 				case 8:
-					return "Dejo de gustar";
+					return ['type'=>'Dejo de gustar','notify'=>$config->like_notification,'sound'=>$config->play_reseiver_notification];
 					break;
 				//Friend
 				case 9:
-					return "Solicito amistad";
+					return ['type'=>'Solicito amistad','notify'=>true];
 					break;
 				default:
 					return false;
 					break;
 			}
 	}
+
+
+
 
 	public static function knowNotificationNum(){
 		$count = DB::table('my_notifications')
