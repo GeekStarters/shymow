@@ -363,7 +363,15 @@ class DataHelpers{
 	}
 
 	public static function knowTypeNotification($type,$reseiver){
-			$config = Notification_setting::where('perfil_id','=',$reseiver)->first();
+			$config = Notification_setting::where('perfil_id','=',$reseiver)->count();
+			if (count($config) < 1) {
+				$notifications = new Notification_setting();
+			    	$notifications->perfil_id = (int)$reseiver);
+			    $notifications->save();
+			    $config = Notification_setting::where('perfil_id','=',$reseiver)->first();
+			}else{
+				$config = Notification_setting::where('perfil_id','=',$reseiver)->first();
+			}
 			switch ($type) {
 				//Qualification
 				case 0:

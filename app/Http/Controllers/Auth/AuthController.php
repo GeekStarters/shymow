@@ -121,6 +121,10 @@ class AuthController extends Controller {
                 $socialData->access_token= $user->token;
                 $socialData->profile_id= $newSocialUser->id;
                 $socialData->save();
+
+                $notifications = new Notification_setting();
+                $notifications->perfil_id = $user->id;
+                $notifications->save();
                 // Add role
                 // $role = Role::whereName('user')->first();
                 // $newSocialUser->assignRole($role);
