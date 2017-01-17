@@ -350,7 +350,7 @@ class NotificationController extends Controller {
 	    }
 
 	    $sender = $request->input('sender');
-	    $reseiver = $request->input('reseiver');
+	    $reseiver = (int)$request->input('reseiver');
 	    $type = (int) $request->input('type');
 	    $objectId = (int) $request->input('objectId');
 
