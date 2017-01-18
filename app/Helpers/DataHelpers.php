@@ -145,9 +145,9 @@ class DataHelpers{
 						$edit_user->like = $count_like;
 					try {
 						$edit_user->save();
-						echo "Like";
+						return "Like";
 					} catch (Exception $e) {
-						echo "error";
+						return "error";
 					}
 				}
 			}elseif (count($like_edit) > 0) {
@@ -161,9 +161,9 @@ class DataHelpers{
 				
 				try {
 					$edit_user = $modelIncrementLike::where('id','=',$id_object)->update(['like'=>count( $count_like)]);
-					echo "like";
+					return "like";
 				} catch (Exception $e) {
-					echo "error";
+					return "error";
 				}
 			}
 
@@ -180,7 +180,7 @@ class DataHelpers{
 		
 				
 				
-				echo "like";
+				return "like";
 			}
 		}
 	}
@@ -204,11 +204,11 @@ class DataHelpers{
 					break;
 				//Share
 				case 3:
-					return ['type'=>'Compartió Post','notify'=>$config->share_notification,'sound'=>$config->sound_notification];
+					return ['type'=>'Compartió producto','notify'=>$config->share_notification,'sound'=>$config->sound_notification];
 					break;
 				//Comments
 				case 4:
-					return ['type'=>'Comento Post','notify'=>$config->comments_notification,'sound'=>$config->sound_notification];
+					return ['type'=>'Comento producto','notify'=>$config->comments_notification,'sound'=>$config->sound_notification];
 					break;
 				//Friend
 				case 5:
@@ -272,12 +272,12 @@ class DataHelpers{
 						//Guardamos la nueva calificacion de los posteos
 							$saveNewQualificationPost = $modelProduct::where('active',true)->where('id',$post_id) ->update(['qualification' => $media]);
 						//retornamos el promedio o el error
-						return response()->json(['error' => false, 'qualification' => $media]);
+						return ['error' => false, 'qualification' => $media];
 					} catch (Exception $e) {
-						return response()->json(['error' => true, 'description' => $e->getMessage()]);
+						return ['error' => true, 'description' => $e->getMessage()];
 					}
 				} catch (Exception $e) {
-					return response()->json(['error' => true, 'description' => $e->getMessage()]);
+					return ['error' => true, 'description' => $e->getMessage()];
 				}
 
 				// Si el usuario ya califico editamos esa misma calificacion
@@ -305,12 +305,12 @@ class DataHelpers{
 							$saveNewQualificationPost = $modelProduct::where('active',true)->where('id',$post_id)->update(['qualification' => $media]);
 
 						//retornamos el promedio o el error
-						return response()->json(['error' => false, 'qualification' => $media]);
+						return ['error' => false, 'qualification' => $media];
 					} catch (Exception $e) {
-						return response()->json(['error' => true, 'description' => $e->getMessage()]);
+						return ['error' => true, 'description' => $e->getMessage()];
 					}
 				} catch (Exception $e) {
-					return response()->json(['error' => true, 'description' => $e->getMessage()]);
+					return ['error' => true, 'description' => $e->getMessage()];
 				}
 
 				//Si el usuario habia calificado antes pero esta desactivada la activamos y editamos
@@ -338,12 +338,12 @@ class DataHelpers{
 						//Guardamos la nueva calificacion de los posteos
 							$saveNewQualificationPost = $modelProduct::where('active',true)->where('id',$post_id) ->update(['qualification' => $media]);
 						//retornamos el promedio o el error
-						return response()->json(['error' => false, 'qualification' => $media]);
+						return ['error' => false, 'qualification' => $media];
 					} catch (Exception $e) {
-						return response()->json(['error' => true, 'description' => $e->getMessage()]);
+						return ['error' => true, 'description' => $e->getMessage()];
 					}
 				} catch (Exception $e) {
-					return response()->json(['error' => true, 'description' => $e->getMessage()]);
+					return ['error' => true, 'description' => $e->getMessage()];
 				}
 			}
 		}

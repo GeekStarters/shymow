@@ -6,6 +6,7 @@ jQuery(document).ready(function($) {
 	actualuser = $( "#unvalus" ).data("unvalus");
 	conn.onmessage = function(e) {
 		var data = JSON.parse(e.data);
+		console.log(data);
 		if(actualuser==data.channel)
 		{
 			var count = $('.number-notify-g').text();
@@ -43,7 +44,7 @@ jQuery(document).ready(function($) {
 	        if (user != null) {
 	        }else{
 	            // alert(post);
-	            var no_like = $(this).hasClass('post-like-me');
+	            var no_like = objecto.hasClass('post-like-me');
 
 	            var like = objecto.children('.number-post').text();
 	            like = parseInt(like);
@@ -52,8 +53,10 @@ jQuery(document).ready(function($) {
 	                url: '/create_like_product/'+post+'/'+type,
 	                type: 'POST',
 	                dataType: 'HTML',
-	                success: function($data){
-	                    if (!data.error) {
+	                success: function(data){
+	                var data = $.parseJSON(data);
+					if (!data.error) {
+							
 	                    	if (no_like == false) {             
 		                        objecto.addClass('post-like-me');
 		                        objecto.removeClass('post-like-me-active');
@@ -61,7 +64,7 @@ jQuery(document).ready(function($) {
 		                        conn.send(JSON.stringify({channel:data.identification,name:data.name,img:data.img,type:data.description,sound:data.sound,notify:data.notify }));
 
 		                    }else{
-		                    	
+		                   
 		                        objecto.removeClass('post-like-me');
 		                        objecto.addClass('post-like-me-active');
 		                        objecto.children('.number-post').text(like+1);
@@ -77,7 +80,94 @@ jQuery(document).ready(function($) {
 	        }
 	    });
 
-//FIN PROCESO DE LIKE
+	//FIN PROCESO DE LIKE
+
+
+	$(".box-comment-header-product").submit('.form-comment',function(event) {
+        /* Act on the event */
+        event.preventDefault();
+
+        // CONTENEDOR DEL POST
+        var padre = $(this).parents('.content-post');
+        var post = padre.find('.box-comment-product').data('trend');
+        var comment = $(this).find('input').val();
+        var count = padre.find('.post-comment ').children('.number-post').text();
+
+        if (comment.length > 0 ) {
+            $.ajax({
+                url: '/create_comment-product/'+post,
+                type: 'POST',
+                dataType: 'HTML',
+                data: {comment: comment},
+                success: function(data){
+                		var data = $.parseJSON(data);
+                        conn.send(JSON.stringify({channel:data.identification,name:data.name,img:data.img,type:data.description,sound:data.sound,notify:data.notify }));
+                        if (count > 0) {
+                        	padre.find('.box-comment-body').append(data.html);
+                        }else{
+                        	padre.find('.box-comment-body').html(data.html);
+                        }
+                        count = parseInt(count) + 1;
+                        padre.find('.post_change').text('');
+                        padre.find('.post_change').text(count);
+
+                        padre.find('input').val("");
+                        
+                }                   
+
+            })
+            .fail(function() {
+                console.log("error");
+            });
+            
+        }
+    });
+
+
+	 //PROCESO CALIFICACION PRODUCTO
+    $('.post-qualification-product').on('click', 'a', function(event) {
+        event.preventDefault();
+        /* Act on the event */
+        var value = $(this).data('star');
+
+        var post_id = $(this).data('post');
+
+        var padre = $(this).parents('.post-qualification-product');
+        
+        if (post_id != null) {
+            $.ajax({
+                url: '/create_qualification_product/'+post_id+'/'+value,
+                type: 'POST',
+                dataType: 'JSON',
+                success: function(data){
+                    if (!data.error) {
+                        var html_append = "";
+                        conn.send(JSON.stringify({channel:data.identification,name:data.name,img:data.img,type:data.description,sound:data.sound,notify:data.notify }));
+                        if(data.qualification < 5)
+                        {
+                            for (var i = 1; i <= parseInt(data.qualification); i++)
+                                html_append += '<a data-star="'+i+'" class="glyphicon glyphicon-star qualification-popular" data-post="'+post_id+'"></a>'
+                      
+                            for (var i = 1; i <= (5-parseInt(data.qualification)); i++)
+                                html_append += '<a data-star="'+(parseInt(data.qualification)+i)+'" class="glyphicon glyphicon-star qualification-no-popular" data-post="'+post_id+'"></a>'
+                            
+                            padre.html(html_append);
+                        }else{
+                            for (var i = 1; i <= data.qualification; i++)
+                                html_append += '<a data-star="'+i+'" class="glyphicon glyphicon-star qualification-popular" data-post="'+post_id+'"></a>'
+                            
+                            padre.html(html_append);
+                        }
+                    }
+                }
+            })
+            .fail(function() {
+                console.log("error");
+            });
+        }
+        
+    });
+
 
 
 

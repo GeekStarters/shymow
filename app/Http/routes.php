@@ -147,6 +147,10 @@ Route::group(['middleware' => 'auth'], function()
             Route::get('informacion-producto-pro','ShymowShop@informacionProductoPro');
             Route::post('envio-producto','ShymowShop@envioProducto');
             Route::post('crear-producto','ShymowShop@create');
+            // My notifications type
+            Route::get('get_notification_type_store','NotificationController@getNotificationTypeStore');
+            //DELETE My notifications
+            Route::post('delete_notification_shop','NotificationController@deleteNotificationShop');
 
             Route::group(['middleware' => 'identificate_store'], function()
             {

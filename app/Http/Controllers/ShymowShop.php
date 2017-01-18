@@ -42,7 +42,23 @@ class ShymowShop extends Controller {
 	public function qualificationProduct($id,$qualification){
 		$qualificationModel = new Qualification_product();
 		$productModel = new Product();
-		return DataHelpers::createQualification($id,$qualification,$qualificationModel,$productModel,"product_id","profil_id");
+		$qualificationData = DataHelpers::createQualification($id,$qualification,$qualificationModel,$productModel,"product_id","profil_id");
+
+		$productS = Product::where('id','=',$id)->first();
+		$userR = Perfil::find($productS->profile_id);
+		$store = Store::where('profile_id','=',$productS->profile_id)->first();
+
+
+		$data = DataHelpers::verifyNotificationShop(0,$id,$store->id);
+		$newNoti = new MyNotificationShop;
+			$newNoti->sender = Auth::id();
+			$newNoti->reseiver = $userR->id;
+			$newNoti->type = 0;
+			$newNoti->description = $data['type'];
+			$newNoti->object_id = $id;
+		$newNoti->save();
+
+		return response()->json(['error'=>false,'qualification' => $qualificationData['qualification'],'name' => Auth::user()->name, 'identification' => $userR->identification, 'img' => Auth::user()->img_profile, 'description' => $data['type'], 'sound'=>$data['sound'],'notify'=>$data['notify']]);
 	}
 	public function likeProduct($id,$type){
 		$product = Product::find($id);
@@ -55,7 +71,7 @@ class ShymowShop extends Controller {
 
 
 			try {
-				DataHelpers::createLike($id,"products","like_products","product_id","profil_id",$product,$new_like);
+				$save = DataHelpers::createLike($id,"products","like_products","product_id","profil_id",$product,$new_like);
 
 				$data = DataHelpers::verifyNotificationShop($type,$id,$store->id);
 				$newNoti = new MyNotificationShop;
@@ -136,25 +152,41 @@ class ShymowShop extends Controller {
 				$newComment->save();
 
 				$count = CommentProduct::comments($id)->count();
-				if ($count > 0) {
-					$coments = DB::select('SELECT comment_products.id AS id_comment,product_id,profil_id,description,comment_products.active,perfils.name, perfils.id, perfils.img_profile, comment_products.created_at FROM comment_products INNER JOIN perfils ON comment_products.profil_id = perfils.id WHERE comment_products.product_id = "'.$id.'"and comment_products.active = true ORDER BY id_comment ASC LIMIT 10');
-					foreach ($coments as $comment) {
-						$tiempo = DataHelpers::knowTime($comment->created_at);
-						// dd($tiempo);
-						echo '
-						<div class="box-comment-data-content">
-							<div class="box-coment-data-header">
-								<a href=""><img style="width:50px;" src="'.url($comment->img_profile).'" alt="shymow"></a>
-								<a href="">'.$comment->name.'</a> |
-								<span>'.$tiempo.'</span>
-							</div>
-							<div class="box-coment-data-description">
-								'.$comment->description.'
-							</div>
-						</div>
-						';
-					}
+				$tiempo = DataHelpers::knowTime($newComment->created_at);
+				// dd($tiempo);
 
+				$productS = Product::where('id','=',$id)->first();
+				$userR = Perfil::find($productS->profile_id);
+				$store = Store::where('profile_id','=',$productS->profile_id)->first();
+
+
+				$data = DataHelpers::verifyNotificationShop(4,$id,$store->id);
+				try {
+					$newNoti = new MyNotificationShop;
+						$newNoti->sender = Auth::id();
+						$newNoti->reseiver = $userR->id;
+						$newNoti->type = 4;
+						$newNoti->description = $data['type'];
+						$newNoti->object_id = $id;
+					$newNoti->save();
+
+
+					$html= '
+					<div class="box-comment-data-content">
+						<div class="box-coment-data-header">
+							<a href=""><img style="width:50px;" src="'.url(Auth::user()->img_profile).'" alt="shymow"></a>
+							<a href="">'.Auth::user()->name.'</a> |
+							<span>'.$tiempo.'</span>
+						</div>
+						<div class="box-coment-data-description">
+							'.$newComment->description.'
+						</div>
+					</div>
+					';
+
+					return response()->json(['error'=>false,'name' => Auth::user()->name,'html'=>$html, 'identification' => $userR->identification, 'img' => Auth::user()->img_profile, 'description' => $data['type'], 'sound'=>$data['sound'],'notify'=>$data['notify']]);
+				} catch (Exception $e) {
+					return response()->json(['error'=>true]);					
 				}
 			}
 		}
@@ -365,6 +397,20 @@ class ShymowShop extends Controller {
                 	$newOrder->perfil_id = (int)Auth::user()->id;
                 	$newOrder->quantity = (int)$response['quantity'];
                 $newOrder->save();
+
+                $productS = Product::find((int)$response['item_number']);
+				$userR = Perfil::find($productS->profile_id);
+				$store = Store::where('profile_id','=',$productS->profile_id)->first();
+
+
+				$data = DataHelpers::verifyNotificationShop(2,0,$store->id);
+				$newNoti = new MyNotificationShop;
+					$newNoti->sender = Auth::id();
+					$newNoti->reseiver = $userR->id;
+					$newNoti->type = 2;
+					$newNoti->description = $data['type'];
+					$newNoti->object_id = (int)$response['item_number'];
+				$newNoti->save();
 
                 $product_id = (int)$response['item_number'];
                 $data = [

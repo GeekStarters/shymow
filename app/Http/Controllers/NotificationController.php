@@ -12,6 +12,7 @@ use Validator;
 use DB;
 use DataHelpers;
 use App\MyNotification;
+use App\MyNotificationShop;
 class NotificationController extends Controller {
 
 	/**
@@ -207,27 +208,26 @@ class NotificationController extends Controller {
 
 	public function myNotificationsShop()
 	{
-		$notifications = DB::table('my_notifications')
-							->join('perfils', 'perfils.id', '=', 'my_notifications.sender')
-							->leftJoin('posts', 'posts.id', '=', 'my_notifications.object_id')
-							->select('perfils.id as senderId', 'perfils.name', 'perfils.img_profile','my_notifications.sender','my_notifications.type','my_notifications.description','my_notifications.object_id','my_notifications.read','posts.description as postsDescription','my_notifications.created_at as time','my_notifications.id as notification_id')
-							->where('my_notifications.active',true)
-							->where('my_notifications.reseiver',Auth::id())
-							->where('my_notifications.type','<>',9)
-							->take(15)->orderBy('my_notifications.id', 'desc')->get();
+		$notifications = DB::table('my_notification_shops')
+							->join('perfils', 'perfils.id', '=', 'my_notification_shops.sender')
+							->leftJoin('products', 'products.id', '=', 'my_notification_shops.object_id')
+							->select('perfils.id as senderId', 'perfils.name', 'perfils.img_profile','my_notification_shops.sender','my_notification_shops.type','my_notification_shops.description','my_notification_shops.object_id','my_notification_shops.read','products.description as postsDescription','products.title','products.price','my_notification_shops.created_at as time','my_notification_shops.id as notification_id')
+							->where('my_notification_shops.active',true)
+							->where('my_notification_shops.reseiver',Auth::id())
+							->take(15)->orderBy('my_notification_shops.id', 'desc')->get();
 		//COUNT
-			$count = DB::table('my_notifications')
-			->where('my_notifications.active',true)
-			->where('my_notifications.read',false)
-			->where('my_notifications.type','<>',9)
-			->where('my_notifications.reseiver',Auth::id())
+			$count = DB::table('my_notification_shops')
+			->where('my_notification_shops.active',true)
+			->where('my_notification_shops.read',false)
+			->where('my_notification_shops.type','<>',9)
+			->where('my_notification_shops.reseiver',Auth::id())
 			->count();
 
 		//READ					
-		DB::table('my_notifications')
-			->where('my_notifications.active',true)
-			->where('my_notifications.reseiver',Auth::id())
-			->where('my_notifications.type','<>',9)
+		DB::table('my_notification_shops')
+			->where('my_notification_shops.active',true)
+			->where('my_notification_shops.reseiver',Auth::id())
+			->where('my_notification_shops.type','<>',9)
 			->update(['read'=>true]);
 		return view('logueado.my_notifications_shop',compact('notifications','count'));
 	}
@@ -279,7 +279,55 @@ class NotificationController extends Controller {
 			echo $html;
 		}
 	}
-	public function deleteNotification(Request $request){
+
+	public function getNotificationTypeStore(Request $request)
+	{
+		$v = Validator::make($request->all(), [
+	        'type' => 'required',
+	    ]);
+
+	    if ($v->fails())
+	    {
+	        return response()->json(['error'=>true]);
+	    }
+
+	    $type = (int) $request->input('type');
+	    $notifications = DB::table('my_notification_shops')
+							->join('perfils', 'perfils.id', '=', 'my_notification_shops.sender')
+							->leftJoin('products', 'products.id', '=', 'my_notification_shops.object_id')
+							->select('perfils.id as senderId', 'perfils.name', 'perfils.img_profile','my_notification_shops.sender','my_notification_shops.type','my_notification_shops.description','my_notification_shops.object_id','my_notification_shops.read','products.description as postsDescription','products.title','products.price','my_notification_shops.created_at as time','my_notification_shops.id as notification_id')
+						->where('my_notification_shops.active',true)
+						->where('my_notification_shops.reseiver',Auth::id())
+						->where('my_notification_shops.type',$type)
+						->take(15)->orderBy('my_notification_shops.id', 'desc')->get();
+
+		foreach($notifications as $notification){
+			$html = "";
+
+			if($notification->read){
+				$html .= '<div class="content-notifications">';
+			}else{
+				$html .= '<div class="content-notifications notification_unread">';
+			}
+				$html .= '<div class="checkbox">';
+				    $html .= '<label style="width: 100%">';
+				      $html .= '<input type="checkbox" value="'.$notification->notification_id.'">';
+				      $html .= '<div class="notification-body">';
+				      	$html .= '<div class="type-notification">';
+				      		$html .= '<img src="/'.$notification->img_profile.'" class="img-responsive" alt="">';
+				      		$html .= '<img src="/img/notification-shops/'.$notification->type.'.png">';
+				      	$html .= '</div>';
+				      	$html .= '<span class="description-notification hashtag-post"><i><a href="/view_user/'.$notification->senderId.'"> '.$notification->name.'</a> '.$notification->description.'</i> - '.DataHelpers::knowTime($notification->time).' <br><b>'.$notification->title.'</b>: '.$notification->postsDescription.'- €'.$notification->price.'</span>';
+				      $html .= '</div>';
+				    $html .= '</label>';
+				$html .= '</div>';
+				$html .= '<hr>';
+			$html .= '</div>';
+
+			echo $html;
+		}
+	}
+	public function deleteNotificationShop(Request $request){
 		$v = Validator::make($request->all(), [
 	        'data' => 'required',
 	    ]);
@@ -294,7 +342,7 @@ class NotificationController extends Controller {
 	    
 	    try {
 	    	foreach ($data as $val) {
-	    		MyNotification::where('id',$val)->update(['active'=>false]);
+	    		MyNotificationShop::where('id',$val)->update(['active'=>false]);
 	    	}
 	    	return response()->json(['error'=>false,'message' => 'Tus datos fueron eliminados']);
 	    } catch (Exception $e) {

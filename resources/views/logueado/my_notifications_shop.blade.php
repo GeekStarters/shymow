@@ -37,17 +37,11 @@
 				<hr>
 			</div>
 			<ul class="list-notification">
-				<li><a href="/my_notifications"><img src="{{url('img/config_shymow_shop/all_notifications_small.png')}}" >Todas las notificaciones</a></li>
-				<li data-type="2"><img src="{{url('img/config_shymow_shop/add_friends.png')}}">Me sigue</li>
-				<li data-type="6"><img src="{{url('img/config_shymow_shop/delete_friend.png')}}" >Ya no me sigue</li>
-				<!-- <li><img src="{{url('img/config_shymow_shop/02.png')}}" data-type="">Me etiquetó</li> -->
-				<li data-type="3"><img src="{{url('img/config_shymow_shop/03.png')}}" >Compartió</li>
+				<li><a href="/my_notification_shop"><img src="{{url('img/config_shymow_shop/all_notifications_small.png')}}" >Todas las notificaciones</a></li>
+				<li data-type="2"><img src="{{url('img/config_shymow_shop/01.png')}}" >Ventas</li>
 				<li data-type="1"><img src="{{url('img/config_shymow_shop/04.png')}}" >Le gustó</li>
-				<!-- <li><img src="{{url('img/config_shymow_shop/05.png')}}" data-type="7">Nuevo mensaje</li> -->
 				<li data-type="0"><img src="{{url('img/config_shymow_shop/07.png')}}" >Me calificó</li>
 				<li data-type="4"><img src="{{url('img/config_shymow_shop/06.png')}}" >Nuevo comentario</li>
-				<!-- <li><img src="{{url('img/config_shymow_shop/label.png')}}" data-type="">Nuevo en comercios favoritos</li> -->
-				<!-- <li><img src="{{url('img/config_shymow_shop/trends.png')}}" data-type="">Nuevas tendencias</li> -->
 			</ul>
 			<div class="clearfix"></div>
 		</div>
@@ -85,9 +79,9 @@
 							      <div class="notification-body">
 							      	<div class="type-notification">
 							      		<img src="{{url($notification->img_profile)}}" class="img-responsive" alt="">
-							      		<img src="{{url('img/icon_notification/'.$notification->type.'.png')}}" alt="">
+							      		<img src="{{url('img/notification-shops/'.$notification->type.'.png')}}" alt="">
 							      	</div>
-							      	<span class="description-notification hashtag-post"><i><a href="{{url('view_user/'.$notification->senderId)}}"> {{$notification->name}}</a> {{$notification->description}}</i> - {{DataHelpers::knowTime($notification->time)}} <br> {{$notification->postsDescription}}</span>
+							      	<span class="description-notification hashtag-post"><i><a href="{{url('view_user/'.$notification->senderId)}}"> {{$notification->name}}</a> {{$notification->description}}</i> - {{DataHelpers::knowTime($notification->time)}} <br> <b>{{$notification->title}}:</b> {{$notification->postsDescription}} - €{{$notification->price}}</span>
 							      </div>
 							    </label>
 							</div>
@@ -140,7 +134,7 @@
 					function(isConfirm) {
 					  if (isConfirm) {
 					  		$.ajax({
-						  		url: 'delete_notification',
+						  		url: 'delete_notification_shop',
 						  		type: 'POST',
 						  		dataType: 'JSON',
 						  		data: {data: codes},
@@ -181,7 +175,7 @@
 			var container = $('#notification-container');
 			if (type != "" || type == 0) {
 				$.ajax({
-					url: 'get_notification_type',
+					url: 'get_notification_type_store',
 					type: 'GET',
 					dataType: 'html',
 					data: {type: type},

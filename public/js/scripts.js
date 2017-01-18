@@ -147,41 +147,6 @@ $( document ).ready(function() {
     });
 
 
-
-    $(".box-comment-header-product").submit('.form-comment',function(event) {
-        /* Act on the event */
-        event.preventDefault();
-
-        // CONTENEDOR DEL POST
-        var padre = $(this).parents('.content-post');
-        var post = padre.find('.box-comment-product').data('trend');
-        var comment = $(this).find('input').val();
-        var count = padre.find('.post-comment ').children('.number-post').text();
-
-        if (comment.length > 0 ) {
-            $.ajax({
-                url: '/create_comment-product/'+post,
-                type: 'POST',
-                dataType: 'HTML',
-                data: {comment: comment},
-                success: function($data){
-                        
-                        count = parseInt(count) + 1;
-                        padre.find('.post_change').text('');
-                        padre.find('.post_change').text(count);
-
-                        padre.find('input').val("");
-                        padre.find('.box-comment-body').html($data);
-                }                   
-
-            })
-            .fail(function() {
-                console.log("error");
-            });
-            
-        }
-    });
-
     $(".box-comment-header").submit('.form-comment',function(event) {
     	/* Act on the event */
     	event.preventDefault();
@@ -283,48 +248,6 @@ $( document ).ready(function() {
 
     //FIN PROCESO DE LIKE
 
-    //PROCESO CALIFICACION PRODUCTO
-    $('.post-qualification-product').on('click', 'a', function(event) {
-        event.preventDefault();
-        /* Act on the event */
-        var value = $(this).data('star');
-
-        var post_id = $(this).data('post');
-
-        var padre = $(this).parents('.post-qualification-product');
-        
-        if (post_id != null) {
-            $.ajax({
-                url: '/create_qualification_product/'+post_id+'/'+value,
-                type: 'POST',
-                dataType: 'JSON',
-                success: function(data){
-                    if (!data.error) {
-                        var html_append = "";
-                        if(data.qualification < 5)
-                        {
-                            for (var i = 1; i <= parseInt(data.qualification); i++)
-                                html_append += '<a data-star="'+i+'" class="glyphicon glyphicon-star qualification-popular" data-post="'+post_id+'"></a>'
-                      
-                            for (var i = 1; i <= (5-parseInt(data.qualification)); i++)
-                                html_append += '<a data-star="'+(parseInt(data.qualification)+i)+'" class="glyphicon glyphicon-star qualification-no-popular" data-post="'+post_id+'"></a>'
-                            
-                            padre.html(html_append);
-                        }else{
-                            for (var i = 1; i <= data.qualification; i++)
-                                html_append += '<a data-star="'+i+'" class="glyphicon glyphicon-star qualification-popular" data-post="'+post_id+'"></a>'
-                            
-                            padre.html(html_append);
-                        }
-                    }
-                }
-            })
-            .fail(function() {
-                console.log("error");
-            });
-        }
-        
-    });
 
     // PROCESO DE CALIFICACION
     $('.post-qualification').on('click', 'a', function(event) {
