@@ -428,11 +428,26 @@ class DataHelpers{
 
 
 	public static function knowNotificationNum(){
-		$count = DB::table('my_notifications')
-		->where('my_notifications.active',true)
-		->where('my_notifications.read',false)
-		->where('my_notifications.reseiver',Auth::id())
-		->count();
+		$count = "";
+		if (Auth::id() != 0) {
+			$count = DB::table('my_notifications')
+			->where('my_notifications.active',true)
+			->where('my_notifications.read',false)
+			->where('my_notifications.reseiver',Auth::id())
+			->count();
+			$count += DB::table('my_notification_shops')
+			->where('my_notification_shops.active',true)
+			->where('my_notification_shops.read',false)
+			->where('my_notification_shops.reseiver',Auth::id())
+			->count();
+		}else{
+			$count = DB::table('my_notifications')
+			->where('my_notifications.active',true)
+			->where('my_notifications.read',false)
+			->where('my_notifications.reseiver',Auth::id())
+			->count();
+
+		}
 		return $count;
 	}
 
