@@ -111,6 +111,7 @@
 		$('.form-group button').click(function(e){
 			e.preventDefault();
 		});
+		
 		// REDES
 		// var numredes = 1;
 		// $('#moreRed').click(function(e){

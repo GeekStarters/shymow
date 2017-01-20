@@ -68,8 +68,7 @@
     <script src=" {{ asset('js/validate.js') }} "></script>
     <script src=" {{ asset('js/jquery.Jcrop.min.js') }} "></script>
     <script src=" {{ asset('js/jquery.color.js') }} "></script>
-    @if(Auth::check())<script src=" {{ asset('js/notification.js') }} "></script>@endif
-    <script src=" {{ asset('js/messages.js') }} "></script>
+       
     <script type="text/javascript" src="{{ asset('js/responsiveCarousel.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/jquery.imgareaselect.min.js') }}"></script>
     @yield('scripts')
@@ -86,5 +85,7 @@
           a.appendChild(r);
       })(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');
   </script>
+  @if(Auth::check())<script src=" {{ asset('js/notification.js') }} "></script>@endif
+  @if(Auth::check())<script src=" {{ asset('js/messages.js') }} "></script>@endif
   </body>
 </html>

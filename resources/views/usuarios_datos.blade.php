@@ -20,13 +20,14 @@
 				</div>
 				<br><br>
 				@include('flash::message')
+				<div class="alert alert-warning" id="alert_" style="display: none" role="alert"></div>
+				@foreach ($errors->register->all() as $error)
+	              <span class="text-danger">
+	                <b>{{ $error}}</b>             
+	              </span> <br>
+	            @endforeach
 			</div>
-			  @foreach ($errors->register->all() as $error)
-              <p class="text-danger">
-                <b>{{ $error}}</b>             
-              </p>
-              @endforeach
-			{!! Form::open(array('url' => 'final_steps','method'=>'post')) !!}
+			{!! Form::open(array('url' => 'final_steps','method'=>'post','name'=>'form_validate')) !!}
 
 			{!! Form::hidden('hobbies','',['id'=>'hobb']) !!}
 				<div class="col-sm-4">
@@ -216,6 +217,44 @@
 			})
 		});
 		
+
+		var validator = new FormValidator('form_validate', [{
+		    name: 'mes',
+		    display: 'Mes',
+		    rules: 'required'
+		},{
+		    name: 'anio',
+		    display: 'Año',
+		    rules: 'required'
+		},{
+		    name: 'genero',
+		    display: 'Genero',
+		    rules: 'required'
+		},{
+		    name: 'pais',
+		    display: 'País',
+		    rules: 'required'
+		},{
+		    name: 'provincia',
+		    display: 'Provincia',
+		    rules: 'required'
+		},{
+		    name: 'municipio',
+		    display: 'Municipio',
+		    rules: 'required'
+		}], function(errors, event) {
+		    if (errors.length > 0) {
+		        var errorString = '';
+
+		        for (var i = 0, errorLength = errors.length; i < errorLength; i++) {
+		            errorString += errors[i].message + '<br />';
+		        }
+
+		        $('#alert_').slideDown('fast');
+		        $('#alert_').html(errorString);
+		    }
+		});
+		validator.setMessage('required', 'El campo %s es requerido');
 	</script>
 @stop
 

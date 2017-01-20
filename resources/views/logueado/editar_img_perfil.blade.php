@@ -54,10 +54,11 @@
             jcrop_api = $.Jcrop('#viewImgProfile');
         };
 
-		$('#displayImgProfile').click(function(event) {
-			/* Act on the event */
+		$('body').on('click', '#displayImgProfile', function(event) {
+			event.preventDefault();
+			console.log('entre');
 			$('#imgProfile').click();
-		});
+		})
 
 
 

@@ -42,6 +42,21 @@ class RegistroController extends Controller {
 	 */
 	public function create(Request $request)
 	{
+		$messages = [
+		    'social1.url'    => 'Una de tus redes sociales no tiene un formato correcto',
+		    'social2.url'    => 'Una de tus redes sociales no tiene un formato correcto',
+		    'social3.url'    => 'Una de tus redes sociales no tiene un formato correcto',
+		    'social4.url'    => 'Una de tus redes sociales no tiene un formato correcto',
+		    'social5.url'    => 'Una de tus redes sociales no tiene un formato correcto',
+		    'stream1.url'    => 'Uno de tus streaming no tiene formato correcto',
+		    'stream2.url'    => 'Uno de tus streaming no tiene formato correcto',
+		    'stream3.url'    => 'Uno de tus streaming no tiene formato correcto',
+		    'stream4.url'    => 'Uno de tus streaming no tiene formato correcto',
+		    'stream5.url'    => 'Uno de tus streaming no tiene formato correcto',
+		    'blog1.url'    => 'La URL del blog que introduces no tiene formato correcto',
+		    'web1.url'    => 'La URL de la web que introduces no tiene formato correcto',
+		];
+
 		$v = Validator::make($request->all(), [
 	        'social1' => 'url',
 	        'social2' => 'url',
@@ -55,7 +70,7 @@ class RegistroController extends Controller {
 	        'stream5' => 'url',
 	        'blog1' => 'url',
 	        'web1' => 'url'
-	    ]);
+	    ],$messages);
 
 		$role = Session::get('data_user')['role'];
 	    if ($v->fails())
@@ -415,6 +430,12 @@ class RegistroController extends Controller {
 	public function final_steps(Request $request)
 	{	
 		if(Session::has('data_user')){
+			$messages = [
+				'required' => 'El campo :attribute es requerido',
+			    'dia.numeric'    => 'El campo :attribute es numérico',
+			    'dia.numeric'    => 'El campo :attribute es numérico',
+			    'dia.numeric'    => 'El campo :attribute es numérico',
+			];
 			$v = Validator::make($request->all(), [
 		        'dia' => 'required|numeric',
 		        'mes' => 'required|numeric',
@@ -423,11 +444,11 @@ class RegistroController extends Controller {
 		        'pais' => 'required',
 		        'provincia' => 'required',
 		        'municipio' => 'required',
-		    ]);
+		    ],$messages);
 
 		    if ($v->fails())
 		    {	
-		        return redirect('data_user')->withErrors($v, 'register')->withInput();
+		        return redirect()->back()->withErrors($v, 'register');
 		    }
 
 
@@ -529,9 +550,32 @@ class RegistroController extends Controller {
 	public function empresaSocial(Request $request)
 	{
 		if(Session::has('data_user')){
+
+			$messages = [
+				'responsable_empresa.required' => 'El nombre del responsable es obligatorio',
+				'email_empresa.required' => 'El email del responsable obligatorio',
+				'dia.required' => 'El día es obligatorio',
+				'mes.required' => 'El mes es obligatorio',
+				'anio.required' => 'El año es obligatorio',
+				'genero.required' => 'El genero es obligatorio',
+				'pais.required' => 'El país es obligatorio',
+				'provincia.required' => 'La provincia es obligatoria',
+				'municipio.required' => 'El municipio es obligatorio',
+				'empresa.required' => 'El nombre de la empresa es obligatorio',
+				'alias.required' => 'El alías de la empresa es obligatorio',
+				'dni.required' => 'El DNI de la empresa es obligatorio',
+				'empresa_comercio.required' => 'El comercio de la empresa es obligatorio',
+				'paiscorp.required' => 'El país al que pertenece la empresa es obligatorio',
+				'provinciacorp.required' => 'La provincia a la que pertenece la empresa es obligatoria',
+				'municipiocorp.required' => 'El municipio a la que pertenece la empresa es obligatorio',
+				'dia.numeric' => 'El día debe ser númerico',
+				'mes.numeric' => 'El mes debe ser númerico',
+				'anio.numeric' => 'El año debe ser númerico',
+				'email_empresa.unique' => 'El email del responsable existe',
+			];
 			$v = Validator::make($request->all(), [
-		        'responsable_empresa' => 'required|min:10',
-		        'email_empresa' => 'required|email',
+		        'responsable_empresa' => 'required',
+		        'email_empresa' => 'required|email|unique:empresas,email_responsable',
 		        'dia' => 'required|numeric',
 		        'mes' => 'required|numeric',
 		        'anio' => 'required|numeric',
@@ -539,18 +583,18 @@ class RegistroController extends Controller {
 		        'pais' => 'required',
 		        'provincia' => 'required',
 		        'municipio' => 'required',
-		        'empresa' => 'required|min:3',
-		        'alias' => 'required|min:3',
+		        'empresa' => 'required',
+		        'alias' => 'required',
 		        'dni' => 'required',
 		        'empresa_comercio' => 'required',
 		        'paiscorp' => 'required',
 		        'provinciacorp' => 'required',
 		        'municipiocorp' => 'required',
-		    ]);
+		    ],$messages);
 
 		    if ($v->fails())
 		    {	
-		        return redirect('datos_empresa')->withErrors($v, 'register')->withInput();
+		        return redirect()->back()->withErrors($v, 'register');
 		    }
 
 		    //DATOS EMPRESA

@@ -20,18 +20,19 @@
 				</div>
 				<br><br>
 				@include('flash::message')
+				<div class="alert alert-warning" id="alert_" style="display: none" role="alert"></div>
 			</div>
 			@foreach ($errors->register->all() as $error)
-              <p class="text-danger">
-                <b>{{ $error}}</b>             
-              </p>
+              <span class="text-danger">
+                <b>{{ $error}}</b> <br>            
+              </span>
               @endforeach
 
 			<div class="col-sm-3 out-padding">
 				<section class="about-you-empresa out-padding">
 					<h3>Sobre ti</h3>
 					
-					{!! Form::open(array('url' => 'empresa_social','method'=>'post')) !!}
+					{!! Form::open(array('url' => 'empresa_social','method'=>'post','name'=>'form_validate')) !!}
 
 					{!! Form::hidden('hobbies','',['id'=>'hobb']) !!}
 						<div class="grup-form">
@@ -289,6 +290,79 @@
 			})
 		});
 		
+		var validator = new FormValidator('form_validate', [{
+		    name: 'mes',
+		    display: 'Mes',
+		    rules: 'required'
+		},{
+		    name: 'anio',
+		    display: 'Año',
+		    rules: 'required'
+		},{
+		    name: 'genero',
+		    display: 'Genero',
+		    rules: 'required'
+		},{
+		    name: 'pais',
+		    display: 'País',
+		    rules: 'required'
+		},{
+		    name: 'provincia',
+		    display: 'Provincia',
+		    rules: 'required'
+		},{
+		    name: 'municipio',
+		    display: 'Municipio',
+		    rules: 'required'
+		},{
+		    name: 'responsable_empresa',
+		    display: 'Responsable de empresa',
+		    rules: 'required'
+		},{
+		    name: 'email_empresa',
+		    display: 'Email responsable',
+		    rules: 'required'
+		},{
+		    name: 'empresa',
+		    display: 'Empresa',
+		    rules: 'required'
+		},{
+		    name: 'alias',
+		    display: 'Alías',
+		    rules: 'required'
+		},{
+		    name: 'dni',
+		    display: 'DNI',
+		    rules: 'required'
+		},{
+		    name: 'empresa_comercio',
+		    display: 'Comercio empresarial',
+		    rules: 'required'
+		},{
+		    name: 'paiscorp',
+		    display: 'País de la empresa',
+		    rules: 'required'
+		},{
+		    name: 'provinciacorp',
+		    display: 'Provincia de la empresa',
+		    rules: 'required'
+		},{
+		    name: 'municipiocorp',
+		    display: 'Municipio de la empresa',
+		    rules: 'required'
+		}], function(errors, event) {
+		    if (errors.length > 0) {
+		        var errorString = '';
+
+		        for (var i = 0, errorLength = errors.length; i < errorLength; i++) {
+		            errorString += errors[i].message + '<br />';
+		        }
+
+		        $('#alert_').slideDown('fast');
+		        $('#alert_').html(errorString);
+		    }
+		});
+		validator.setMessage('required', 'El %s es requerido');
 	</script>
 @stop
 
