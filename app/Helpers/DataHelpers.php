@@ -82,6 +82,20 @@ class DataHelpers{
 		$messages = Message::whereReceptor(Auth::id())->whereActive(true)->whereRead(false)->count();
 		return $messages;
 	}
+
+	public static function nameUser($id){
+		$empresa = DB::table('empresas')->where('profile_id','=',$id)->first();
+		$name = [];
+		if (count($empresa) < 1) {
+			$name = DB::table('perfils')->where('id','=',$id)->first();
+			$name = $name->name;
+		}else{
+			$name = $empresa->empresa;
+		}
+
+		return $name;
+	}
+
 	public static function knowTime($time){
 		$from = new DateTime($time);
 		$to = new DateTime(date("Y-m-d H:i:s"));

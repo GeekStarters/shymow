@@ -679,7 +679,7 @@
 										</a>
 										<div class="social-body">
 											<a href="{{url($red)}}" class="color_reds" target="_blank">
-												<h2>{{explode(" ",Auth::user()->name)[0]}}</h2>
+												<h2>{{explode(" ",DataHelpers::nameUser(Auth::user()->id))[0]}}</h2>
 											</a>
 											<p>{{$socialNet[$i]}}</p>
 											<h6 class="text-danger delete_red" data-network="{{$socialNet[$i]}}" data-red="{{$red}}" style="cursor:pointer;">Eliminar</h6>
@@ -689,7 +689,7 @@
 							@endif
 						@endfor
 					@endif
-					<div class="social-redes new_social"  data-name='{{explode(" ",Auth::user()->name)[0]}}'>
+					<div class="social-redes new_social"  data-name='{{explode(" ",DataHelpers::nameUser(Auth::user()->id))[0]}}'>
 						<a href="#" target="_blank">
 							<div class="img-social">
 								<div class="sub-img-social">

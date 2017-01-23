@@ -32,7 +32,7 @@
 
                             <div class="checkbox">
                               <label style="padding:0px !important; ">
-                               <input type="radio" value="all" name="like" id="searchAll" checked="checked"> Todo 
+                               <input type="radio" value="all" name="like" id="searchAll"> Todo 
                               </label>
                             </div>
                             
@@ -553,7 +553,7 @@
 
                               <div class="busquedas-content col-sm-6" style="padding:0px !important;">
                                 <div class="content-busqueda-header">
-                                  <span class="first-title">{{$user->name}}</span>
+                                  <span class="first-title">{{$user->alias}}</span>
                                    <span class="sub-title">{{$user->pais}}</span>
                                 </div>
                                 <p>{{$user->descripcion}}</p>
@@ -646,7 +646,7 @@
 
                                 <div class="busquedas-content col-sm-6" style="padding:0px !important;">
                                   <div class="content-busqueda-header">
-                                    <span class="first-title">{{$user->name}}</span>
+                                    <span class="first-title">{{$user->alias}}</span>
                                      <span class="sub-title">{{$user->pais}}</span>
                                   </div>
                                   <p>{{$user->descripcion}}</p>
@@ -1420,41 +1420,15 @@ $('#searchAll').click(function(event) {
     $('#searchcategories').css('visibility', 'visible');
   });
 
+
   $('#actComercial').change(function(event) {
     /* Act on the event */
     $('#searchcategories').css('visibility', 'hidden');
     $('#actComercial').css('visibility', 'visible');
+    $('#searchGender').slideUp('slow');
+    $('#searchEdad').slideUp('slow');
   });
 
-  $('#searching').keyup(function(event) {
-    $('#interesting').css('visibility', 'visible');
-
-    var txt = $(this).val();
-    if (txt.length > 0) {
-      // $('#SearchPeople').prop('checked', true);
-      $('#actComercial').slideUp('slow');
-      $('#searchcategories').slideDown('slow');
-      $('#SearchPeople').is('checked');
-    }else{
-      $('#actComercial').slideDown('slow');
-      $('#searchcategories').slideDown('slow');
-    }
-  });
-
-  $('#searching').select(function(event) {
-    $('#interesting').css('visibility', 'visible');
-
-    var txt = $(this).val();
-    if (txt.length > 0) {
-      // $('#SearchPeople').prop('checked', true);
-      $('#actComercial').slideUp('slow');
-      $('#searchcategories').slideDowb('slow');
-      $('#SearchPeople').is('checked');
-    }else{
-      $('#actComercial').slideDown('slow');
-      $('#searchcategories').slideDown('slow');
-    }
-  });
 
 
   </script>

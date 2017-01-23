@@ -18,8 +18,8 @@
                   @endif
                 </span>
             </span>
-
-              {{Auth::user()->name}} <b class="caret"></b>
+              
+              {{DataHelpers::nameUser(Auth::user()->id)}} <b class="caret"></b>
             </a>
         <ul class="dropdown-menu">
           <li class="dropdown-submenu">

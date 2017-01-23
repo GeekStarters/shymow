@@ -23,7 +23,7 @@
 		  					</span>
 						</span>
 
-	  					{{Auth::user()->name}} <b class="caret"></b>
+	  					{{DataHelpers::nameUser(Auth::user()->id)}} <b class="caret"></b>
   					</a>
   					<ul class="dropdown-menu">
   						<li class="dropdown-submenu">
@@ -112,7 +112,7 @@
 							</div>
 							<div class="data-profile">
 								<div class="name-profile text-center">
-									<h2>{{$users->name}}</h2>
+									<h2>{{DataHelpers::nameUser($users->user_id)}}</h2>
 								</div>
 								<div class="profile-message text-center">
 									<p>{{$users->mi_frase}}</p>

@@ -942,37 +942,39 @@
     /* Act on the event */
     $('#searchcategories').css('visibility', 'hidden');
     $('#actComercial').css('visibility', 'visible');
+    $('#searchGender').slideUp('slow');
+    $('#searchEdad').slideUp('slow');
   });
 
-  $('#searching').keyup(function(event) {
-    $('#interesting').css('visibility', 'visible');
+  // $('#searching').keyup(function(event) {
+  //   $('#interesting').css('visibility', 'visible');
 
-    var txt = $(this).val();
-    if (txt.length > 0) {
-      // $('#SearchPeople').prop('checked', true);
-      $('#actComercial').slideUp('slow');
-      $('#searchcategories').slideDown('slow');
-      $('#SearchPeople').is('checked');
-    }else{
-      $('#actComercial').slideDown('slow');
-      $('#searchcategories').slideDown('slow');
-    }
-  });
+  //   var txt = $(this).val();
+  //   if (txt.length > 0) {
+  //     // $('#SearchPeople').prop('checked', true);
+  //     $('#actComercial').slideUp('slow');
+  //     $('#searchcategories').slideDown('slow');
+  //     $('#SearchPeople').is('checked');
+  //   }else{
+  //     $('#actComercial').slideDown('slow');
+  //     $('#searchcategories').slideDown('slow');
+  //   }
+  // });
 
-  $('#searching').select(function(event) {
-    $('#interesting').css('visibility', 'visible');
+  // $('#searching').select(function(event) {
+  //   $('#interesting').css('visibility', 'visible');
 
-    var txt = $(this).val();
-    if (txt.length > 0) {
-      // $('#SearchPeople').prop('checked', true);
-      $('#actComercial').slideUp('slow');
-      $('#searchcategories').slideDowb('slow');
-      $('#SearchPeople').is('checked');
-    }else{
-      $('#actComercial').slideDown('slow');
-      $('#searchcategories').slideDown('slow');
-    }
-  });
+  //   var txt = $(this).val();
+  //   if (txt.length > 0) {
+  //     // $('#SearchPeople').prop('checked', true);
+  //     $('#actComercial').slideUp('slow');
+  //     $('#searchcategories').slideDowb('slow');
+  //     $('#SearchPeople').is('checked');
+  //   }else{
+  //     $('#actComercial').slideDown('slow');
+  //     $('#searchcategories').slideDown('slow');
+  //   }
+  // });
 
   // $("#searchingData"). contentSearchModal
   $("#buscadorOut").submit(function(event) {
@@ -988,7 +990,7 @@
       success: function(data){
         if(!data.error){
           if (data.data.length > 0) {
-            for (var i = 0; i <= data.data.length; i++) {
+            for (var i = 0; i < data.data.length; i++) {
               var user = data.data[i];
 
               var html = '<div class="container-busquedas">'+

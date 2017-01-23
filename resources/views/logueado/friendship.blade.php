@@ -28,7 +28,7 @@
 			    	<div class="thumbnail">
 				      <img src="{{url($user->img_profile)}}" alt="{{$user->name}}">
 				      <div class="caption">
-				        <h3><a href="{{url('view_user/'.$user->id)}}">{{DataHelpers::getSubString($user->name, 15)}}</a></h3>
+				        <h3><a href="{{url('view_user/'.$user->id)}}">{{DataHelpers::getSubString(DataHelpers::nameUser($user->id), 15)}}</a></h3>
 				        <p>
 				        	<br>
 				        	<ul>
