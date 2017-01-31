@@ -91,7 +91,11 @@ Route::get('users','HomeController@users');
 Route::get('data_users','HomeController@dataUser');
 Route::post('final_steps','RegistroController@final_steps');
 Route::get('final_steps','HomeController@final_steps');
-Route::post('create_user','RegistroController@create');
+
+Route::group(['middleware' => 'create_user'], function()
+{
+    Route::get('create_user','RegistroController@create');
+});
 
 
 //Registro celebridad
@@ -99,6 +103,7 @@ Route::get('celebridad','HomeController@celebridad');
 Route::get('datos_celebridad','HomeController@dataCelebridad');
 Route::post('celebridad_social','RegistroController@celebridad_social');
 Route::get('celebridad_social','HomeController@celebridad_social');
+
 //Registro Empresa
 
 Route::get('empresa','HomeController@empresa');

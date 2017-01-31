@@ -31,6 +31,7 @@ class Kernel extends HttpKernel {
 		'have_store' => 'App\Http\Middleware\HaveStore',
 		'identificate_store' => 'App\Http\Middleware\IdentificateStore',
 		'out_user' => 'App\Http\Middleware\OutUser',
+		'create_user' => 'App\Http\Middleware\CreateUser',
 	];
 
 }

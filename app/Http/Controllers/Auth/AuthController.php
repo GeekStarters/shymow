@@ -105,12 +105,10 @@ class AuthController extends Controller {
                     if($user->name == null){
                         $newSocialUser->name = $user->user['first_name'].' '.$user->user['last_name'];
                     }
-                    $date = date('Y-m-d', strtotime($user->user['birthday']));
                     $fecha = time() - strtotime($date);
                     $edad = (int) floor($fecha / 31556926);
                     $genero = substr($user->user['gender'], 0,1);
                     $newSocialUser->genero = $genero;
-                    $newSocialUser->fecha_nacimiento = $date;
                     $newSocialUser->edad = $edad;
                 }
                 $newSocialUser->save();

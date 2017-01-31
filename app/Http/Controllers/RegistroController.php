@@ -377,16 +377,15 @@ class RegistroController extends Controller {
 	    		'password' => Session::get('data_user')['pass']
 			];
 			Session::forget('data_user');
+			Session::forget('create_user');
 		    if (Auth::attempt($tuser,true))
 			{	
-				flash()->overlay('Debes conformar tu correo', Auth::user()->name);
+				flash()->overlay('Debes confirmar tu correo', Auth::user()->name);
 		        return redirect()->intended('perfil');
 			}else
 			{
 				return redirect()->intended('/');
 			}
-
-
 
 	    	return Redirect('/?users=Usuario creado');
 	    } catch (Exception $e) {
@@ -406,8 +405,8 @@ class RegistroController extends Controller {
 
 
 		$v = Validator::make($request->all(), [
-	        'name' => 'required|min:10',
-	        'email' => 'required|min:10|email|unique:perfils',
+	        'name' => 'required',
+	        'email' => 'required|email|unique:perfils',
 	        'password' => 'required|min:8',
 	        'condiciones' => 'required',
 	    ]);
@@ -484,7 +483,9 @@ class RegistroController extends Controller {
 		    Session::put('data_user', $resultado);
 		   
 
-		   	return view('users_steps_final');
+		   	// return view('users_steps_final');
+		   	Session::put('create_user', true);
+		   	return redirect('create_user');
 		}else{
 		    return redirect('/');
 		}
@@ -541,7 +542,9 @@ class RegistroController extends Controller {
 		    $resultado = array_merge($data_user, $request->all());
 		    Session::put('data_user', $resultado);
 
-		   	return view('final_celebridad');
+		   	// return view('final_celebridad');
+		   	Session::put('create_user', true);
+		   	return redirect('create_user');
 		}else{
 			return redirect('/');
 		}
@@ -641,7 +644,9 @@ class RegistroController extends Controller {
 		    Session::put('data_user', $resultado);
 		   	
 
-		   	return view('final_empresa');
+		   	// return view('final_empresa');
+		   	Session::put('create_user', true);
+		   	return redirect('create_user');
 		}else{
 			return redirect('/');
 		}

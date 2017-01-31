@@ -45,7 +45,7 @@
 							</div>
 							<div class="grup-form">
 								{!! Form::label('País')!!}
-								{!! Form::select('pais',array('' => 'País') + $countries,'',['class'=>'form-control','required' => 'required','id'=>'paisF']) !!}	
+								{!! Form::select('pais',array('' => 'País') + ['205'=>'Spain'] + $countries,'',['class'=>'form-control','required' => 'required','id'=>'paisF']) !!}	
 							</div>
 							<div class="grup-form">
 								{!! Form::label('Provincia')!!}
